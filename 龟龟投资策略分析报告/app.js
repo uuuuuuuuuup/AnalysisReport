@@ -87,7 +87,29 @@ const reportData = [
     { code: '601728', name: '中国电信', file: 'GLM5/601728/中国电信_601728_分析报告.md', rating: 'good', model: 'GLM5' },
     { code: '603288', name: '海天味业', file: 'GLM5/603288/海天味业_603288_分析报告.md', rating: 'good', model: 'GLM5' },
     { code: '688036', name: '传音控股', file: 'GLM5/688036/传音控股_688036_分析报告.md', rating: 'good', model: 'GLM5' },
-    { code: '688363', name: '华熙生物', file: 'GLM5/688363/华熙生物_688363_分析报告.md', rating: 'warning', model: 'GLM5' }
+    { code: '688363', name: '华熙生物', file: 'GLM5/688363/华熙生物_688363_分析报告.md', rating: 'warning', model: 'GLM5' },
+    
+    // GLM5 新增报告 (2026-03-12)
+    { code: '000333', name: '美的集团', file: 'GLM5/000333/美的集团_000333_分析报告.md', rating: 'good', model: 'GLM5' },
+    { code: '000423', name: '东阿阿胶', file: 'GLM5/000423/东阿阿胶_000423_分析报告.md', rating: 'good', model: 'GLM5' },
+    { code: '000429', name: '粤高速A', file: 'GLM5/000429/粤高速A_000429_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '000848', name: '承德露露', file: 'GLM5/000848/承德露露_000848_分析报告.md', rating: 'exclude', model: 'GLM5' },
+    { code: '002690', name: '美亚光电', file: 'GLM5/002690/美亚光电_002690_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '300627', name: '华测导航', file: 'GLM5/300627/华测导航_300627_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '300628', name: '亿联网络', file: 'GLM5/300628/亿联网络_300628_分析报告.md', rating: 'good', model: 'GLM5' },
+    { code: '300866', name: '安克创新', file: 'GLM5/300866/安克创新_300866_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '301061', name: '匠心家居', file: 'GLM5/301061/匠心家居_301061_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '600018', name: '上港集团', file: 'GLM5/600018/上港集团_600018_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '600025', name: '华能水电', file: 'GLM5/600025/华能水电_600025_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '600036', name: '招商银行', file: 'GLM5/600036/招商银行_600036_分析报告.md', rating: 'good', model: 'GLM5' },
+    { code: '600066', name: '宇通客车', file: 'GLM5/600066/宇通客车_600066_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '600276', name: '恒瑞医药', file: 'GLM5/600276/恒瑞医药_600276_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '600674', name: '川投能源', file: 'GLM5/600674/川投能源_600674_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '600885', name: '宏发股份', file: 'GLM5/600885/宏发股份_600885_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '601298', name: '青岛港', file: 'GLM5/601298/青岛港_601298_分析报告.md', rating: 'good', model: 'GLM5' },
+    { code: '603129', name: '春风动力', file: 'GLM5/603129/春风动力_603129_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '603259', name: '药明康德', file: 'GLM5/603259/药明康德_603259_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '688334', name: '西高院', file: 'GLM5/688334/西高院_688334_分析报告.md', rating: 'warning', model: 'GLM5' }
 ];
 
 // 模型配置
