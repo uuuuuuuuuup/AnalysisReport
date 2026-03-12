@@ -32,6 +32,12 @@
     --rating-exclude: #ef4444;
     --rating-exclude-bg: #fee2e2;
     
+    /* 模型颜色 */
+    --model-default: #3b82f6;
+    --model-default-bg: #dbeafe;
+    --model-qwen: #10b981;
+    --model-qwen-bg: #d1fae5;
+    
     /* 功能色 */
     --success: #10b981;
     --warning: #f59e0b;
@@ -304,6 +310,102 @@ body {
     gap: var(--space-4);
 }
 
+/* ============================================
+   模型选择器
+   ============================================ */
+.model-selector {
+    position: relative;
+}
+
+.model-select-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--primary-50);
+    border: 1px solid var(--primary-200);
+    border-radius: var(--radius-lg);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--primary-700);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.model-select-btn:hover {
+    background: var(--primary-100);
+    border-color: var(--primary-300);
+}
+
+.model-icon {
+    font-size: 1.125rem;
+}
+
+.model-dropdown {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    right: 0;
+    min-width: 220px;
+    background: white;
+    border: 1px solid var(--primary-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+    display: none;
+    overflow: hidden;
+}
+
+.model-dropdown.active {
+    display: block;
+    animation: dropdownSlide 0.2s ease;
+}
+
+@keyframes dropdownSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.model-option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.model-option:hover {
+    background: var(--primary-50);
+}
+
+.model-option.active {
+    background: var(--accent-50);
+}
+
+.model-option-icon {
+    font-size: 1.125rem;
+}
+
+.model-option-name {
+    flex: 1;
+    font-size: 0.9375rem;
+    color: var(--primary-800);
+}
+
+.model-option-count {
+    font-size: 0.75rem;
+    color: var(--primary-400);
+    background: var(--primary-100);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-md);
+}
+
 /* 搜索框 */
 .search-box {
     position: relative;
@@ -375,6 +477,97 @@ body {
 }
 
 /* ============================================
+   模型统计区域
+   ============================================ */
+.model-stats-section {
+    margin-bottom: var(--space-8);
+}
+
+.model-stats-section .section-title {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary-900);
+    margin-bottom: var(--space-4);
+}
+
+.model-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-4);
+}
+
+.model-stat-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    border: 1px solid var(--primary-200);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.model-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.model-stat-card.active {
+    border-color: var(--accent-500);
+    box-shadow: 0 0 0 3px var(--accent-100);
+}
+
+.model-stat-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+.model-stat-icon {
+    font-size: 1.25rem;
+}
+
+.model-stat-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary-600);
+}
+
+.model-stat-count {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-900);
+    margin-bottom: var(--space-3);
+}
+
+.model-stat-breakdown {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.breakdown-item {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-md);
+}
+
+.breakdown-item.good {
+    background: var(--rating-good-bg);
+    color: var(--rating-good);
+}
+
+.breakdown-item.warning {
+    background: var(--rating-warning-bg);
+    color: var(--rating-warning);
+}
+
+.breakdown-item.exclude {
+    background: var(--rating-exclude-bg);
+    color: var(--rating-exclude);
+}
+
+/* ============================================
    仪表板视图
    ============================================ */
 .hero-section {
@@ -418,7 +611,7 @@ body {
 .hero-subtitle {
     font-size: 1.125rem;
     color: var(--primary-300);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
     font-weight: 400;
 }
 
@@ -528,28 +721,6 @@ body {
     margin-bottom: var(--space-4);
 }
 
-.card-rating {
-    padding: var(--space-1) var(--space-3);
-    border-radius: var(--radius-md);
-    font-size: 0.875rem;
-    font-weight: 600;
-}
-
-.card-rating.good {
-    background: var(--rating-good-bg);
-    color: var(--rating-good);
-}
-
-.card-rating.warning {
-    background: var(--rating-warning-bg);
-    color: var(--rating-warning);
-}
-
-.card-rating.exclude {
-    background: var(--rating-exclude-bg);
-    color: var(--rating-exclude);
-}
-
 .card-code {
     font-family: 'SF Mono', monospace;
     font-size: 0.75rem;
@@ -559,19 +730,19 @@ body {
     border-radius: var(--radius-sm);
 }
 
+.card-model {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-md);
+}
+
 .card-title {
     font-family: var(--font-serif);
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--primary-900);
     margin-bottom: var(--space-2);
-}
-
-.card-price {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-800);
-    margin-bottom: var(--space-4);
 }
 
 .card-summary {
@@ -605,6 +776,54 @@ body {
 
 .report-card:hover .card-arrow {
     transform: translateX(4px);
+}
+
+/* ============================================
+   模型分组区域
+   ============================================ */
+.model-section {
+    margin-bottom: var(--space-8);
+}
+
+.model-section-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    padding: var(--space-4) 0;
+    border-bottom: 2px solid var(--primary-200);
+}
+
+.model-section-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    font-size: 1.25rem;
+}
+
+.model-section-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-900);
+}
+
+.model-section-count {
+    font-size: 0.875rem;
+    color: var(--primary-500);
+    background: var(--primary-100);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-md);
+    margin-left: auto;
+}
+
+.reports-by-model {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
 }
 
 /* ============================================
@@ -667,10 +886,10 @@ body {
 
 .report-list-item {
     display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: var(--space-6);
-    padding: var(--space-5) var(--space-6);
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-6);
     background: white;
     border-radius: var(--radius-lg);
     border: 1px solid var(--primary-200);
@@ -728,19 +947,230 @@ body {
     border-radius: var(--radius-sm);
 }
 
-.list-price {
-    text-align: right;
+.list-model {
+    font-weight: 500;
 }
 
-.list-price-value {
+/* ============================================
+   模型对比视图
+   ============================================ */
+.comparison-header {
+    margin-bottom: var(--space-6);
+}
+
+.comparison-subtitle {
+    color: var(--primary-500);
+    font-size: 0.9375rem;
+    margin-top: var(--space-2);
+}
+
+.comparison-content {
+    background: white;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--primary-200);
+    min-height: 400px;
+}
+
+.comparison-empty {
+    text-align: center;
+    padding: var(--space-16);
+}
+
+.comparison-empty .empty-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-4);
+}
+
+.comparison-empty h3 {
+    font-family: var(--font-serif);
     font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--primary-800);
+    font-weight: 600;
+    color: var(--primary-900);
+    margin-bottom: var(--space-2);
 }
 
-.list-price-label {
+.comparison-empty p {
+    color: var(--primary-500);
+    font-size: 0.9375rem;
+}
+
+/* 对比介绍 */
+.comparison-intro {
+    padding: var(--space-6);
+    background: var(--accent-50);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-6);
+    border: 1px solid var(--accent-100);
+}
+
+.comparison-intro p {
+    color: var(--primary-700);
+    font-size: 0.9375rem;
+    margin: 0;
+}
+
+/* 对比网格 */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+    padding: var(--space-4);
+}
+
+.comparison-stock-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--primary-200);
+    padding: var(--space-5);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.comparison-stock-card:hover {
+    border-color: var(--accent-400);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.comparison-stock-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--primary-100);
+}
+
+.stock-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.stock-code-lg {
+    font-family: 'SF Mono', monospace;
+    font-size: 0.875rem;
+    color: var(--primary-500);
+    background: var(--primary-100);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    align-self: flex-start;
+}
+
+.stock-info h4 {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary-900);
+    margin: 0;
+}
+
+.rating-summary {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.rating-count {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
     font-size: 0.75rem;
-    color: var(--primary-400);
+    font-weight: 600;
+    cursor: help;
+}
+
+.rating-count.good {
+    background: var(--rating-good-bg);
+    color: var(--rating-good);
+}
+
+.rating-count.warning {
+    background: var(--rating-warning-bg);
+    color: var(--rating-warning);
+}
+
+.rating-count.exclude {
+    background: var(--rating-exclude-bg);
+    color: var(--rating-exclude);
+}
+
+.comparison-models {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.comparison-model-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-3);
+    background: var(--primary-50);
+    border-radius: var(--radius-md);
+}
+
+.model-info-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.model-icon-small {
+    font-size: 1rem;
+}
+
+.model-name-small {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--primary-700);
+}
+
+.rating-pill {
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-md);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.rating-pill.good {
+    background: var(--rating-good-bg);
+    color: var(--rating-good);
+}
+
+.rating-pill.warning {
+    background: var(--rating-warning-bg);
+    color: var(--rating-warning);
+}
+
+.rating-pill.exclude {
+    background: var(--rating-exclude-bg);
+    color: var(--rating-exclude);
+}
+
+.compare-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: linear-gradient(135deg, var(--accent-600) 0%, var(--accent-500) 100%);
+    border: none;
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.compare-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
 }
 
 /* ============================================
@@ -775,7 +1205,33 @@ body {
 
 .detail-actions {
     display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.detail-model-switch {
+    display: flex;
+    align-items: center;
     gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: white;
+    border: 1px solid var(--primary-200);
+    border-radius: var(--radius-lg);
+}
+
+.switch-label {
+    font-size: 0.875rem;
+    color: var(--primary-500);
+}
+
+#detailModelSelect {
+    border: none;
+    background: transparent;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--primary-800);
+    cursor: pointer;
+    outline: none;
 }
 
 .action-btn {
@@ -835,32 +1291,17 @@ body {
     margin-bottom: var(--space-4);
 }
 
-.stock-rating {
-    padding: var(--space-1) var(--space-3);
-    border-radius: var(--radius-md);
-    font-size: 0.875rem;
-    font-weight: 600;
-}
-
-.stock-rating.good {
-    background: var(--rating-good-bg);
-    color: var(--rating-good);
-}
-
-.stock-rating.warning {
-    background: var(--rating-warning-bg);
-    color: var(--rating-warning);
-}
-
-.stock-rating.exclude {
-    background: var(--rating-exclude-bg);
-    color: var(--rating-exclude);
-}
-
 .stock-code {
     font-family: 'SF Mono', monospace;
     font-size: 0.75rem;
     color: var(--primary-400);
+}
+
+.model-badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-md);
 }
 
 .stock-name {
@@ -869,13 +1310,6 @@ body {
     font-weight: 700;
     color: var(--primary-900);
     margin-bottom: var(--space-2);
-}
-
-.stock-price {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent-600);
-    margin-bottom: var(--space-4);
 }
 
 .stock-tags {
@@ -1208,6 +1642,39 @@ body {
     color: var(--primary-600);
 }
 
+/* 模型特性列表 */
+.model-feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.model-feature {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    background: var(--primary-50);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--primary-200);
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    min-width: 40px;
+}
+
+.feature-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-900);
+    margin-bottom: var(--space-1);
+}
+
+.feature-content p {
+    font-size: 0.9375rem;
+    color: var(--primary-600);
+}
+
 .rating-legend {
     display: flex;
     flex-direction: column;
@@ -1354,16 +1821,6 @@ body {
     background: var(--primary-50);
 }
 
-.search-result-rating {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-}
-
 .search-result-info {
     flex: 1;
 }
@@ -1377,6 +1834,18 @@ body {
 .search-result-meta {
     font-size: 0.875rem;
     color: var(--primary-500);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.search-result-models {
+    background: var(--accent-100);
+    color: var(--accent-600);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 500;
 }
 
 .search-empty {
@@ -1410,6 +1879,10 @@ body {
         position: static;
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }
+    
+    .model-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -1457,6 +1930,10 @@ body {
         display: none;
     }
     
+    .model-selector {
+        display: none;
+    }
+    
     .content-wrapper {
         padding: var(--space-4);
     }
@@ -1491,12 +1968,19 @@ body {
         gap: var(--space-3);
     }
     
-    .list-price {
-        text-align: left;
-    }
-    
     .detail-sidebar {
         grid-template-columns: 1fr;
+    }
+    
+    .detail-header {
+        flex-direction: column;
+        gap: var(--space-4);
+        align-items: flex-start;
+    }
+    
+    .detail-actions {
+        width: 100%;
+        justify-content: space-between;
     }
     
     .markdown-body {
@@ -1507,9 +1991,14 @@ body {
         padding: var(--space-6);
     }
     
-    .factor-item {
+    .factor-item,
+    .model-feature {
         flex-direction: column;
         gap: var(--space-2);
+    }
+    
+    .model-stats-grid {
+        grid-template-columns: 1fr;
     }
 }
 

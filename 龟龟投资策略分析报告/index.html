@@ -50,6 +50,13 @@
                     </svg>
                     <span>报告列表</span>
                 </a>
+                <a href="#" class="nav-item" data-view="comparison">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3v18h18"/>
+                        <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+                    </svg>
+                    <span>模型对比</span>
+                </a>
                 <a href="#" class="nav-item" data-view="favorites">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
@@ -73,8 +80,8 @@
                         <span class="stat-label">报告总数</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-value" id="goodReports">0</span>
-                        <span class="stat-label">优秀评级</span>
+                        <span class="stat-value" id="modelCount">0</span>
+                        <span class="stat-label">模型数量</span>
                     </div>
                 </div>
             </div>
@@ -95,6 +102,24 @@
                     <h1 class="page-title" id="pageTitle">总览</h1>
                 </div>
                 <div class="header-right">
+                    <!-- 模型选择器 -->
+                    <div class="model-selector" id="modelSelector">
+                        <button class="model-select-btn" id="modelSelectBtn">
+                            <span class="model-icon">🤖</span>
+                            <span class="model-name" id="currentModelName">全部模型</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </button>
+                        <div class="model-dropdown" id="modelDropdown">
+                            <div class="model-option active" data-model="all">
+                                <span class="model-option-icon">🌐</span>
+                                <span class="model-option-name">全部模型</span>
+                                <span class="model-option-count" id="allModelCount">0</span>
+                            </div>
+                            <!-- 动态生成模型选项 -->
+                        </div>
+                    </div>
                     <div class="search-box">
                         <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"/>
@@ -110,11 +135,19 @@
             <div class="content-wrapper" id="contentWrapper">
                 <!-- 仪表板视图 -->
                 <div class="view dashboard-view active" id="dashboardView">
+                    <!-- 模型统计卡片 -->
+                    <div class="model-stats-section" id="modelStatsSection">
+                        <h3 class="section-title">模型统计</h3>
+                        <div class="model-stats-grid" id="modelStatsGrid">
+                            <!-- 动态生成模型统计卡片 -->
+                        </div>
+                    </div>
+
                     <div class="hero-section">
                         <div class="hero-content">
                             <h2 class="hero-title">龟龟投资策略分析报告库</h2>
                             <p class="hero-subtitle">基于价值投资的深度分析框架，精选优质投资标的</p>
-                            <p class="hero-model">Powered by Qwen3.5-Plus AI Analysis</p>
+                            <p class="hero-model" id="heroModelText">多模型智能分析</p>
                             <div class="hero-stats">
                                 <div class="hero-stat">
                                     <span class="hero-stat-value" id="heroTotal">0</span>
@@ -166,8 +199,30 @@
                             </select>
                         </div>
                     </div>
-                    <div class="report-list" id="reportList">
+                    
+                    <!-- 按模型分组的报告列表 -->
+                    <div class="reports-by-model" id="reportsByModel">
+                        <!-- 动态生成按模型分组的报告 -->
+                    </div>
+                    
+                    <!-- 纯列表视图（用于筛选时） -->
+                    <div class="report-list" id="reportList" style="display: none;">
                         <!-- 动态生成 -->
+                    </div>
+                </div>
+
+                <!-- 模型对比视图 -->
+                <div class="view comparison-view" id="comparisonView">
+                    <div class="comparison-header">
+                        <h3 class="section-title">模型分析对比</h3>
+                        <p class="comparison-subtitle">对比不同 AI 模型对同一股票的分析结果</p>
+                    </div>
+                    <div class="comparison-content" id="comparisonContent">
+                        <div class="comparison-empty">
+                            <div class="empty-icon">📊</div>
+                            <h3>选择股票进行对比</h3>
+                            <p>在报告列表中选择已被多个模型分析的股票，查看不同模型的分析差异</p>
+                        </div>
                     </div>
                 </div>
 
@@ -181,6 +236,13 @@
                             返回
                         </button>
                         <div class="detail-actions">
+                            <!-- 模型切换（当多个模型分析了同一股票时显示） -->
+                            <div class="detail-model-switch" id="detailModelSwitch" style="display: none;">
+                                <span class="switch-label">分析模型:</span>
+                                <select id="detailModelSelect">
+                                    <!-- 动态生成 -->
+                                </select>
+                            </div>
                             <button class="action-btn" id="favoriteBtn" title="收藏">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
@@ -200,6 +262,7 @@
                             <div class="stock-info-card">
                                 <div class="stock-header">
                                     <span class="stock-code" id="detailCode"></span>
+                                    <span class="model-badge" id="detailModelBadge"></span>
                                 </div>
                                 <h2 class="stock-name" id="detailName"></h2>
                                 <div class="stock-tags" id="detailTags"></div>
@@ -269,6 +332,33 @@
                                     <div class="factor-content">
                                         <h4>因子 4 - 估值与安全边际</h4>
                                         <p>评估估值水平，确定合理的买入价格和安全边际</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-section">
+                            <h3>多模型分析</h3>
+                            <p>本报告库支持多个 AI 模型的分析结果对比，帮助投资者从不同角度审视投资标的：</p>
+                            <div class="model-feature-list">
+                                <div class="model-feature">
+                                    <span class="feature-icon">🤖</span>
+                                    <div class="feature-content">
+                                        <h4>多模型覆盖</h4>
+                                        <p>支持 Qwen、GPT、Claude 等多个主流大模型的分析结果</p>
+                                    </div>
+                                </div>
+                                <div class="model-feature">
+                                    <span class="feature-icon">📊</span>
+                                    <div class="feature-content">
+                                        <h4>对比分析</h4>
+                                        <p>直观对比不同模型对同一股票的评级和分析差异</p>
+                                    </div>
+                                </div>
+                                <div class="model-feature">
+                                    <span class="feature-icon">🎯</span>
+                                    <div class="feature-content">
+                                        <h4>综合判断</h4>
+                                        <p>基于多模型分析结果，形成更全面的投资决策参考</p>
                                     </div>
                                 </div>
                             </div>
