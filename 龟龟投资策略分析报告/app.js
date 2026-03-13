@@ -113,7 +113,7 @@ const reportData = [
     
     // GLM5 新增报告 (2026-03-13) - Git 未跟踪文件
     { code: '000063', name: '中兴通讯', file: 'GLM5/000063/中兴通讯_000063_分析报告.md', rating: 'warning', model: 'GLM5' },
-    { code: '000100', name: 'TCL 科技', file: 'GLM5/000100/TCL 科技_000100_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '000100', name: 'TCL 科技', file: 'GLM5/000100/TCL科技_000100_分析报告.md', rating: 'warning', model: 'GLM5' },
     { code: '000401', name: '冀东水泥', file: 'GLM5/000401/冀东水泥_000401_分析报告.md', rating: 'warning', model: 'GLM5' },
     { code: '000513', name: '丽珠集团', file: 'GLM5/000513/丽珠集团_000513_分析报告.md', rating: 'warning', model: 'GLM5' },
     { code: '000596', name: '古井贡酒', file: 'GLM5/000596/古井贡酒_000596_分析报告.md', rating: 'good', model: 'GLM5' },
@@ -215,6 +215,11 @@ function encodeFilePath(filePath) {
     return filePath.split('/').map(part => encodeURIComponent(part)).join('/');
 }
 
+function resolveFileUrl(filePath) {
+    const encodedPath = encodeFilePath(filePath);
+    return new URL(encodedPath, window.location.href).toString();
+}
+
 /**
  * 解析报告元数据
  */
@@ -225,8 +230,8 @@ async function parseReportMeta(report) {
     }
 
     try {
-        const encodedPath = encodeFilePath(report.file);
-        const response = await fetch(encodedPath);
+        const fileUrl = resolveFileUrl(report.file);
+        const response = await fetch(fileUrl);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -418,18 +423,6 @@ function initModelSelector() {
     modelSelectBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         modelDropdown.classList.toggle('active');
-        
-        // 在移动端，将下拉框定位到底部
-        if (window.innerWidth <= 768) {
-            modelDropdown.style.position = 'fixed';
-            modelDropdown.style.top = 'auto';
-            modelDropdown.style.left = 'var(--space-4)';
-            modelDropdown.style.right = 'var(--space-4)';
-            modelDropdown.style.bottom = 'var(--space-4)';
-            modelDropdown.style.maxHeight = '60vh';
-            modelDropdown.style.overflowY = 'auto';
-            modelDropdown.style.webkitOverflowScrolling = 'touch';
-        }
     });
     
     // 点击外部关闭
@@ -483,11 +476,11 @@ function selectModel(model) {
 /**
  * 渲染报告卡片
  */
-function createReportCard(report, meta) {
+function createReportCard(report, meta, index = 0) {
     const modelInfo = getModelInfo(report.model);
     
     return `
-        <div class="report-card" data-code="${report.code}" data-model="${report.model}" data-rating="${report.rating}">
+        <div class="report-card" data-code="${report.code}" data-model="${report.model}" data-rating="${report.rating}" style="animation-delay: ${index * 0.1}s">
             <div class="card-header">
                 <span class="card-code">${report.code}</span>
                 <span class="card-model" style="background: ${modelInfo.color}20; color: ${modelInfo.color}">
@@ -550,7 +543,7 @@ function renderModelStats() {
     };
     
     html += `
-        <div class="model-stat-card ${state.currentModel === 'all' ? 'active' : ''}" data-model="all">
+        <div class="model-stat-card ${state.currentModel === 'all' ? 'active' : ''}" data-model="all" style="animation-delay: 0s">
             <div class="model-stat-header">
                 <span class="model-stat-icon">🌐</span>
                 <span class="model-stat-name">全部模型</span>
@@ -565,7 +558,7 @@ function renderModelStats() {
     `;
     
     // 添加各模型卡片
-    models.forEach(model => {
+    models.forEach((model, index) => {
         const config = getModelInfo(model);
         const reports = grouped[model] || [];
         const stats = {
@@ -575,7 +568,7 @@ function renderModelStats() {
         };
         
         html += `
-            <div class="model-stat-card ${state.currentModel === model ? 'active' : ''}" data-model="${model}">
+            <div class="model-stat-card ${state.currentModel === model ? 'active' : ''}" data-model="${model}" style="animation-delay: ${(index + 1) * 0.1}s">
                 <div class="model-stat-header">
                     <span class="model-stat-icon">${config.icon}</span>
                     <span class="model-stat-name">${config.name}</span>
@@ -636,9 +629,9 @@ async function renderRecentReports() {
     const recentReports = reports.slice(0, 6);
     
     const cards = await Promise.all(
-        recentReports.map(async report => {
+        recentReports.map(async (report, index) => {
             const meta = await parseReportMeta(report);
-            return createReportCard(report, meta);
+            return createReportCard(report, meta, index);
         })
     );
     
@@ -697,9 +690,9 @@ async function renderReportsByModel() {
         });
         
         const cards = await Promise.all(
-            sortedReports.map(async report => {
+            sortedReports.map(async (report, index) => {
                 const meta = await parseReportMeta(report);
-                return createReportCard(report, meta);
+                return createReportCard(report, meta, index);
             })
         );
         
@@ -973,8 +966,8 @@ async function showComparisonDetail(code, model) {
     
     // 加载报告的内容
     try {
-        const encodedPath = encodeFilePath(report.file);
-        const response = await fetch(encodedPath);
+        const fileUrl = resolveFileUrl(report.file);
+        const response = await fetch(fileUrl);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -999,7 +992,7 @@ async function showComparisonDetail(code, model) {
         generateTOC();
         updateFavoriteButton();
         
-        document.getElementById('downloadBtn').href = encodedPath;
+        document.getElementById('downloadBtn').href = fileUrl;
         document.getElementById('downloadBtn').download = `${report.name}_${code}_分析报告.md`;
         
         // 显示模型切换和对比提示
@@ -1041,6 +1034,10 @@ async function showComparisonDetail(code, model) {
         
     } catch (error) {
         console.error('加载报告失败:', error);
+        if (window.location.protocol === 'file:') {
+            alert('当前通过“本地文件”方式打开页面，浏览器会拦截加载报告内容。请用本地静态服务器打开该目录（例如 python3 -m http.server），再访问 index.html。');
+            return;
+        }
         alert('报告加载失败，请稍后重试');
     }
 }
@@ -1160,8 +1157,8 @@ async function showReportDetail(code, model) {
     
     // 加载报告内容
     try {
-        const encodedPath = encodeFilePath(report.file);
-        const response = await fetch(encodedPath);
+        const fileUrl = resolveFileUrl(report.file);
+        const response = await fetch(fileUrl);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -1195,7 +1192,7 @@ async function showReportDetail(code, model) {
         updateFavoriteButton();
         
         // 更新下载链接
-        document.getElementById('downloadBtn').href = encodedPath;
+        document.getElementById('downloadBtn').href = fileUrl;
         document.getElementById('downloadBtn').download = `${report.name}_${report.code}_分析报告.md`;
         
         // 处理多模型切换
@@ -1221,6 +1218,10 @@ async function showReportDetail(code, model) {
         
     } catch (error) {
         console.error('加载报告失败:', error);
+        if (window.location.protocol === 'file:') {
+            alert('当前通过“本地文件”方式打开页面，浏览器会拦截加载报告内容。请用本地静态服务器打开该目录（例如 python3 -m http.server），再访问 index.html。');
+            return;
+        }
         alert('报告加载失败，请稍后重试');
     }
 }
@@ -1358,7 +1359,95 @@ function switchView(viewName) {
         renderReportsByModel();
     } else if (viewName === 'comparison') {
         renderComparisonView();
+    } else if (viewName === 'detail') {
+        updateDetailSidebarPanel();
     }
+}
+
+function getDetailSidebarPanelState() {
+    const collapsed = localStorage.getItem('detailSidebarCollapsed') === 'true';
+    const pinned = localStorage.getItem('detailSidebarPinned') === 'true';
+    return { collapsed, pinned };
+}
+
+function setDetailSidebarPanelState(next) {
+    localStorage.setItem('detailSidebarCollapsed', next.collapsed ? 'true' : 'false');
+    localStorage.setItem('detailSidebarPinned', next.pinned ? 'true' : 'false');
+}
+
+function updateDetailSidebarPanel() {
+    const content = document.getElementById('detailContent');
+    const pinBtn = document.getElementById('detailSidebarPinBtn');
+    const handleBtn = document.getElementById('detailSidebarHandle');
+
+    if (!content || !pinBtn || !handleBtn) return;
+
+    const isDesktop = window.innerWidth > 1024;
+    const { collapsed, pinned } = getDetailSidebarPanelState();
+
+    content.classList.toggle('sidebar-collapsed', isDesktop && collapsed && !pinned);
+    content.classList.toggle('sidebar-pinned', isDesktop && pinned);
+
+    pinBtn.classList.toggle('active', pinned);
+    pinBtn.setAttribute('aria-label', pinned ? '取消固定侧栏' : '固定侧栏');
+    pinBtn.setAttribute('title', pinned ? '取消固定' : '固定');
+
+    handleBtn.setAttribute('aria-label', collapsed && !pinned ? '展开侧栏' : '侧栏已展开');
+}
+
+function initDetailSidebarPanel() {
+    const content = document.getElementById('detailContent');
+    const shell = document.getElementById('detailSidebarShell');
+    const pinBtn = document.getElementById('detailSidebarPinBtn');
+    const collapseBtn = document.getElementById('detailSidebarCollapseBtn');
+    const handleBtn = document.getElementById('detailSidebarHandle');
+
+    if (!content || !shell || !pinBtn || !collapseBtn || !handleBtn) return;
+
+    const reveal = () => {
+        const { collapsed, pinned } = getDetailSidebarPanelState();
+        if (!collapsed || pinned) return;
+        content.classList.add('sidebar-revealed');
+    };
+
+    const conceal = () => {
+        const { collapsed, pinned } = getDetailSidebarPanelState();
+        if (!collapsed || pinned) return;
+        content.classList.remove('sidebar-revealed');
+    };
+
+    handleBtn.addEventListener('mouseenter', reveal);
+    handleBtn.addEventListener('focus', reveal);
+    shell.addEventListener('mouseenter', reveal);
+    shell.addEventListener('mouseleave', conceal);
+
+    collapseBtn.addEventListener('click', () => {
+        const { collapsed, pinned } = getDetailSidebarPanelState();
+        const next = pinned ? { collapsed: true, pinned: false } : { collapsed: !collapsed, pinned: false };
+        setDetailSidebarPanelState(next);
+        content.classList.remove('sidebar-revealed');
+        updateDetailSidebarPanel();
+    });
+
+    handleBtn.addEventListener('click', () => {
+        const { collapsed, pinned } = getDetailSidebarPanelState();
+        if (!collapsed || pinned) return;
+        setDetailSidebarPanelState({ collapsed: false, pinned: false });
+        content.classList.remove('sidebar-revealed');
+        updateDetailSidebarPanel();
+    });
+
+    pinBtn.addEventListener('click', () => {
+        const { collapsed, pinned } = getDetailSidebarPanelState();
+        const nextPinned = !pinned;
+        const next = nextPinned ? { collapsed: false, pinned: true } : { collapsed, pinned: false };
+        setDetailSidebarPanelState(next);
+        content.classList.remove('sidebar-revealed');
+        updateDetailSidebarPanel();
+    });
+
+    window.addEventListener('resize', updateDetailSidebarPanel);
+    updateDetailSidebarPanel();
 }
 
 // ============================================
@@ -1588,6 +1677,9 @@ async function init() {
     
     // 初始化模型选择器
     initModelSelector();
+
+    // 初始化详情侧栏面板
+    initDetailSidebarPanel();
     
     // 绑定事件
     initEventListeners();
