@@ -119,7 +119,7 @@ const reportData = [
     { code: '000596', name: '古井贡酒', file: 'GLM5/000596/古井贡酒_000596_分析报告.md', rating: 'good', model: 'GLM5' },
     { code: '000625', name: '长安汽车', file: 'GLM5/000625/长安汽车_000625_分析报告.md', rating: 'warning', model: 'GLM5' },
     { code: '000661', name: '长春高新', file: 'GLM5/000661/长春高新_000661_分析报告.md', rating: 'warning', model: 'GLM5' },
-    { code: '000725', name: '京东方 A', file: 'GLM5/000725/京东方 A_000725_分析报告.md', rating: 'warning', model: 'GLM5' },
+    { code: '000725', name: '京东方 A', file: 'GLM5/000725/京东方A_000725_分析报告.md', rating: 'warning', model: 'GLM5' },
     { code: '000786', name: '北新建材', file: 'GLM5/000786/北新建材_000786_分析报告.md', rating: 'warning', model: 'GLM5' },
     { code: '000876', name: '新希望', file: 'GLM5/000876/新希望_000876_分析报告.md', rating: 'warning', model: 'GLM5' },
     { code: '001289', name: '龙源电力', file: 'GLM5/001289/龙源电力_001289_分析报告.md', rating: 'warning', model: 'GLM5' },
@@ -305,63 +305,81 @@ function getReportsByCode(code) {
 function drawRatingChart() {
     const canvas = document.getElementById('ratingChart');
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
-    
+
+    // 检查 canvas 尺寸是否有效
+    if (rect.width <= 0 || rect.height <= 0) {
+        console.warn('Canvas 尺寸无效，跳过绘制');
+        return;
+    }
+
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
     ctx.scale(dpr, dpr);
-    
+
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const radius = Math.min(centerX, centerY) - 20;
-    
+
+    // 确保半径不为负数，设置最小值
+    const radius = Math.max(10, Math.min(centerX, centerY) - 20);
+
     // 统计数据
-    const reports = state.currentModel === 'all' 
-        ? state.reports 
+    const reports = state.currentModel === 'all'
+        ? state.reports
         : state.reports.filter(r => r.model === state.currentModel);
-    
+
     const stats = {
         good: reports.filter(r => r.rating === 'good').length,
         warning: reports.filter(r => r.rating === 'warning').length,
         exclude: reports.filter(r => r.rating === 'exclude').length
     };
     const total = reports.length;
-    
+
+    // 如果没有数据，显示空状态
+    if (total === 0) {
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.font = '14px Inter';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('暂无数据', centerX, centerY);
+        return;
+    }
+
     // 颜色
     const colors = {
         good: '#10b981',
         warning: '#f59e0b',
         exclude: '#ef4444'
     };
-    
+
     // 绘制环形图
     let startAngle = -Math.PI / 2;
-    
+
     Object.entries(stats).forEach(([key, value]) => {
         if (value === 0) return;
-        
+
         const angle = (value / total) * Math.PI * 2;
-        
+
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, startAngle, startAngle + angle);
         ctx.arc(centerX, centerY, radius * 0.6, startAngle + angle, startAngle, true);
         ctx.closePath();
         ctx.fillStyle = colors[key];
         ctx.fill();
-        
+
         startAngle += angle;
     });
-    
+
     // 中心文字
     ctx.fillStyle = '#fff';
     ctx.font = 'bold 32px Inter';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(total.toString(), centerX, centerY - 8);
-    
+
     ctx.font = '12px Inter';
     ctx.fillStyle = 'rgba(255,255,255,0.7)';
     ctx.fillText('报告总数', centerX, centerY + 16);
@@ -1008,24 +1026,117 @@ async function showComparisonDetail(code, model) {
 }
 
 /**
+ * 更新报告导航状态
+ * 根据当前筛选条件计算上一篇和下一篇报告
+ */
+function updateReportNavigationState(currentReport) {
+    // 获取当前筛选条件下的报告列表
+    let filteredReports = state.currentModel === 'all'
+        ? [...state.reports]
+        : state.reports.filter(r => r.model === state.currentModel);
+
+    // 应用评级筛选
+    if (state.currentFilter !== 'all') {
+        filteredReports = filteredReports.filter(r => r.rating === state.currentFilter);
+    }
+
+    // 应用搜索筛选
+    if (state.searchQuery) {
+        const query = state.searchQuery.toLowerCase();
+        filteredReports = filteredReports.filter(r =>
+            r.code.includes(query) ||
+            r.name.toLowerCase().includes(query)
+        );
+    }
+
+    // 应用排序
+    filteredReports.sort((a, b) => {
+        switch (state.currentSort) {
+            case 'code':
+                return a.code.localeCompare(b.code);
+            case 'name':
+                return a.name.localeCompare(b.name);
+            default:
+                return 0;
+        }
+    });
+
+    // 找到当前报告的索引
+    const currentIndex = filteredReports.findIndex(
+        r => r.code === currentReport.code && r.model === currentReport.model
+    );
+
+    // 保存导航状态
+    state.navigationList = filteredReports;
+    state.navigationIndex = currentIndex;
+
+    // 更新导航按钮状态
+    updateNavigationButtons();
+}
+
+/**
+ * 更新导航按钮的显示状态
+ */
+function updateNavigationButtons() {
+    const prevBtn = document.getElementById('prevReportBtn');
+    const nextBtn = document.getElementById('nextReportBtn');
+
+    if (!prevBtn || !nextBtn) return;
+
+    const hasPrev = state.navigationIndex > 0;
+    const hasNext = state.navigationIndex < state.navigationList.length - 1;
+
+    prevBtn.disabled = !hasPrev;
+    nextBtn.disabled = !hasNext;
+
+    prevBtn.style.opacity = hasPrev ? '1' : '0.4';
+    nextBtn.style.opacity = hasNext ? '1' : '0.4';
+    prevBtn.style.cursor = hasPrev ? 'pointer' : 'not-allowed';
+    nextBtn.style.cursor = hasNext ? 'pointer' : 'not-allowed';
+}
+
+/**
+ * 导航到上一篇报告
+ */
+function navigateToPrevReport() {
+    if (state.navigationIndex > 0) {
+        const prevReport = state.navigationList[state.navigationIndex - 1];
+        showReportDetail(prevReport.code, prevReport.model);
+    }
+}
+
+/**
+ * 导航到下一篇报告
+ */
+function navigateToNextReport() {
+    if (state.navigationIndex < state.navigationList.length - 1) {
+        const nextReport = state.navigationList[state.navigationIndex + 1];
+        showReportDetail(nextReport.code, nextReport.model);
+    }
+}
+
+/**
  * 显示报告详情
  */
 async function showReportDetail(code, model) {
     // 获取该股票的所有模型分析
     const allReports = getReportsByCode(code);
-    
+
     // 如果指定了模型，使用指定模型；否则使用第一个
-    let report = model 
+    let report = model
         ? allReports.find(r => r.model === model)
         : allReports[0];
-    
+
     if (!report && allReports.length > 0) {
         report = allReports[0];
     }
-    
+
     if (!report) return;
-    
+
     state.selectedReport = report;
+
+    // 计算当前报告在列表中的位置，用于上一篇/下一篇导航
+    updateReportNavigationState(report);
     
     // 加载报告内容
     try {
@@ -1212,6 +1323,12 @@ function switchView(viewName) {
     };
     document.getElementById('pageTitle').textContent = titleMap[viewName];
     
+    // 控制 Header 导航按钮显示/隐藏
+    const headerNav = document.getElementById('headerNav');
+    if (headerNav) {
+        headerNav.style.display = viewName === 'detail' ? 'flex' : 'none';
+    }
+
     // 特殊处理
     if (viewName === 'favorites') {
         renderFavorites();
@@ -1362,7 +1479,11 @@ function initEventListeners() {
     document.getElementById('backBtn').addEventListener('click', () => {
         switchView('reports');
     });
-    
+
+    // 上一篇/下一篇导航按钮
+    document.getElementById('prevReportBtn').addEventListener('click', navigateToPrevReport);
+    document.getElementById('nextReportBtn').addEventListener('click', navigateToNextReport);
+
     // 收藏按钮
     document.getElementById('favoriteBtn').addEventListener('click', toggleFavorite);
     

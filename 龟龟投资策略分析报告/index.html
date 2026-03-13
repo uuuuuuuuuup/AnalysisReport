@@ -102,6 +102,21 @@
                     <h1 class="page-title" id="pageTitle">总览</h1>
                 </div>
                 <div class="header-right">
+                    <!-- 报告导航按钮（仅在详情视图显示） -->
+                    <div class="header-nav" id="headerNav" style="display: none;">
+                        <button class="nav-btn" id="prevReportBtn" title="上一篇">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                            <span>上一篇</span>
+                        </button>
+                        <button class="nav-btn" id="nextReportBtn" title="下一篇">
+                            <span>下一篇</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
+                    </div>
                     <!-- 模型选择器 -->
                     <div class="model-selector" id="modelSelector">
                         <button class="model-select-btn" id="modelSelectBtn">

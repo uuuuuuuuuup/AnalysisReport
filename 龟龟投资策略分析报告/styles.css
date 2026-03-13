@@ -310,6 +310,43 @@ body {
     gap: var(--space-4);
 }
 
+/* Header 导航按钮 */
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-right: var(--space-4);
+    border-right: 1px solid var(--primary-200);
+    margin-right: var(--space-2);
+}
+
+.header-nav .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: white;
+    border: 1px solid var(--primary-200);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary-700);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.header-nav .nav-btn:hover:not(:disabled) {
+    background: var(--primary-50);
+    border-color: var(--accent-400);
+    color: var(--accent-600);
+}
+
+.header-nav .nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
 /* ============================================
    模型选择器
    ============================================ */
@@ -1181,6 +1218,8 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-4);
 }
 
 .back-btn {
@@ -1929,11 +1968,26 @@ body {
     .search-box {
         display: none;
     }
-    
+
     .model-selector {
         display: none;
     }
-    
+
+    /* 移动端 Header 导航按钮样式 */
+    .header-nav {
+        padding-right: var(--space-2);
+        margin-right: 0;
+        border-right: none;
+    }
+
+    .header-nav .nav-btn span {
+        display: none;
+    }
+
+    .header-nav .nav-btn {
+        padding: var(--space-2);
+    }
+
     .content-wrapper {
         padding: var(--space-4);
     }
@@ -1977,7 +2031,7 @@ body {
         gap: var(--space-4);
         align-items: flex-start;
     }
-    
+
     .detail-actions {
         width: 100%;
         justify-content: space-between;
