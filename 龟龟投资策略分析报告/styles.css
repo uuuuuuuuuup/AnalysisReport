@@ -297,6 +297,15 @@ body {
     padding: var(--space-2);
 }
 
+.mobile-search-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--primary-700);
+    cursor: pointer;
+    padding: var(--space-2);
+}
+
 .page-title {
     font-family: var(--font-serif);
     font-size: 1.5rem;
@@ -1789,6 +1798,7 @@ body {
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-xl);
     overflow: hidden;
+    margin: 0 var(--space-4);
 }
 
 .search-input-wrapper {
@@ -1929,6 +1939,7 @@ body {
     .sidebar {
         transform: translateX(-100%);
         width: var(--sidebar-width);
+        transition: transform 0.3s ease;
     }
     
     .sidebar.mobile-open {
@@ -1969,8 +1980,30 @@ body {
         display: none;
     }
 
+    .mobile-search-btn {
+        display: block;
+    }
+
     .model-selector {
+        display: block;
+        margin-right: var(--space-2);
+    }
+
+    .model-select-btn {
+        padding: var(--space-2);
+    }
+
+    .model-select-btn .model-name {
         display: none;
+    }
+
+    .model-select-btn .model-icon {
+        font-size: 1.25rem;
+    }
+
+    .model-dropdown {
+        right: 0;
+        min-width: 200px;
     }
 
     /* 移动端 Header 导航按钮样式 */
@@ -2053,6 +2086,39 @@ body {
     
     .model-stats-grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* 移动端搜索弹窗优化 */
+    .search-modal {
+        padding-top: 10vh;
+        padding-bottom: var(--space-4);
+        align-items: flex-start;
+    }
+    
+    .search-container {
+        margin: 0 var(--space-4);
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .search-results {
+        max-height: none;
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* 移动端模型下拉框优化 */
+    .model-dropdown {
+        position: fixed;
+        top: auto;
+        left: var(--space-4);
+        right: var(--space-4);
+        bottom: var(--space-4);
+        max-height: 60vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }
 

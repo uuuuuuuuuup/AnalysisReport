@@ -418,11 +418,31 @@ function initModelSelector() {
     modelSelectBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         modelDropdown.classList.toggle('active');
+        
+        // 在移动端，将下拉框定位到底部
+        if (window.innerWidth <= 768) {
+            modelDropdown.style.position = 'fixed';
+            modelDropdown.style.top = 'auto';
+            modelDropdown.style.left = 'var(--space-4)';
+            modelDropdown.style.right = 'var(--space-4)';
+            modelDropdown.style.bottom = 'var(--space-4)';
+            modelDropdown.style.maxHeight = '60vh';
+            modelDropdown.style.overflowY = 'auto';
+            modelDropdown.style.webkitOverflowScrolling = 'touch';
+        }
     });
     
     // 点击外部关闭
-    document.addEventListener('click', () => {
-        modelDropdown.classList.remove('active');
+    document.addEventListener('click', (e) => {
+        // 检查点击是否在下拉框内
+        if (!modelDropdown.contains(e.target) && !modelSelectBtn.contains(e.target)) {
+            modelDropdown.classList.remove('active');
+        }
+    });
+    
+    // 移动端点击下拉框内部不关闭
+    modelDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
     });
 }
 
@@ -1443,9 +1463,31 @@ function initEventListeners() {
     });
     
     // 移动端菜单
-    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-        document.getElementById('sidebar').classList.toggle('mobile-open');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    overlay.id = 'overlay';
+    document.body.appendChild(overlay);
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('mobile-open');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = sidebar.classList.contains('mobile-open') ? 'hidden' : '';
     });
+    
+    // 点击遮罩层关闭菜单
+    overlay.addEventListener('click', () => {
+        sidebar.classList.remove('mobile-open');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // 移动端搜索按钮
+    const mobileSearchBtn = document.getElementById('mobileSearchBtn');
+    if (mobileSearchBtn) {
+        mobileSearchBtn.addEventListener('click', openSearch);
+    }
     
     // 导航点击
     document.querySelectorAll('.nav-item').forEach(item => {
@@ -1454,8 +1496,14 @@ function initEventListeners() {
             const view = item.dataset.view;
             switchView(view);
             
-            // 关闭移动端菜单
-            document.getElementById('sidebar').classList.remove('mobile-open');
+            // 关闭移动端菜单和遮罩层
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.remove('mobile-open');
+            if (overlay) {
+                overlay.classList.remove('active');
+            }
+            document.body.style.overflow = '';
         });
     });
     
