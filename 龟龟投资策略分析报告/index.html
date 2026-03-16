@@ -4,23 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>龟龟投资策略分析报告</title>
-    <!-- 阿里巴巴普惠体 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alibaba-puhuiti-2/Alibaba-PuHuiTi-Bold/Alibaba-PuHuiTi-Bold.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alibaba-puhuiti-2/Alibaba-PuHuiTi-Medium/Alibaba-PuHuiTi-Medium.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alibaba-puhuiti-2/Alibaba-PuHuiTi-Regular/Alibaba-PuHuiTi-Regular.css">
-    <!-- Inter 字体用于数字和英文 -->
+    <!-- 字体配置 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- 阿里巴巴普惠体 -->
+    <link href="https://cdn.jsdelivr.net/npm/alibaba-puhuiti-2/Alibaba-PuHuiTi-Bold/Alibaba-PuHuiTi-Bold.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/alibaba-puhuiti-2/Alibaba-PuHuiTi-Medium/Alibaba-PuHuiTi-Medium.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/alibaba-puhuiti-2/Alibaba-PuHuiTi-Regular/Alibaba-PuHuiTi-Regular.css" rel="stylesheet">
+    <!-- Inter 字体用于数字和英文 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <a class="skip-link" href="#contentWrapper">跳到主要内容</a>
     <div class="app">
         <!-- 侧边栏 -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <span class="logo-icon">🐢</span>
+                    <img class="logo-icon" src="nanobanana-1773388148941.png" alt="龟仙人">
                     <span class="logo-text">龟龟投资</span>
                 </div>
                 <button class="sidebar-toggle" id="sidebarToggle" aria-label="切换侧边栏">
@@ -280,8 +282,29 @@
                             </a>
                         </div>
                     </div>
-                    <div class="detail-content">
-                        <div class="detail-sidebar">
+                    <div class="detail-content" id="detailContent">
+                        <div class="detail-sidebar-shell" id="detailSidebarShell">
+                            <button class="detail-sidebar-handle" id="detailSidebarHandle" type="button" aria-label="展开侧栏">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6"/>
+                                </svg>
+                            </button>
+                            <div class="detail-sidebar" id="detailSidebar">
+                                <div class="detail-sidebar-controls">
+                                    <button class="detail-sidebar-btn" id="detailSidebarPinBtn" type="button" aria-label="固定侧栏" title="固定">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 9l7 7-4 4-7-7"/>
+                                            <path d="M3 21l6-6"/>
+                                            <path d="M8 9l7-7 4 4-7 7"/>
+                                        </svg>
+                                    </button>
+                                    <button class="detail-sidebar-btn" id="detailSidebarCollapseBtn" type="button" aria-label="收起侧栏" title="收起">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M11 17l-5-5 5-5"/>
+                                            <path d="M18 17l-5-5 5-5"/>
+                                        </svg>
+                                    </button>
+                                </div>
                             <div class="stock-info-card">
                                 <div class="stock-header">
                                     <span class="stock-code" id="detailCode"></span>
@@ -296,6 +319,7 @@
                                     <!-- 动态生成 -->
                                 </nav>
                             </div>
+                        </div>
                         </div>
                         <div class="detail-main">
                             <article class="markdown-body" id="markdownContent">
