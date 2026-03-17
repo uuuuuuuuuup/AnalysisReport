@@ -173,7 +173,10 @@ const reportData = [
     { code: '603833', name: '欧派家居', file: 'GLM5/603833/欧派家居_603833_分析报告.md', rating: 'warning', model: 'GLM5' },
     { code: '605499', name: '东鹏饮料', file: 'GLM5/605499/东鹏饮料_605499_分析报告.md', rating: 'warning', model: 'GLM5' },
     { code: '688169', name: '石头科技', file: 'GLM5/688169/石头科技_688169_分析报告.md', rating: 'warning', model: 'GLM5' },
-    { code: '688271', name: '联影医疗', file: 'GLM5/688271/联影医疗_688271_分析报告.md', rating: 'warning', model: 'GLM5' }
+    { code: '688271', name: '联影医疗', file: 'GLM5/688271/联影医疗_688271_分析报告.md', rating: 'warning', model: 'GLM5' },
+    
+    // GLM5 新增报告 (2026-03-16) - 金龙鱼
+    { code: '300999', name: '金龙鱼', file: 'GLM5/300999/金龙鱼_300999_分析报告.md', rating: 'exclude', model: 'GLM5' }
 ];
 
 // 模型配置
