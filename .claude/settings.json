@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "AI Tools": {
+      "command": "node",
+      "args": [
+        "/Users/apple/Documents/code/AI-Tools/mcp-server/index.js"
+      ],
+      "env": {
+        "AI_TOOLS_BASE_URL": "http://localhost:8080"
+      }
+    }
+  }
+}
