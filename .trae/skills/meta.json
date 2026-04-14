@@ -1,0 +1,66 @@
+{
+    "mx-macro-data": {
+        "ownerId": "kn7b4ptpdag877t9kmq8axyja182taab",
+        "display": "Global Macro Database Assistant",
+        "slug": "mx-macro-data",
+        "version": "1.0.11",
+        "publishedAt": 1773828110847
+    },
+    "mx-finance-search": {
+        "ownerId": "kn7b4ptpdag877t9kmq8axyja182taab",
+        "display": "Financial Search Engine",
+        "slug": "mx-finance-search",
+        "version": "1.0.8",
+        "publishedAt": 1773828110847
+    },
+    "mx-finance-data": {
+        "ownerId": "kn7b4ptpdag877t9kmq8axyja182taab",
+        "display": "All-Market Financial Data Hub",
+        "slug": "mx-finance-data",
+        "version": "1.0.10",
+        "publishedAt": 1773828110847
+    },
+    "mx-stocks-screener": {
+        "ownerId": "kn7b4ptpdag877t9kmq8axyja182taab",
+        "display": "Intelligent Stocks Screener",
+        "slug": "mx-stocks-screener",
+        "version": "1.0.14",
+        "publishedAt": 1773828110847
+    },
+    "industry-research-report": {
+        "ownerId": "kn7b4ptpdag877t9kmq8axyja182taab",
+        "display": "Industry Research Agent",
+        "slug": "industry-research-report",
+        "version": "1.0.2",
+        "publishedAt": 1773660152105
+    },
+    "industry-stock-tracker": {
+        "ownerId": "kn7b4ptpdag877t9kmq8axyja182taab",
+        "display": "Stock/Industry Tracker",
+        "slug": "industry-stock-tracker",
+        "version": "1.0.1",
+        "publishedAt": 1773660152105
+    },
+    "initiation-of-coverage-or-deep-dive": {
+        "ownerId": "kn7b4ptpdag877t9kmq8axyja182taab",
+        "display": "Initiation of Coverage Agent",
+        "slug": "initiation-of-coverage-or-deep-dive",
+        "version": "1.0.3",
+        "publishedAt": 1773660152105
+    },
+    "stock-earnings-review": {
+        "ownerId": "kn7b4ptpdag877t9kmq8axyja182taab",
+        "display": "Earnings Review Agent",
+        "slug": "stock-earnings-review",
+        "version": "1.0.2",
+        "publishedAt": 1773660152105
+    },
+    "mx-financial-assistant": {
+        "ownerId": "kn7b4ptpdag877t9kmq8axyja182taab",
+        "display": "mx-financial-assistant",
+        "slug": "mx-financial-assistant",
+        "version": "1.0.1",
+        "publishedAt": 1773660152105
+    }
+
+}
