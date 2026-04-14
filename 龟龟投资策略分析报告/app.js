@@ -176,13 +176,17 @@ const reportData = [
     { code: '688271', name: '联影医疗', file: 'GLM5/688271/联影医疗_688271_分析报告.md', rating: 'warning', model: 'GLM5' },
     
     // GLM5 新增报告 (2026-03-16) - 金龙鱼
-    { code: '300999', name: '金龙鱼', file: 'GLM5/300999/金龙鱼_300999_分析报告.md', rating: 'exclude', model: 'GLM5' }
+    { code: '300999', name: '金龙鱼', file: 'GLM5/300999/金龙鱼_300999_分析报告.md', rating: 'exclude', model: 'GLM5' },
+
+    // Claude Sonnet 4.6 新增报告 (2026-03-31)
+    { code: '2367.HK', name: '巨子生物', file: '2367.HK/巨子生物_2367HK_分析报告.md', rating: 'exclude', model: 'Claude' }
 ];
 
 // 模型配置
 const modelConfig = {
     'Qwen3.5-Plus': { name: 'Qwen3.5-Plus', icon: '🤖', color: '#10b981' },
-    'GLM5': { name: 'GLM5', icon: '🧠', color: '#8b5cf6' }
+    'GLM5': { name: 'GLM5', icon: '🧠', color: '#8b5cf6' },
+    'Claude': { name: 'Claude Sonnet 4.6', icon: '🐢', color: '#f59e0b' }
 };
 
 // 报告元数据缓存
