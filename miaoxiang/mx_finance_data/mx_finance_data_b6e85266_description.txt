@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 丽珠集团000513受限现金应收账款坏账计提关联方交易定期存款
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b6e85266.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b6e85266_description.txt
+数据行数: 10
+表数量: 2
+Sheet 列表: 丽珠集团(000513.SZ)的受限货币资金、坏账准备合计, 丽珠集团(000513.SZ)关联交易(2025-04-15~

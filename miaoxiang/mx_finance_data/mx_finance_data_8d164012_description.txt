@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 五粮液000858的子公司信息
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8d164012.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8d164012_description.txt
+数据行数: 43
+表数量: 1
+Sheet 列表: 五粮液(000858.SZ)控股参股子公司(2025-06-3

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 丽珠集团 总市值 流通市值
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_5038f351.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_5038f351_description.txt
+数据行数: 4
+表数量: 3
+Sheet 列表: 丽珠集团(000513.SZ)当前的流通市值、总市值, 丽珠集团(000513.SZ)的流通市值, 丽珠集团(000513.SZ)的总市值

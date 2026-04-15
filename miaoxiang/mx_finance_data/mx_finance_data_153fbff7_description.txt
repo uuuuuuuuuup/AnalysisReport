@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 丽珠集团000513有息负债银行贷款债券资本化利息或有负债
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_153fbff7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_153fbff7_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 丽珠集团(000513.SZ)的带息债务

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 股息历史 分红历史 回购
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1a994b22.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1a994b22_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 泸州老窖(000568.SZ)的分红送转, 泸州老窖(000568.SZ)股份回购实施明细(2021-04

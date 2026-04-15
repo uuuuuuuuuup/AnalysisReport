@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 子公司 控股公司
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_43a5f089.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_43a5f089_description.txt
+数据行数: 28
+表数量: 1
+Sheet 列表: 泸州老窖(000568.SZ)控股参股子公司(2025-06-
