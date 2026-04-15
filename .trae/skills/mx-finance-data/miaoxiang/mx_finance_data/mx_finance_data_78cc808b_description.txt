@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖000568 股息率 分红历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_78cc808b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_78cc808b_description.txt
+数据行数: 22
+表数量: 4
+Sheet 列表: 泸州老窖(000568.SZ)当前的股息率, 泸州老窖(000568.SZ)的股息率(TTM), 泸州老窖(000568.SZ)分红方案(2025-04-15~, 泸州老窖(000568.SZ)股票回购(2025-04-15~
