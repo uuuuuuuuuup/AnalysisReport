@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 牧原股份002714 市值 股息率 股息历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_dfa07f65.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_dfa07f65_description.txt
+数据行数: 26
+表数量: 7
+Sheet 列表: 牧原股份(02714.HK)等当前的总市值, 牧原股份(02714.HK)等的总市值, 牧原股份(002714.SZ)当前的股息率, 牧原股份(002714.SZ)的股息率(TTM), 牧原股份(02714.HK)分红明细(2025-04-15~2, 牧原股份(002714.SZ)股份回购实施明细(2025-04, 牧原股份(002714.SZ)分红方案(2025-04-15~

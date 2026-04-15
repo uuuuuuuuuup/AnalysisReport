@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 富安娜 002327 最新股价 市值 股息率 市盈率 市净率 总股本 流通股本
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ba696448.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ba696448_description.txt
+数据行数: 11
+表数量: 5
+Sheet 列表: 富安娜(002327.SZ)当前的总市值、市净率等, 富安娜(002327.SZ)的总市值、收盘价, 富安娜(002327.SZ)的流通股本、市净率(PB,MRQ), 富安娜(002327.SZ)当前的股息率, 富安娜(002327.SZ)的股息率(TTM)

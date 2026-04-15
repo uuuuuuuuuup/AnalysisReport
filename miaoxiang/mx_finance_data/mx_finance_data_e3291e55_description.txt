@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖000568实时股价、总市值、股息率、近五年股息历史、回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e3291e55.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e3291e55_description.txt
+数据行数: 16
+表数量: 6
+Sheet 列表: 泸州老窖(000568.SZ)当前的总市值、最新价, 泸州老窖(000568.SZ)的总市值、收盘价, 泸州老窖(000568.SZ)当前的股息率, 泸州老窖(000568.SZ)的股息率(TTM), 泸州老窖(000568.SZ)股份回购实施明细(2021-04, 泸州老窖(000568.SZ)分红方案(2021-04-15~
