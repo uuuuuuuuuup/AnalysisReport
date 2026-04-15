@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 山西汾酒 600809 关联方交易 2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_0fa9da6f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_0fa9da6f_description.txt
+数据行数: 6
+表数量: 1
+Sheet 列表: 山西汾酒(600809.SH)关联交易(2025-01-01~

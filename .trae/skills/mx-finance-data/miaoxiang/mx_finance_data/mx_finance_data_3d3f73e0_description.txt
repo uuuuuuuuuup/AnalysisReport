@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 洋河股份 002304 定期存款 理财产品 交易性金融资产
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_3d3f73e0.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_3d3f73e0_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 洋河股份(002304.SZ)的交易性金融资产

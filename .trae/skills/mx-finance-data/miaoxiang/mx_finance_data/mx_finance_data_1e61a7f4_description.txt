@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 洋河股份 002304 2025年 非经常性损益 政府补助 投资收益
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_1e61a7f4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_1e61a7f4_description.txt
+数据行数: 12
+表数量: 5
+Sheet 列表: 洋河股份(002304.SZ)的非经常性损益、非经常性损益项目, 洋河股份(002304.SZ)政府补助合计金额(2017-06, 洋河股份(002304.SZ)政府补助合计金额(2016-12, 洋河股份(002304.SZ)政府补助合计金额(2016-06, 洋河股份(002304.SZ)投资收益

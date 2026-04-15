@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 山西汾酒 600809 非经常性损益明细 2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9e6d2b6a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9e6d2b6a_description.txt
+数据行数: 4
+表数量: 1
+Sheet 列表: 山西汾酒(600809.SH)的非经常性损益、非经常性损益项目

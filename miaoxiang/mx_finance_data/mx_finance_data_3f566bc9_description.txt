@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 丽珠集团 000513 历年股息分配 分红率 支付率 2023 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3f566bc9.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3f566bc9_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 丽珠集团(000513.SZ)的年度股利支付率, 丽珠集团(000513.SZ)分红方案(2023-01-01~

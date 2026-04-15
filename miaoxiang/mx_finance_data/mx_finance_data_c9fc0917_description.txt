@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 山西汾酒 600809 子公司 控股公司
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c9fc0917.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c9fc0917_description.txt
+数据行数: 23
+表数量: 1
+Sheet 列表: 山西汾酒(600809.SH)控股参股子公司(2025-06-
