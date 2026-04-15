@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 顺丰控股002352 最新股价 总市值 流通市值 股息率 市盈率 市净率
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_b9669bef.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_b9669bef_description.txt
+数据行数: 17
+表数量: 7
+Sheet 列表: 顺丰控股(06936.HK)等的流通市值、市净率(PB,MRQ, 顺丰控股(06936.HK)等当前的总市值、市净率等, 顺丰控股(06936.HK)的总市值、收盘价, 顺丰控股(002352.SZ)的总市值、收盘价, 顺丰控股(06936.HK)等当前的股息率, 顺丰控股(06936.HK)的市盈率(PE,TTM), 顺丰控股(002352.SZ)的流通市值、股息率(TTM)
