@@ -1,16 +1,64 @@
 ---
 name: "turtle-investment-strategy"
-description: "Executes multi-phase stock analysis using Turtle Investment Strategy v1.1. Invoke when user requests stock analysis, asks to evaluate a company, or uploads annual report PDF with stock name/code."
+description: "Executes multi-phase stock analysis using Turtle Investment Strategy v2.0. Sub-agent architecture: main agent orchestrates only, Phase 1 & Phase 2 worker agents collect data in parallel. Integrates East Finance mx-* skills by data type. Invoke when user requests stock analysis, asks to evaluate a company, or uploads annual report PDF with stock name/code."
 ---
 
-# 龟龟投资策略分析助手
+# 龟龟投资策略分析助手 v2.0
 
 ## 技能描述
 
-本技能实现龟龟投资策略 v1.1 框架，通过多阶段 Sub-agent 架构对股票进行深度价值分析。适用于：
+本技能实现龟龟投资策略框架，通过**主代理+子代理**的多代理架构对股票进行深度价值分析，并按数据类型接入东方财富 mx-* skills。适用于：
 - 用户请求分析某只股票
 - 用户询问是否应该买入某只股票
 - 用户需要估值分析和安全边际评估
+
+---
+
+## 架构设计
+
+### 角色分工
+
+**主代理（Coordinator）**
+- 输入解析与任务调度
+- 创建输出目录
+- 并行启动子代理（使用 Agent 工具）
+- 等待子代理写出数据包文件后汇聚结果
+- 执行因子分析（Phase 3）
+- 生成最终报告
+
+⚠️ **主代理不直接调用任何数据采集工具，所有数据采集由子代理完成**
+
+**子代理 1（Phase 1 Worker）**
+- 采集市场数据：股价、三大报表、股息历史、K 线、无风险利率、管理层信息、行业竞争格局
+- 输出：`data_pack_market.md`
+
+**子代理 2（Phase 2 Worker）**
+- 采集深度财务数据：报表附注、审计报告、关联方交易、非经常损益、研报
+- 输出：`data_pack_report.md`
+
+### 工作流程图
+
+```
+用户请求
+    ↓
+主代理：输入解析 + 目标年份确定
+    ↓
+主代理：mkdir 创建输出目录
+    ↓
+主代理：Agent 工具（并行启动两个子代理）
+    ├─→ 子代理 1（Phase 1）→ data_pack_market.md
+    └─→ 子代理 2（Phase 2）→ data_pack_report.md
+    ↓
+主代理：Read 工具轮询，等待两个文件生成
+    ↓
+主代理：读取数据包，验证完整性
+    ↓
+主代理：执行因子分析（1A → 1B → 2 → 3 → 4）
+    ↓
+主代理：写出最终报告
+```
+
+---
 
 ## 触发条件
 
@@ -19,205 +67,388 @@ description: "Executes multi-phase stock analysis using Turtle Investment Strate
 2. 询问估值、安全边际、是否值得买入等问题
 3. 提到"龟龟投资策略"或"turtle strategy"
 
-## 执行流程
+---
+
+## 主代理执行流程
 
 ### 第一阶段：输入解析
 
 从用户消息中提取：
 1. **股票代码/名称**：识别目标股票
 2. **持股渠道**：港股通/直接持有/美股券商（未指定则用默认值）
-
-### 第二阶段：深度财务数据确保（协调器执行）
-
-在启动分析前，必须确保获取最新完整财年的深度财务数据：
-
-```
-1. 确定目标年份：
+3. **目标年份**：
    - 当前月份 ≤ 3 月 → target_year = 当前年份 - 2
    - 当前月份 ≥ 4 月 → target_year = 当前年份 - 1
 
-2. 检查用户上传的 PDF：
-   - 检查路径：/sessions/*/mnt/uploads/*.pdf
-   - 若用户上传了 PDF 且文件名/标题包含 target_year → 使用用户上传的 PDF
-   - 若用户未上传或 PDF 年份不匹配 → 按优先级获取财务数据
+### 第二阶段：创建输出目录
 
-3. 获取深度财务数据（四级优先级）：
-   
-   第一优先级：AI-Tools MCP 工具 获取近5年的财务数据
-   - 使用 StockSearch 确认股票代码
-   - 调用以下工具获取核心数据：
-     * GetFinancialReport：完整财务报告
-     * GetIncomeStatement：利润表详细数据
-     * GetBalanceSheet：资产负债表详细数据
-     * GetCashFlowStatement：现金流量表详细数据
-     * GetFinancialIndicators：财务指标深度数据
-   - 若工具返回成功 → 使用获取的财务数据
-   
-   第二优先级：WebSearch 补充
-   - 若 AI-Tools 数据缺失或失败 → 使用 Trae WebSearch 搜索：
-     * "{公司名} {年份} 年年报"
-     * "{公司名} {年份} 财务报表"
-     * "{股票代码} {年份} 业绩公告"
-   
-   第三优先级：发现报告 MCP 工具
-   - 若 WebSearch 无法获取 → 调用 search_reports：
-     * keywords: "{公司名}" 或 "{股票代码}"
-     * 可结合时间范围筛选
-   
-4. 数据整合：
-   - 优先使用 AI-Tools 数据作为主数据源
-   - 其他来源数据作为补充和验证
-   - 缺失项目标注"⚠️未找到：{项目名}"
+```bash
+mkdir -p {workspace}/龟龟投资策略分析报告/{symbol}/
 ```
 
-### 第三阶段：启动 Phase 1 和 Phase 2
+### 第三阶段：并行启动子代理
 
-创建输出目录：`mkdir -p {workspace}/龟龟投资策略分析报告/{symbol}/`
+使用 Agent 工具并行启动两个子代理（设置 run_in_background=true 可同时运行）。
 
-#### Phase 1：数据采集
+**子代理 1 完整 prompt**：
 
-**任务描述**：采集市场数据、财务报表、管理层信息、行业竞争等数据
+```
+你是龟龟投资策略的 Phase 1 市场数据采集子代理。请严格按照以下规范采集数据，写出标准化 markdown 文件。
 
-**输入**：
-- 股票代码
-- 持股渠道
-- 采集清单（见 phase1_数据采集.md）
+═══ 输入参数 ═══
+股票代码：{symbol}
+公司名称：{company_name}
+持股渠道：{holding_channel}
+目标年份：{target_year}
+输出路径：{workspace}/龟龟投资策略分析报告/{symbol}/data_pack_market.md
 
-**输出**：`{workspace}/龟龟投资策略分析报告/{symbol}/data_pack_market.md`
+═══ 数据来源（按数据类型分工）═══
 
-**采集内容**：
-1. 基础市场数据（股价、市值、股息率等）
-2. 5 年三大报表（损益表、资产负债表、现金流量表）通过 AI-Tools MCP 工具获取
-3. 股息与回购历史
-4. 5 年历史月线价格
-5. 无风险利率（Trae WebSearch）
-6. 上市结构与税务信息
-7. 管理层与治理信息
-8. 行业与竞争格局
-9. 子公司数据（控股公司适用）
-10. MD&A 摘要
+1. 无风险利率（十年期国债收益率）
+   → 第一来源：mx_macro_data Skill（查询："[对应市场] 十年期国债收益率"）
+   → 备用：WebSearch 搜索"中国十年期国债收益率 最新"
 
-**单位要求**：所有金额单位为报表币种百万元，必须在文件头标注
+2. 实时股价/市值/股息率/股息历史/回购历史
+   → 第一来源：mx_finance_data Skill（自然语言查询）
+   → 备用：AI-Tools MCP QueryStockPriceInfo + GetFinancialIndicators
 
-#### Phase 2：深度财务数据采集（四级优先级策略）
+3. 三大报表近5年（利润表/资产负债表/现金流量表）+ 财务比率
+   → 第一来源：AI-Tools MCP
+     * GetIncomeStatement（利润表）
+     * GetBalanceSheet（资产负债表）
+     * GetCashFlowStatement（现金流量表）
+     * GetFinancialIndicators（财务比率）
+   → 备用：mx_finance_data Skill
 
-**任务描述**：按优先级获取深度财务数据，包括母公司单体报表、附注信息、审计报告等
+4. 历史月线价格（近5年）
+   → 第一来源：AI-Tools MCP GetMonthlyKLineData（period='5y', interval='1mo'）
+   → 备用：mx_finance_data Skill
 
-**输入**：
-- 股票代码
-- 公司名称
-- 目标年份
+5. 管理层与治理信息（CEO/CFO/董事长/控股股东/股权结构）
+   → 第一来源：mx_financial_assistant Skill
+     查询1："[公司名] 管理层 CEO CFO 董事长 任期 持股比例"
+     查询2："[公司名] 控股股东 持股比例 股权结构"
+   → 备用：WebSearch
 
-**输出**：`{workspace}/龟龟投资策略分析报告/{symbol}/data_pack_report.md`
+6. 行业与竞争格局（行业规模/增速/主要竞争对手/市场份额）
+   → 第一来源：mx_financial_assistant Skill
+     查询："[公司名] 行业地位 市场份额 主要竞争对手 护城河"
+   → 备用：mx_finance_search Skill 搜索行业研报
 
-**数据采集策略**：四级优先级，逐级降级
+7. MD&A 摘要（经营回顾/前瞻指引/风险因素）
+   → 第一来源：AI-Tools MCP GetFinancialReport
+   → 备用：mx_financial_assistant Skill 查询"[公司名] [target_year] 年报 MD&A 经营回顾"
+
+8. 上市结构与税务信息
+   → 第一来源：mx_financial_assistant Skill
+     查询："[公司名] 上市地点 [持股渠道] 股息税率 代扣代缴"
+   → 备用：WebSearch
+
+9. 子公司数据（仅控股公司）
+   → 第一来源：mx_finance_data Skill
+   → 备用：AI-Tools MCP GetFinancialReport
+
+═══ 输出文件规范 ═══
+
+文件头部必须包含：
+- 数据采集时间（时间戳）
+- 金额单位：报表币种百万元（除非另有标注）
+- 数据来源标注（每个数据项标注实际使用的工具）
+
+缺失项标注格式：⚠️未找到：{项目名}
+
+文件结构：
+## 一、基础市场数据（股价/市值/股息/回购）
+## 二、财务报表数据（利润表/资产负债/现金流，近5年）
+## 三、历史价格数据（月线）
+## 四、无风险利率
+## 五、上市结构与税务
+## 六、管理层与治理信息
+## 七、行业与竞争格局
+## 八、子公司数据（控股公司适用，否则跳过）
+## 九、MD&A 摘要
+## 十、数据完整性检查（缺失项列表 + 完整度评估）
+```
+
+**子代理 2 完整 prompt**：
+
+```
+你是龟龟投资策略的 Phase 2 深度财务数据采集子代理。请严格按照以下规范采集数据，写出标准化 markdown 文件。
+
+═══ 输入参数 ═══
+股票代码：{symbol}
+公司名称：{company_name}
+目标年份：{target_year}
+输出路径：{workspace}/龟龟投资策略分析报告/{symbol}/data_pack_report.md
+
+═══ 数据来源（按数据类型分工）═══
+
+1. 母公司单体报表/报表附注（资产明细/负债明细/权益明细）
+   → 第一来源：AI-Tools MCP
+     * GetBalanceSheet（含单体报表）
+     * GetCashFlowStatement（详细版）
+     * GetFinancialIndicators（受限现金/应收账款周转/坏账计提/关联方交易/定期存款）
+   → 备用：mx_finance_data Skill
+
+2. 审计报告（审计意见类型/审计师名称/关键审计事项/审计师更换历史）
+   → 第一来源：mx_finance_search Skill
+     搜索1："[公司名] [target_year] 审计报告 审计意见"
+     搜索2："[公司名] [target_year] 年报公告"
+   → 备用：AI-Tools MCP GetFinancialReport
+
+3. 券商研报（用于验证数据和补充定性分析）
+   → 第一来源：mx_finance_search Skill
+     搜索："[公司名] [target_year] 年报点评 业绩 研报"
+   → 备用：search_reports MCP（keywords="{公司名}"）
+
+4. MD&A 深度（经营回顾/前瞻指引/资本配置意图/风险因素）
+   → 第一来源：AI-Tools MCP GetFinancialReport
+   → 备用：mx_financial_assistant Skill 查询"[公司名] [target_year] 年报 前瞻指引 资本配置"
+
+5. 非经常性损益明细（资产处置/政府补贴/投资收益/公允价值变动）
+   → 第一来源：AI-Tools MCP GetFinancialReport + GetIncomeStatement
+   → 备用：mx_finance_search Skill 搜索公告
+
+6. 股息分配历史（历年股息总额/归母净利润/支付率）
+   → 第一来源：mx_finance_data Skill（查询"[公司名] 历年股息 分红 支付率"）
+   → 备用：AI-Tools MCP GetFinancialReport
+
+7. 有息负债明细（银行贷款/债券/关联方借款/资本化利息/或有负债）
+   → 第一来源：AI-Tools MCP GetBalanceSheet + GetFinancialIndicators
+   → 备用：mx_finance_search Skill（搜索公告）
+
+═══ 输出文件规范 ═══
+
+文件头部必须包含：
+- 数据采集时间（时间戳）
+- 金额单位：报表币种百万元
+- 数据来源标注
+
+缺失项标注格式：⚠️未找到：{项目名}
+
+文件结构：
+## 一、母公司单体资产负债表数据
+## 二、受限现金与应收账款明细
+## 三、负债详细信息（有息负债/资本化利息/或有负债）
+## 四、MD&A 深度信息
+## 五、审计相关信息
+## 六、非经常性损益明细
+## 七、股息分配信息
+## 八、关联方交易信息
+## 九、定期存款与理财产品
+## 十、数据完整性检查
+```
+
+### 第四阶段：监控子代理状态
+
+主代理使用 Read 工具检查输出文件是否生成：
+- 检查 `data_pack_market.md`：存在且非空 → Phase 1 完成
+- 检查 `data_pack_report.md`：存在且非空 → Phase 2 完成
+- 若 data_pack_market.md 缺失超过合理时间 → 通知用户，可选择重试
+- data_pack_report.md 可选，若缺失则使用降级方案继续分析
+
+### 第五阶段：数据包整合
+
+```
+1. 读取 data_pack_market.md
+2. 检查文件头部单位标注（百万元 / 千元 / 万元）
+3. 读取 data_pack_report.md（若存在）
+4. 汇总缺失项列表
+5. 将数据传递给因子分析
+```
+
+### 第六阶段：执行因子分析（Phase 3）
+
+见"因子分析框架"章节。
 
 ---
 
-**第一优先级：AI-Tools MCP 工具（主数据源）**
+## 子代理规范
 
-调用 `mcp_AI_Tools_invoke_tool` 获取以下数据：
+### Phase 1 输出文件详细格式
 
-1. **详细财务报表数据**
-   - `GetIncomeStatement`：利润表详细数据
-   - `GetBalanceSheet`：资产负债表详细数据
-   - `GetCashFlowStatement`：现金流量表详细数据
-   
-   采集内容：
-   - 母公司单体资产负债表数据
-   - 现金及等价物、短期投资明细
-   - 应收账款、其他应收款明细
-   - 长期股权投资、固定资产明细
-   - 短期借款、长期借款、应付债券明细
-   - 实收资本、资本公积、未分配利润
+````markdown
+# {公司名}（{代码}）市场数据包
 
-2. **财务指标深度数据**（`GetFinancialIndicators`）
-   - 受限现金相关信息
-   - 应收账款周转分析
-   - 坏账计提相关指标
-   - 关联方交易信息
-   - 定期存款/理财产品信息
-
-3. **负债详细信息**
-   - 有息负债明细（银行贷款/债券/关联方借款）
-   - 资本化利息金额
-   - 或有负债（对外担保/未决诉讼）
-
-4. **MD&A 相关信息**（`GetFinancialReport`）
-   - 经营回顾与业绩归因
-   - 前瞻性指引
-   - 资本配置意图
-   - 风险因素
-
-5. **审计相关信息**
-   - 审计意见类型（标准无保留/保留意见/强调事项）
-   - 审计师名称
-   - 关键审计事项
-
-6. **非经常性损益明细**
-   - 资产处置损益
-   - 政府补贴
-   - 投资收益
-   - 公允价值变动损益
-
-7. **股息分配信息**
-   - 历年股息总额（报表币种）
-   - 支付率历史序列
+**数据采集时间**：[时间戳]
+**金额单位**：报表币种百万元（除非另有标注）
+**数据来源汇总**：[AI-Tools / mx_finance_data / mx_macro_data / mx_financial_assistant / WebSearch]
 
 ---
 
-**第二优先级：WebSearch 补充**
+## 一、基础市场数据
 
-若 AI-Tools 数据缺失或调用失败，使用 Trae WebSearch 搜索：
-- 搜索关键词：
-  * "{公司名} {年份} 年年度报告"
-  * "{公司名} {年份} 财务报表附注"
-  * "{股票代码} {年份} 业绩公告"
-  * "{公司名} 审计报告 {年份}"
-- 优先来源：巨潮资讯、港交所披露易、公司官网投资者关系
+### 1.1 股价与市值
+- 当前股价：[值] [币种]
+- 总股本（稀释后）：[值] 股
+- 当前市值：[值] 亿元
+- 52周最高/最低：[高] / [低]
+- **数据来源**：mx_finance_data / AI-Tools QueryStockPriceInfo
 
----
-
-**第三优先级：发现报告 MCP 工具**
-
-若 WebSearch 无法获取，调用 `search_reports`：
-- 参数：
-  * keywords: "{公司名}" 或 "{股票代码}"
-  * start_time/end_time: 限定时间范围
-  * page_size: 10-20
-- 从返回结果中提取：
-  * 财报解读报告
-  * 业绩点评报告
-  * 深度研究报告
+### 1.2 股息与回购
+- 当前股息率：[值]%
+- 过去5年股息率序列：[X%, X%, X%, X%, X%]
+- 过去5年回购金额序列：[X, X, X, X, X] 亿元
+- **数据来源**：mx_finance_data / AI-Tools
 
 ---
 
-**数据整合与标注要求**：
-- 优先使用 AI-Tools 数据作为主数据源
-- 其他来源数据作为补充和验证
-- 所有金额标注原始单位和币种
-- 必须在文件头部标注单位信息
-- 缺失项目标注 `⚠️未找到：{项目名}`
-- 数据来源标注：
-  * AI-Tools 数据：标注工具名称（如 `GetBalanceSheet`）
-  * WebSearch 数据：标注搜索关键词
-  * 发现报告数据：标注报告来源机构和 docId
-  * DuckDuckGo 数据：标注搜索关键词和 URL
+## 二、财务报表数据（近5年，百万元）
 
-### 第四阶段：分析与报告（Phase 3）
+### 2.1 利润表
+| 年份 | 营业收入 | 营业成本 | 毛利润 | 研发费用 | 销售费用 | 管理费用 | 经营利润 | 税前利润 | 所得税 | 归母净利润 | 少数股东损益 | D&A | SBC |
+|------|---------|---------|--------|---------|---------|---------|---------|---------|--------|-----------|-------------|-----|-----|
+| 202X | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-等待 Phase 1 完成后（若 Phase 2 已启动且完成则同时等待 Phase 2），启动 Phase 3。
+**数据来源**：AI-Tools GetIncomeStatement
 
-**任务描述**：基于数据包执行四因子分析，生成最终报告
+### 2.2 资产负债表
+| 年份 | 现金及等价物 | 短期投资 | 应收账款 | 存货 | 流动资产 | 长期投资 | 商誉 | 无形资产 | 总资产 | 短期借款 | 长期借款 | 有息负债合计 | 合同负债 | 股东权益 |
+|------|------------|---------|---------|------|---------|---------|------|---------|--------|---------|---------|-------------|---------|---------|
+| 202X | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-**输入**：
-- `data_pack_market.md`（必有）
-- `data_pack_report.md`（可选）
-- 策略知识库（phase3_分析与报告.md）
+**数据来源**：AI-Tools GetBalanceSheet
 
-**输出**：`{workspace}/龟龟投资策略分析报告/{symbol}/{公司名}_{代码}_分析报告.md`
+### 2.3 现金流量表
+| 年份 | OCF | Capex | FCF | 股息支付 | 回购金额 |
+|------|-----|-------|-----|---------|---------|
+| 202X | ... | ... | ... | ... | ... |
 
-**分析框架**：
+**数据来源**：AI-Tools GetCashFlowStatement
+
+---
+
+## 三、历史价格数据（5年月线）
+[逐年逐月价格数据，含日期和收盘价]
+**数据来源**：AI-Tools GetMonthlyKLineData
+
+---
+
+## 四、无风险利率
+- 十年期国债收益率：[值]%
+- 对应市场：[中国/美国/香港]
+- **数据来源**：mx_macro_data / WebSearch
+
+---
+
+## 五、上市结构与税务信息
+- 上市地点：[港股/A股/美股]
+- 持股渠道：[港股通/直接持有/美股券商]
+- 股息税率：[值]%
+- 代扣代缴：[是/否]
+- **数据来源**：mx_financial_assistant / WebSearch
+
+---
+
+## 六、管理层与治理信息
+- CEO：[姓名]，任期：[时间]
+- CFO：[姓名]，任期：[时间]
+- 董事长：[姓名]，任期：[时间]
+- 控股股东：[名称]，持股：[值]%
+- 独立董事占比：[值]%
+- **数据来源**：mx_financial_assistant
+
+---
+
+## 七、行业与竞争格局
+- 行业名称：[名称]，规模：[值] 亿元，增速：[值]%
+- 主要竞争对手及市场份额：...
+- **数据来源**：mx_financial_assistant / mx_finance_search
+
+---
+
+## 八、子公司数据（控股公司适用）
+[若非控股公司则填写：不适用]
+**数据来源**：mx_finance_data / AI-Tools GetFinancialReport
+
+---
+
+## 九、MD&A 摘要
+- 经营回顾：[摘要]
+- 前瞻性指引：[摘要]
+- 风险因素：[摘要]
+- **数据来源**：AI-Tools GetFinancialReport / mx_financial_assistant
+
+---
+
+## 十、数据完整性检查
+- ⚠️未找到：[项目名]
+- 完整度：[值]%
+- 可靠性：[高/中/低]
+````
+
+---
+
+### Phase 2 输出文件详细格式
+
+````markdown
+# {公司名}（{代码}）深度财务数据包
+
+**数据采集时间**：[时间戳]
+**金额单位**：报表币种百万元
+**数据来源汇总**：[AI-Tools / mx_finance_search / mx_financial_assistant / search_reports]
+
+---
+
+## 一、母公司单体资产负债表数据
+### 1.1 资产端明细
+### 1.2 负债端明细
+### 1.3 股东权益明细
+**数据来源**：AI-Tools GetBalanceSheet / GetFinancialIndicators
+
+## 二、受限现金与应收账款明细
+**数据来源**：AI-Tools GetFinancialIndicators
+
+## 三、负债详细信息
+### 3.1 有息负债明细（银行贷款/债券/关联方借款）
+### 3.2 资本化利息（金额/占比）
+### 3.3 或有负债（对外担保/未决诉讼/资本承诺）
+**数据来源**：AI-Tools GetBalanceSheet / GetFinancialIndicators
+
+## 四、MD&A 深度信息
+### 4.1 经营回顾与业绩归因
+### 4.2 前瞻性指引
+### 4.3 资本配置意图
+### 4.4 风险因素
+**数据来源**：AI-Tools GetFinancialReport / mx_financial_assistant
+
+## 五、审计相关信息
+### 5.1 审计意见（标准无保留/保留意见/强调事项）
+### 5.2 审计师名称
+### 5.3 关键审计事项
+### 5.4 审计师更换历史
+**数据来源**：mx_finance_search（公告搜索）/ AI-Tools GetFinancialReport
+
+## 六、非经常性损益明细
+### 6.1 资产处置损益
+### 6.2 政府补贴
+### 6.3 投资收益（联营分红/理财收益）
+### 6.4 公允价值变动损益
+**数据来源**：AI-Tools GetFinancialReport / GetIncomeStatement
+
+## 七、股息分配信息
+| 年份 | 股息总额 | 归母净利润 | 支付率 |
+|------|---------|-----------|--------|
+| 202X | ... | ... | ...% |
+**数据来源**：mx_finance_data / AI-Tools GetFinancialReport
+
+## 八、关联方交易信息
+**数据来源**：AI-Tools GetFinancialIndicators
+
+## 九、定期存款与理财产品
+**数据来源**：AI-Tools GetFinancialIndicators
+
+## 十、数据完整性检查
+- ⚠️未找到：[项目名]
+- 完整度：[值]%
+- 可靠性：[高/中/低]
+````
+
+---
+
+## 因子分析框架
+
+> 本章节由主代理在 Phase 3 执行，基于两个子代理产出的数据包进行分析。
 
 #### 因子 1A：五分钟快筛（一票否决）
 
@@ -602,54 +833,179 @@ Step 4-1：目标买入价反推
 - 强保护 → × 0.80
 - 极强保护 → × 0.85
 
-最终目标买入价 = [值]
+Step 4-2：当前股价位置评估
+当前股价 = P_current
+目标买入价 = P_target
+距离目标买入价距离 = (P_target - P_current) / P_current × 100%
 
-判断：
-- 目标买入价 ≥ 当前股价 → 已达标
-- 目标买入价 < 当前股价 → 需等待回调，差距 = [X]%
-
-Step 4-2：历史价格数据获取（MCP 工具实时获取）
-
-使用 AI-Tools MCP 工具实时获取 5 年月线数据：
-- 调用 `GetMonthlyKLineData` 或 `GetKLineData`（period='5y', interval='1mo'）
-- 数据覆盖区间：{起始日期} — {结束日期}
-- 数据点数量 NN
-- 5 年最低价 OO（及日期）
-- 5 年最高价 PP（及日期）
-
-⚠️ 不依赖 data_pack_market 中预存的历史价格数据，必须实时调用 MCP 工具获取最新数据。
-
-Step 4-3：分位计算与买入触发评估
-
-当前股价历史分位 = (当前股价低于历史价格的数据点数) / NN × 100%
-目标买入价历史分位 = (目标买入价低于历史价格的数据点数) / NN × 100%
-
-买入触发概率：
-- 目标买入价分位 ≤ 10% → 触发概率极低（仅历史极端底部可触及）
-- 10-25% → 触发概率低（需显著回调）
-- 25-50% → 触发概率中等（历史中位数以下）
-- 50-75% → 触发概率较高（股价常处于此区间）
-- > 75% → 当前已在目标价附近或以下
-
-综合判断：
-- 若 GG ≥ II 且当前股价分位 < 75% → "已达标，当前价位合理"
-- 若 GG ≥ II 且当前股价分位 ≥ 75% → "已达标，但股价偏高位，可等待回调"
-- 若 GG < II 且目标买入价分位 ≤ 10% → "需大幅回调至历史极端低位，实际触发概率极低"
-- 若 GG < II 且目标买入价分位 10-50% → "需等待回调，历史上有一定概率触及"
-- 若 GG < II 且目标买入价分位 > 50% → "目标价在历史常见区间，等待机会"
+Step 4-3：买入触发条件
+- 立即买入：当前股价 ≤ 目标买入价
+- 观察等待：当前股价 > 目标买入价
+  - 距离<5% → 高优先级观察
+  - 距离 5-15% → 中优先级观察
+  - 距离>15% → 低优先级观察
 ```
 
-### 第五阶段：报告生成
+**步骤 5：最终决策输出**
+```
+═══════════════════════════════════════
+龟龟投资策略分析结论
+═══════════════════════════════════════
 
-严格按照 `<report_template>` 输出完整 Markdown 报告，包含：
-- Executive Summary
-- 因子 1A/1B 分析
-- 因子 2 粗算结果
-- 因子 3 精算结果
-- 因子 4 估值结论
-- 最终综合输出
-- 风险提示与待验证事项
-- 数据来源汇总
+【股票基本信息】
+公司名称：[公司名]
+股票代码：[代码]
+持股渠道：[港股通/直接持有/美股券商]
+分析日期：[日期]
+数据截止：[最新财年]
+
+【因子 1A 快筛结果】
+审计意见：[标准无保留/保留意见/强调事项]
+审计师更换：[无/有，频率]
+财务造假/违规：[无/有，详情]
+商业模式理解：[清晰/模糊]
+商业模式验证：[已验证/未验证]
+控股股东信号：[正面/中性/负面]
+快筛结论：[通过/否决]
+
+【因子 1B 定性分析结论】
+资本消耗强度：[低/中/高]
+收款模式：[预收/现结/应收为主]
+护城河评级：[宽/窄/无]
+周期性：[强周期/弱周期/非周期]
+人力资本依赖：[低/中/高]
+管理层评分：[优秀/良好/一般/差]
+监管风险：[低/中/高]
+MD&A 前瞻：[正面/中性/负面]
+
+【因子 2 粗算穿透回报率】
+归母净利润：[值] 亿元
+Owner Earnings：[值] 亿元
+支付率锚定值：[值]%
+粗算穿透回报率 R：[值]%
+粗算结论：[通过/边际不达标/否决]
+
+【因子 3 精算穿透回报率】
+真实可支配现金结余历史均值：[值] 亿元
+精算穿透回报率 GG（市值口径）：[值]%
+精算穿透回报率 GG_EV（EV 口径）：[值]%
+决策口径：[市值口径/EV 口径]
+外推可信度：[高/中/低]
+
+【因子 4 估值与安全边际】
+门槛 II：[值]%
+安全边际 JJ：[值] pct
+修正后安全边际 KK：[值] pct
+价值陷阱风险：[低/中/高]
+现金保护等级：[无/轻度/强/极强]
+
+【最终决策】
+投资建议：[标准仓位/70%仓位/50%仓位/观察仓位/不建仓/排除]
+目标买入价：[值] 元
+当前股价：[值] 元
+距离目标价：[值]%
+优先级：[高/中/低]
+
+【风险提示】
+1. [风险点 1]
+2. [风险点 2]
+3. [风险点 3]
+
+【后续跟踪事项】
+1. [跟踪事项 1]
+2. [跟踪事项 2]
+3. [跟踪事项 3]
+═══════════════════════════════════════
+```
+
+---
+
+## 可用工具清单
+
+### 一、东方财富 mx-* Skills（按数据类型专项使用）
+
+**`mx_finance_data`（实时行情/股息/市场数据）**
+- 适用场景：实时股价、市值、股息率、股息历史、回购历史、股东信息
+- 调用方式：`Skill(name="mx_finance_data", args="查询内容")`
+- 或 Bash：`python3 {baseDir}/scripts/get_data.py --query "贵州茅台近5年股息率和分红总额"`
+- 输出：xlsx 文件（结构化数据）+ txt 说明文件
+
+**`mx_macro_data`（宏观数据/国债收益率/无风险利率）**
+- 适用场景：十年期国债收益率（Rf）、GDP、CPI 等宏观指标
+- 调用方式：`Skill(name="mx_macro_data", args="查询内容")`
+- 或 Bash：`python3 {baseDir}/scripts/get_data.py --query "中国十年期国债收益率"`
+- 注意：查询必须包含具体指标名称
+- 输出：csv 文件 + txt 说明文件
+
+**`mx_finance_search`（公告/研报/新闻搜索）**
+- 适用场景：公司公告（审计报告、分红公告）、券商研报、财经新闻
+- 调用方式：`Skill(name="mx_finance_search", args="查询内容")`
+- 或 Bash：`python3 {baseDir}/scripts/get_data.py "格力电器 2024 年报审计意见"`
+- 输出：txt 文件（资讯正文）
+
+**`mx_financial_assistant`（综合金融问答）**
+- 适用场景：管理层信息、行业竞争格局、商业模式解读、综合定性分析
+- 调用方式：`Skill(name="mx_financial_assistant", args="查询内容")`
+- 或 Bash：`python3 {baseDir}/scripts/generate_answer.py --query "平安银行管理层构成和持股"`
+- 深度思考模式：添加 `--deep-think` 参数
+- 输出：Markdown 格式回答
+
+---
+
+### 二、AI-Tools MCP 工具（结构化财务数据，第一优先级用于三大报表）
+
+**股票基础信息**：
+- `StockSearch`：搜索股票代码和名称
+- `QueryStockPriceInfo`：查询实时股价信息
+
+**财务报表数据**：
+- `GetIncomeStatement`：利润表（Markdown）
+- `GetBalanceSheet`：资产负债表（Markdown）
+- `GetCashFlowStatement`：现金流量表（Markdown）
+- `GetFinancialReport`：完整财务报告（含 MD&A）
+- `GetFinancialIndicators`：财务指标（含受限现金/关联方/应收账款详情）
+
+**JSON 原始数据**（用于精确数字提取）：
+- `GetIncomeStatementJson`、`GetBalanceSheetJson`、`GetCashFlowStatementJson`
+- `GetFinancialIndicatorsJson`、`GetFinancialReportJson`
+
+**K 线数据**：
+- `GetMonthlyKLineData`：月线数据（历史价格，主要来源）
+- `GetKLineData`：任意周期 K 线
+- `GetDailyKLineData`：日线数据
+
+**调用方式**：
+```
+mcp_AI_Tools_invoke_tool({
+  "toolName": "工具名称",
+  "parameters": { ... }
+})
+```
+
+---
+
+### 三、WebSearch（补充数据）
+
+- 适用场景：mx-* skill 和 AI-Tools 均无法获取时的补充
+- 优先来源：巨潮资讯、港交所披露易、公司官网投资者关系
+
+---
+
+### 四、发现报告 MCP（`search_reports`，研报备用）
+
+- 适用场景：mx_finance_search 无法获取研报时
+- 参数：keywords, start_time/end_time, page_size（10-20）
+
+---
+
+### 五、文件操作工具
+
+- `Read`：读取数据包和策略规则文件
+- `Write`：写入数据包和分析报告
+- `Glob`：查找文件
+- `Bash`：执行 mx-* skill Python 脚本、创建目录
+
+---
 
 ## 单位换算规则
 
@@ -663,44 +1019,45 @@ Step 4-3：分位计算与买入触发评估
 
 **币种换算**：使用分析日即期汇率，先换算为人民币再转为亿元
 
+---
+
+## 注意事项
+
+1. **职责边界**：主代理只做调度和分析，不调用数据采集工具；数据采集完全由子代理完成
+2. **工具分工**：严格按数据类型选用工具（见可用工具清单中的适用场景）
+3. **数据优先级**：
+   - 无风险利率 → mx_macro_data 优先
+   - 公告/研报 → mx_finance_search 优先
+   - 定性信息/管理层/竞争格局 → mx_financial_assistant 优先
+   - 实时行情/股息 → mx_finance_data 优先
+   - 三大报表/K线 → AI-Tools MCP 优先
+4. **并行执行**：Phase 1 和 Phase 2 子代理可以并行执行，主代理等待两个文件都生成后再继续
+5. **数据标注**：所有数据必须标注来源（工具名称/搜索关键词）
+6. **单位统一**：报告输出使用人民币亿元，子代理数据包使用报表原始币种百万元
+7. **否决纪律**：因子 1A 或因子 2 触发否决 → 立即停止后续分析
+8. **策略目录只读**：不得修改 V1.x.md 历史版本文件
+9. **框架边界**：不适用于 Pre-profit 企业、高增长科技股、周期顶部的强周期股
+
+---
+
 ## 关键变量索引
 
 ### 因子 2 变量
-- A = 集团净利润
-- B = 少数股东损益
-- C = 归母净利润
-- D = 折旧摊销
-- E = 资本开支
-- G = 维持性资本开支系数
-- H = D × G（维持性资本开支粗估）
-- I = C + D − H（Owner Earnings）
-- M = 支付率锚定值
-- O = 年均回购金额
-- Q = 综合股息税率
-- R = 粗算穿透回报率
+A=集团净利润, B=少数股东损益, C=归母净利润, D=折旧摊销, E=资本开支,
+G=维持性资本开支系数, H=D×G（维持性资本开支粗估）, I=C+D-H（Owner Earnings）,
+M=支付率锚定值, O=年均回购金额, Q=综合股息税率, R=粗算穿透回报率
 
 ### 因子 3 变量
-- S = 营业收入
-- T = 应收账款净变动
-- U = 预收款/合同负债净变动
-- V1 = 资产处置收入（保留项）
-- V_deduct = 应扣除非经常性流入
-- W = 经营性现金支出
-- Y = 总扣除额（资本开支 + 投资 + 隐性支出）
-- AA = 真实可支配现金结余基准值
-- BB = 广义现金合计
-- FF = 可自由支配现金
-- GG = 精算穿透回报率
-- HH = R − GG（粗算偏差）
+S=营业收入, T=应收账款净变动, U=预收款/合同负债净变动,
+V1=资产处置收入（保留项）, V_deduct=应扣除非经常性流入,
+W=经营性现金支出, Y=总扣除额, AA=真实可支配现金结余基准值,
+BB=广义现金合计, FF=可自由支配现金, GG=精算穿透回报率, HH=R-GG（粗算偏差）
 
 ### 因子 4 变量
-- GG = 精算穿透回报率
-- II = 门槛值
-- JJ = GG − II（安全边际）
-- KK = 修正后安全边际
-- NN = 历史价格数据点数量
-- OO = 5 年最低价
-- PP = 5 年最高价
+GG=精算穿透回报率, II=门槛值, JJ=GG-II（安全边际）, KK=修正后安全边际,
+NN=历史价格数据点数量, OO=5年最低价, PP=5年最高价
+
+---
 
 ## 特殊规则
 
@@ -708,8 +1065,8 @@ Step 4-3：分位计算与买入触发评估
 
 适用条件（须同时满足）：
 - 业务模式为"先款后货"或"预收制"
-- 合同负债对应服务/产品交付确定性极高（>95%）
-- 合同负债近 3 年波动率 < 30%
+- 合同负债对应交付确定性极高（>95%）
+- 合同负债近3年波动率 < 30%
 
 计入逻辑：
 - 用于：安全垫评估、EV 口径计算、派息可持续年限
@@ -720,9 +1077,9 @@ Step 4-3：分位计算与买入触发评估
 触发条件：广义净现金/市值 > 40%
 
 计算：
-- EV = 市值 − 广义净现金
-- R_EV = [C × M × (1−Q%) + O] / EV
-- GG_EV = [AA × M × (1−Q%) + O] / EV
+- EV = 市值 - 广义净现金
+- R_EV = [C × M × (1-Q%) + O] / EV
+- GG_EV = [AA × M × (1-Q%) + O] / EV
 
 通过条件：R_EV ≥ II **且** 通过"现金分配意愿检验"
 
@@ -735,184 +1092,15 @@ Step 4-3：分位计算与买入触发评估
 | 强保护 | 40-60% | 20% |
 | 极强保护 | > 60% | 15% |
 
+---
+
 ## 异常处理
 
 | 异常情况 | 处理方式 |
 |---------|---------|
-| Phase 1 无法获取股价/市值 | 依次尝试：AI-Tools → WebSearch → 发现报告，全部失败则终止并通知用户 |
-| AI-Tools 财报数据不足 5 年 | 使用 WebSearch/发现报告补充，仍不足则在 data_pack 中标注实际覆盖年份 |
-| AI-Tools 工具调用失败 | 自动降级至 WebSearch，再失败则降级至发现报告 |
-| WebSearch 无法获取原文 | 降级至发现报告搜索券商研报 |
-| 发现报告无相关研报 | 标注数据缺失，使用可得数据继续分析 |
-| Phase 2 数据获取失败 | 使用 WebSearch 补充，仍失败则标注"⚠️数据缺失"，Phase 3 使用降级方案 |
+| Phase 1 子代理超时 | 主代理重新启动，最多3次；仍失败则通知用户 |
+| mx-* skill 调用失败 | 降级至对应备用工具（见工具清单） |
+| AI-Tools 财报数据不足5年 | 使用 mx_finance_data 补充，标注实际覆盖年份 |
+| data_pack_report.md 缺失 | 使用降级方案（data_pack_market.md 单独分析），标注"深度数据缺失" |
 | 因子 1A/1B 触发否决 | 停止后续分析，输出否决报告 |
 | 因子 2 粗算否决 | 不进入因子 3，直接输出否决结论 |
-| 三级优先级全部失败 | 在报告中标注数据缺失项，使用可得数据继续分析或终止 |
-
-## 输出要求
-
-1. **Checkpoint 机制**：每完成一个因子 → 立即将该因子结论追加写入报告文件
-2. **数据来源标注**：每项数据标注来源（如 `data_pack_market §3` 或 `data_pack_report P1`）
-3. **计算过程展示**：所有量化计算必须展示公式 + 代入数字 + 结果
-4. **单位统一**：最终报告使用人民币亿元
-5. **语言规范**：中英混合，报告框架用中文，专业术语保留英文（OCF、FCF、ROE 等）
-
-## 示例调用
-
-用户：分析平安银行
-
-助手：
-1. 调用 search_stock 确认股票代码（000001.SZ）
-2. 创建输出目录
-3. 执行 Step 0（深度财务数据确保）
-4. 并行启动 Phase 1（数据采集）和 Phase 2（深度财务数据采集）
-5. 等待完成后启动 Phase 3（分析与报告）
-6. 生成报告文件并返回链接
-
-## 注意事项
-
-1. **策略目录只读**：严禁在策略规则目录中添加、修改或删除任何文件
-2. **输出路径**：所有运行时文件必须输出到 `{workspace}/龟龟投资策略分析报告/{symbol}/` 目录
-3. **统一报告目录**：所有股票分析报告统一存放在 `龟龟投资策略分析报告` 文件夹中，保持项目根目录整洁
-4. **数据一致性**：因子 2/3/4 使用模块〇 (8) 预提取的参数，不得重新取数
-5. **否决门纪律**：任一因子触发否决 → 立即停止后续分析
-6. **框架边界**：本框架不适用于 Pre-profit 企业、高增长科技股、周期顶部的强周期股
-7. **数据获取优先级**：
-   - 第一优先级：AI-Tools MCP 工具（主数据源）
-   - 第二优先级：WebSearch（补充数据）
-   - 第三优先级：发现报告 MCP 工具（深度研究）
-   - 必须按顺序逐级降级，不得跳过优先级
-8. **数据来源标注**：
-   - 所有数据必须标注来源
-   - AI-Tools 数据标注工具名称
-   - WebSearch 数据标注搜索关键词
-   - 发现报告数据标注机构和 docId
-9. **数据验证**：
-   - 跨来源数据应相互验证
-   - 发现重大差异时优先采信 AI-Tools 数据
-   - 无法验证的数据标注"⚠️待验证"
-
-## 可用工具
-
-### 一、AI-Tools MCP 工具（第一优先级 - 主数据源）
-
-**股票基础信息**：
-- `StockSearch`：搜索股票代码和名称
-  - 参数：keyword（关键词）, pageSize（可选）
-  - 返回：股票代码、名称、价格、市值等
-
-- `QueryStockPriceInfo`：查询实时股价信息
-  - 参数：stock_code
-  - 返回：股价、市值、市盈率、市净率、股息率等
-
-**财务报表数据**：
-- `GetIncomeStatement`：获取利润表详细数据（Markdown）
-- `GetBalanceSheet`：获取资产负债表详细数据（Markdown）
-- `GetCashFlowStatement`：获取现金流量表详细数据（Markdown）
-- `GetFinancialReport`：获取完整财务报告（含 MD&A，Markdown）
-- `GetFinancialIndicators`：获取财务指标深度数据（Markdown）
-
-**JSON 原始数据**（用于复杂计算）：
-- `GetIncomeStatementJson`：利润表原始 JSON
-- `GetBalanceSheetJson`：资产负债表原始 JSON
-- `GetCashFlowStatementJson`：现金流量表原始 JSON
-- `GetFinancialIndicatorsJson`：财务指标原始 JSON
-- `GetFinancialReportJson`：财务报告原始 JSON
-
-**K 线数据**：
-- `GetKLineData`：查询任意周期 K 线
-- `GetDailyKLineData`：日线数据
-- `GetWeeklyKLineData`：周线数据（备用，主要使用月线）
-- `GetMonthlyKLineData`：月线数据
-- `GetMinuteKLineData`：分钟线数据
-
-**新闻资讯**：
-- `GetMarketHotNews`：市场热点新闻
-- `GetSinaFinanceNews`：新浪财经新闻
-- `GetClsTelegraphNews`：财联社电报
-- `GetTradingViewNews`：TradingView 新闻
-- `GetStockRelatedNews`：个股相关新闻
-
-**其他工具**：
-- `GetHotStrategyStocks`：热门策略股票排行
-- `ChoiceStockByIndicators`：根据指标选股
-- `StockSentimentAnalysis`：情感分析
-
-**调用方式**：
-```
-通过 `mcp_AI_Tools_invoke_tool` 调用：
-{
-  "toolName": "工具名称",
-  "parameters": { 具体参数 }
-}
-```
-
----
-
-### 二、WebSearch（第二优先级 - 补充数据）
-
-**工具**：Trae WebSearch
-
-**用途**：
-- 搜索公司年报、财报原文
-- 获取行业数据和竞争格局
-- 搜索无风险利率（国债收益率）
-- 获取管理层信息、股权结构
-- 搜索监管政策、行业风险
-
-**搜索示例**：
-- "{公司名} {年份} 年年度报告"
-- "{公司名} 财务报表附注"
-- "中国十年期国债收益率"
-- "{公司名} 大股东 控股结构"
-- "{行业} 监管政策 最新"
-
-**优先来源**：
-- 巨潮资讯网（A 股官方披露）
-- 港交所披露易（港股官方披露）
-- 公司官网投资者关系栏目
-- 证券交易所官网
-
----
-
-### 三、发现报告 MCP 工具（第三优先级 - 深度研究）
-
-**工具**：`search_reports`
-
-**参数**：
-- keywords：关键词（公司名/股票代码/行业）
-- authors：作者姓名（可选）
-- org_names：机构名称（可选，如"中信证券"）
-- start_time/end_time：时间范围
-- page_size：返回数量（10-20）
-
-**用途**：
-- 获取券商深度研究报告
-- 获取财报解读和业绩点评
-- 获取行业分析报告
-- 验证 AI-Tools 数据
-
-**示例**：
-```
-search_reports(keywords="格力电器", page_size=10)
-search_reports(keywords="000651", end_time="last3mon")
-```
-
----
-
-### 四、文件操作工具
-
-- `Read`：读取文件（data_pack、策略规则）
-- `Write`：写入文件（数据包、分析报告）
-- `Glob`：查找文件（检查上传的 PDF）
-- `LS`：列出目录内容
-- `DeleteFile`：删除文件
-
----
-
-### 五、Sub-agent 工具
-
-- `Task`：启动子代理执行任务
-  - subagent_type：search / backend-architect 等
-  - prompt：详细任务指令
-  - description：任务描述
