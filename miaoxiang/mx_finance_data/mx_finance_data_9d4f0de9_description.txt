@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 歌尔股份 002241 最新股价 总市值 流通市值 市盈率 市净率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9d4f0de9.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9d4f0de9_description.txt
+数据行数: 5
+表数量: 2
+Sheet 列表: 歌尔股份(002241.SZ)的流通市值, 歌尔股份(002241.SZ)的总市值、市净率PB等

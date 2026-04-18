@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 石头科技 688169 历年股息 分红 支付率 归母净利润
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_19ed202a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_19ed202a_description.txt
+数据行数: 3
+表数量: 2
+Sheet 列表: 石头科技(688169.SH)的分红送转、归属于母公司股东的净, 石头科技(688169.SH)的股息率(TTM)

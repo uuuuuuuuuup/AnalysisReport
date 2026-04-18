@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 蓝思科技 300433 2020-2024年度 营业收入 净利润 毛利率 净利率 ROE 总资产 股东权益 经营现金流
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6d0f63ee.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6d0f63ee_description.txt
+数据行数: 29
+表数量: 3
+Sheet 列表: 蓝思科技(300433.SZ)的净利润、归属于母公司股东的净利, 蓝思科技(06613.HK)(最新年结日12-31)的净利润、, 蓝思科技(06613.HK)利润表_合并报表(调整)_(202

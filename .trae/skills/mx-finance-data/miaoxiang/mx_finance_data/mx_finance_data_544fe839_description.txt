@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 青岛港 601298 历年股息分红支付率 归母净利润 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_544fe839.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_544fe839_description.txt
+数据行数: 36
+表数量: 9
+Sheet 列表: 青岛港(601298.SH)的归属于母公司股东的净利润、现金分, 青岛港(06198.HK)(最新年结日12-31)的归属于母公, 青岛港(601298.SH)的年度股利支付率、年度累计每股股利, 青岛港(601298.SH)的股息率(年度)(2026-04-, 青岛港(601298.SH)的股息率(近12个月), 青岛港(601298.SH)的最新股息率, 青岛港(601298.SH)分红统计, 青岛港(06198.HK)累计分红统计, 青岛港(06198.HK)历年分红统计

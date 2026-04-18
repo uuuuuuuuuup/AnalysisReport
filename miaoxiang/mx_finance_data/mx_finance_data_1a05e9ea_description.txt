@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 歌尔股份 002241 现金流量表 经营活动现金流出 购买商品接受劳务支付的现金 支付给职工及为职工支付的现金 支付的各项税费 支付利息 近5年
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1a05e9ea.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1a05e9ea_description.txt
+数据行数: 9
+表数量: 1
+Sheet 列表: 歌尔股份(002241.SZ)的购买商品、接受劳务支付的现金、

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 上港集团600018 2020-2025 每股股利 分红总额 归母净利润 股利支付率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_89817fa4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_89817fa4_description.txt
+数据行数: 8
+表数量: 3
+Sheet 列表: 上港集团(600018.SH)的每股股利(税前)、归属于母公司, 上港集团(600018.SH)的年度股利支付率, 上港集团(600018.SH)分红方案(2020-01-01~

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 歌尔股份 002241 历年股息分红 每股派息 股息率 股息支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_10e7ff1b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_10e7ff1b_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 歌尔股份(002241.SZ)的股息率(TTM), 歌尔股份(002241.SZ)分红方案(2020-01-01~

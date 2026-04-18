@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 白云山600332 总市值 流通市值 市盈率 市净率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_80d2b86c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_80d2b86c_description.txt
+数据行数: 8
+表数量: 4
+Sheet 列表: 白云山(600332.SH)的流通市值, 白云山(600332.SH)的总市值、市净率PB等, 白云山(00874.HK)的总市值、市净率PB等, 白云山(00874.HK)的流通市值

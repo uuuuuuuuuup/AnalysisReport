@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 青岛啤酒 600600 历年股息分红支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_be7a4905.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_be7a4905_description.txt
+数据行数: 35
+表数量: 3
+Sheet 列表: 青岛啤酒(600600.SH)分红方案(2020-01-01~, 青岛啤酒股份(00168.HK)累计分红统计, 青岛啤酒股份(00168.HK)历年分红统计

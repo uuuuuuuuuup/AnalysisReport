@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 同仁堂600085 购买商品接受劳务支付的现金 支付给职工支付的现金 支付的各项税费 支付利息 2020 2021 2022 2023 2024 年报
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_ed1c96cc.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_ed1c96cc_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 同仁堂(600085.SH)的购买商品、接受劳务支付的现金、支

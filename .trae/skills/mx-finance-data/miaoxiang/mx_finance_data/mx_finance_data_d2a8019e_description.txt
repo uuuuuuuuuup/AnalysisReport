@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 今世缘603369 实时股价 市值 股息率 历年股息分红 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_d2a8019e.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_d2a8019e_description.txt
+数据行数: 14
+表数量: 5
+Sheet 列表: 今世缘(603369.SH)的总市值、收盘价, 今世缘(603369.SH)的股息率(TTM), 今世缘(603369.SH)的股息率(TTM)_2, 今世缘(603369.SH)分红方案(2026-04-18~2, 今世缘(603369.SH)分红方案(2024-04-18~2

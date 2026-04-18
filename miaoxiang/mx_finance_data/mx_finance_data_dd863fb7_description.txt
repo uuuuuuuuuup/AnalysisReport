@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 三一重工600031 有息负债 银行贷款 债券 短期借款 长期借款 2023-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_dd863fb7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_dd863fb7_description.txt
+数据行数: 5
+表数量: 2
+Sheet 列表: 三一重工(600031.SH)的短期借款、带息债务等, 三一重工(06031.HK)(最新年结日12-31)的带息债务

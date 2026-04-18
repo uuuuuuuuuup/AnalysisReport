@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 爱美客300896 审计意见 审计师 非经常性损益 带息债务 分红方案 2025年报
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_141c318a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_141c318a_description.txt
+数据行数: 12
+表数量: 2
+Sheet 列表: 爱美客(300896.SZ)的带息债务、非经常性损益等, 爱美客(300896.SZ)分红方案(2025-04-18~2

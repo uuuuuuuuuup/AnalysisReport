@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 龙佰集团002601 历年股息分红支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3ef8e3d3.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3ef8e3d3_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 龙佰集团(002601.SZ)分红方案(2020-01-01~

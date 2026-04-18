@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 温氏股份300498 历年分红总额 归母净利润 股息支付率 2020 2021 2022 2023 2024
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_796f6efb.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_796f6efb_description.txt
+数据行数: 3
+表数量: 2
+Sheet 列表: 温氏股份(300498.SZ)的年度累计分红总额、年度股利支付, 温氏股份(300498.SZ)的归属于母公司股东的净利润

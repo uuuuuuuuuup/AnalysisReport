@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 龙佰集团002601 有息负债 银行贷款 应付债券 长期借款 短期借款 一年内到期非流动负债 2024-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_79b726bd.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_79b726bd_description.txt
+数据行数: 15
+表数量: 4
+Sheet 列表: 龙佰集团(002601.SZ)的短期借款、带息债务等, 龙佰集团(002601.SZ)一年内到期的非流动负债, 龙佰集团(002601.SZ)一年内到期的非流动负债_2, 龙佰集团(002601.SZ)一年内到期的非流动负债_3
