@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 同仁堂600085 最新总市值 流通市值 股息率 市盈率 市净率 每股收益 历年分红
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_7a414cbb.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_7a414cbb_description.txt
+数据行数: 48
+表数量: 8
+Sheet 列表: 同仁堂(600085.SH)当前的流通市值、总市值等, 同仁堂(600085.SH)的流通市值、股息率(TTM)等, 同仁堂(600085.SH)的总市值、市净率PB等, 同仁堂(600085.SH)的每股收益EPS(基本)、现金分红, 同仁堂(600085.SH)当前的股息率, 同仁堂(600085.SH)的年度股利支付率、年度累计每股股利, 同仁堂(600085.SH)的股息率(年度)(2026-04-, 同仁堂(600085.SH)分红统计

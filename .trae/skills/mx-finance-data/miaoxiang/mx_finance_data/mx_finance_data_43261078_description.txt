@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 三一重工600031 购买商品接受劳务支付的现金 支付给职工支付的现金 支付的各项税费 支付利息 2020 2021 2022 2023 2024 2025年报
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_43261078.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_43261078_description.txt
+数据行数: 5
+表数量: 2
+Sheet 列表: 三一重工(600031.SH)的购买商品、接受劳务支付的现金、, 三一重工(06031.HK)(最新年结日12-31)的应付职工

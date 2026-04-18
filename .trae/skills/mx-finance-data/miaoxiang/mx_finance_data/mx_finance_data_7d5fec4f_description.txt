@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海尔智家 600690 历年股息 分红 派息 支付率
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_7d5fec4f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_7d5fec4f_description.txt
+数据行数: 17
+表数量: 2
+Sheet 列表: 海尔智家(600690.SH)分红方案(2021-04-19~, 海尔智家(06690.HK)分红明细(2021-04-19~2

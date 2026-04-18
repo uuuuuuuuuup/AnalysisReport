@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 招商蛇口001979 历年股息 分红 支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_ec0a085f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_ec0a085f_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 招商蛇口(001979.SZ)分红方案(2020-01-01~
