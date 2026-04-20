@@ -1,9 +1,9 @@
 ---
 name: "turtle-investment-strategy"
-description: "Executes multi-phase stock analysis using Turtle Investment Strategy v2.0. Sub-agent architecture: main agent orchestrates only, Phase 1 & Phase 2 worker agents collect data in parallel. Integrates East Finance mx-* skills by data type. Invoke when user requests stock analysis, asks to evaluate a company, or uploads annual report PDF with stock name/code."
+description: "Executes multi-phase stock analysis using Turtle Investment Strategy v2.1. Sub-agent architecture: main agent orchestrates only, Phase 1 & Phase 2 worker agents collect data in parallel. Integrates East Finance mx-* skills by data type. Invoke when user requests stock analysis, asks to evaluate a company, or uploads annual report PDF with stock name/code."
 ---
 
-# 龟龟投资策略分析助手 v2.0
+# 龟龟投资策略分析助手 v2.1
 
 ## 技能描述
 
@@ -898,14 +898,14 @@ Step 4-3：买入触发条件
 
 ````markdown
 ---
-title: "{公司名}（{代码}）龟龟投资策略分析报告"
+title: "{公司名}（{代码}）稳健投资策略分析报告"
 date: {分析日期}
 draft: false
 ---
 
 {交易所} · {行业板块} · {代码}
 
-# {公司名} · 龟龟投资策略分析
+# {公司名} · 稳健投资策略分析
 
 > 分析基准日 {分析日期} · 当前股价 ¥{当前股价} · 市值 {市值}亿元
 
@@ -917,7 +917,7 @@ draft: false
 
 **{公司全称}** · {代码} · {持股渠道} · 数据截止 {数据截止年份}
 
-### Turtle KPI 快照
+### 指标摘要
 
 | 指标 | 数值 | 说明 |
 |:---|:---:|:---|
@@ -971,17 +971,6 @@ draft: false
 3. {关键发现3}
 4. {关键发现4，如有}
 5. {关键发现5，如有}
-
----
-
-## 关键假设
-
-| # | 假设项 | 选定值 | 可替代值 | 敏感性 |
-|---|:---|:---:|:---:|:---|
-| 1 | 维持性Capex系数 G | {G} | {替代值} | G每+0.1 → OE约±{值}百万元 |
-| 2 | 支付率锚定值 M | {M}% | {替代值}% | M每+1% → R约+{值}pct |
-| 3 | 利润口径 | {口径说明} | GAAP归母 | {口径切换对R的影响} |
-| 4 | 税率 Q | {Q}% | {替代值}% | Q={值}% → R降至{值}% |
 
 ---
 
@@ -1278,7 +1267,7 @@ draft: false
 
 ---
 
-## 投资论点卡
+## 投资论点
 
 > **核心论点**：{2-3句完整论点，含主要优势、主要风险和介入条件}
 
@@ -1295,18 +1284,36 @@ draft: false
 
 ---
 
+## 关键假设
+
+> 以下假设是穿透回报率计算的核心参数。若实际值偏离假设，回报预测将相应变化。
+
+| # | 假设项 | 选定值 | 可替代值 | 敏感性 |
+|---|:---|:---:|:---:|:---|
+| 1 | 维持性Capex系数 G | {G} | {替代值} | G每+0.1 → OE约±{值}百万元 |
+| 2 | 支付率锚定值 M | {M}% | {替代值}% | M每+1% → R约+{值}pct |
+| 3 | 利润口径 | {口径说明} | GAAP归母 | {口径切换对R的影响} |
+| 4 | 税率 Q | {Q}% | {替代值}% | Q={值}% → R降至{值}% |
+
+---
+
 ## 监控清单
 
 **基本面止损条件**
 
-| # | 指标 | 触发条件 | 严重度 | 当前值 |
-|---|:---|:---|:---:|---:|
-| 1 | 广义净现金 | < 0 | 🔴 critical | {v} 百万元 |
-| 2 | FCF yield | < {v}% | 🔴 critical | {v}% |
-| 3 | 连续2期 FCF < 0 | — | 🔴 critical | {当前状态} |
-| 4 | 有息负债/总资产 | > {v}% | 🟡 warning | {v}% |
-| 5 | 营收同比 | < −10% | 🟡 warning | {v}% |
-| 6 | 支付率 | < {v}% | 🟡 warning | {v}% |
+> 严重度判定逻辑：
+> - 🔴 **严重**：直接威胁本金安全或公司持续经营能力
+> - 🟡 **关注**：可能预示基本面恶化，需密切跟踪后续变化
+> - 🟢 **正常**：当前处于合理区间，无需特别警惕
+
+| # | 指标 | 触发条件 | 当前值 | 严重度判定依据 |
+|---|:---|:---|---:|:---|
+| 1 | 广义净现金 | 跌破安全阈值 | {v} 百万元 | {结合现金消耗速度、债务到期结构判定} |
+| 2 | FCF yield | 低于门槛值 | {v}% | {结合行业特性和公司生命周期阶段判定} |
+| 3 | 自由现金流 | 连续多期为负 | {当前状态} | {结合资本开支周期、行业景气度判定} |
+| 4 | 有息负债率 | 快速上升或绝对值过高 | {v}% | {结合现金流覆盖能力、资产变现价值判定} |
+| 5 | 营收增长 | 大幅负增长 | {v}% | {结合行业周期、竞争格局变化判定} |
+| 6 | 股息支付率 | 显著下降或不可持续 | {v}% | {结合盈利质量、现金储备、派息政策判定} |
 
 **待验证事项**
 
@@ -1317,7 +1324,7 @@ draft: false
 
 ---
 
-*龟龟投资策略 v2.0 | {公司名}（{代码}） | 分析基准日 {分析日期}*
+*稳健投资策略 v2.1 | {公司名}（{代码}） | 分析基准日 {分析日期}*
 
 *本报告由 AI 辅助生成，仅供参考，不构成投资建议。*
 ````
