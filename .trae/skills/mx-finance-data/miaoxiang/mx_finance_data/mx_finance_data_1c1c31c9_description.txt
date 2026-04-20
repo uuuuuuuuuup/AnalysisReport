@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 龙佰集团002601 最近三年有息负债 银行贷款 应付债券 资产负债表明细
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_1c1c31c9.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_1c1c31c9_description.txt
+数据行数: 11
+表数量: 1
+Sheet 列表: 龙佰集团(002601.SZ)的带息债务、流动资产合计等

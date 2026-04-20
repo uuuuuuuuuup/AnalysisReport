@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 贵州茅台 600519 受限现金 应收账款坏账计提 关联方交易
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_bf2fe5f0.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_bf2fe5f0_description.txt
+数据行数: 26
+表数量: 3
+Sheet 列表: 贵州茅台(600519.SH)关联交易(2025-04-20~, 贵州茅台(600519.SH)应收账款账龄结构(2025年年报, 贵州茅台(600519.SH)应收账款账龄结构(2025年中报

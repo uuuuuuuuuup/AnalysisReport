@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 贵州茅台 600519 历年股息分红 支付率 2019-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_0809be92.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_0809be92_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 贵州茅台(600519.SH)分红方案(2019-01-01~
