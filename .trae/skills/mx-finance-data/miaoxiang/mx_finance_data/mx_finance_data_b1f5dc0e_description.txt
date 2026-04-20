@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 贵州茅台 600519 定期存款 理财产品 有息负债明细
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_b1f5dc0e.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_b1f5dc0e_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 贵州茅台(600519.SH)的带息债务

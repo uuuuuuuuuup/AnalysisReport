@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 龙佰集团002601 最近三年非经常性损益 政府补贴 投资收益 资产处置收益
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_d49c70e3.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_d49c70e3_description.txt
+数据行数: 40
+表数量: 9
+Sheet 列表: 龙佰集团(002601.SZ)的资产处置收益、非经常性损益等, 龙佰集团(002601.SZ)政府补助合计金额(2022-12, 龙佰集团(002601.SZ)政府补助合计金额(2021-06, 龙佰集团(002601.SZ)政府补助合计金额(2020-12, 龙佰集团(002601.SZ)投资收益, 龙佰集团(002601.SZ)投资收益_2, 龙佰集团(002601.SZ)投资收益_3, 龙佰集团(002601.SZ)投资收益_4, 龙佰集团(002601.SZ)投资收益_5

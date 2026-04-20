@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 龙佰集团002601 最近三年受限现金 应收账款 存货 固定资产 在建工程
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_7a540489.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_7a540489_description.txt
+数据行数: 97
+表数量: 7
+Sheet 列表: 龙佰集团(002601.SZ)的存货、在建工程等, 龙佰集团(002601.SZ)应收账款账龄结构(2025年中报, 龙佰集团(002601.SZ)应收账款账龄结构(2024年年报, 龙佰集团(002601.SZ)应收账款账龄结构(2024年中报, 龙佰集团(002601.SZ)应收账款账龄结构(2023年年报, 龙佰集团(002601.SZ)应收账款账龄结构(2023年中报, 龙佰集团(002601.SZ)固定资产
