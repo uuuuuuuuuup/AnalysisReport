@@ -3,11 +3,11 @@ name: "turtle-investment-strategy"
 description: "Executes multi-phase stock analysis using Turtle Investment Strategy v2.1. Sub-agent architecture: main agent orchestrates only, Phase 1 & Phase 2 worker agents collect data in parallel. Integrates East Finance mx-* skills by data type. Invoke when user requests stock analysis, asks to evaluate a company, or uploads annual report PDF with stock name/code."
 ---
 
-# 龟龟投资策略分析助手 v2.1
+# 稳健投资策略分析助手 v2.1
 
 ## 技能描述
 
-本技能实现龟龟投资策略框架，通过**主代理+子代理**的多代理架构对股票进行深度价值分析，并按数据类型接入东方财富 mx-* skills。适用于：
+本技能实现稳健投资策略框架，通过**主代理+子代理**的多代理架构对股票进行深度价值分析，并按数据类型接入东方财富 mx-* skills。适用于：
 - 用户请求分析某只股票
 - 用户询问是否应该买入某只股票
 - 用户需要估值分析和安全边际评估
@@ -65,7 +65,7 @@ description: "Executes multi-phase stock analysis using Turtle Investment Strate
 当用户输入包含以下任一情况时，立即调用本技能：
 1. 股票代码或名称（如"分析平安银行"、"000001"、"长和"）
 2. 询问估值、安全边际、是否值得买入等问题
-3. 提到"龟龟投资策略"或"turtle strategy"
+3. 提到"稳健投资策略"或"turtle strategy"
 
 ---
 
@@ -83,7 +83,7 @@ description: "Executes multi-phase stock analysis using Turtle Investment Strate
 ### 第二阶段：创建输出目录
 
 ```bash
-mkdir -p {workspace}/龟龟投资策略分析报告/{symbol}/
+mkdir -p {workspace}/稳健投资策略分析报告/{symbol}/
 ```
 
 ### 第三阶段：并行启动子代理
@@ -93,14 +93,14 @@ mkdir -p {workspace}/龟龟投资策略分析报告/{symbol}/
 **子代理 1 完整 prompt**：
 
 ```
-你是龟龟投资策略的 Phase 1 市场数据采集子代理。请严格按照以下规范采集数据，写出标准化 markdown 文件。
+你是稳健投资策略的 Phase 1 市场数据采集子代理。请严格按照以下规范采集数据，写出标准化 markdown 文件。
 
 ═══ 输入参数 ═══
 股票代码：{symbol}
 公司名称：{company_name}
 持股渠道：{holding_channel}
 目标年份：{target_year}
-输出路径：{workspace}/龟龟投资策略分析报告/{symbol}/data_pack_market.md
+输出路径：{workspace}/稳健投资策略分析报告/{symbol}/data_pack_market.md
 
 ═══ 数据来源（按数据类型分工）═══
 
@@ -122,7 +122,6 @@ mkdir -p {workspace}/龟龟投资策略分析报告/{symbol}/
           "支付给职工及为职工支付的现金"
           "支付的各项税费"
           "支付利息"
-       若 GetCashFlowStatement 未返回上述明细，调用 GetCashFlowStatementJson 补充
      * GetFinancialIndicators（财务比率）
    → 备用：mx_finance_data Skill
 
@@ -179,13 +178,13 @@ mkdir -p {workspace}/龟龟投资策略分析报告/{symbol}/
 **子代理 2 完整 prompt**：
 
 ```
-你是龟龟投资策略的 Phase 2 深度财务数据采集子代理。请严格按照以下规范采集数据，写出标准化 markdown 文件。
+你是稳健投资策略的 Phase 2 深度财务数据采集子代理。请严格按照以下规范采集数据，写出标准化 markdown 文件。
 
 ═══ 输入参数 ═══
 股票代码：{symbol}
 公司名称：{company_name}
 目标年份：{target_year}
-输出路径：{workspace}/龟龟投资策略分析报告/{symbol}/data_pack_report.md
+输出路径：{workspace}/稳健投资策略分析报告/{symbol}/data_pack_report.md
 
 ═══ 数据来源（按数据类型分工）═══
 
@@ -324,7 +323,7 @@ mkdir -p {workspace}/龟龟投资策略分析报告/{symbol}/
 
 ### 2.4 经营活动现金流出明细（必填，用于因子 3 步骤 4）
 
-> ⚠️ 本节数据必须直接来自现金流量表"经营活动"各支出行，不可用利润表科目替代。若 GetCashFlowStatement 返回不足，使用 GetCashFlowStatementJson 补充。
+> ⚠️ 本节数据必须直接来自现金流量表"经营活动"各支出行，不可用利润表科目替代。
 
 | 年份 | 购买商品/劳务支付 | 支付员工现金 | 支付税费 | 支付利息 |
 |------|----------------|------------|---------|---------|
