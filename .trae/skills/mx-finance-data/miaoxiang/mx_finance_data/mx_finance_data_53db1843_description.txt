@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 股息率 分红 市值 总股本 流通股 近5年
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_53db1843.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_53db1843_description.txt
+数据行数: 7
+表数量: 6
+Sheet 列表: 泸州老窖(000568.SZ)当前的总市值, 泸州老窖(000568.SZ)的总市值, 泸州老窖(000568.SZ)的分红送转, 泸州老窖(000568.SZ)的流通股本、总股本, 泸州老窖(000568.SZ)当前的股息率, 泸州老窖(000568.SZ)的股息率(TTM)

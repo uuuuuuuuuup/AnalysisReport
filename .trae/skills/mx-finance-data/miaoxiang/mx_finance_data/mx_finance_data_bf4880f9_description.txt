@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国移动 600941 历年股息 分红 派息率 2021 2022 2023 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_bf4880f9.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_bf4880f9_description.txt
+数据行数: 34
+表数量: 4
+Sheet 列表: 中国移动(600941.SH)分红方案(2021-04-22~, 中国移动(600941.SH)分红方案(2021-01-01~, 中国移动(00941.HK)分红明细(2021-04-22~2, 中国移动(00941.HK)分红明细(2021-01-01~2

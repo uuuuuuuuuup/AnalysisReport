@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海尔智家 600690 受限现金 定期存款 交易性金融资产 衍生金融资产 2023-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_e21b640b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_e21b640b_description.txt
+数据行数: 3
+表数量: 2
+Sheet 列表: 海尔智家(600690.SH)的衍生金融资产、交易性金融资产, 海尔智家(06690.HK)(最新年结日12-31)的交易性金

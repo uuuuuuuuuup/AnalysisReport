@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 索菲亚 002572 历年分红 股息 每股派息 分红支付率 2019-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_52f0907a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_52f0907a_description.txt
+数据行数: 3
+表数量: 2
+Sheet 列表: 索菲亚(002572.SZ)的分红送转、每股股利(税前), 索菲亚(002572.SZ)的股息率(TTM)

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 古井贡酒 000596 非经常性损益明细 2023-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_ff5aa847.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_ff5aa847_description.txt
+数据行数: 4
+表数量: 1
+Sheet 列表: 古井贡酒(000596.SZ)的非经常性损益、非经常性损益项目

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海尔智家 600690 有息负债 短期借款 长期借款 应付债券 2023-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_cf730ca5.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_cf730ca5_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 海尔智家(600690.SH)的短期借款、带息债务等, 海尔智家(06690.HK)(最新年结日12-31)的带息债务

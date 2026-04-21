@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 美的集团000333 2025年 有息负债 短期借款 长期借款 应付债券 一年内到期非流动负债
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_f9a85c54.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_f9a85c54_description.txt
+数据行数: 17
+表数量: 5
+Sheet 列表: 美的集团(00300.HK)(最新年结日12-31)的带息债务, 美的集团(000333.SZ)的短期借款、带息债务等, 美的集团(000333.SZ)一年内到期的非流动负债, 美的集团(000333.SZ)一年内到期的非流动负债_2, 美的集团(00300.HK)资产负债表_合并报表(调整)_(2

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 石头科技 688169 历年分红 每股股利 股息支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_3490bc43.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_3490bc43_description.txt
+数据行数: 2
+表数量: 2
+Sheet 列表: 石头科技(688169.SH)的股息率(年度)(2026-04, 石头科技(688169.SH)的每股股利(税前)
