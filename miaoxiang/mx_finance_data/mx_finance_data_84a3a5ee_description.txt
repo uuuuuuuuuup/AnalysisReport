@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 涪陵榨菜 002507 历年股息 分红 支付率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_84a3a5ee.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_84a3a5ee_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 涪陵榨菜(002507.SZ)分红方案(2021-04-21~

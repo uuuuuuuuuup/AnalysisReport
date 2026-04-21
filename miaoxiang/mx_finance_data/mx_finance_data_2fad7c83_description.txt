@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 格力电器000651 股息率 分红 股息历史 回购
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2fad7c83.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2fad7c83_description.txt
+数据行数: 25
+表数量: 4
+Sheet 列表: 格力电器(000651.SZ)当前的股息率, 格力电器(000651.SZ)的股息率(TTM), 格力电器(000651.SZ)分红方案(2025-04-20~, 格力电器(000651.SZ)股票回购(2020-04-10~

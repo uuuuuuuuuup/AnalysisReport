@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 格力电器 000651 历年股息分红支付率 2019-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a7741bef.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a7741bef_description.txt
+数据行数: 39
+表数量: 6
+Sheet 列表: 格力电器(000651.SZ)的现金分红总额、股息率(报告期), 格力电器(000651.SZ)的年度股利支付率、年度累计每股股, 格力电器(000651.SZ)的股息率(年度)(2026-04, 格力电器(000651.SZ)的股息率(近12个月), 格力电器(000651.SZ)的最新股息率, 格力电器(000651.SZ)分红统计

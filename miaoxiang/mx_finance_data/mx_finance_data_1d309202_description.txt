@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 招商公路001965 近5年分红派息 股息历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1d309202.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1d309202_description.txt
+数据行数: 3
+表数量: 3
+Sheet 列表: 招商公路(001965.SZ)的分红送转, 招商公路(001965.SZ)当前的股息率, 招商公路(001965.SZ)的股息率(TTM)

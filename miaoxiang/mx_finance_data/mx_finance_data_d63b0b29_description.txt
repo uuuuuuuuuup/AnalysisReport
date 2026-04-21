@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 联影医疗 688271 有息负债 银行贷款 债券 定期存款 理财产品
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d63b0b29.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d63b0b29_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 联影医疗(688271.SH)的带息债务

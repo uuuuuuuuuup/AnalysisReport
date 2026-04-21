@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 招商公路001965 市值 股息率 总股本 流通股本 回购
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_08267c31.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_08267c31_description.txt
+数据行数: 24
+表数量: 6
+Sheet 列表: 招商公路(001965.SZ)当前的总市值, 招商公路(001965.SZ)的总市值, 招商公路(001965.SZ)的流通股本、总股本, 招商公路(001965.SZ)当前的股息率, 招商公路(001965.SZ)的股息率(TTM), 招商公路(001965.SZ)股票回购(2025-04-20~

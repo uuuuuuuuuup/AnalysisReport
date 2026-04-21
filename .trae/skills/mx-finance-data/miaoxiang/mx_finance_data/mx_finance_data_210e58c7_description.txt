@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 石头科技 688169 短期借款 长期借款 有息负债 应付债券 2023-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_210e58c7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_210e58c7_description.txt
+数据行数: 2
+表数量: 1
+Sheet 列表: 石头科技(688169.SH)的带息债务、短期借款

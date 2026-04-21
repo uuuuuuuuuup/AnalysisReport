@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 万科A 000002 2021 2022 购买商品接受劳务支付的现金 支付给职工以及为职工支付的现金 支付的各项税费
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_bcce2239.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_bcce2239_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 万科A(000002.SZ)的购买商品、接受劳务支付的现金、支

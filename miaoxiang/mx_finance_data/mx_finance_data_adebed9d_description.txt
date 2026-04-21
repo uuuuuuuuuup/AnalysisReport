@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 东鹏饮料605499 2021年报 2022年报 购买商品接受劳务支付的现金 支付给职工的现金 支付各项税费 经营活动现金流出小计
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_adebed9d.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_adebed9d_description.txt
+数据行数: 4
+表数量: 1
+Sheet 列表: 东鹏饮料(605499.SH)的购买商品、接受劳务支付的现金、

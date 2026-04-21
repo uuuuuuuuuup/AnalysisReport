@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 格力电器 000651 2024 非经常性损益 政府补助 投资收益 公允价值变动
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8a4e278c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8a4e278c_description.txt
+数据行数: 18
+表数量: 6
+Sheet 列表: 格力电器(000651.SZ)的非经常性损益、公允价值变动收益, 格力电器(000651.SZ)政府补助合计金额(2025-06, 格力电器(000651.SZ)政府补助合计金额(2023-12, 格力电器(000651.SZ)政府补助合计金额(2023-06, 格力电器(000651.SZ)投资收益, 格力电器(000651.SZ)投资收益_2

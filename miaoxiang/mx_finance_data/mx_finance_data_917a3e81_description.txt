@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 双汇发展 近5年股息分红历史 每股股利
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_917a3e81.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_917a3e81_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 双汇发展(000895.SZ)的每股股利(税前), 双汇发展(000895.SZ)分红方案(2021-04-20~

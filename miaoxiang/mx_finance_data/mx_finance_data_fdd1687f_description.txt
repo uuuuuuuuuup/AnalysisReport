@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 丽珠集团000513 最新市值 市盈率PE 市净率PB 股息率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fdd1687f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fdd1687f_description.txt
+数据行数: 8
+表数量: 4
+Sheet 列表: 丽珠集团(000513.SZ)当前的总市值、市净率等, 丽珠集团(000513.SZ)的总市值、市净率PB等, 丽珠集团(000513.SZ)当前的股息率, 丽珠集团(000513.SZ)的股息率(TTM)

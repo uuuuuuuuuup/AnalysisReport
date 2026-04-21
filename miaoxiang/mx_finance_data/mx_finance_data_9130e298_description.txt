@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 歌尔股份002241 实时股价 市值 股息率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9130e298.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9130e298_description.txt
+数据行数: 3
+表数量: 2
+Sheet 列表: 歌尔股份(002241.SZ)的总市值、收盘价, 歌尔股份(002241.SZ)的股息率(TTM)

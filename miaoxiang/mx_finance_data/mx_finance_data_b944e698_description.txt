@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 丽珠集团000513 近5年现金流量表经营活动现金流出明细
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b944e698.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b944e698_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 丽珠集团(000513.SZ)的经营活动产生的现金流量净额、投

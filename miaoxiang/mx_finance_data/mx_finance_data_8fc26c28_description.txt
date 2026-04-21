@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 东鹏饮料605499 股息率 分红 市值 回购
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8fc26c28.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8fc26c28_description.txt
+数据行数: 26
+表数量: 5
+Sheet 列表: 东鹏饮料(605499.SH)等的总市值, 东鹏饮料(605499.SH)的股息率(TTM), 东鹏饮料(605499.SH)分红方案(2025-04-21~, 东鹏饮料(605499.SH)股票回购(2025-04-21~, 东鹏饮料(09980.HK)分红明细(2025-04-21~2

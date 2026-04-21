@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 长安汽车000625 股息率 分红历史 回购 市值 总股本 流通股本
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c1ce91fb.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c1ce91fb_description.txt
+数据行数: 27
+表数量: 5
+Sheet 列表: 长安汽车(000625.SZ)的总市值, 长安汽车(000625.SZ)的流通股本、总股本, 长安汽车(000625.SZ)的股息率(TTM), 长安汽车(000625.SZ)分红方案(2025-04-21~, 长安汽车(000625.SZ)股票回购(2025-04-21~

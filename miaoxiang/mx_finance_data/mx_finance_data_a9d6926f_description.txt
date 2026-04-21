@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 长安汽车000625 主要子公司 控股子公司
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a9d6926f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a9d6926f_description.txt
+数据行数: 104
+表数量: 2
+Sheet 列表: 长安汽车(000625.SZ)控股参股子公司(2025-12-, 长安汽车(000625.SZ)控股参股子公司(2025-06-

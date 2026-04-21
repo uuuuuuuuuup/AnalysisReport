@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 上海机场600009 2020-2021年报 经营活动现金流出明细 购买商品接受劳务支付的现金 支付给职工及为职工支付的现金 支付的各项税费
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_675b1bb7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_675b1bb7_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 上海机场(600009.SH)的购买商品、接受劳务支付的现金、

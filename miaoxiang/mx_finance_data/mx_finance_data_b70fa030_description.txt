@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 石头科技688169 股息率 分红历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b70fa030.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b70fa030_description.txt
+数据行数: 24
+表数量: 3
+Sheet 列表: 石头科技(688169.SH)的股息率(TTM), 石头科技(688169.SH)分红方案(2025-04-21~, 石头科技(688169.SH)股票回购(2025-04-21~

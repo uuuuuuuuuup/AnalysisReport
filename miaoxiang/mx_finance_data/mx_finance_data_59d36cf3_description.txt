@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 索菲亚002572 最新股价 市值 股息率 分红历史 回购
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_59d36cf3.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_59d36cf3_description.txt
+数据行数: 25
+表数量: 6
+Sheet 列表: 索菲亚(002572.SZ)的分红送转, 索菲亚(002572.SZ)当前的总市值、最新价, 索菲亚(002572.SZ)的总市值、收盘价, 索菲亚(002572.SZ)当前的股息率, 索菲亚(002572.SZ)的股息率(TTM), 索菲亚(002572.SZ)股票回购(2015-06-27~2

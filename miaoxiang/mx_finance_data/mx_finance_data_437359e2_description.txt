@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 上港集团600018 十大股东 持股比例 控股股东
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_437359e2.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_437359e2_description.txt
+数据行数: 2
+表数量: 2
+Sheet 列表: 上港集团(600018.SH)的大股东名称, 上港集团(600018.SH)的控股股东名称

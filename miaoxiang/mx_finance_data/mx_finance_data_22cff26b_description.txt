@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 双汇发展 000895 历年股息 分红 支付率 2019-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_22cff26b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_22cff26b_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 双汇发展(000895.SZ)分红方案(2019-01-01~

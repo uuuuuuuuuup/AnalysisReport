@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 上港集团600018 2021年2022年 现金流量表 购买商品接受劳务支付的现金 支付给职工支付的现金 支付各项税费
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_68fcca32.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_68fcca32_description.txt
+数据行数: 8
+表数量: 1
+Sheet 列表: 上港集团(600018.SH)的购买商品、接受劳务支付的现金、

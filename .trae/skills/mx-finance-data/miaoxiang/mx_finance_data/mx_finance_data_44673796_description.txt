@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 上海机场600009 实时股价 市值 股息率 股息历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_44673796.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_44673796_description.txt
+数据行数: 9
+表数量: 4
+Sheet 列表: 上海机场(600009.SH)的总市值、收盘价, 上海机场(600009.SH)的股息率(TTM), 上海机场(600009.SH)股份回购实施明细(2025-04, 上海机场(600009.SH)分红方案(2025-04-21~

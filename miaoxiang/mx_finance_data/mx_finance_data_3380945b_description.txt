@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 石头科技688169 现金流量表 经营活动 购买商品接受劳务支付的现金 支付给职工及为职工支付的现金 支付的各项税费 近5年
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3380945b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3380945b_description.txt
+数据行数: 8
+表数量: 1
+Sheet 列表: 石头科技(688169.SH)的购买商品、接受劳务支付的现金、

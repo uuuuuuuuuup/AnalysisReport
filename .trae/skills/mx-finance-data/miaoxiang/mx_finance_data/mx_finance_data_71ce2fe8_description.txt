@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 上海机场600009 分红历史 2019-2025年 每股股利
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_71ce2fe8.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_71ce2fe8_description.txt
+数据行数: 2
+表数量: 1
+Sheet 列表: 上海机场(600009.SH)的每股股利(税后)、每股股利(税

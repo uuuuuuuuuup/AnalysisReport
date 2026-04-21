@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 白云山600332 子公司 控股公司 主要子公司
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7043d96b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7043d96b_description.txt
+数据行数: 427
+表数量: 3
+Sheet 列表: 白云山(600332.SH)控股参股子公司(2025-12-3, 白云山(600332.SH)控股参股子公司(2025-06-3, 白云山(00874.HK)控股参股子公司(2024-12-31

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 石头科技688169 子公司 控股公司 主要子公司
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_f35786a1.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_f35786a1_description.txt
+数据行数: 53
+表数量: 1
+Sheet 列表: 石头科技(688169.SH)控股参股子公司(2025-06-

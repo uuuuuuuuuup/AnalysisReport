@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海尔智家 600690 非经常性损益明细 2023-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_3b56f3fd.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_3b56f3fd_description.txt
+数据行数: 5
+表数量: 2
+Sheet 列表: 海尔智家(600690.SH)的非经常性损益、非经常性损益项目, 海尔智家(06690.HK)(最新年结日12-31)的非经常项

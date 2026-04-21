@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 美的集团000333 股息率 股息历史 分红 回购
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_cc4245da.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_cc4245da_description.txt
+数据行数: 37
+表数量: 6
+Sheet 列表: 美的集团(000333.SZ)的分红送转, 美的集团(000333.SZ)等当前的股息率, 美的集团(000333.SZ)的股息率(TTM), 美的集团(00300.HK)的回购日期、回购数量等, 美的集团(000333.SZ)股票回购(2025-04-20~, 美的集团(00300.HK)分红明细(2025-04-20~2

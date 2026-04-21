@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 富安娜002327 股息率 分红派息历史 回购历史 市值 总股本 流通股本
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_6943e738.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_6943e738_description.txt
+数据行数: 17
+表数量: 7
+Sheet 列表: 富安娜(002327.SZ)当前的总市值, 富安娜(002327.SZ)的总市值, 富安娜(002327.SZ)的流通股本、总股本, 富安娜(002327.SZ)当前的股息率, 富安娜(002327.SZ)的股息率(TTM), 富安娜(002327.SZ)股份回购实施明细(2025-04-, 富安娜(002327.SZ)分红方案(2025-04-20~2

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 同仁堂 600085 历年股息分红 支付率 2019 2020 2021 2022 2023 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c3a7d2af.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c3a7d2af_description.txt
+数据行数: 37
+表数量: 6
+Sheet 列表: 同仁堂(600085.SH)的现金分红总额、股息率(报告期)等, 同仁堂(600085.SH)的年度股利支付率、年度累计每股股利, 同仁堂(600085.SH)的股息率(年度)(2026-04-, 同仁堂(600085.SH)的股息率(近12个月), 同仁堂(600085.SH)的最新股息率, 同仁堂(600085.SH)分红统计

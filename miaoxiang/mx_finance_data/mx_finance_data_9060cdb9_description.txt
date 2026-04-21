@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 000568 历年股息分红 2020-2022
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9060cdb9.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9060cdb9_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 泸州老窖(000568.SZ)分红方案(2020-01-01~
