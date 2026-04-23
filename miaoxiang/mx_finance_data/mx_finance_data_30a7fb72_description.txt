@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百润股份 002568 历年股息 分红 支付率 2021-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_30a7fb72.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_30a7fb72_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 百润股份(002568.SZ)分红方案(2021-01-01~

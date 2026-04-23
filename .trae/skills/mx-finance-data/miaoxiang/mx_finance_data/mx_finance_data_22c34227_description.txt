@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 小商品城 600415 历年股息 分红 支付率 2020 2021 2022 2023 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_22c34227.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_22c34227_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 小商品城(600415.SH)分红方案(2020-01-01~

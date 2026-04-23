@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 爱玛科技 603529 近五年分红派息历史 每股股利
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_6c472bca.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_6c472bca_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 爱玛科技(603529.SH)的每股股利(税前), 爱玛科技(603529.SH)分红方案(2021-04-22~

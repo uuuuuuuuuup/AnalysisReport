@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海底捞 06862.HK 财务指标 盈利能力 偿债能力 运营能力 2024 2023
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_de82a151.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_de82a151_description.txt
+数据行数: 21
+表数量: 1
+Sheet 列表: 海底捞(06862.HK)(最新年结日12-31)的流动资产周

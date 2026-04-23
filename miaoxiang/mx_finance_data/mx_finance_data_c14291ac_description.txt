@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 平安银行 近5年股息率 分红总额 回购
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c14291ac.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c14291ac_description.txt
+数据行数: 2
+表数量: 2
+Sheet 列表: 平安银行(000001.SZ)的股息率(TTM), 平安银行(000001.SZ)的区间现金分红金额

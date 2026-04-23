@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海底捞 06862.HK 现金流量表 经营活动现金流出明细
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fc427683.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fc427683_description.txt
+数据行数: 78
+表数量: 2
+Sheet 列表: 海底捞(06862.HK)(最新年结日12-31)的经营活动产, 海底捞(06862.HK)现金流量表_合并报表(调整)_(20
