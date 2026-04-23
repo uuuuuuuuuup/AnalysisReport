@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 小商品城600415 股息历史 分红派息 近5年 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_84d943d9.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_84d943d9_description.txt
+数据行数: 16
+表数量: 2
+Sheet 列表: 小商品城(600415.SH)的分红送转, 小商品城(600415.SH)股票回购(2021-04-22~

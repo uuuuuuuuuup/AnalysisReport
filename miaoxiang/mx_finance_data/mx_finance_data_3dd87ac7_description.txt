@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 老凤祥600612 实时股价 市值 股息率 总股本 流通股本
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3dd87ac7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3dd87ac7_description.txt
+数据行数: 5
+表数量: 3
+Sheet 列表: 老凤祥(600612.SH)的总市值、收盘价, 老凤祥(600612.SH)的流通股本、总股本, 老凤祥(600612.SH)的股息率(TTM)

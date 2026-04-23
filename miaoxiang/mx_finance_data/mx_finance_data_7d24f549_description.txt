@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海底捞 06862.HK 现金流量表 经营活动现金流入小计 经营活动现金流出小计 销售商品提供劳务收到的现金 购买商品接受劳务支付的现金 支付给职工以及为职工支付的现金 支付的各项税费 支付其他与经营活动有关的现金 2023 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7d24f549.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7d24f549_description.txt
+数据行数: 82
+表数量: 2
+Sheet 列表: 海底捞(06862.HK)(最新年结日12-31)的经营活动产, 海底捞(06862.HK)现金流量表_合并报表(调整)_(20

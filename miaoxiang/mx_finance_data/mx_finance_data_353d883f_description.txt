@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 美团-W 03690.HK 近5年资产负债表
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_353d883f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_353d883f_description.txt
+数据行数: 79
+表数量: 2
+Sheet 列表: 美团-W(03690.HK)(最新年结日12-31)的总资产、, 美团-W(03690.HK)资产负债表_合并报表(调整)_(2

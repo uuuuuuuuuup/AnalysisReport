@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海底捞 06862.HK 利润表 近5年 营业收入 营业成本 毛利润 销售费用 管理费用 财务费用 净利润 归母净利润
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ee340148.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ee340148_description.txt
+数据行数: 64
+表数量: 3
+Sheet 列表: 海底捞(06862.HK)(最新年结日12-31)的营业收入、, 海底捞(06862.HK)利润表_合并报表(调整)_(2021, 海底捞(06862.HK)利润表_合并报表(调整)_(20_2

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海底捞 06862.HK 有息负债 银行贷款 借款 2024
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e37a388e.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e37a388e_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 海底捞(06862.HK)(最新年结日12-31)的带息债务

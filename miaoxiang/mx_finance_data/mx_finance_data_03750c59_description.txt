@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海底捞 06862.HK 现金流量表 近3年 经营活动现金流入 经营活动现金流出 经营活动产生的现金流量净额 购买商品接受劳务支付的现金 支付给职工及为职工支付的现金 支付的各项税费 支付利息 投资活动产生的现金流量净额 筹资活动产生的现金流量净额
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_03750c59.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_03750c59_description.txt
+数据行数: 82
+表数量: 2
+Sheet 列表: 海底捞(06862.HK)(最新年结日12-31)的经营活动产, 海底捞(06862.HK)现金流量表_合并报表(调整)_(20

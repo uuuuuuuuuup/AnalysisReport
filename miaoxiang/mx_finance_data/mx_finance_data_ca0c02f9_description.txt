@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海底捞 06862.HK 现金流量表 2021年报 2022年报 经营活动产生的现金流量净额 投资活动产生的现金流量净额 筹资活动产生的现金流量净额 资本性支出
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ca0c02f9.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ca0c02f9_description.txt
+数据行数: 137
+表数量: 3
+Sheet 列表: 海底捞(06862.HK)(最新年结日12-31)的经营活动产, 海底捞(06862.HK)现金流量表_合并报表(调整)_(20, 海底捞(06862.HK)现金流量表_合并报表(调整)_(_2

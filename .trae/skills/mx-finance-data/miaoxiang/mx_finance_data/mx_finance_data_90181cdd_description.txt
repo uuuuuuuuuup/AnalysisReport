@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 重庆百货600729 回购历史 股份回购
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_90181cdd.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_90181cdd_description.txt
+数据行数: 6
+表数量: 1
+Sheet 列表: 重庆百货(600729.SH)股份回购实施明细(2021-04

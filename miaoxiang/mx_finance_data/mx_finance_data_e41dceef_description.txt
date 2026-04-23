@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 豪威集团603501 购买商品接受劳务支付的现金 支付给职工及为职工支付的现金 支付的各项税费 支付利息 近5年
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e41dceef.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e41dceef_description.txt
+数据行数: 4
+表数量: 2
+Sheet 列表: 豪威集团(603501.SH)的购买商品、接受劳务支付的现金、, 豪威集团(00501.HK)(最新年结日12-31)的利息支出

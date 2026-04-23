@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 美团-W 03690.HK 近5年利润表
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_55f2a3af.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_55f2a3af_description.txt
+数据行数: 63
+表数量: 2
+Sheet 列表: 美团-W(03690.HK)(最新年结日12-31)的营业总收, 美团-W(03690.HK)利润表_合并报表(调整)_(202

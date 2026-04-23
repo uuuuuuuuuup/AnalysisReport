@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 兴齐眼药 300573 非经常性损益明细 政府补助 投资收益
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_02828c45.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_02828c45_description.txt
+数据行数: 10
+表数量: 5
+Sheet 列表: 兴齐眼药(300573.SZ)的非经常性损益、非经常性损益项目, 兴齐眼药(300573.SZ)政府补助合计金额(2023-12, 兴齐眼药(300573.SZ)政府补助合计金额(2022-12, 兴齐眼药(300573.SZ)政府补助合计金额(2021-12, 兴齐眼药(300573.SZ)投资收益
