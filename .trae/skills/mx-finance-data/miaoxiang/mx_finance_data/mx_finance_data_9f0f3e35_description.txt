@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 富森美002818实时股价、市值、股息率、股息历史、回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_9f0f3e35.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_9f0f3e35_description.txt
+数据行数: 11
+表数量: 5
+Sheet 列表: 富森美(002818.SZ)当前的总市值、最新价, 富森美(002818.SZ)的总市值、收盘价, 富森美(002818.SZ)当前的股息率, 富森美(002818.SZ)的股息率(TTM), 富森美(002818.SZ)分红方案(2025-04-23~2

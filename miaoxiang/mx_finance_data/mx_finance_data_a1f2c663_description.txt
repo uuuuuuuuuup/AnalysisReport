@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国国贸 600007 公司基本信息、市值、行业分类、主营业务
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a1f2c663.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a1f2c663_description.txt
+数据行数: 11
+表数量: 5
+Sheet 列表: 中国国贸(600007.SH)当前的总市值, 中国国贸(600007.SH)的总市值, 中国国贸(600007.SH)的公司基本信息, 中国国贸(600007.SH)主营构成分析(2025-12-3, 中国国贸(600007.SH)主营构成分析(2025-06-3

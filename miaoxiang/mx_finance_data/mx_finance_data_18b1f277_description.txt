@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 上海银行601229 子公司 上银香港 上银基金 上银理财 尚诚消费金融
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_18b1f277.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_18b1f277_description.txt
+数据行数: 12
+表数量: 2
+Sheet 列表: 上海银行(601229.SH)控股参股子公司(2025-12-, 上海银行(601229.SH)控股参股子公司(2025-06-

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 亚宝药业600351 股息历史 分红历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_66677c6d.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_66677c6d_description.txt
+数据行数: 18
+表数量: 4
+Sheet 列表: 亚宝药业(600351.SH)当前的股息率, 亚宝药业(600351.SH)的股息率(TTM), 亚宝药业(600351.SH)股份回购实施明细(2024-04, 亚宝药业(600351.SH)分红方案(2024-04-23~

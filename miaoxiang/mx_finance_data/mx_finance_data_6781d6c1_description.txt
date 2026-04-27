@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 维力医疗603309 市值 总市值 流通市值 市盈率PE 市净率PB 股息率 分红历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6781d6c1.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6781d6c1_description.txt
+数据行数: 21
+表数量: 5
+Sheet 列表: 维力医疗(603309.SH)的流通市值、股息率(TTM), 维力医疗(603309.SH)的总市值、市净率PB, 维力医疗(603309.SH)的市盈率(PE), 维力医疗(603309.SH)分红方案(2025-04-24~, 维力医疗(603309.SH)股票回购(2025-04-24~

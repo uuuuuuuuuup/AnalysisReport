@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 我乐家居 股息率 股息历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_5fd0ef18.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_5fd0ef18_description.txt
+数据行数: 16
+表数量: 2
+Sheet 列表: 我乐家居(603326.SH)的股息率(TTM), 我乐家居(603326.SH)股票回购(2025-04-24~

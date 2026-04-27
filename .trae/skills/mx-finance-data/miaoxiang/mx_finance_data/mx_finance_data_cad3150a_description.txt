@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 兴业银行 601166 非经常性损益明细 2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_cad3150a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_cad3150a_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 兴业银行(601166.SH)的非经常性损益、非经常性损益项目

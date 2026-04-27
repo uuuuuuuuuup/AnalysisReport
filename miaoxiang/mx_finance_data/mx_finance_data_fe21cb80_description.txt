@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 亚宝药业600351 实时股价 市值 股息率 股息历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fe21cb80.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fe21cb80_description.txt
+数据行数: 11
+表数量: 5
+Sheet 列表: 亚宝药业(600351.SH)当前的总市值、最新价, 亚宝药业(600351.SH)的总市值、收盘价, 亚宝药业(600351.SH)当前的股息率, 亚宝药业(600351.SH)的股息率(TTM), 亚宝药业(600351.SH)分红方案(2026-04-23~

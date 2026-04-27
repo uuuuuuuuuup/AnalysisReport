@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中粮糖业 600737 2024年 2023年 2022年 2021年 2020年 折旧摊销 资本开支 固定资产折旧 无形资产摊销
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_4683b76c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_4683b76c_description.txt
+数据行数: 8
+表数量: 2
+Sheet 列表: 中粮糖业(600737.SH)的购建固定资产、无形资产和其他长, 中粮糖业(600737.SH)固定资产

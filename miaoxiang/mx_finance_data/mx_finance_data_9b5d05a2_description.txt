@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 亚宝药业 600351 银行贷款债券有息负债
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9b5d05a2.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9b5d05a2_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 亚宝药业(600351.SH)的带息债务

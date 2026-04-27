@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 鱼跃医疗 当前总市值 流通市值 总股本
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_54cd158f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_54cd158f_description.txt
+数据行数: 4
+表数量: 3
+Sheet 列表: 鱼跃医疗(002223.SZ)当前的流通市值、总市值, 鱼跃医疗(002223.SZ)的流通市值, 鱼跃医疗(002223.SZ)的总市值

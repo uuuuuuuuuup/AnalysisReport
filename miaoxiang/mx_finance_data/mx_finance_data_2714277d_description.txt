@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 山煤国际股票代码和基本信息
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2714277d.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2714277d_description.txt
+数据行数: 2
+表数量: 2
+Sheet 列表: 山煤国际(600546.SH)的公司基本信息, 山煤国际(600546.SH)的股票代码

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 广汇能源 600256 有息负债 银行贷款 债券 资本化利息 或有负债
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_2799e8b1.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_2799e8b1_description.txt
+数据行数: 2
+表数量: 1
+Sheet 列表: 广汇能源(600256.SH)的带息债务、预计负债

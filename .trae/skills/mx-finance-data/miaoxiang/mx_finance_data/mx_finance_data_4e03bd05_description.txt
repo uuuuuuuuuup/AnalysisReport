@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 威孚高科000581的实时股价、市值、股息率、股息历史、回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_4e03bd05.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_4e03bd05_description.txt
+数据行数: 8
+表数量: 3
+Sheet 列表: 威孚高科(000581.SZ)的总市值、收盘价, 威孚高科(000581.SZ)的股息率(TTM), 威孚高科(000581.SZ)分红方案(2026-04-24~

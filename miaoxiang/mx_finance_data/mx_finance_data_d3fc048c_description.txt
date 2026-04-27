@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖000568最近5年财务报表，包括营业收入、净利润、毛利率、ROE、资产负债率、经营现金流
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d3fc048c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d3fc048c_description.txt
+数据行数: 19
+表数量: 1
+Sheet 列表: 泸州老窖(000568.SZ)的净利润、归属于母公司股东的净利

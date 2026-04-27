@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华荣股份 603855 实时股价 市值 股息率 股息历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_b5a1128f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_b5a1128f_description.txt
+数据行数: 9
+表数量: 4
+Sheet 列表: 华荣股份(603855.SH)的总市值、收盘价, 华荣股份(603855.SH)的股息率(TTM), 华荣股份(603855.SH)股份回购实施明细(2026-04, 华荣股份(603855.SH)分红方案(2026-04-24~

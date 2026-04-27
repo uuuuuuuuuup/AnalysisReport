@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中粮糖业 600737 近5年股息率 分红总额 股息支付率
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_46ba41b4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_46ba41b4_description.txt
+数据行数: 4
+表数量: 4
+Sheet 列表: 中粮糖业(600737.SH)的分红送转, 中粮糖业(600737.SH)当前的股息率, 中粮糖业(600737.SH)的股息率(TTM), 中粮糖业(600737.SH)的年度股利支付率

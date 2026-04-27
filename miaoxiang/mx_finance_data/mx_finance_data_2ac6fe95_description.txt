@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 冀中能源 000937 近五年股息率 分红历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2ac6fe95.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2ac6fe95_description.txt
+数据行数: 7
+表数量: 3
+Sheet 列表: 冀中能源(000937.SZ)当前的股息率, 冀中能源(000937.SZ)的股息率(TTM), 冀中能源(000937.SZ)分红方案(2021-04-23~

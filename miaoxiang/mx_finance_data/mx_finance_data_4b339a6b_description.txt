@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 东方雨虹 002271 2025年受限现金 应收账款坏账计提 关联方交易
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4b339a6b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4b339a6b_description.txt
+数据行数: 45
+表数量: 4
+Sheet 列表: 东方雨虹(002271.SZ)的受限货币资金, 东方雨虹(002271.SZ)关联交易(2025-01-01~, 东方雨虹(002271.SZ)应收账款账龄结构(2025年年报, 东方雨虹(002271.SZ)应收账款账龄结构(2025年中报

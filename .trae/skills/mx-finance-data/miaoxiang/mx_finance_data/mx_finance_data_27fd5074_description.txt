@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海容冷链 股息率 分红历史 回购
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_27fd5074.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_27fd5074_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 海容冷链(603187.SH)的股息率(TTM), 海容冷链(603187.SH)分红方案(2025-04-24~

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国国贸 600007 市盈率PE、市净率PB、历史估值分位、股息率、机构目标价、分析师评级
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_25b85fdc.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_25b85fdc_description.txt
+数据行数: 24
+表数量: 5
+Sheet 列表: 中国国贸(600007.SH)的目标价(综合值)、股息率(TT, 中国国贸(600007.SH)当前的股息率、市销率(TTM)等, 中国国贸(600007.SH)当前的市盈率(TTM)、市盈率(, 中国国贸(600007.SH)的市盈率PE(TTM)、市净率P, 中国国贸(600007.SH)预测投资评级(评级综合值周期：1

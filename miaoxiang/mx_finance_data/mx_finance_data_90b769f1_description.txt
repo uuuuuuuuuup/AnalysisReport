@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 招商银行历年股息分红支付率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_90b769f1.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_90b769f1_description.txt
+数据行数: 17
+表数量: 2
+Sheet 列表: 招商银行(600036.SH)分红方案(2021-04-24~, 招商银行(03968.HK)分红明细(2021-04-24~2

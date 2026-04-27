@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中远海控 601919 股息率 市值 总股本 流通股本 最新
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8422d14e.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8422d14e_description.txt
+数据行数: 13
+表数量: 7
+Sheet 列表: 中远海控(601919.SH)等当前的总市值, 中远海控(601919.SH)等的总市值, 中远海控(601919.SH)等的流通股本、总股本等, 中远海控(601919.SH)等当前的股息率, 中远海控(601919.SH)的股息率(TTM), 中远海控(01919.HK)的流通股本(含限售股), 中远海控(01919.HK)资产负债表_合并报表(调整)_(2

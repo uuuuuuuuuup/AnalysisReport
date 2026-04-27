@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 大商股份 实时股价 市值 股息率 股息历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_8081463b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_8081463b_description.txt
+数据行数: 5
+表数量: 3
+Sheet 列表: 大商股份(600694.SH)的总市值、收盘价, 大商股份(600694.SH)的股息率(TTM), 大商股份(600694.SH)分红方案(2026-04-24~

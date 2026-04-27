@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国国贸 600007 最近三年营业收入、净利润、毛利率、ROE、资产负债率、现金流量
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_0c2c4a62.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_0c2c4a62_description.txt
+数据行数: 27
+表数量: 2
+Sheet 列表: 中国国贸(600007.SH)的净利润、归属于母公司股东的净利, 中国国贸(600007.SH)的预测归属于母公司的净利润中值(

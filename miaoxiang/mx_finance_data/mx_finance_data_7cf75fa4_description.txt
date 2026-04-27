@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 常熟银行601128实时股价、市值、股息率、股息历史、回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7cf75fa4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7cf75fa4_description.txt
+数据行数: 8
+表数量: 3
+Sheet 列表: 常熟银行(601128.SH)的总市值、收盘价, 常熟银行(601128.SH)的股息率(TTM), 常熟银行(601128.SH)分红方案(2025-04-24~

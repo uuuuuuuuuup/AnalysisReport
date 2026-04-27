@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 森马服饰002563 子公司 控股子公司
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_ec7a5778.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_ec7a5778_description.txt
+数据行数: 145
+表数量: 2
+Sheet 列表: 森马服饰(002563.SZ)控股参股子公司(2025-12-, 森马服饰(002563.SZ)控股参股子公司(2025-06-

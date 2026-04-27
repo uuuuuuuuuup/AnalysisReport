@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 鲁阳节能002088 股息率 分红历史 回购历史 市值
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ccb10cc6.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ccb10cc6_description.txt
+数据行数: 9
+表数量: 5
+Sheet 列表: 鲁阳节能(002088.SZ)当前的总市值, 鲁阳节能(002088.SZ)的总市值, 鲁阳节能(002088.SZ)当前的股息率, 鲁阳节能(002088.SZ)的股息率(TTM), 鲁阳节能(002088.SZ)分红方案(2025-04-23~

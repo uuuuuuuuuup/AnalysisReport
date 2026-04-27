@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 分众传媒 近5年股息率 分红总额 回购金额
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_54d010e5.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_54d010e5_description.txt
+数据行数: 11
+表数量: 4
+Sheet 列表: 分众传媒(002027.SZ)当前的股息率, 分众传媒(002027.SZ)的股息率(TTM), 分众传媒(002027.SZ)的区间现金分红金额, 分众传媒(002027.SZ)股票回购(2021-04-27~

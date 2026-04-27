@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 航民股份 600987 分红派息历史 回购股份历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_5c2fe50f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_5c2fe50f_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 航民股份(600987.SH)的已回购金额, 航民股份(600987.SH)分红方案(2021-04-25~
