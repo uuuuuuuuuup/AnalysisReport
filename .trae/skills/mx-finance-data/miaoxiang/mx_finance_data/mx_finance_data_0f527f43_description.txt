@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 森马服饰002563 股息率 股息历史 回购历史 市值
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_0f527f43.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_0f527f43_description.txt
+数据行数: 18
+表数量: 5
+Sheet 列表: 森马服饰(002563.SZ)当前的总市值, 森马服饰(002563.SZ)的总市值, 森马服饰(002563.SZ)当前的股息率, 森马服饰(002563.SZ)的股息率(TTM), 森马服饰(002563.SZ)股票回购(2016-10-20~

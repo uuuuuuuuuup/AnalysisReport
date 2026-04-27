@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 东方雨虹002271股息率股息历史回购历史市值
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2eab5b16.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2eab5b16_description.txt
+数据行数: 4
+表数量: 4
+Sheet 列表: 东方雨虹(002271.SZ)当前的总市值, 东方雨虹(002271.SZ)的总市值, 东方雨虹(002271.SZ)当前的股息率, 东方雨虹(002271.SZ)的股息率(TTM)

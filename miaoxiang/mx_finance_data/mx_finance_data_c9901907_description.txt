@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国国贸 600007 市盈率PE、市净率PB、市销率PS、历史分位数、估值水平
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c9901907.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c9901907_description.txt
+数据行数: 17
+表数量: 4
+Sheet 列表: 中国国贸(600007.SH)的市销率PS、3年市盈率历史百分, 中国国贸(600007.SH)当前的市盈率(TTM)、市盈率(, 中国国贸(600007.SH)当前的市销率(TTM)、市现率(, 中国国贸(600007.SH)的市盈率PE(TTM)、市净率P

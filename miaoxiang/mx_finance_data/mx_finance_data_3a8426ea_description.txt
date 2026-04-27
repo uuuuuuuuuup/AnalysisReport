@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华特达因 000915 非经常性损益明细
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3a8426ea.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3a8426ea_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 华特达因(000915.SZ)的非经常性损益、非经常性损益项目

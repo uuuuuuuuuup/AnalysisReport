@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖000568估值数据，PE、PB、PS、股息率、市值、目标价、机构评级
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ec479606.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ec479606_description.txt
+数据行数: 31
+表数量: 7
+Sheet 列表: 泸州老窖(000568.SZ)当前的总市值、市净率等, 泸州老窖(000568.SZ)的总市值、市盈率PE(TTM)等, 泸州老窖(000568.SZ)当前的股息率、市销率(TTM)等, 泸州老窖(000568.SZ)的股息率(TTM)、3年市盈率历, 泸州老窖(000568.SZ)的市盈率(PE), 泸州老窖(000568.SZ)机构评级统计, 泸州老窖(000568.SZ)预测投资评级(评级综合值周期：1

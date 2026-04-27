@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 鱼跃医疗 近5年股息率 分红总额 每股股利 回购金额
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1c80613d.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1c80613d_description.txt
+数据行数: 6
+表数量: 4
+Sheet 列表: 鱼跃医疗(002223.SZ)的每股股利(税后)、每股股利(税, 鱼跃医疗(002223.SZ)当前的股息率, 鱼跃医疗(002223.SZ)的股息率(TTM), 鱼跃医疗(002223.SZ)股份回购实施明细(2021-04

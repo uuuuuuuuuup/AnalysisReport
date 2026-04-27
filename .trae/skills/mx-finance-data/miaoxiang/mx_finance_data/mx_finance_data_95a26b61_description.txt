@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 富森美002818 子公司数据 主要控股子公司
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_95a26b61.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_95a26b61_description.txt
+数据行数: 39
+表数量: 2
+Sheet 列表: 富森美(002818.SZ)控股参股子公司(2025-12-3, 富森美(002818.SZ)控股参股子公司(2025-06-3

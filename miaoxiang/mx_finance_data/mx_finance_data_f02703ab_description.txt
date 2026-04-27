@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 山煤国际600546受限资金货币资金明细
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_f02703ab.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_f02703ab_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 山煤国际(600546.SH)货币资金(按货币)

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 银都股份 603277 历年分红 股息率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_629c829c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_629c829c_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 银都股份(603277.SH)的股息率(TTM), 银都股份(603277.SH)分红方案(2021-04-25~

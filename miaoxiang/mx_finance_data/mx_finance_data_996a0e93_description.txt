@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 永新股份002014 股息率 分红历史 回购历史 市值
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_996a0e93.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_996a0e93_description.txt
+数据行数: 9
+表数量: 5
+Sheet 列表: 永新股份(002014.SZ)当前的总市值, 永新股份(002014.SZ)的总市值, 永新股份(002014.SZ)当前的股息率, 永新股份(002014.SZ)的股息率(TTM), 永新股份(002014.SZ)分红方案(2025-04-23~

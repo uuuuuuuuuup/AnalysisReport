@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中粮糖业 600737 2024年 2023年 2022年 经营活动现金流出 购买商品支付现金 支付职工现金 支付税费
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_3dffe2ee.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_3dffe2ee_description.txt
+数据行数: 4
+表数量: 1
+Sheet 列表: 中粮糖业(600737.SH)的购买商品、接受劳务支付的现金、

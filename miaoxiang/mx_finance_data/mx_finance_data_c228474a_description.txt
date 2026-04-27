@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海澜之家600398最近一年的日K线数据、历史最高价、历史最低价、52周高低点、成交量、换手率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c228474a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c228474a_description.txt
+数据行数: 35
+表数量: 6
+Sheet 列表: 海澜之家(600398.SH)的历史最低价、历史最低价日等, 海澜之家(600398.SH)的区间涨跌幅、区间换手率等, 海澜之家(600398.SH)的BOLL布林线LOW、BOLL, 海澜之家(600398.SH)的开盘价、收盘价等, 海澜之家(600398.SH)当前的支撑位、压力位, 海澜之家(600398.SH)当前的涨跌幅、5日涨跌幅等

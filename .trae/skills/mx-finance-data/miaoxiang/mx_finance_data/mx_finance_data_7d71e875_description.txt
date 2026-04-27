@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 大商股份 子公司 控股子公司
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_7d71e875.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_7d71e875_description.txt
+数据行数: 168
+表数量: 2
+Sheet 列表: 大商股份(600694.SH)控股参股子公司(2025-12-, 大商股份(600694.SH)控股参股子公司(2025-06-

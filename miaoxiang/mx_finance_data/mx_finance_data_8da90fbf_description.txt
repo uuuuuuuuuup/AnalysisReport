@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海螺水泥600585最近3个月的日K线数据
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8da90fbf.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8da90fbf_description.txt
+数据行数: 40
+表数量: 7
+Sheet 列表: 海螺水泥(600585.SH)的区间涨跌幅、区间换手率等, 海螺水泥(00914.HK)的区间成交量、区间涨跌幅等, 海螺水泥(600585.SH)的BOLL布林线LOW、BOLL, 海螺水泥(600585.SH)的开盘价、收盘价等, 海螺水泥(00914.HK)的开盘价、收盘价等, 海螺水泥(600585.SH)当前的支撑位、压力位, 海螺水泥(600585.SH)等当前的涨跌幅、5日涨跌幅等

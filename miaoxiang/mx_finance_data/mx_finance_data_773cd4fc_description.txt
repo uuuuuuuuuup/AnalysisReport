@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 元祖股份603886最新股价、涨跌幅、市值
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_773cd4fc.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_773cd4fc_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 元祖股份(603886.SH)当前的总市值、最新价等, 元祖股份(603886.SH)的总市值、收盘价等

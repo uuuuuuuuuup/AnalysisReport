@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 元祖股份6038862026年一季度报告营业收入、净利润、扣非净利润、经营现金流
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2dfcfff5.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2dfcfff5_description.txt
+数据行数: 4
+表数量: 1
+Sheet 列表: 元祖股份(603886.SH)的单季度.扣除非经常损益后的净利

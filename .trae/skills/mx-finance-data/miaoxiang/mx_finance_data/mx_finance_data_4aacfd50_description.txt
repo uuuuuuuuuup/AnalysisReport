@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 广汇能源 600256 非经常性损益明细 政府补贴 投资收益
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_4aacfd50.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_4aacfd50_description.txt
+数据行数: 19
+表数量: 6
+Sheet 列表: 广汇能源(600256.SH)的非经常性损益、非经常性损益项目, 广汇能源(600256.SH)政府补助合计金额(2018-06, 广汇能源(600256.SH)政府补助合计金额(2017-06, 广汇能源(600256.SH)政府补助合计金额(2016-12, 广汇能源(600256.SH)投资收益, 广汇能源(600256.SH)投资收益_2

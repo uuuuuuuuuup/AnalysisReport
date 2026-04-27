@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 航民股份 600987 现金流量表 经营活动现金流出 购买商品支付现金 支付职工现金 支付税费 支付利息
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_274e4ec6.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_274e4ec6_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 航民股份(600987.SH)的经营活动产生的现金流量净额、筹

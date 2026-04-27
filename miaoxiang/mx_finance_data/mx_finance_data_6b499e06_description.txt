@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 凌霄泵业 002884 实时股价 市值 股息率 股息历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6b499e06.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6b499e06_description.txt
+数据行数: 8
+表数量: 3
+Sheet 列表: 凌霄泵业(002884.SZ)的总市值、收盘价, 凌霄泵业(002884.SZ)的股息率(TTM), 凌霄泵业(002884.SZ)分红方案(2025-04-24~

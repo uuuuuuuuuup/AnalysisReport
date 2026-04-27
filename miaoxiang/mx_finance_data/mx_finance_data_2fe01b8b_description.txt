@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 冀中能源 000937 现金流量表 经营活动现金流出明细 购买商品支付现金 支付职工薪酬 支付税费 支付利息 近5年
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2fe01b8b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2fe01b8b_description.txt
+数据行数: 8
+表数量: 1
+Sheet 列表: 冀中能源(000937.SZ)的购买商品、接受劳务支付的现金、

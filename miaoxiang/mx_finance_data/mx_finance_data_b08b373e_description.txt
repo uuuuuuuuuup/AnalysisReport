@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国国贸 600007 最近6个月股价走势、日K线、成交量、技术指标
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b08b373e.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b08b373e_description.txt
+数据行数: 73
+表数量: 6
+Sheet 列表: 中国国贸(600007.SH)的区间涨跌幅、区间换手率等, 中国国贸(600007.SH)的BOLL布林线LOW、BOLL, 中国国贸(600007.SH)的开盘价、收盘价等, 中国国贸(600007.SH)当前的超大单净额、超大单流出等, 中国国贸(600007.SH)当前的主力流出(元)、主力流入(, 中国国贸(600007.SH)当前的支撑位、压力位

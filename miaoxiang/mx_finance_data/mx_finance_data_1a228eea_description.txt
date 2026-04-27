@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖000568历史股价走势，近一年K线数据
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1a228eea.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1a228eea_description.txt
+数据行数: 80
+表数量: 7
+Sheet 列表: 泸州老窖(000568.SZ)的区间涨跌幅、区间换手率等, 泸州老窖(000568.SZ)的BOLL布林线LOW、BOLL, 泸州老窖(000568.SZ)的开盘价、收盘价等, 泸州老窖(000568.SZ)当前的超大单净额、超大单流出等, 泸州老窖(000568.SZ)当前的主力流出(元)、主力流入(, 泸州老窖(000568.SZ)当前的支撑位、压力位, 泸州老窖(000568.SZ)的开盘价、收盘价等_2

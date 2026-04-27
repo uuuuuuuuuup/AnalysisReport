@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 海螺水泥600585的PE、PB、PS估值指标及历史分位数
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_62abd2b9.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_62abd2b9_description.txt
+数据行数: 27
+表数量: 8
+Sheet 列表: 海螺水泥(600585.SH)的市销率(PS)、市盈率(PE), 海螺水泥(600585.SH)当前的市盈率(TTM)行业排名、, 海螺水泥(600585.SH)当前的市销率(TTM)、市现率(, 海螺水泥(600585.SH)的3年市盈率历史百分位、3年市净, 海螺水泥(00914.HK)的3年市盈率百分位、3年市销率分位, 海螺水泥(600585.SH)的市盈率PE(TTM)、市净率P, 海螺水泥(00914.HK)的市净率PB, 海螺水泥(00914.HK)的市销率(PS)(2026-04-

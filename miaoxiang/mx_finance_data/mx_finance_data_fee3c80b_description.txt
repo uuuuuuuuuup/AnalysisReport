@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 大商股份 600694 历年分红股息支付率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fee3c80b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fee3c80b_description.txt
+数据行数: 6
+表数量: 2
+Sheet 列表: 大商股份(600694.SH)的股息率(TTM), 大商股份(600694.SH)分红方案(2021-04-25~

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 三星电气 601567 现金流量表 经营活动现金流出明细 购买商品支付现金 支付职工现金 支付税费 支付利息 近5年
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_a099a4d2.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_a099a4d2_description.txt
+数据行数: 8
+表数量: 1
+Sheet 列表: 三星电气(601567.SH)的购买商品、接受劳务支付的现金、
