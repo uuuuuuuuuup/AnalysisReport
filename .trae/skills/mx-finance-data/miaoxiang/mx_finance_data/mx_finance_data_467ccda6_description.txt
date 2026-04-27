@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 000915 华特达因 股息历史 分红历史 近5年分红 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_467ccda6.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_467ccda6_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 华特达因(000915.SZ)分红方案(2021-04-23~

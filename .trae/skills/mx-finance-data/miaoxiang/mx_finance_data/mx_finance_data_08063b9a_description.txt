@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 森马服饰 002563 历年股息 分红 支付率 2019-2024
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_08063b9a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_08063b9a_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 森马服饰(002563.SZ)分红方案(2019-01-01~
