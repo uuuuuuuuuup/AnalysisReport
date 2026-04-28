@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国铝业601600的基本面指标，包括市盈率、市净率、ROE、营业收入、净利润
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-search/miaoxiang/mx_finance_data/mx_finance_data_8f8bcefd.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-search/miaoxiang/mx_finance_data/mx_finance_data_8f8bcefd_description.txt
+数据行数: 34
+表数量: 5
+Sheet 列表: 中国铝业(601600.SH)的净利润、归属于母公司股东的净利, 中国铝业(02600.HK)(最新年结日12-31)的净资产收, 中国铝业(601600.SH)的市净率PB、市盈率PE(TTM, 中国铝业(02600.HK)的市净率PB、市盈率PE(TTM), 中国铝业(601600.SH)的预测归属于母公司的净利润中值(

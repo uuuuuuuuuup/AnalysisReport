@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国铝业601600最近3个月的股价走势、成交量、技术指标
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-search/miaoxiang/mx_finance_data/mx_finance_data_83866b80.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-search/miaoxiang/mx_finance_data/mx_finance_data_83866b80_description.txt
+数据行数: 24
+表数量: 3
+Sheet 列表: 中国铝业(601600.SH)的成交量、开盘价等, 中国铝业(601600.SH)的区间涨跌幅、区间换手率等, 中国铝业(601600.SH)的BOLL布林线LOW、BOLL
