@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 长江电力近5年股息率和分红总额
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_863fa1f5.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_863fa1f5_description.txt
+数据行数: 3
+表数量: 3
+Sheet 列表: 长江电力(600900.SH)当前的股息率, 长江电力(600900.SH)的股息率(TTM), 长江电力(600900.SH)的现金分红总额

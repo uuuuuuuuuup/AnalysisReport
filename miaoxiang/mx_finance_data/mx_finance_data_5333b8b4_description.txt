@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 龙佰集团002601近5年折旧摊销、资本开支、股权激励费用
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_5333b8b4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_5333b8b4_description.txt
+数据行数: 23
+表数量: 3
+Sheet 列表: 龙佰集团(002601.SZ)的购建固定资产、无形资产和其他长, 龙佰集团(002601.SZ)股权激励(2021-04-28~, 龙佰集团(002601.SZ)股权激励的业绩考核目标(2021

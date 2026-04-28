@@ -1,0 +1,21 @@
+{
+  "current_price": 16.56,
+  "current_market_cap": 394.4,
+  "rf": 1.77,
+  "threshold": 3.77,
+  "revenue_2025": 259.88,
+  "net_profit_2025": 12.45,
+  "adjusted_net_profit_2025": 11.7,
+  "ocf_2025": 39.66,
+  "fcf_2025": 37.2,
+  "roe_2025": 5.47,
+  "broad_cash": 91.27,
+  "interest_bearing_debt": 123.12,
+  "broad_net_cash": -31.85000000000001,
+  "payout_ratio": 114.29718875502009,
+  "dividend_yield_ttm": 3.354,
+  "dividend_2025": 14.23,
+  "repurchase_2025": 2.336,
+  "owner_earnings_2025": 37.2,
+  "rough_return": 11.372858574256458
+}

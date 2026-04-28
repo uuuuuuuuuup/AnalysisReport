@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 广农糖业000911的基本面指标，包括市盈率、市净率、ROE、营业收入、净利润
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-search/miaoxiang/mx_finance_data/mx_finance_data_6119b32e.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-search/miaoxiang/mx_finance_data/mx_finance_data_6119b32e_description.txt
+数据行数: 17
+表数量: 2
+Sheet 列表: 广农糖业(000911.SZ)的净利润、归属于母公司股东的净利, 广农糖业(000911.SZ)的市净率PB、市盈率PE(TTM
