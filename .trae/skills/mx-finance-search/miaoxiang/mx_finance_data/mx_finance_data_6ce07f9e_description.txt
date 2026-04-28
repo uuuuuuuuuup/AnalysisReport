@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 永和股份605020的基本面指标，包括市盈率、市净率、ROE、营业收入、净利润
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-search/miaoxiang/mx_finance_data/mx_finance_data_6ce07f9e.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-search/miaoxiang/mx_finance_data/mx_finance_data_6ce07f9e_description.txt
+数据行数: 19
+表数量: 3
+Sheet 列表: 永和股份(605020.SH)的净利润、归属于母公司股东的净利, 永和股份(605020.SH)的市净率PB、市盈率PE(TTM, 永和股份(605020.SH)的预测归属于母公司的净利润中值(

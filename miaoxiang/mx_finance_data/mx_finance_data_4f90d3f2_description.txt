@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 龙佰集团002601近5年股息率、分红总额、回购金额、当前市值、总股本
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4f90d3f2.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4f90d3f2_description.txt
+数据行数: 23
+表数量: 6
+Sheet 列表: 龙佰集团(002601.SZ)当前的股息率, 龙佰集团(002601.SZ)的股息率(TTM), 龙佰集团(002601.SZ)的现金分红总额, 龙佰集团(002601.SZ)当前的总市值, 龙佰集团(002601.SZ)的总市值, 龙佰集团(002601.SZ)股票回购(2021-04-28~
