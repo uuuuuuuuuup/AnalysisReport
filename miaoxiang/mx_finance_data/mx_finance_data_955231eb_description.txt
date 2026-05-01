@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华利集团300979 2025年年报 短期借款 长期借款 应付债券 有息负债 递延所得税
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_955231eb.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_955231eb_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 华利集团(300979.SZ)的带息债务、短期借款等

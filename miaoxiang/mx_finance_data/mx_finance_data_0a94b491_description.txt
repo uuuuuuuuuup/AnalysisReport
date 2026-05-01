@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 000568 2025年报 非经常性损益 折旧摊销 资本开支 有息负债
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_0a94b491.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_0a94b491_description.txt
+数据行数: 7
+表数量: 1
+Sheet 列表: 泸州老窖(000568.SZ)的带息债务、购建固定资产、无形资

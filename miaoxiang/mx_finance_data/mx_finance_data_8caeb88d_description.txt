@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 有息负债 银行借款 长期借款 短期借款 应付债券
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8caeb88d.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8caeb88d_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 泸州老窖(000568.SZ)的短期借款、带息债务等

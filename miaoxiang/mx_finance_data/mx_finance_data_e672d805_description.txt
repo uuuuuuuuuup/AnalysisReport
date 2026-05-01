@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 分众传媒002027 2026年一季报货币资金、应收账款、短期借款、经营现金流净额
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e672d805.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e672d805_description.txt
+数据行数: 13
+表数量: 3
+Sheet 列表: 分众传媒(002027.SZ)的短期借款、经营活动产生的现金流, 分众传媒(002027.SZ)应收账款账龄结构(2025年年报, 分众传媒(002027.SZ)货币资金(按货币)

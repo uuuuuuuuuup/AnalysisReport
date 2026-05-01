@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 分众传媒002027 2025年年报折旧与摊销、资本开支、2026年一季报资产负债表货币资金、应收账款、总资产、股东权益
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_f8ba291c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_f8ba291c_description.txt
+数据行数: 11
+表数量: 2
+Sheet 列表: 分众传媒(002027.SZ)的购建固定资产、无形资产和其他长, 分众传媒(002027.SZ)的流动资产合计、固定资产等

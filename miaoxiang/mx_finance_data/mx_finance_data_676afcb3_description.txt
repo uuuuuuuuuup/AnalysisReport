@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 合同负债 非经常性损益 折旧摊销 2021-2025年报
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_676afcb3.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_676afcb3_description.txt
+数据行数: 6
+表数量: 1
+Sheet 列表: 泸州老窖(000568.SZ)的合同负债、非经常性损益等

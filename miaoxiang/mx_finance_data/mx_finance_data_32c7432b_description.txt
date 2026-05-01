@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 折旧摊销 固定资产折旧 无形资产摊销 长期待摊费用摊销
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_32c7432b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_32c7432b_description.txt
+数据行数: 7
+表数量: 2
+Sheet 列表: 泸州老窖(000568.SZ)的长期待摊费用摊销、无形资产摊销, 泸州老窖(000568.SZ)固定资产

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 格力电器 2020-2025年 回购金额 回购股数
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d7eeb31f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d7eeb31f_description.txt
+数据行数: 19
+表数量: 2
+Sheet 列表: 格力电器(000651.SZ)的已回购金额, 格力电器(000651.SZ)股票回购(2020-01-01~

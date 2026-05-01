@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 格力电器2025年报的短期借款、一年内到期的非流动负债、长期借款、交易性金融资产、合同负债
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_46c83190.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_46c83190_description.txt
+数据行数: 14
+表数量: 3
+Sheet 列表: 格力电器(000651.SZ)的合同负债、短期借款等, 格力电器(000651.SZ)一年内到期的非流动负债, 格力电器(000651.SZ)一年内到期的非流动负债_2

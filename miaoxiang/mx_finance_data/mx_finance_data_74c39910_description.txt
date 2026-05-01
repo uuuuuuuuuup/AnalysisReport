@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 2025年报 归属于母公司股东的净利润 少数股东损益 扣除非经常性损益后的净利润
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_74c39910.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_74c39910_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 泸州老窖(000568.SZ)的少数股东损益、归属于母公司股东

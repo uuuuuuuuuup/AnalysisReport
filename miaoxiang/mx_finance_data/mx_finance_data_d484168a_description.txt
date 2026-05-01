@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 000568 2025年报 分红方案 股息 每股股利
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d484168a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d484168a_description.txt
+数据行数: 17
+表数量: 2
+Sheet 列表: 泸州老窖(000568.SZ)的每股股利(税前), 泸州老窖(000568.SZ)分红明细

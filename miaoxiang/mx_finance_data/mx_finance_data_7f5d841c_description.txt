@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 分众传媒002027 2026年一季报营业收入、营业成本、归母净利润、扣非净利润、经营现金流
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7f5d841c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7f5d841c_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 分众传媒(002027.SZ)的单季度.归属母公司股东的净利润

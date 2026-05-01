@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 格力电器 近5年股息率 分红总额 每股股利
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3d560b7d.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3d560b7d_description.txt
+数据行数: 3
+表数量: 3
+Sheet 列表: 格力电器(000651.SZ)的每股股利(税前), 格力电器(000651.SZ)的股息率(TTM), 格力电器(000651.SZ)的年度累计分红总额

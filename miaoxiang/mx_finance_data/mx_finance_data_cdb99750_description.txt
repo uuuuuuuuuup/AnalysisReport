@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 分众传媒002027 2025年年报营业收入、营业成本、归母净利润、扣非净利润、经营现金流、毛利率、净利率、ROE
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_cdb99750.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_cdb99750_description.txt
+数据行数: 22
+表数量: 2
+Sheet 列表: 分众传媒(002027.SZ)的营业成本、净利润_营业总收入(, 分众传媒(002027.SZ)的预测归属于母公司的净利润中值(

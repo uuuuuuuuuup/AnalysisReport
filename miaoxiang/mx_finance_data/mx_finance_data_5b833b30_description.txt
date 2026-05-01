@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 苏垦农发的营业收入同比增长率、销售毛利率、净利润同比增长率，近5年动态市盈率历史分位
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_5b833b30.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_5b833b30_description.txt
+数据行数: 4
+表数量: 2
+Sheet 列表: 苏垦农发(601952.SH)的净利润同比增长率、营业收入同比, 苏垦农发(601952.SH)当前的市盈率(动态)

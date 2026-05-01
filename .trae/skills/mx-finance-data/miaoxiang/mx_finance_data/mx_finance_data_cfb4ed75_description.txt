@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 五粮液 市值 总股本 流通股 52周最高最低
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_cfb4ed75.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_cfb4ed75_description.txt
+数据行数: 8
+表数量: 4
+Sheet 列表: 五粮液(000858.SZ)当前的总市值, 五粮液(000858.SZ)的总市值, 五粮液(000858.SZ)的流通股本、总股本, 五粮液(000858.SZ)的区间最高价、区间最高价日等
