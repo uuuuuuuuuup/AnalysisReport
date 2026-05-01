@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 总股本 流通股 市值
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a310dadf.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a310dadf_description.txt
+数据行数: 3
+表数量: 2
+Sheet 列表: 泸州老窖(000568.SZ)的总市值, 泸州老窖(000568.SZ)的流通股本、总股本

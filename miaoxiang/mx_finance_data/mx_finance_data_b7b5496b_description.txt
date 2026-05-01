@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 云图控股、史丹利、大北农、登海种业、兴发集团近1个月、3个月涨跌幅，最新营收增速、毛利率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b7b5496b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b7b5496b_description.txt
+数据行数: 7
+表数量: 3
+Sheet 列表: 云图控股(002539.SZ)等的区间涨跌幅, 云图控股(002539.SZ)的营业收入同比增长率、销售毛利率, 史丹利(002588.SZ)的营业收入同比增长率、销售毛利率

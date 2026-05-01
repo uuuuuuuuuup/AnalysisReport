@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 分众传媒002027 2025年年报货币资金、应收账款、存货、使用权资产、租赁负债、商誉、递延所得税负债
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1379898f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1379898f_description.txt
+数据行数: 32
+表数量: 4
+Sheet 列表: 分众传媒(002027.SZ)的递延所得税负债、租赁负债等, 分众传媒(002027.SZ)应收账款账龄结构(2025年年报, 分众传媒(002027.SZ)应收账款账龄结构(2025年中报, 分众传媒(002027.SZ)货币资金(按货币)

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 亚钾国际、新洋丰、北大荒、隆平高科、川恒股份最新营收增速、毛利率、净利润增速
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_be59b6d3.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_be59b6d3_description.txt
+数据行数: 22
+表数量: 5
+Sheet 列表: 亚钾国际(000893.SZ)的净利润同比增长率、净利润环比增, 新洋丰(000902.SZ)的净利润同比增长率、净利润环比增长, 北大荒(600598.SH)的净利润同比增长率、净利润环比增长, 隆平高科(000998.SZ)的净利润同比增长率、净利润环比增, 川恒股份(002895.SZ)的净利润同比增长率、净利润环比增

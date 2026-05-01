@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 合同负债 应付账款 预付款项 非经常性损益
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_978749f3.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_978749f3_description.txt
+数据行数: 7
+表数量: 1
+Sheet 列表: 泸州老窖(000568.SZ)的合同负债、非经常性损益等

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 老板电器002508 2021年到2025年 折旧摊销 资本开支 购建固定资产无形资产支付的现金 经营活动现金流出明细 购买商品接受劳务支付现金 支付给职工现金 支付税费 支付利息
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_de8b3472.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_de8b3472_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 老板电器(002508.SZ)的购买商品、接受劳务支付的现金、

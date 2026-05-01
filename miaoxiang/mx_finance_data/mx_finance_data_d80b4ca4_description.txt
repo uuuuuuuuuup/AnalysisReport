@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 泸州老窖 经营活动现金流出明细 购买商品支付现金 支付员工现金 支付税费
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d80b4ca4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d80b4ca4_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 泸州老窖(000568.SZ)的经营活动现金流出小计

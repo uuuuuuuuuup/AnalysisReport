@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华利集团300979 近5年折旧摊销 资本开支 经营活动现金流出明细 购买商品支付劳务 支付员工现金
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9fcc74ff.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9fcc74ff_description.txt
+数据行数: 4
+表数量: 1
+Sheet 列表: 华利集团(300979.SZ)的购建固定资产、无形资产和其他长
