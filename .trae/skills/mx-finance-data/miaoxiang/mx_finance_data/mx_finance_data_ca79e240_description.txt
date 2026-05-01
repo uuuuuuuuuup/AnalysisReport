@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 五粮液 历年股息支付率 归母净利润 扣非净利润 折旧摊销 资本开支
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_ca79e240.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_ca79e240_description.txt
+数据行数: 5
+表数量: 2
+Sheet 列表: 五粮液(000858.SZ)的购建固定资产、无形资产和其他长期, 五粮液(000858.SZ)的年度股利支付率
