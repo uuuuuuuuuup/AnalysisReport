@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国联通600050 近3年现金流量表 经营活动现金流入 经营活动现金流出 购买商品接受劳务支付的现金 支付给职工及为职工支付的现金 支付的各项税费 支付利息
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a2e34b31.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a2e34b31_description.txt
+数据行数: 10
+表数量: 1
+Sheet 列表: 中国联通(600050.SH)的购买商品、接受劳务支付的现金、

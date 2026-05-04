@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 001979 招商蛇口 2021-2023年 营业收入 净利润 毛利率 净利率 ROE 资产负债率 经营活动现金流净额
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d16ebc70.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d16ebc70_description.txt
+数据行数: 19
+表数量: 1
+Sheet 列表: 招商蛇口(001979.SZ)的净利润、归属于母公司股东的净利

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 城投控股 600649 资产负债表 母公司 2025 2024 2023
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_c937d9bc.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_c937d9bc_description.txt
+数据行数: 10
+表数量: 1
+Sheet 列表: 城投控股(600649.SH)的流动资产合计、固定资产等

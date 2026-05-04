@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 001979 招商蛇口 回购历史 股份回购
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_0917a0a4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_0917a0a4_description.txt
+数据行数: 18
+表数量: 1
+Sheet 列表: 招商蛇口(001979.SZ)股票回购(2021-05-02~

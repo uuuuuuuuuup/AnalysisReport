@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 城投控股 600649 历年股息分红支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_aca5d622.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_aca5d622_description.txt
+数据行数: 41
+表数量: 6
+Sheet 列表: 城投控股(600649.SH)的现金分红总额、股息率(报告期), 城投控股(600649.SH)的年度股利支付率、年度累计每股股, 城投控股(600649.SH)的股息率(年度)(2026-05, 城投控股(600649.SH)的股息率(近12个月), 城投控股(600649.SH)的最新股息率, 城投控股(600649.SH)分红统计

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 城投控股600649 2022年 资产负债表 总资产 总负债 股东权益 归属母公司股东权益 流动资产 非流动资产 流动负债 非流动负债 未分配利润
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_48cf4269.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_48cf4269_description.txt
+数据行数: 13
+表数量: 1
+Sheet 列表: 城投控股(600649.SH)的股东权益合计、未分配利润等

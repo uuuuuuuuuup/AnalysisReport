@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国联通 600050 应收账款 坏账准备 存货 限制性现金 2023-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1e08a31b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1e08a31b_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 中国联通(600050.SH)的存货

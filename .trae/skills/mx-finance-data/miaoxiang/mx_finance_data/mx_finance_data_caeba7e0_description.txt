@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 长城汽车601633 历年股息 每股股利 分红支付率 2021-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_caeba7e0.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_caeba7e0_description.txt
+数据行数: 41
+表数量: 4
+Sheet 列表: 长城汽车(601633.SH)的每股股利(税前), 长城汽车(601633.SH)分红明细, 长城汽车(02333.HK)分红明细(2021-01-01~2, 长城汽车-R(82333.HK)分红明细(2021-01-01

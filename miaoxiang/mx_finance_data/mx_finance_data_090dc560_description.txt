@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 巨子生物 02367 月K线 近5年价格
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_090dc560.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_090dc560_description.txt
+数据行数: 5
+表数量: 2
+Sheet 列表: 巨子生物(02367.HK)的区间成交量、区间涨跌幅等, 巨子生物(02367.HK)的开盘价、收盘价

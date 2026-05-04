@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 长安汽车000625 近5年分红派息历史 股息
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_add6adbd.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_add6adbd_description.txt
+数据行数: 17
+表数量: 2
+Sheet 列表: 长安汽车(000625.SZ)的股息率(TTM), 长安汽车(000625.SZ)分红明细

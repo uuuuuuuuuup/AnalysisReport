@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百联股份 600827 经营活动现金流出明细 购买商品接受劳务支付现金 支付职工薪酬 支付税费 支付利息 近5年
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_4e9f7109.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_4e9f7109_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 百联股份(600827.SH)的购买商品、接受劳务支付的现金、

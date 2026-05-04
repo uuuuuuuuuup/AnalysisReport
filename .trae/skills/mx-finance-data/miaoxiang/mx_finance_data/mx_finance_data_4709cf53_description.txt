@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百联股份 600827 历年股息分红支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_4709cf53.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_4709cf53_description.txt
+数据行数: 16
+表数量: 1
+Sheet 列表: 百联股份(600827.SH)分红明细

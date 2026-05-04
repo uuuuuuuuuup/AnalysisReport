@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百联股份 600827 近5年股息率和分红总额 市值 实时股价
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_fb9e1671.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_fb9e1671_description.txt
+数据行数: 19
+表数量: 3
+Sheet 列表: 百联股份(600827.SH)的总市值、收盘价, 百联股份(600827.SH)的股息率(TTM), 百联股份(600827.SH)分红明细

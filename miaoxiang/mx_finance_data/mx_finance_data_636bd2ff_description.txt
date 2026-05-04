@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 城投控股600649 资产负债表 总资产 总负债 股东权益 近5年
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_636bd2ff.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_636bd2ff_description.txt
+数据行数: 12
+表数量: 1
+Sheet 列表: 城投控股(600649.SH)的股东权益合计、负债合计等

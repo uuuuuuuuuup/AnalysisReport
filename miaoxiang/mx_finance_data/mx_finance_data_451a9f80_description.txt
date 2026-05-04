@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 城投控股600649 实时股价 市值 股息率 市净率 市盈率 总股本 流通股本
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_451a9f80.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_451a9f80_description.txt
+数据行数: 7
+表数量: 3
+Sheet 列表: 城投控股(600649.SH)的总市值、市净率PB等, 城投控股(600649.SH)的流通股本、总股本, 城投控股(600649.SH)的股息率(TTM)

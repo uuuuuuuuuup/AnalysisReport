@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华夏幸福600340 近5年分红派息 股息率历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ea8212c2.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ea8212c2_description.txt
+数据行数: 16
+表数量: 1
+Sheet 列表: 华夏幸福(600340.SH)分红明细

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 川仪股份 603100 2023-2025年 应收账款 应收票据 应收款项融资 预付款项 其他应收款 其他流动资产 长期股权投资 在建工程 使用权资产 租赁负债 递延所得税资产 递延所得税负债 预计负债
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_dc06dda0.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_dc06dda0_description.txt
+数据行数: 117
+表数量: 7
+Sheet 列表: 川仪股份(603100.SH)的应收票据及应收账款、递延所得税, 川仪股份(603100.SH)应收账款账龄结构(2025年年报, 川仪股份(603100.SH)应收账款账龄结构(2025年中报, 川仪股份(603100.SH)应收账款账龄结构(2024年年报, 川仪股份(603100.SH)应收账款账龄结构(2024年中报, 川仪股份(603100.SH)应收账款账龄结构(2023年年报, 川仪股份(603100.SH)应收账款账龄结构(2023年中报

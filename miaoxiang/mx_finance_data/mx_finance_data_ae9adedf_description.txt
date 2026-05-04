@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国联通600050 2021年 2022年 总资产 总负债 股东权益 货币资金 固定资产 在建工程
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ae9adedf.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ae9adedf_description.txt
+数据行数: 18
+表数量: 5
+Sheet 列表: 中国联通(600050.SH)的股东权益合计、资产总计等, 中国联通(600050.SH)固定资产, 中国联通(600050.SH)固定资产_2, 中国联通(600050.SH)货币资金(按货币), 中国联通(600050.SH)货币资金(按货币)_2

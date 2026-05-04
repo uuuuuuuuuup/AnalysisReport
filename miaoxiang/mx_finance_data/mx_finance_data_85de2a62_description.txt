@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华夏幸福600340 近5年 购买商品接受劳务支付的现金 支付给职工以及为职工支付的现金 支付的各项税费 分配股利利润或偿付利息支付的现金
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_85de2a62.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_85de2a62_description.txt
+数据行数: 4
+表数量: 1
+Sheet 列表: 华夏幸福(600340.SH)的购买商品、接受劳务支付的现金、
