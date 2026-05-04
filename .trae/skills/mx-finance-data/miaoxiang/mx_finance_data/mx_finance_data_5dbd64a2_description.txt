@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 城投控股 600649 货币资金 应收账款 存货 短期借款 长期借款 应付债券 2023-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_5dbd64a2.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_5dbd64a2_description.txt
+数据行数: 80
+表数量: 8
+Sheet 列表: 城投控股(600649.SH)的短期借款、应付债券等, 城投控股(600649.SH)应收账款账龄结构(2025年年报, 城投控股(600649.SH)应收账款账龄结构(2025年中报, 城投控股(600649.SH)应收账款账龄结构(2024年年报, 城投控股(600649.SH)应收账款账龄结构(2024年中报, 城投控股(600649.SH)应收账款账龄结构(2023年年报, 城投控股(600649.SH)应收账款账龄结构(2023年中报, 城投控股(600649.SH)货币资金(按货币)

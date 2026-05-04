@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 巨子生物 02367 2025 资产负债 详细 货币资金 应收账款 存货 固定资产 无形资产 商誉 短期借款 应付账款
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_10132a23.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_10132a23_description.txt
+数据行数: 73
+表数量: 3
+Sheet 列表: 巨子生物(02367.HK)(最新年结日12-31)的总资产、, 巨子生物(02367.HK)资产负债表_合并报表(调整)_(2, 巨子生物(02367.HK)资产负债表_合并报表(调整)__2

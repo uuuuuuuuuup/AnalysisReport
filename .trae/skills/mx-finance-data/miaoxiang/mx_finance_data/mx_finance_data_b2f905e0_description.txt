@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百联股份 600827 2025年资产负债表 母公司 资产明细 负债明细
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_b2f905e0.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_b2f905e0_description.txt
+数据行数: 10
+表数量: 1
+Sheet 列表: 百联股份(600827.SH)的流动资产合计、固定资产等
