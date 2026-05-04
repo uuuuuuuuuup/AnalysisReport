@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华夏幸福 600340 资产负债表 2025 总资产 总负债 净资产 货币资金 应收账款 存货
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4e95f7d8.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4e95f7d8_description.txt
+数据行数: 55
+表数量: 4
+Sheet 列表: 华夏幸福(600340.SH)的存货、负债合计等, 华夏幸福(600340.SH)应收账款账龄结构(2025年年报, 华夏幸福(600340.SH)应收账款账龄结构(2025年中报, 华夏幸福(600340.SH)货币资金(按货币)

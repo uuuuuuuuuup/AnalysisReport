@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 山西汾酒 600809 最新股价 市值 股息率
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_13a0e683.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_13a0e683_description.txt
+数据行数: 3
+表数量: 2
+Sheet 列表: 山西汾酒(600809.SH)的总市值、收盘价, 山西汾酒(600809.SH)的股息率(TTM)

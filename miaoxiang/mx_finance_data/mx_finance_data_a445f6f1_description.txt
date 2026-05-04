@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 鱼跃医疗 002223 最新股价 市值 股息率 市盈率 市净率 总股本 流通股本
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a445f6f1.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a445f6f1_description.txt
+数据行数: 7
+表数量: 3
+Sheet 列表: 鱼跃医疗(002223.SZ)的总市值、市净率PB等, 鱼跃医疗(002223.SZ)的流通股本、总股本, 鱼跃医疗(002223.SZ)的股息率(TTM)

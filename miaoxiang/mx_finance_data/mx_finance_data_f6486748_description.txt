@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 鱼跃医疗 002223 主要控股子公司 参股公司
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_f6486748.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_f6486748_description.txt
+数据行数: 107
+表数量: 2
+Sheet 列表: 鱼跃医疗(002223.SZ)控股参股子公司(2025-12-, 鱼跃医疗(002223.SZ)控股参股子公司(2025-06-

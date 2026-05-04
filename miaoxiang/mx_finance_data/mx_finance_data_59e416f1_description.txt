@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华夏幸福 600340 2025 应收账款 合同资产 受限现金 货币资金
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_59e416f1.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_59e416f1_description.txt
+数据行数: 45
+表数量: 4
+Sheet 列表: 华夏幸福(600340.SH)的受限货币资金、合同资产, 华夏幸福(600340.SH)应收账款账龄结构(2025年年报, 华夏幸福(600340.SH)应收账款账龄结构(2025年中报, 华夏幸福(600340.SH)货币资金(按货币)

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国联通600050 近5年分红 每股股利 股利支付率 回购
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e5e56ef9.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e5e56ef9_description.txt
+数据行数: 35
+表数量: 4
+Sheet 列表: 中国联通(600050.SH)的每股股利(税前), 中国联通(600050.SH)的年度股利支付率, 中国联通(600050.SH)分红明细, 中国联通(600050.SH)股票回购(2021-05-02~

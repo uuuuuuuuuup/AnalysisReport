@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国联通600050 总市值 流通市值 市盈率 市净率 股息率 每股收益 每股净资产
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2aec965f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_2aec965f_description.txt
+数据行数: 7
+表数量: 3
+Sheet 列表: 中国联通(600050.SH)的每股收益EPS(TTM)、流通, 中国联通(600050.SH)的总市值、市净率PB等, 中国联通(600050.SH)的每股净资产BPS

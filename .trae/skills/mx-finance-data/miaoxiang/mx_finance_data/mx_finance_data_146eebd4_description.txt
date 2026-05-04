@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 巨子生物 02367 2025 营收 净利润 毛利率 净利率 销售费用 管理费用 研发费用 经营性现金流 资本开支 自由现金流
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_146eebd4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_146eebd4_description.txt
+数据行数: 13
+表数量: 2
+Sheet 列表: 巨子生物(02367.HK)(最新年结日12-31)的净利润、, 巨子生物(02367.HK)利润表_合并报表(调整)_(202

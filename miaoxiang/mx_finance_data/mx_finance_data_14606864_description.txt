@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国联通600050 近3年财务指标 ROE净资产收益率 ROA总资产收益率 毛利率 净利率 资产负债率 流动比率 速动比率 应收账款周转率 存货周转率 总资产周转率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_14606864.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_14606864_description.txt
+数据行数: 20
+表数量: 1
+Sheet 列表: 中国联通(600050.SH)的总资产净利率ROA、净资产收益

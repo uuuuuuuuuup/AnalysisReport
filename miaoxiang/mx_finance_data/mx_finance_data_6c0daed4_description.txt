@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 省广集团 002400 历年股息分红支付率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6c0daed4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6c0daed4_description.txt
+数据行数: 16
+表数量: 1
+Sheet 列表: 省广集团(002400.SZ)分红明细

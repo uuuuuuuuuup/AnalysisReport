@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 巨子生物 02367 现金流量表 近5年 经营活动现金流 资本开支 自由现金流
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_5b24311f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_5b24311f_description.txt
+数据行数: 82
+表数量: 2
+Sheet 列表: 巨子生物(02367.HK)(最新年结日12-31)的企业自由, 巨子生物(02367.HK)现金流量表_合并报表(调整)_(2

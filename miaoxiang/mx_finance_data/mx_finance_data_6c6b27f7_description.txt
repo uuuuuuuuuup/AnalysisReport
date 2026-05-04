@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 东鹏饮料605499 最新股价 市值 股息率 市盈率 市净率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6c6b27f7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6c6b27f7_description.txt
+数据行数: 5
+表数量: 2
+Sheet 列表: 东鹏饮料(605499.SH)的总市值、市净率PB等, 东鹏饮料(605499.SH)的股息率(TTM)

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华力创通300045 购买商品接受劳务支付的现金 支付利息 分配股利利润或偿付利息支付的现金 近5年年度数据
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e56dbd32.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e56dbd32_description.txt
+数据行数: 2
+表数量: 1
+Sheet 列表: 华力创通(300045.SZ)的购买商品、接受劳务支付的现金、

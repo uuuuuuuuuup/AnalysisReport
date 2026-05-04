@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华力创通300045 2025年资产负债表 应收账款 存货 固定资产 无形资产 在建工程 货币资金 交易性金融资产 预付款项 其他应收款 长期股权投资 开发支出 递延所得税资产 短期借款 应付票据 应付账款 合同负债 应付职工薪酬 应交税费 长期借款 应付债券 递延收益 股本 资本公积 盈余公积 未分配利润
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_890ddee4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_890ddee4_description.txt
+数据行数: 10
+表数量: 1
+Sheet 列表: 华力创通(300045.SZ)的流动资产合计、固定资产等

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 巨子生物 02367 2024 2025 非经常项目损益 政府补贴 公允价值变动 资产减值 投资收益 权益性投资损益 利息收入 研发费用 股份支付
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_10380c38.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_10380c38_description.txt
+数据行数: 11
+表数量: 5
+Sheet 列表: 巨子生物(02367.HK)(最新年结日12-31)的非经常项, 巨子生物(02367.HK)利润表_合并报表(调整)_(202, 巨子生物(02367.HK)现金流量表_合并报表(调整)_(2, 巨子生物(02367.HK)利润表_合并报表(调整)_(2_2, 巨子生物(02367.HK)现金流量表_合并报表(调整)__2

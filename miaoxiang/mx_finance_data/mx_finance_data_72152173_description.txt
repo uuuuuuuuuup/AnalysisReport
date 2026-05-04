@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 巨子生物 02367 利润表 近5年 营业收入 毛利率 净利润
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_72152173.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_72152173_description.txt
+数据行数: 67
+表数量: 3
+Sheet 列表: 巨子生物(02367.HK)(最新年结日12-31)的销售毛利, 巨子生物(02367.HK)利润表_合并报表(调整)_(202, 巨子生物(02367.HK)利润表_合并报表(调整)_(2_2

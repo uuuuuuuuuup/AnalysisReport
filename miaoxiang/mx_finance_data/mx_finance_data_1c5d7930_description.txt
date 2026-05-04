@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 巨子生物 02367 资产负债表 近5年 现金 应收账款 存货 有息负债
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1c5d7930.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1c5d7930_description.txt
+数据行数: 159
+表数量: 4
+Sheet 列表: 巨子生物(02367.HK)(最新年结日12-31)的带息债务, 巨子生物(02367.HK)资产负债表_合并报表(调整)_(2, 巨子生物(02367.HK)现金流量表_合并报表(调整)_(2, 巨子生物(02367.HK)资产负债表_合并报表(调整)__2

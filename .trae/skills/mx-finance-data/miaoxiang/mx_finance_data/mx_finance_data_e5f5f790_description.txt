@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 招商蛇口 001979 历年股息分红支付率 2021-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_e5f5f790.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_e5f5f790_description.txt
+数据行数: 19
+表数量: 6
+Sheet 列表: 招商蛇口(001979.SZ)的现金分红总额、股息率(报告期), 招商蛇口(001979.SZ)的年度股利支付率、年度累计每股股, 招商蛇口(001979.SZ)的股息率(年度)(2026-04, 招商蛇口(001979.SZ)的股息率(近12个月), 招商蛇口(001979.SZ)的最新股息率, 招商蛇口(001979.SZ)分红统计

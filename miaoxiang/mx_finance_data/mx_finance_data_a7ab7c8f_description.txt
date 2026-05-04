@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 歌尔股份002241 购买商品接受劳务支付的现金 支付给职工以及为职工支付的现金 支付的各项税费 近5年
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a7ab7c8f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a7ab7c8f_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 歌尔股份(002241.SZ)的购买商品、接受劳务支付的现金、
