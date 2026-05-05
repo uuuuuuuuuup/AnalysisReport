@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 苏垦农发 601952 分配股利利润或偿付利息支付的现金 偿付利息支付的现金 近3年
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ee6e5889.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ee6e5889_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 苏垦农发(601952.SH)的分配股利、利润或偿付利息支付的

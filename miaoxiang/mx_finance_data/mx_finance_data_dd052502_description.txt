@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 新媒股份300770 支付利息 利息支出 财务费用明细
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_dd052502.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_dd052502_description.txt
+数据行数: 6
+表数量: 1
+Sheet 列表: 新媒股份(300770.SZ)的财务费用、财务费用明细—合计等

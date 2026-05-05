@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 新媒股份300770 股息历史 分红方案 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a153546d.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a153546d_description.txt
+数据行数: 22
+表数量: 3
+Sheet 列表: 新媒股份(300770.SZ)的股息率(TTM), 新媒股份(300770.SZ)分红明细, 新媒股份(300770.SZ)股份回购实施明细(2024-05

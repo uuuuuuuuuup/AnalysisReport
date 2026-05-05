@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 苏垦农发 601952 历年分红融资情况 分红总额 每股股利 2017-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9abc457c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9abc457c_description.txt
+数据行数: 16
+表数量: 2
+Sheet 列表: 苏垦农发(601952.SH)的每股股利(税前), 苏垦农发(601952.SH)分红明细

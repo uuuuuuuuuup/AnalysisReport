@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 北大荒600598 近5年分红派息 股息 每股股利 分红金额 回购
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_43d00146.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_43d00146_description.txt
+数据行数: 17
+表数量: 2
+Sheet 列表: 北大荒(600598.SH)的股息率(TTM), 北大荒(600598.SH)分红明细

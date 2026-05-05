@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 苏垦农发 601952 近5年分红派息历史 每股股利
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a5a633d1.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a5a633d1_description.txt
+数据行数: 2
+表数量: 1
+Sheet 列表: 苏垦农发(601952.SH)的年度累计每股股利(税后)、年度
