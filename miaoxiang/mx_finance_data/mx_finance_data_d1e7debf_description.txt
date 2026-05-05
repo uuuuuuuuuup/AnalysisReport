@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 苏垦农发 601952 子公司 控股子公司 主要子公司
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d1e7debf.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d1e7debf_description.txt
+数据行数: 54
+表数量: 2
+Sheet 列表: 苏垦农发(601952.SH)控股参股子公司(2025-12-, 苏垦农发(601952.SH)控股参股子公司(2025-06-

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 苏垦农发 601952 政府补助 其他收益 营业外收入 投资收益 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_e0b79faa.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_e0b79faa_description.txt
+数据行数: 28
+表数量: 11
+Sheet 列表: 苏垦农发(601952.SH)的营业外收入、其他收益, 苏垦农发(601952.SH)政府补助合计金额(2019-12, 苏垦农发(601952.SH)政府补助合计金额(2019-06, 苏垦农发(601952.SH)政府补助合计金额(2018-12, 苏垦农发(601952.SH)政府补助合计金额(2019-_2, 苏垦农发(601952.SH)政府补助合计金额(2019-_3, 苏垦农发(601952.SH)政府补助合计金额(2018-_2, 苏垦农发(601952.SH)投资收益, 苏垦农发(601952.SH)投资收益_2, 苏垦农发(601952.SH)投资收益_3, 苏垦农发(601952.SH)投资收益_4

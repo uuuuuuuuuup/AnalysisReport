@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 苏垦农发 601952 母公司资产负债表 资产明细 负债明细 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_b34fdf68.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_b34fdf68_description.txt
+数据行数: 10
+表数量: 1
+Sheet 列表: 苏垦农发(601952.SH)的流动资产合计、固定资产等

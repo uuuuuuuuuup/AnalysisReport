@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 苏垦农发 601952 应收账款 存货 货币资金 交易性金融资产 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_089b302b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_089b302b_description.txt
+数据行数: 52
+表数量: 7
+Sheet 列表: 苏垦农发(601952.SH)的交易性金融资产、存货, 苏垦农发(601952.SH)应收账款账龄结构(2024年年报, 苏垦农发(601952.SH)应收账款账龄结构(2024年中报, 苏垦农发(601952.SH)应收账款账龄结构(2025年年报, 苏垦农发(601952.SH)应收账款账龄结构(2025年中报, 苏垦农发(601952.SH)货币资金(按货币), 苏垦农发(601952.SH)货币资金(按货币)_2

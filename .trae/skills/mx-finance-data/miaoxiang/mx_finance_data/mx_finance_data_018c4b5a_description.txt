@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 苏垦农发 601952 短期借款 长期借款 应付债券 一年内到期非流动负债 租赁负债 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_018c4b5a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_018c4b5a_description.txt
+数据行数: 19
+表数量: 5
+Sheet 列表: 苏垦农发(601952.SH)的短期借款、租赁负债等, 苏垦农发(601952.SH)一年内到期的非流动负债, 苏垦农发(601952.SH)一年内到期的非流动负债_2, 苏垦农发(601952.SH)一年内到期的非流动负债_3, 苏垦农发(601952.SH)一年内到期的非流动负债_4

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 长青集团 002616 母公司资产负债表 2025年报 总资产 总负债 所有者权益
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_24b192f9.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_24b192f9_description.txt
+数据行数: 12
+表数量: 1
+Sheet 列表: 长青集团(002616.SZ)的股东权益合计、负债合计等

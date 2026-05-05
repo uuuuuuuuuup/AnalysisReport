@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 新媒股份300770 子公司 控股子公司
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6264e426.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6264e426_description.txt
+数据行数: 32
+表数量: 2
+Sheet 列表: 新媒股份(300770.SZ)控股参股子公司(2025-12-, 新媒股份(300770.SZ)控股参股子公司(2025-06-

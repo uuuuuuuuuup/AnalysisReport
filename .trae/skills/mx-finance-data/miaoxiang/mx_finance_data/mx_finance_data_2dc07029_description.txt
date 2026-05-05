@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 苏垦农发 601952 定期存款 理财产品 其他流动资产 其他非流动金融资产 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_2dc07029.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_2dc07029_description.txt
+数据行数: 2
+表数量: 1
+Sheet 列表: 苏垦农发(601952.SH)的其他流动资产、其他非流动金融资
