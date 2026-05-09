@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国国航 股息率 市值 市净率 市盈率
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_f1aaad83.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_f1aaad83_description.txt
+数据行数: 9
+表数量: 3
+Sheet 列表: 中国国航(601111.SH)等当前的总市值、市净率等, 中国国航(601111.SH)的总市值、市净率PB等, 中国国航(00753.HK)的总市值、市净率PB等
