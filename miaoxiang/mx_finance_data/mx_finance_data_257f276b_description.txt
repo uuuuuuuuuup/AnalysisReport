@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 南方航空 600029 历年股息分红支付率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_257f276b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_257f276b_description.txt
+数据行数: 56
+表数量: 5
+Sheet 列表: 南方航空(600029.SH)的归属于母公司股东的净利润, 南方航空(600029.SH)的最新股息率, 南方航空(600029.SH)分红统计, 中国南方航空股份(01055.HK)累计分红统计, 中国南方航空股份(01055.HK)历年分红统计

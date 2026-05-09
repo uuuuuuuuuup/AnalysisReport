@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国海洋石油 HK0883 2025年资产负债表 母公司报表 资产明细 负债明细 权益明细
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_53d99158.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_53d99158_description.txt
+数据行数: 95
+表数量: 2
+Sheet 列表: 中国海洋石油(00883.HK)(最新年结日12-31)的总资, 中国海洋石油(00883.HK)资产负债表_合并报表(调整)_

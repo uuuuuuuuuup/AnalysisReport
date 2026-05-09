@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国石化 2023-2025年 折旧 摊销 固定资产折旧 无形资产摊销
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8a77f306.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_8a77f306_description.txt
+数据行数: 4
+表数量: 2
+Sheet 列表: 中国石油化工股份(00386.HK)(最新年结日12-31)的, 中国石油化工股份(00386.HK)资产负债表_合并报表(调整

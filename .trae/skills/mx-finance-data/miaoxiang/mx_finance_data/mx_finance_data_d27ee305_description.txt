@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: HK0883 中国海洋石油 2025年年报 现金流量表 购买商品接受劳务支付的现金 支付给职工及为职工支付的现金 支付的各项税费 支付利息
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_d27ee305.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_d27ee305_description.txt
+数据行数: 73
+表数量: 2
+Sheet 列表: 中国海洋石油(00883.HK)(最新年结日12-31)的经营, 中国海洋石油(00883.HK)现金流量表_合并报表(调整)_

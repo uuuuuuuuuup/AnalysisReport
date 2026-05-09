@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国神华 601088.SH 2025年年报 利润表 资产负债表 现金流量表 财务指标
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_bb74501b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_bb74501b_description.txt
+数据行数: 255
+表数量: 5
+Sheet 列表: 中国神华(01088.HK)(最新年结日12-31)的营业总收, 中国神华(601088.SH)的流动资产合计、固定资产等, 中国神华(01088.HK)资产负债表_合并报表(调整)_(2, 中国神华(01088.HK)利润表_合并报表(调整)_(202, 中国神华(01088.HK)现金流量表_合并报表(调整)_(2

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国海洋石油 HK0883 2025年非经常性损益 资产处置收益 政府补贴 投资收益 公允价值变动
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6e56a7d7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6e56a7d7_description.txt
+数据行数: 3
+表数量: 2
+Sheet 列表: 中国海洋石油(00883.HK)(最新年结日12-31)的非经, 中国海洋石油(00883.HK)现金流量表_合并报表(调整)_

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国石化 2021-2025年 折旧摊销 资本开支 经营现金流 自由现金流
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1e394f26.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1e394f26_description.txt
+数据行数: 5
+表数量: 2
+Sheet 列表: 中国石化(600028.SH)的企业自由现金流量FCFF(反推, 中国石油化工股份(00386.HK)(最新年结日12-31)的

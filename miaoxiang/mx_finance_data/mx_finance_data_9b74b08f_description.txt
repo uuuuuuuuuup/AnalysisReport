@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华润电力00836.HK 2025年 受限现金 应收账款 坏账准备 财务指标
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9b74b08f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9b74b08f_description.txt
+数据行数: 12
+表数量: 1
+Sheet 列表: 华润电力(00836.HK)(最新年结日12-31)的应收账款

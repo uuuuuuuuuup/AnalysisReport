@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国神华 601088 2025年 现金流量表 详细版
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ccbce19f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ccbce19f_description.txt
+数据行数: 79
+表数量: 2
+Sheet 列表: 中国神华(601088.SH)等的经营活动产生的现金流量净额、, 中国神华(01088.HK)现金流量表_合并报表(调整)_(2

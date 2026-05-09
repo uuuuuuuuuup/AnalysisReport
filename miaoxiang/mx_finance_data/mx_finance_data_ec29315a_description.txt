@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 南方航空 600029 有息负债 银行贷款 债券 资本化利息
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ec29315a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ec29315a_description.txt
+数据行数: 4
+表数量: 2
+Sheet 列表: 南方航空(600029.SH)的带息债务、财务费用-利息资本化, 中国南方航空股份(01055.HK)(最新年结日12-31)的

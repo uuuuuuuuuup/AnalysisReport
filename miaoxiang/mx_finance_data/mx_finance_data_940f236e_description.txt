@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国海洋石油 HK0883 历年股息 分红 支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_940f236e.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_940f236e_description.txt
+数据行数: 26
+表数量: 2
+Sheet 列表: 中国海洋石油(00883.HK)分红明细(2020-01-01, 中国海油(600938.SH)分红明细

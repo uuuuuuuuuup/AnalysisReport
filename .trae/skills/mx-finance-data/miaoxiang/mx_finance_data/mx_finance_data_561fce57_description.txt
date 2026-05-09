@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 南方航空600029的资产负债表、财务指标、估值指标、股息率、回购历史、上市时间、公司基本信息
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_561fce57.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_561fce57_description.txt
+数据行数: 149
+表数量: 11
+Sheet 列表: 南方航空(600029.SH)等的首发上市日, 南方航空(600029.SH)等的公司基本信息, 南方航空(600029.SH)等当前的市盈率(TTM)行业排名, 南方航空(600029.SH)等当前的市销率(TTM)、市现率, 南方航空(600029.SH)的3年市盈率历史百分位、3年市净, 中国南方航空股份(01055.HK)的3年市盈率百分位、3年市, 南方航空(600029.SH)的市盈率PE(TTM)、市净率P, 中国南方航空股份(01055.HK)的市盈率PE(TTM)、市, 南方航空(600029.SH)的流动资产合计、固定资产等, 中国南方航空股份(01055.HK)(最新年结日12-31)的, 中国南方航空股份(01055.HK)资产负债表_合并报表(调整

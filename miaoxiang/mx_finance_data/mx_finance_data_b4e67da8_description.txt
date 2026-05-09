@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国神华 601088.SH 近5年月线数据 收盘价
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b4e67da8.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b4e67da8_description.txt
+数据行数: 3
+表数量: 3
+Sheet 列表: 中国神华(601088.SH)当前的最新价, 中国神华(601088.SH)的收盘价, 中国神华(01088.HK)的区间收盘价

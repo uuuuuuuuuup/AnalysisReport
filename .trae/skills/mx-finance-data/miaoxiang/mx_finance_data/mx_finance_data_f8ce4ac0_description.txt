@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: HK0883 中国海洋石油 近五年股息历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_f8ce4ac0.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_f8ce4ac0_description.txt
+数据行数: 15
+表数量: 2
+Sheet 列表: 中国海洋石油(00883.HK)的回购日期、回购数量等, 中国海洋石油(00883.HK)分红明细(2021-05-07

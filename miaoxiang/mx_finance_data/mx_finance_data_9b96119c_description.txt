@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国东航 600115 受限现金 应收账款 坏账计提
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9b96119c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9b96119c_description.txt
+数据行数: 31
+表数量: 5
+Sheet 列表: 中国东航(600115.SH)的坏账准备合计, 中国东方航空股份(00670.HK)(最新年结日12-31)的, 中国东航(600115.SH)应收账款账龄结构(2025年年报, 中国东航(600115.SH)应收账款账龄结构(2025年中报, 中国东方航空股份(00670.HK)资产负债表_合并报表(调整

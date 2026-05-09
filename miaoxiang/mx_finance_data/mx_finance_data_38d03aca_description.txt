@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国海洋石油 HK0883 2025年有息负债 银行贷款 债券 关联方借款 资本化利息 或有负债
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_38d03aca.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_38d03aca_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 中国海洋石油(00883.HK)(最新年结日12-31)的带息

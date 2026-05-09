@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国石化 600028 有息负债 银行贷款 债券 关联方借款 2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_51fd1989.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_51fd1989_description.txt
+数据行数: 97
+表数量: 2
+Sheet 列表: 中国石化(600028.SH)等的带息债务、向关联方提供资金余, 中国石油化工股份(00386.HK)资产负债表_合并报表(调整

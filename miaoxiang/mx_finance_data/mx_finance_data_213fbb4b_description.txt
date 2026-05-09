@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国神华 601088 2025年 财务指标 应收账款周转率 坏账计提比例
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_213fbb4b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_213fbb4b_description.txt
+数据行数: 15
+表数量: 1
+Sheet 列表: 中国神华(601088.SH)等的应收账款周转率(含应收票据)

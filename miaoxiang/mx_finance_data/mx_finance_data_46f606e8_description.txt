@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国海洋石油 HK0883 2025年财务指标 受限现金 应收账款周转率 坏账计提比例 关联方交易 定期存款
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_46f606e8.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_46f606e8_description.txt
+数据行数: 13
+表数量: 1
+Sheet 列表: 中国海洋石油(00883.HK)(最新年结日12-31)的应收

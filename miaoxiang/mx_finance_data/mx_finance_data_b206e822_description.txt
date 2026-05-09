@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国神华 601088 2025年 资产负债表 母公司单体报表
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b206e822.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_b206e822_description.txt
+数据行数: 85
+表数量: 2
+Sheet 列表: 中国神华(601088.SH)等的流动资产合计、固定资产等, 中国神华(01088.HK)资产负债表_合并报表(调整)_(2

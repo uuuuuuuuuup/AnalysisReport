@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 华润电力00836.HK 历年股息分红支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4f07453f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4f07453f_description.txt
+数据行数: 30
+表数量: 2
+Sheet 列表: 华润电力(00836.HK)累计分红统计, 华润电力(00836.HK)历年分红统计

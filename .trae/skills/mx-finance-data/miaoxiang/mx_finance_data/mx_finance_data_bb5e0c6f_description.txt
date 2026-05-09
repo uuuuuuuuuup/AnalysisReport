@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国石化 600028 历年股息 分红 支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_bb5e0c6f.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_bb5e0c6f_description.txt
+数据行数: 28
+表数量: 2
+Sheet 列表: 中国石化(600028.SH)分红明细, 中国石油化工股份(00386.HK)分红明细(2020-01-

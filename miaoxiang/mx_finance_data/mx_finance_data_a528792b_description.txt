@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国移动00941.HK 财务指标 应收账款周转 坏账计提 关联方交易 定期存款
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a528792b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a528792b_description.txt
+数据行数: 4
+表数量: 2
+Sheet 列表: 中国移动(00941.HK)(最新年结日12-31)的应收账款, 中国移动(00941.HK)资产负债表_合并报表(调整)_(2

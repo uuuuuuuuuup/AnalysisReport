@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国移动00941.HK 历年股息 分红 支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_853c9b09.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_853c9b09_description.txt
+数据行数: 12
+表数量: 1
+Sheet 列表: 中国移动(00941.HK)分红明细(2020-01-01~2

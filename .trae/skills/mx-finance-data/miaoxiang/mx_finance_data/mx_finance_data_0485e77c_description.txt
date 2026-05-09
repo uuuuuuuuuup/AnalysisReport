@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国国航 股息历史 分红历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_0485e77c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_0485e77c_description.txt
+数据行数: 28
+表数量: 2
+Sheet 列表: 中国国航(601111.SH)分红明细, 中国国航(00753.HK)分红明细(2021-05-07~2

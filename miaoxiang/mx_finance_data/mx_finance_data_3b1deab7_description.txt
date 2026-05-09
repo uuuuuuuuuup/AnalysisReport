@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国神华 601088 历年股息 分红 支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3b1deab7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3b1deab7_description.txt
+数据行数: 39
+表数量: 7
+Sheet 列表: 中国神华(601088.SH)的现金分红总额、股息率(报告期), 中国神华(601088.SH)的年度股利支付率、年度累计每股股, 中国神华(601088.SH)的股息率(年度)(2026-05, 中国神华(601088.SH)的股息率(近12个月), 中国神华(601088.SH)的最新股息率, 中国神华(601088.SH)分红统计, 中国神华(01088.HK)分红明细(2020-01-01~2

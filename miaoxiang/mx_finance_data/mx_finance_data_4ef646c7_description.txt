@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国石化 股息率 分红历史 市值
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4ef646c7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4ef646c7_description.txt
+数据行数: 20
+表数量: 6
+Sheet 列表: 中国石化(600028.SH)等当前的总市值, 中国石化(600028.SH)等的总市值, 中国石化(600028.SH)的分红送转, 中国石化(600028.SH)等当前的股息率, 中国石化(600028.SH)的股息率(TTM), 中国石油化工股份(00386.HK)分红明细(2025-05-

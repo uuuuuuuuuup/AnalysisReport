@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国神华股票代码上市地点
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fc56a4c8.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fc56a4c8_description.txt
+数据行数: 4
+表数量: 2
+Sheet 列表: 中国神华(601088.SH)等的上市地点、股票代码, 中国神华(601088.SH)等当前的证券代码

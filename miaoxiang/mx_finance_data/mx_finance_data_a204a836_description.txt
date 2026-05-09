@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国神华 601088.SH 近5年分红历史 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a204a836.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a204a836_description.txt
+数据行数: 31
+表数量: 3
+Sheet 列表: 中国神华(01088.HK)的回购日期、回购数量等, 中国神华(601088.SH)分红明细, 中国神华(01088.HK)分红明细(2021-05-08~2
