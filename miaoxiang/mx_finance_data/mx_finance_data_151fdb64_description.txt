@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 特步国际 01368.HK 回购 股份回购 回购金额
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_151fdb64.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_151fdb64_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 特步国际(01368.HK)的回购日期、回购数量等

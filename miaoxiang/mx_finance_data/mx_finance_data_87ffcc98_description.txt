@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国飞鹤 06186.HK 母公司资产负债表 资产明细 负债明细 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_87ffcc98.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_87ffcc98_description.txt
+数据行数: 124
+表数量: 3
+Sheet 列表: 中国飞鹤(06186.HK)(最新年结日12-31)的总资产、, 中国飞鹤(06186.HK)资产负债表_合并报表(调整)_(2, 中国飞鹤(06186.HK)资产负债表_合并报表(调整)__2

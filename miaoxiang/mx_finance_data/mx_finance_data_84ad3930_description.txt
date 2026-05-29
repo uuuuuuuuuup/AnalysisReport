@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 科锐国际300662最近52周的周线K线数据，包括周开盘价、周最高价、周最低价、周收盘价、周成交量、周成交额
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_84ad3930.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_84ad3930_description.txt
+数据行数: 6
+表数量: 1
+Sheet 列表: 科锐国际(300662.SZ)的成交量、成交额等

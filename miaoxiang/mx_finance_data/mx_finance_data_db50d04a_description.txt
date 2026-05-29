@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百胜中国 YUMC 2025年利润表 营业收入 净利润 毛利
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_db50d04a.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_db50d04a_description.txt
+数据行数: 20
+表数量: 1
+Sheet 列表: 百胜中国(YUMC.N)(最新年结日12-31)的毛利、营业收

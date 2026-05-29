@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中海物业 02669.HK 2025年 定期存款 受限银行存款 合同资产 减值损失 金融资产
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_345c75ef.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_345c75ef_description.txt
+数据行数: 2
+表数量: 1
+Sheet 列表: 中海物业(02669.HK)资产负债表_合并报表(调整)_(2

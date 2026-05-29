@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 新铝时代301613最近120个交易日的每日开盘价、最高价、最低价、收盘价、成交量、成交额、涨跌幅
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_49aea377.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_49aea377_description.txt
+数据行数: 7
+表数量: 1
+Sheet 列表: 新铝时代(301613.SZ)的成交量、成交额等

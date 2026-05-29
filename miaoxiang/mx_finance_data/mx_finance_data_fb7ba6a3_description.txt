@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中海物业 02669.HK 历年股息 每股股利 分红支付率 派息
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fb7ba6a3.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fb7ba6a3_description.txt
+数据行数: 12
+表数量: 1
+Sheet 列表: 中海物业(02669.HK)分红明细(2021-05-13~2

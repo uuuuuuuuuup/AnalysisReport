@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中海物业 02669.HK 近5年营业收入 净利润 毛利率 净利率 总资产 净资产 资产负债率 经营活动现金流净额
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6cc54b92.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_6cc54b92_description.txt
+数据行数: 11
+表数量: 2
+Sheet 列表: 中海物业(02669.HK)(最新年结日12-31)的净利润、, 中海物业(02669.HK)利润表_合并报表(调整)_(202

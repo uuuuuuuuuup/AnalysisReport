@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 002557 5月15日 1分钟分时数据
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1bd87569.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_1bd87569_description.txt
+数据行数: 23
+表数量: 3
+Sheet 列表: 洽洽食品(002557.SZ)的区间涨跌幅、区间换手率等, 洽洽食品(002557.SZ)的BOLL布林线LOW、BOLL, 洽洽食品(002557.SZ)的开盘价、收盘价等

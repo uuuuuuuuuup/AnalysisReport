@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百胜中国 YUMC 09987.HK 2025年资产负债表明细 资产 负债 权益
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3d9a658e.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_3d9a658e_description.txt
+数据行数: 71
+表数量: 2
+Sheet 列表: 百胜中国(09987.HK)(最新年结日12-31)的总资产、, 百胜中国(09987.HK)资产负债表_合并报表(调整)_(2

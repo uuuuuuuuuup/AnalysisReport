@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中海物业 02669.HK 2025年年报 资产负债表 总资产 总负债 净资产 流动资产 非流动资产 流动负债 非流动负债 货币资金 应收账款
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a5b2e4c0.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a5b2e4c0_description.txt
+数据行数: 76
+表数量: 2
+Sheet 列表: 中海物业(02669.HK)(最新年结日12-31)的货币资金, 中海物业(02669.HK)资产负债表_合并报表(调整)_(2

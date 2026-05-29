@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 卫龙美味 09985.HK 历年股息 分红 每股股息 股息支付率 2022 2023 2024 2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_88b12b40.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_88b12b40_description.txt
+数据行数: 12
+表数量: 1
+Sheet 列表: 卫龙美味(09985.HK)分红明细(2022-01-01~2

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 金界控股 03918.HK 月线收盘价 近5年
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c4b69310.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c4b69310_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 金界控股(03918.HK)的区间收盘价

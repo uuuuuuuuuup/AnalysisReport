@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百胜中国 09987.HK 港股 最新股价 市值 市盈率 股息率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_01063bad.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_01063bad_description.txt
+数据行数: 8
+表数量: 3
+Sheet 列表: 百胜中国(09987.HK)当前的总市值、最新价等, 百胜中国(09987.HK)的总市值、股息率(TTM)等, 百胜中国(09987.HK)当前的股息率

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中海物业 02669.HK 2023-2025年 营业收入 净利润 毛利 每股盈利 每股股息
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4589fb19.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4589fb19_description.txt
+数据行数: 7
+表数量: 3
+Sheet 列表: 中海物业(02669.HK)的每股收益EPS(TTM), 中海物业(02669.HK)(最新年结日12-31)的净利润、, 中海物业(02669.HK)利润表_合并报表(调整)_(202

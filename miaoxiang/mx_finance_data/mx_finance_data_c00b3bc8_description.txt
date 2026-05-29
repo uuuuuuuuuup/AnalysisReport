@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 神威药业最近三年的资产负债表
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c00b3bc8.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_c00b3bc8_description.txt
+数据行数: 69
+表数量: 2
+Sheet 列表: 神威药业(02877.HK)(最新年结日12-31)的总资产、, 神威药业(02877.HK)资产负债表_合并报表(调整)_(2

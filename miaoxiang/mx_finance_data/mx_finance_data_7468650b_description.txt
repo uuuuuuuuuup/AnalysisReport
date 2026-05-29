@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 金界控股 03918.HK 回购历史
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7468650b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7468650b_description.txt
+数据行数: 3
+表数量: 2
+Sheet 列表: 金界控股(03918.HK)的回购日期、回购数量, 金界控股(03918.HK)的区间回购金额

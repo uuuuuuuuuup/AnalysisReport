@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 特步国际 01368.HK 历年股息 分红 派息 每股股息 股息支付率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7e3d6b0b.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7e3d6b0b_description.txt
+数据行数: 12
+表数量: 1
+Sheet 列表: 特步国际(01368.HK)分红明细(2021-05-22~2

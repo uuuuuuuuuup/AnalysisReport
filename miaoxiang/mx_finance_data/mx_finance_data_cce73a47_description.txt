@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 06049.HK 保利物业 近5年每股股息 分红派息 股息支付率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_cce73a47.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_cce73a47_description.txt
+数据行数: 13
+表数量: 2
+Sheet 列表: 保利物业(06049.HK)当前的股息率, 保利物业(06049.HK)分红明细(2021-05-12~2

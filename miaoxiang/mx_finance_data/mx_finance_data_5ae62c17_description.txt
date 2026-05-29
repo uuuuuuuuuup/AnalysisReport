@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百胜中国 09987.HK 近5年月线收盘价
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_5ae62c17.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_5ae62c17_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 百胜中国(09987.HK)的区间收盘价

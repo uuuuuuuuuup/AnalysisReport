@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百胜中国 YUMC 2021 2022年报 营业收入 净利润 总资产 总负债 股东权益 经营活动现金流净额 毛利润
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7c550369.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_7c550369_description.txt
+数据行数: 8
+表数量: 1
+Sheet 列表: 百胜中国(YUMC.N)(最新年结日12-31)的净利润、归属

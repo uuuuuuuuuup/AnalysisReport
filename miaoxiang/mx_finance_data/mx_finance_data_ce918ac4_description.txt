@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 卫龙美味 09985.HK 股息历史 分红派息 近5年
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ce918ac4.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ce918ac4_description.txt
+数据行数: 13
+表数量: 2
+Sheet 列表: 卫龙美味(09985.HK)当前的股息率, 卫龙美味(09985.HK)分红明细(2021-05-21~2

@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中海物业 02669.HK 近5年每股股利 分红总额 派息比率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_005b6bcf.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_005b6bcf_description.txt
+数据行数: 2
+表数量: 1
+Sheet 列表: 中海物业(02669.HK)的区间每股股利(税前)、区间现金分

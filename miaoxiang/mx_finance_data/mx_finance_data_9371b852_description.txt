@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中海物业 02669.HK 2023-2025年 经营活动现金流 投资活动现金流 筹资活动现金流
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9371b852.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9371b852_description.txt
+数据行数: 3
+表数量: 1
+Sheet 列表: 中海物业(02669.HK)(最新年结日12-31)的筹资活动

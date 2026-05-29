@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百胜中国 YUMC 2025年有息负债 银行贷款 债券 长期借款 短期借款
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ba27a70c.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ba27a70c_description.txt
+数据行数: 1
+表数量: 1
+Sheet 列表: 百胜中国(YUMC.N)(最新年结日12-31)的带息债务

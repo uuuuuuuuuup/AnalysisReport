@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 申洲国际 02313.HK 资产负债表 2021-2025 总资产 流动资产 非流动资产 总负债 流动负债 非流动负债 股东权益
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d66f89dd.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_d66f89dd_description.txt
+数据行数: 80
+表数量: 2
+Sheet 列表: 申洲国际(02313.HK)(最新年结日12-31)的总资产、, 申洲国际(02313.HK)资产负债表_合并报表(调整)_(2

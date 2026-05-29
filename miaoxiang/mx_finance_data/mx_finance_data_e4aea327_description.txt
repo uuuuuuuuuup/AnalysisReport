@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 06049.HK 保利物业 近5年资产负债表数据 总资产 总负债 净资产 货币资金 应收账款 合同负债
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e4aea327.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_e4aea327_description.txt
+数据行数: 71
+表数量: 2
+Sheet 列表: 保利物业(06049.HK)(最新年结日12-31)的货币资金, 保利物业(06049.HK)资产负债表_合并报表(调整)_(2

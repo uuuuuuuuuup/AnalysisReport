@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 爱玛科技 603529 历年股息分红支付率 2020-2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9218cf61.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_9218cf61_description.txt
+数据行数: 13
+表数量: 6
+Sheet 列表: 爱玛科技(603529.SH)的现金分红总额、股息率(报告期), 爱玛科技(603529.SH)的年度股利支付率、年度累计每股股, 爱玛科技(603529.SH)的股息率(年度)(2026-05, 爱玛科技(603529.SH)的股息率(近12个月), 爱玛科技(603529.SH)的最新股息率, 爱玛科技(603529.SH)分红统计

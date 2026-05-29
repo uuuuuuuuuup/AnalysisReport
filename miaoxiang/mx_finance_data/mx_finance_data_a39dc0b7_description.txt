@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百胜中国最新价、涨跌幅、成交量、换手率、市盈率、市净率、MACD、KDJ、RSI、布林带、均线排列、主力资金流向
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a39dc0b7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a39dc0b7_description.txt
+数据行数: 77
+表数量: 6
+Sheet 列表: 百胜中国(YUMC.N)的成交量、市净率PB等, 百胜中国(09987.HK)的成交量、市净率PB等, 百胜中国(YUMC.N)的均线多空头排列看涨看跌、RSI相对强, 百胜中国(09987.HK)的RSI相对强弱指标、BOLL布林, 百胜中国(09987.HK)当前的成交量、市净率等, 百胜中国(09987.HK)当前的主力流出(元)、主力流入(元

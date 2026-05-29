@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 中国水务 00855.HK 资产负债表 2025
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4373b38e.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_4373b38e_description.txt
+数据行数: 82
+表数量: 2
+Sheet 列表: 中国水务(00855.HK)(最新年结日03-31)的总资产、, 中国水务(00855.HK)资产负债表_合并报表(调整)_(2

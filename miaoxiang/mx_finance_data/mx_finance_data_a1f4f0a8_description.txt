@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 06049.HK 保利物业 近5年现金流量表数据 经营活动现金流净额 投资活动现金流净额 筹资活动现金流净额 购买商品接受劳务支付的现金 支付给职工及为职工支付的现金 支付的各项税费
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a1f4f0a8.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_a1f4f0a8_description.txt
+数据行数: 76
+表数量: 2
+Sheet 列表: 保利物业(06049.HK)(最新年结日12-31)的经营活动, 保利物业(06049.HK)现金流量表_合并报表(调整)_(2

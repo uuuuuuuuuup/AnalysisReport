@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 特步国际 01368.HK 最新股价 市值 股息率 市盈率 市净率
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fc7e40d7.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_fc7e40d7_description.txt
+数据行数: 5
+表数量: 1
+Sheet 列表: 特步国际(01368.HK)的总市值、市净率PB等

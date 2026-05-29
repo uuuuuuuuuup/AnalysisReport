@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 百胜中国 YUMC 近5年股息率 每股股利 分红总额 回购金额
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_76d61977.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_76d61977_description.txt
+数据行数: 3
+表数量: 3
+Sheet 列表: 百胜中国(YUMC.N)的股息率(TTM), 百胜中国(YUMC.N)的区间每股股利(税前), 百胜中国(YUMC.N)的回购日期

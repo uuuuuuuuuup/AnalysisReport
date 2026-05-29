@@ -1,0 +1,8 @@
+金融数据查询结果说明
+========================================
+查询内容: 白云山 00874.HK 2025年 资产负债表 母公司报表 资产明细 负债明细 权益明细
+数据文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ecdad48d.xlsx
+描述文件路径: /Users/apple/Documents/分析报告/miaoxiang/mx_finance_data/mx_finance_data_ecdad48d_description.txt
+数据行数: 91
+表数量: 2
+Sheet 列表: 白云山(00874.HK)(最新年结日12-31)的总资产、总, 白云山(00874.HK)资产负债表_合并报表(调整)_(20
