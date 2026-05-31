@@ -1,0 +1,222 @@
+{
+  "update_date": "2026-05-30",
+  "funds": [
+    {
+      "code": "501018",
+      "name": "南方原油LOF",
+      "type": "QDII-LOF",
+      "market": "sh",
+      "notes": ""
+    },
+    {
+      "code": "501021",
+      "name": "香港中小LOF",
+      "type": "QDII-LOF",
+      "market": "sh",
+      "notes": ""
+    },
+    {
+      "code": "501225",
+      "name": "全球芯片LOF",
+      "type": "QDII-LOF",
+      "market": "sh",
+      "notes": ""
+    },
+    {
+      "code": "501300",
+      "name": "美元债LOF",
+      "type": "QDII-LOF",
+      "market": "sh",
+      "notes": ""
+    },
+    {
+      "code": "501312",
+      "name": "海外科技LOF",
+      "type": "QDII-LOF",
+      "market": "sh",
+      "notes": ""
+    },
+    {
+      "code": "501318",
+      "name": "嘉实原油LOF",
+      "type": "QDII-LOF",
+      "market": "sh",
+      "notes": ""
+    },
+    {
+      "code": "501322",
+      "name": "长城全球新能源车LOF",
+      "type": "QDII-LOF",
+      "market": "sh",
+      "notes": ""
+    },
+    {
+      "code": "501332",
+      "name": "银华海外数字经济LOF",
+      "type": "QDII-LOF",
+      "market": "sh",
+      "notes": ""
+    },
+    {
+      "code": "161125",
+      "name": "标普500LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "161130",
+      "name": "纳斯达克100LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "161128",
+      "name": "标普信息科技LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "164705",
+      "name": "恒生指数LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "160924",
+      "name": "大成恒生LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "161831",
+      "name": "银华恒生国企LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "161124",
+      "name": "易方达恒生小型股LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "161116",
+      "name": "易方达黄金LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "160719",
+      "name": "嘉实黄金LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "162719",
+      "name": "石油LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "161129",
+      "name": "原油LOF易方达",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "165513",
+      "name": "中信保诚商品LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "160140",
+      "name": "美国REIT精选LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "160125",
+      "name": "南方香港LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "160644",
+      "name": "港美互联网LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "164824",
+      "name": "工银香港中小LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "160723",
+      "name": "嘉实全球房地产LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "162416",
+      "name": "华宝油气LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "160717",
+      "name": "嘉实恒生中国企业LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "161838",
+      "name": "银华全球核心优选LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "162205",
+      "name": "泰达宏利全球新格局LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "163208",
+      "name": "诺安油气能源LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    },
+    {
+      "code": "160215",
+      "name": "国泰纳斯达克100LOF",
+      "type": "QDII-LOF",
+      "market": "sz",
+      "notes": ""
+    }
+  ]
+}
