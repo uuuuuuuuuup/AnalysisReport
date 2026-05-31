@@ -1,0 +1,551 @@
+{
+  "fetch_date": "2026-05-31",
+  "fetch_time": "10:33:48",
+  "threshold_pct": 3.0,
+  "funds": {
+    "501018": {
+      "code": "501018",
+      "name": "南方原油LOF",
+      "market": "sh",
+      "notes": "",
+      "price": {
+        "current": 1.909,
+        "change_pct": -2.4,
+        "change_amount": -0.047,
+        "volume": 1270805,
+        "turnover": 24288.0
+      },
+      "premium_rate": 5.84,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "501021": {
+      "code": "501021",
+      "name": "香港中小LOF",
+      "market": "sh",
+      "notes": "",
+      "price": {
+        "current": 1.38,
+        "change_pct": 1.69,
+        "change_amount": 0.023,
+        "volume": 1042,
+        "turnover": 14.0
+      },
+      "premium_rate": 0.1,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "501225": {
+      "code": "501225",
+      "name": "全球芯片LOF",
+      "market": "sh",
+      "notes": "",
+      "price": {
+        "current": 4.65,
+        "change_pct": 2.15,
+        "change_amount": 0.098,
+        "volume": 124685,
+        "turnover": 5708.0
+      },
+      "premium_rate": 41.44,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "501300": {
+      "code": "501300",
+      "name": "美元债LOF",
+      "market": "sh",
+      "notes": "",
+      "price": {
+        "current": 0.944,
+        "change_pct": 0.11,
+        "change_amount": 0.001,
+        "volume": 114971,
+        "turnover": 1086.0
+      },
+      "premium_rate": -0.07,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "501312": {
+      "code": "501312",
+      "name": "海外科技LOF",
+      "market": "sh",
+      "notes": "",
+      "price": {
+        "current": 2.476,
+        "change_pct": 4.56,
+        "change_amount": 0.108,
+        "volume": 2270548,
+        "turnover": 56021.0
+      },
+      "premium_rate": 3.76,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "501318": {
+      "code": "501318",
+      "name": "嘉实原油LOF",
+      "market": "sh",
+      "notes": "",
+      "price": null,
+      "premium_rate": null,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": "价格获取失败"
+    },
+    "501322": {
+      "code": "501322",
+      "name": "长城全球新能源车LOF",
+      "market": "sh",
+      "notes": "",
+      "price": null,
+      "premium_rate": null,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": "价格获取失败"
+    },
+    "501332": {
+      "code": "501332",
+      "name": "银华海外数字经济LOF",
+      "market": "sh",
+      "notes": "",
+      "price": null,
+      "premium_rate": null,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": "价格获取失败"
+    },
+    "161125": {
+      "code": "161125",
+      "name": "标普500LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 3.181,
+        "change_pct": 1.4,
+        "change_amount": 0.044,
+        "volume": 47669,
+        "turnover": 1508.0
+      },
+      "premium_rate": 1.67,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "161130": {
+      "code": "161130",
+      "name": "纳斯达克100LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 4.725,
+        "change_pct": 2.29,
+        "change_amount": 0.106,
+        "volume": 97137,
+        "turnover": 4567.0
+      },
+      "premium_rate": 3.43,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "161128": {
+      "code": "161128",
+      "name": "标普信息科技LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 7.038,
+        "change_pct": 2.43,
+        "change_amount": 0.167,
+        "volume": 233386,
+        "turnover": 16345.0
+      },
+      "premium_rate": 4.02,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "164705": {
+      "code": "164705",
+      "name": "恒生指数LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 1.129,
+        "change_pct": 1.16,
+        "change_amount": 0.013,
+        "volume": 6510,
+        "turnover": 73.0
+      },
+      "premium_rate": 0.1,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "160924": {
+      "code": "160924",
+      "name": "大成恒生LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 0.994,
+        "change_pct": 0.91,
+        "change_amount": 0.009,
+        "volume": 5834,
+        "turnover": 58.0
+      },
+      "premium_rate": -0.69,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "161831": {
+      "code": "161831",
+      "name": "银华恒生国企LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 0.727,
+        "change_pct": 0.14,
+        "change_amount": 0.001,
+        "volume": 1402,
+        "turnover": 10.0
+      },
+      "premium_rate": -0.64,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "161124": {
+      "code": "161124",
+      "name": "易方达恒生小型股LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 1.016,
+        "change_pct": 1.91,
+        "change_amount": 0.019,
+        "volume": 101848,
+        "turnover": 1032.0
+      },
+      "premium_rate": -0.58,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "161116": {
+      "code": "161116",
+      "name": "易方达黄金LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 1.678,
+        "change_pct": 2.76,
+        "change_amount": 0.045,
+        "volume": 116342,
+        "turnover": 1945.0
+      },
+      "premium_rate": 0.19,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "160719": {
+      "code": "160719",
+      "name": "嘉实黄金LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 2.013,
+        "change_pct": 2.81,
+        "change_amount": 0.055,
+        "volume": 61713,
+        "turnover": 1237.0
+      },
+      "premium_rate": -0.2,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "162719": {
+      "code": "162719",
+      "name": "石油LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 2.597,
+        "change_pct": -1.29,
+        "change_amount": -0.034,
+        "volume": 216970,
+        "turnover": 5645.0
+      },
+      "premium_rate": -1.87,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "161129": {
+      "code": "161129",
+      "name": "原油LOF易方达",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 1.774,
+        "change_pct": -2.69,
+        "change_amount": -0.049,
+        "volume": 1757403,
+        "turnover": 31213.0
+      },
+      "premium_rate": 3.09,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "165513": {
+      "code": "165513",
+      "name": "中信保诚商品LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 1.063,
+        "change_pct": 2.51,
+        "change_amount": 0.026,
+        "volume": 12276,
+        "turnover": 130.0
+      },
+      "premium_rate": -0.46,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "160140": {
+      "code": "160140",
+      "name": "美国REIT精选LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 1.428,
+        "change_pct": 0.14,
+        "change_amount": 0.002,
+        "volume": 13195,
+        "turnover": 188.0
+      },
+      "premium_rate": 0.78,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "160125": {
+      "code": "160125",
+      "name": "南方香港LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 1.81,
+        "change_pct": 3.37,
+        "change_amount": 0.059,
+        "volume": 18813,
+        "turnover": 339.0
+      },
+      "premium_rate": 0.01,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "160644": {
+      "code": "160644",
+      "name": "港美互联网LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 2.212,
+        "change_pct": -4.78,
+        "change_amount": -0.111,
+        "volume": 9997072,
+        "turnover": 226642.0
+      },
+      "premium_rate": 7.81,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "164824": {
+      "code": "164824",
+      "name": "工银香港中小LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 1.284,
+        "change_pct": 0.86,
+        "change_amount": 0.011,
+        "volume": 222951,
+        "turnover": 2867.0
+      },
+      "premium_rate": -0.83,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "160723": {
+      "code": "160723",
+      "name": "嘉实全球房地产LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 2.108,
+        "change_pct": -2.32,
+        "change_amount": -0.05,
+        "volume": 1136306,
+        "turnover": 23983.0
+      },
+      "premium_rate": 2.44,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "162416": {
+      "code": "162416",
+      "name": "华宝油气LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 0.865,
+        "change_pct": 0.0,
+        "change_amount": 0.0,
+        "volume": 0,
+        "turnover": 0.0
+      },
+      "premium_rate": 0.8641,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "160717": {
+      "code": "160717",
+      "name": "嘉实恒生中国企业LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 0.722,
+        "change_pct": 0.98,
+        "change_amount": 0.007,
+        "volume": 1338,
+        "turnover": 10.0
+      },
+      "premium_rate": -0.17,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "161838": {
+      "code": "161838",
+      "name": "银华全球核心优选LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 1.0,
+        "change_pct": 0.0,
+        "change_amount": 0.0,
+        "volume": 0,
+        "turnover": 0.0
+      },
+      "premium_rate": null,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "162205": {
+      "code": "162205",
+      "name": "泰达宏利全球新格局LOF",
+      "market": "sz",
+      "notes": "",
+      "price": null,
+      "premium_rate": null,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": "价格获取失败"
+    },
+    "163208": {
+      "code": "163208",
+      "name": "诺安油气能源LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 1.271,
+        "change_pct": -1.4,
+        "change_amount": -0.018,
+        "volume": 46322,
+        "turnover": 590.0
+      },
+      "premium_rate": -1.55,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    },
+    "160215": {
+      "code": "160215",
+      "name": "国泰纳斯达克100LOF",
+      "market": "sz",
+      "notes": "",
+      "price": {
+        "current": 3.637,
+        "change_pct": 0.55,
+        "change_amount": 0.02,
+        "volume": 1444,
+        "turnover": 54.0
+      },
+      "premium_rate": -3.04,
+      "kline_5d": [],
+      "money_flow": {},
+      "news": [],
+      "error": null
+    }
+  },
+  "summary": {
+    "total_funds": 31,
+    "above_threshold": 7,
+    "below_threshold": 20,
+    "max_premium": {
+      "code": "501225",
+      "rate": 41.44
+    },
+    "errors": 4
+  }
+}
