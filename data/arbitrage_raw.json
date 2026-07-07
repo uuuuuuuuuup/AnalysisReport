@@ -1,60 +1,110 @@
 {
-  "fetch_date": "2026-05-31",
-  "fetch_time": "10:33:48",
+  "fetch_date": "2026-06-01",
+  "fetch_time": "17:40:28",
   "threshold_pct": 3.0,
   "funds": {
-    "501018": {
-      "code": "501018",
-      "name": "南方原油LOF",
-      "market": "sh",
-      "notes": "",
-      "price": {
-        "current": 1.909,
-        "change_pct": -2.4,
-        "change_amount": -0.047,
-        "volume": 1270805,
-        "turnover": 24288.0
-      },
-      "premium_rate": 5.84,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
-    },
     "501021": {
       "code": "501021",
       "name": "香港中小LOF",
       "market": "sh",
       "notes": "",
       "price": {
-        "current": 1.38,
-        "change_pct": 1.69,
-        "change_amount": 0.023,
-        "volume": 1042,
-        "turnover": 14.0
+        "current": 1.39,
+        "change_pct": 0.72,
+        "change_amount": 0.01,
+        "volume": 1468,
+        "turnover": 20.4002
       },
-      "premium_rate": 0.1,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "501225": {
-      "code": "501225",
-      "name": "全球芯片LOF",
-      "market": "sh",
-      "notes": "",
-      "price": {
-        "current": 4.65,
-        "change_pct": 2.15,
-        "change_amount": 0.098,
-        "volume": 124685,
-        "turnover": 5708.0
+      "premium_rate": 0.83,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "开放申购",
+        "limit_amount": null,
+        "buy_fee_pct": "0.10%",
+        "is_fully_open": true,
+        "is_restricted": false,
+        "is_suspended": false
       },
-      "premium_rate": 41.44,
-      "kline_5d": [],
+      "kline_5d": [
+        {
+          "date": "2026-05-26",
+          "open": 1.377,
+          "close": 1.384,
+          "high": 1.385,
+          "low": 1.361,
+          "volume": 5704,
+          "turnover": 5704.0
+        },
+        {
+          "date": "2026-05-27",
+          "open": 1.386,
+          "close": 1.366,
+          "high": 1.386,
+          "low": 1.362,
+          "volume": 783,
+          "turnover": 783.0
+        },
+        {
+          "date": "2026-05-28",
+          "open": 1.378,
+          "close": 1.357,
+          "high": 1.378,
+          "low": 1.337,
+          "volume": 2198,
+          "turnover": 2198.0
+        },
+        {
+          "date": "2026-05-29",
+          "open": 1.36,
+          "close": 1.38,
+          "high": 1.384,
+          "low": 1.36,
+          "volume": 1042,
+          "turnover": 1042.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 1.385,
+          "close": 1.39,
+          "high": 1.399,
+          "low": 1.38,
+          "volume": 1468,
+          "turnover": 1468.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "501300": {
@@ -64,15 +114,101 @@
       "notes": "",
       "price": {
         "current": 0.944,
-        "change_pct": 0.11,
-        "change_amount": 0.001,
-        "volume": 114971,
-        "turnover": 1086.0
+        "change_pct": 0.0,
+        "change_amount": 0.0,
+        "volume": 110958,
+        "turnover": 1047.7302
       },
       "premium_rate": -0.07,
-      "kline_5d": [],
+      "subscription": {
+        "status_code": "1",
+        "status_text": "限大额 (单日累计购买上限1000.00万元",
+        "limit_amount": "1000.00万元",
+        "buy_fee_pct": "0.08%",
+        "is_fully_open": false,
+        "is_restricted": true,
+        "is_suspended": false
+      },
+      "kline_5d": [
+        {
+          "date": "2026-05-26",
+          "open": 0.946,
+          "close": 0.947,
+          "high": 0.948,
+          "low": 0.945,
+          "volume": 149768,
+          "turnover": 149768.0
+        },
+        {
+          "date": "2026-05-27",
+          "open": 0.947,
+          "close": 0.946,
+          "high": 0.948,
+          "low": 0.942,
+          "volume": 313297,
+          "turnover": 313297.0
+        },
+        {
+          "date": "2026-05-28",
+          "open": 0.946,
+          "close": 0.943,
+          "high": 0.946,
+          "low": 0.942,
+          "volume": 119277,
+          "turnover": 119277.0
+        },
+        {
+          "date": "2026-05-29",
+          "open": 0.944,
+          "close": 0.944,
+          "high": 0.945,
+          "low": 0.943,
+          "volume": 114971,
+          "turnover": 114971.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 0.944,
+          "close": 0.944,
+          "high": 0.945,
+          "low": 0.943,
+          "volume": 110958,
+          "turnover": 110958.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "501312": {
@@ -81,16 +217,102 @@
       "market": "sh",
       "notes": "",
       "price": {
-        "current": 2.476,
-        "change_pct": 4.56,
-        "change_amount": 0.108,
-        "volume": 2270548,
-        "turnover": 56021.0
+        "current": 2.508,
+        "change_pct": 1.29,
+        "change_amount": 0.032,
+        "volume": 1625906,
+        "turnover": 40526.7161
       },
-      "premium_rate": 3.76,
-      "kline_5d": [],
+      "premium_rate": 4.54,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "限大额 (单日累计购买上限5000.00元",
+        "limit_amount": "5000.00元",
+        "buy_fee_pct": "0.12%",
+        "is_fully_open": false,
+        "is_restricted": true,
+        "is_suspended": false
+      },
+      "kline_5d": [
+        {
+          "date": "2026-05-26",
+          "open": 2.298,
+          "close": 2.291,
+          "high": 2.301,
+          "low": 2.281,
+          "volume": 187789,
+          "turnover": 187789.0
+        },
+        {
+          "date": "2026-05-27",
+          "open": 2.326,
+          "close": 2.399,
+          "high": 2.455,
+          "low": 2.323,
+          "volume": 2398238,
+          "turnover": 2398238.0
+        },
+        {
+          "date": "2026-05-28",
+          "open": 2.46,
+          "close": 2.368,
+          "high": 2.474,
+          "low": 2.336,
+          "volume": 1806854,
+          "turnover": 1806854.0
+        },
+        {
+          "date": "2026-05-29",
+          "open": 2.425,
+          "close": 2.476,
+          "high": 2.502,
+          "low": 2.416,
+          "volume": 2270548,
+          "turnover": 2270548.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 2.47,
+          "close": 2.508,
+          "high": 2.524,
+          "low": 2.451,
+          "volume": 1625906,
+          "turnover": 1625906.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "501318": {
@@ -100,6 +322,7 @@
       "notes": "",
       "price": null,
       "premium_rate": null,
+      "subscription": null,
       "kline_5d": [],
       "money_flow": {},
       "news": [],
@@ -112,6 +335,7 @@
       "notes": "",
       "price": null,
       "premium_rate": null,
+      "subscription": null,
       "kline_5d": [],
       "money_flow": {},
       "news": [],
@@ -124,64 +348,11 @@
       "notes": "",
       "price": null,
       "premium_rate": null,
+      "subscription": null,
       "kline_5d": [],
       "money_flow": {},
       "news": [],
       "error": "价格获取失败"
-    },
-    "161125": {
-      "code": "161125",
-      "name": "标普500LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 3.181,
-        "change_pct": 1.4,
-        "change_amount": 0.044,
-        "volume": 47669,
-        "turnover": 1508.0
-      },
-      "premium_rate": 1.67,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "161130": {
-      "code": "161130",
-      "name": "纳斯达克100LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 4.725,
-        "change_pct": 2.29,
-        "change_amount": 0.106,
-        "volume": 97137,
-        "turnover": 4567.0
-      },
-      "premium_rate": 3.43,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "161128": {
-      "code": "161128",
-      "name": "标普信息科技LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 7.038,
-        "change_pct": 2.43,
-        "change_amount": 0.167,
-        "volume": 233386,
-        "turnover": 16345.0
-      },
-      "premium_rate": 4.02,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
     },
     "164705": {
       "code": "164705",
@@ -189,16 +360,102 @@
       "market": "sz",
       "notes": "",
       "price": {
-        "current": 1.129,
-        "change_pct": 1.16,
-        "change_amount": 0.013,
-        "volume": 6510,
-        "turnover": 73.0
+        "current": 1.135,
+        "change_pct": 0.53,
+        "change_amount": 0.006,
+        "volume": 1161,
+        "turnover": 13.1336
       },
-      "premium_rate": 0.1,
-      "kline_5d": [],
+      "premium_rate": 0.63,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "开放申购",
+        "limit_amount": null,
+        "buy_fee_pct": "0.12%",
+        "is_fully_open": true,
+        "is_restricted": false,
+        "is_suspended": false
+      },
+      "kline_5d": [
+        {
+          "date": "2020-11-25",
+          "open": 1.075,
+          "close": 1.071,
+          "high": 1.076,
+          "low": 1.07,
+          "volume": 1183,
+          "turnover": 1183.0
+        },
+        {
+          "date": "2020-11-26",
+          "open": 1.065,
+          "close": 1.066,
+          "high": 1.066,
+          "low": 1.065,
+          "volume": 21,
+          "turnover": 21.0
+        },
+        {
+          "date": "2020-11-27",
+          "open": 1.066,
+          "close": 1.076,
+          "high": 1.076,
+          "low": 1.066,
+          "volume": 1239,
+          "turnover": 1239.0
+        },
+        {
+          "date": "2020-11-30",
+          "open": 1.06,
+          "close": 1.075,
+          "high": 1.082,
+          "low": 1.06,
+          "volume": 411,
+          "turnover": 411.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 1.12,
+          "close": 1.14,
+          "high": 1.14,
+          "low": 1.12,
+          "volume": 1161,
+          "turnover": 1161.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "160924": {
@@ -207,16 +464,102 @@
       "market": "sz",
       "notes": "",
       "price": {
-        "current": 0.994,
+        "current": 1.003,
         "change_pct": 0.91,
         "change_amount": 0.009,
-        "volume": 5834,
-        "turnover": 58.0
+        "volume": 7289,
+        "turnover": 72.8616
       },
-      "premium_rate": -0.69,
-      "kline_5d": [],
+      "premium_rate": 0.21,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "开放申购",
+        "limit_amount": null,
+        "buy_fee_pct": "0.12%",
+        "is_fully_open": true,
+        "is_restricted": false,
+        "is_suspended": false
+      },
+      "kline_5d": [
+        {
+          "date": "2026-05-26",
+          "open": 1.009,
+          "close": 1.013,
+          "high": 1.015,
+          "low": 1.002,
+          "volume": 9019,
+          "turnover": 9019.0
+        },
+        {
+          "date": "2026-05-27",
+          "open": 1.008,
+          "close": 0.999,
+          "high": 1.011,
+          "low": 0.998,
+          "volume": 3995,
+          "turnover": 3995.0
+        },
+        {
+          "date": "2026-05-28",
+          "open": 0.994,
+          "close": 0.985,
+          "high": 1.006,
+          "low": 0.978,
+          "volume": 5268,
+          "turnover": 5268.0
+        },
+        {
+          "date": "2026-05-29",
+          "open": 0.986,
+          "close": 0.994,
+          "high": 0.996,
+          "low": 0.986,
+          "volume": 5834,
+          "turnover": 5834.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 0.993,
+          "close": 1.003,
+          "high": 1.003,
+          "low": 0.987,
+          "volume": 7289,
+          "turnover": 7289.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "161831": {
@@ -225,16 +568,102 @@
       "market": "sz",
       "notes": "",
       "price": {
-        "current": 0.727,
-        "change_pct": 0.14,
-        "change_amount": 0.001,
-        "volume": 1402,
-        "turnover": 10.0
+        "current": 0.735,
+        "change_pct": 1.1,
+        "change_amount": 0.008,
+        "volume": 3411,
+        "turnover": 24.8917
       },
-      "premium_rate": -0.64,
-      "kline_5d": [],
+      "premium_rate": 0.45,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "开放申购",
+        "limit_amount": null,
+        "buy_fee_pct": "0.12%",
+        "is_fully_open": true,
+        "is_restricted": false,
+        "is_suspended": false
+      },
+      "kline_5d": [
+        {
+          "date": "2020-12-28",
+          "open": 0.886,
+          "close": 0.879,
+          "high": 0.886,
+          "low": 0.876,
+          "volume": 1614,
+          "turnover": 1614.0
+        },
+        {
+          "date": "2020-12-29",
+          "open": 0.879,
+          "close": 0.887,
+          "high": 0.889,
+          "low": 0.879,
+          "volume": 8726,
+          "turnover": 8726.0
+        },
+        {
+          "date": "2020-12-30",
+          "open": 0.894,
+          "close": 0.9,
+          "high": 0.906,
+          "low": 0.889,
+          "volume": 16057,
+          "turnover": 16057.0
+        },
+        {
+          "date": "2020-12-31",
+          "open": 0.91,
+          "close": 0.912,
+          "high": 0.913,
+          "low": 0.904,
+          "volume": 24821,
+          "turnover": 24821.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 0.73,
+          "close": 0.74,
+          "high": 0.74,
+          "low": 0.73,
+          "volume": 3411,
+          "turnover": 3411.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "161124": {
@@ -243,88 +672,102 @@
       "market": "sz",
       "notes": "",
       "price": {
-        "current": 1.016,
-        "change_pct": 1.91,
-        "change_amount": 0.019,
-        "volume": 101848,
-        "turnover": 1032.0
+        "current": 1.017,
+        "change_pct": 0.1,
+        "change_amount": 0.001,
+        "volume": 38300,
+        "turnover": 389.3549
       },
-      "premium_rate": -0.58,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "161116": {
-      "code": "161116",
-      "name": "易方达黄金LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 1.678,
-        "change_pct": 2.76,
-        "change_amount": 0.045,
-        "volume": 116342,
-        "turnover": 1945.0
+      "premium_rate": -0.48,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "限大额 (单日累计购买上限3000.00元",
+        "limit_amount": "3000.00元",
+        "buy_fee_pct": "0.12%",
+        "is_fully_open": false,
+        "is_restricted": true,
+        "is_suspended": false
       },
-      "premium_rate": 0.19,
-      "kline_5d": [],
+      "kline_5d": [
+        {
+          "date": "2026-05-26",
+          "open": 1.029,
+          "close": 1.025,
+          "high": 1.036,
+          "low": 1.018,
+          "volume": 199749,
+          "turnover": 199749.0
+        },
+        {
+          "date": "2026-05-27",
+          "open": 1.026,
+          "close": 1.012,
+          "high": 1.029,
+          "low": 1.01,
+          "volume": 162057,
+          "turnover": 162057.0
+        },
+        {
+          "date": "2026-05-28",
+          "open": 1.012,
+          "close": 0.997,
+          "high": 1.012,
+          "low": 0.984,
+          "volume": 81282,
+          "turnover": 81282.0
+        },
+        {
+          "date": "2026-05-29",
+          "open": 1.0,
+          "close": 1.016,
+          "high": 1.022,
+          "low": 1.0,
+          "volume": 101848,
+          "turnover": 101848.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 1.019,
+          "close": 1.017,
+          "high": 1.02,
+          "low": 1.01,
+          "volume": 38300,
+          "turnover": 38300.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "160719": {
-      "code": "160719",
-      "name": "嘉实黄金LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 2.013,
-        "change_pct": 2.81,
-        "change_amount": 0.055,
-        "volume": 61713,
-        "turnover": 1237.0
-      },
-      "premium_rate": -0.2,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "162719": {
-      "code": "162719",
-      "name": "石油LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 2.597,
-        "change_pct": -1.29,
-        "change_amount": -0.034,
-        "volume": 216970,
-        "turnover": 5645.0
-      },
-      "premium_rate": -1.87,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "161129": {
-      "code": "161129",
-      "name": "原油LOF易方达",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 1.774,
-        "change_pct": -2.69,
-        "change_amount": -0.049,
-        "volume": 1757403,
-        "turnover": 31213.0
-      },
-      "premium_rate": 3.09,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "165513": {
@@ -333,16 +776,102 @@
       "market": "sz",
       "notes": "",
       "price": {
-        "current": 1.063,
-        "change_pct": 2.51,
-        "change_amount": 0.026,
-        "volume": 12276,
-        "turnover": 130.0
+        "current": 1.061,
+        "change_pct": -0.19,
+        "change_amount": -0.002,
+        "volume": 6453,
+        "turnover": 68.6248
       },
-      "premium_rate": -0.46,
-      "kline_5d": [],
+      "premium_rate": -1.62,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "开放申购",
+        "limit_amount": null,
+        "buy_fee_pct": "0.16%",
+        "is_fully_open": true,
+        "is_restricted": false,
+        "is_suspended": false
+      },
+      "kline_5d": [
+        {
+          "date": "2026-05-26",
+          "open": 1.067,
+          "close": 1.07,
+          "high": 1.078,
+          "low": 1.067,
+          "volume": 12413,
+          "turnover": 12413.0
+        },
+        {
+          "date": "2026-05-27",
+          "open": 1.07,
+          "close": 1.059,
+          "high": 1.07,
+          "low": 1.057,
+          "volume": 15015,
+          "turnover": 15015.0
+        },
+        {
+          "date": "2026-05-28",
+          "open": 1.061,
+          "close": 1.037,
+          "high": 1.061,
+          "low": 1.035,
+          "volume": 12901,
+          "turnover": 12901.0
+        },
+        {
+          "date": "2026-05-29",
+          "open": 1.058,
+          "close": 1.063,
+          "high": 1.064,
+          "low": 1.056,
+          "volume": 12276,
+          "turnover": 12276.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 1.062,
+          "close": 1.061,
+          "high": 1.067,
+          "low": 1.059,
+          "volume": 6453,
+          "turnover": 6453.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "160140": {
@@ -351,16 +880,102 @@
       "market": "sz",
       "notes": "",
       "price": {
-        "current": 1.428,
-        "change_pct": 0.14,
-        "change_amount": 0.002,
-        "volume": 13195,
-        "turnover": 188.0
+        "current": 1.417,
+        "change_pct": -0.77,
+        "change_amount": -0.011,
+        "volume": 16189,
+        "turnover": 229.3048
       },
-      "premium_rate": 0.78,
-      "kline_5d": [],
+      "premium_rate": 0.01,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "开放申购",
+        "limit_amount": null,
+        "buy_fee_pct": "0.12%",
+        "is_fully_open": true,
+        "is_restricted": false,
+        "is_suspended": false
+      },
+      "kline_5d": [
+        {
+          "date": "2026-05-26",
+          "open": 1.429,
+          "close": 1.428,
+          "high": 1.437,
+          "low": 1.426,
+          "volume": 11290,
+          "turnover": 11290.0
+        },
+        {
+          "date": "2026-05-27",
+          "open": 1.434,
+          "close": 1.435,
+          "high": 1.443,
+          "low": 1.43,
+          "volume": 10133,
+          "turnover": 10133.0
+        },
+        {
+          "date": "2026-05-28",
+          "open": 1.437,
+          "close": 1.426,
+          "high": 1.437,
+          "low": 1.412,
+          "volume": 12573,
+          "turnover": 12573.0
+        },
+        {
+          "date": "2026-05-29",
+          "open": 1.426,
+          "close": 1.428,
+          "high": 1.431,
+          "low": 1.418,
+          "volume": 13195,
+          "turnover": 13195.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 1.41,
+          "close": 1.42,
+          "high": 1.42,
+          "low": 1.41,
+          "volume": 16189,
+          "turnover": 16189.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "160125": {
@@ -369,34 +984,102 @@
       "market": "sz",
       "notes": "",
       "price": {
-        "current": 1.81,
-        "change_pct": 3.37,
-        "change_amount": 0.059,
-        "volume": 18813,
-        "turnover": 339.0
+        "current": 1.839,
+        "change_pct": 1.6,
+        "change_amount": 0.029,
+        "volume": 15560,
+        "turnover": 283.9576
       },
-      "premium_rate": 0.01,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "160644": {
-      "code": "160644",
-      "name": "港美互联网LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 2.212,
-        "change_pct": -4.78,
-        "change_amount": -0.111,
-        "volume": 9997072,
-        "turnover": 226642.0
+      "premium_rate": 1.61,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "开放申购",
+        "limit_amount": null,
+        "buy_fee_pct": "0.13%",
+        "is_fully_open": true,
+        "is_restricted": false,
+        "is_suspended": false
       },
-      "premium_rate": 7.81,
-      "kline_5d": [],
+      "kline_5d": [
+        {
+          "date": "2019-06-28",
+          "open": 1.034,
+          "close": 1.03,
+          "high": 1.034,
+          "low": 1.03,
+          "volume": 2,
+          "turnover": 2.0
+        },
+        {
+          "date": "2019-07-01",
+          "open": 1.044,
+          "close": 1.057,
+          "high": 1.064,
+          "low": 1.022,
+          "volume": 1240,
+          "turnover": 1240.0
+        },
+        {
+          "date": "2019-07-02",
+          "open": 1.05,
+          "close": 1.05,
+          "high": 1.05,
+          "low": 1.05,
+          "volume": 102,
+          "turnover": 102.0
+        },
+        {
+          "date": "2019-07-03",
+          "open": 1.051,
+          "close": 1.051,
+          "high": 1.058,
+          "low": 1.051,
+          "volume": 725,
+          "turnover": 725.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 1.82,
+          "close": 1.84,
+          "high": 1.84,
+          "low": 1.81,
+          "volume": 15560,
+          "turnover": 15560.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "164824": {
@@ -405,52 +1088,102 @@
       "market": "sz",
       "notes": "",
       "price": {
-        "current": 1.284,
-        "change_pct": 0.86,
-        "change_amount": 0.011,
-        "volume": 222951,
-        "turnover": 2867.0
+        "current": 1.273,
+        "change_pct": -0.86,
+        "change_amount": -0.011,
+        "volume": 236739,
+        "turnover": 3026.5199
       },
-      "premium_rate": -0.83,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "160723": {
-      "code": "160723",
-      "name": "嘉实全球房地产LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 2.108,
-        "change_pct": -2.32,
-        "change_amount": -0.05,
-        "volume": 1136306,
-        "turnover": 23983.0
+      "premium_rate": -1.68,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "限大额 (单日累计购买上限50.00万元",
+        "limit_amount": "50.00万元",
+        "buy_fee_pct": "0.12%",
+        "is_fully_open": false,
+        "is_restricted": true,
+        "is_suspended": false
       },
-      "premium_rate": 2.44,
-      "kline_5d": [],
+      "kline_5d": [
+        {
+          "date": "2026-05-26",
+          "open": 1.293,
+          "close": 1.292,
+          "high": 1.296,
+          "low": 1.288,
+          "volume": 151593,
+          "turnover": 151593.0
+        },
+        {
+          "date": "2026-05-27",
+          "open": 1.288,
+          "close": 1.286,
+          "high": 1.29,
+          "low": 1.282,
+          "volume": 214883,
+          "turnover": 214883.0
+        },
+        {
+          "date": "2026-05-28",
+          "open": 1.283,
+          "close": 1.273,
+          "high": 1.284,
+          "low": 1.27,
+          "volume": 138486,
+          "turnover": 138486.0
+        },
+        {
+          "date": "2026-05-29",
+          "open": 1.284,
+          "close": 1.284,
+          "high": 1.293,
+          "low": 1.281,
+          "volume": 222951,
+          "turnover": 222951.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 1.282,
+          "close": 1.273,
+          "high": 1.284,
+          "low": 1.273,
+          "volume": 236739,
+          "turnover": 236739.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "162416": {
-      "code": "162416",
-      "name": "华宝油气LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 0.865,
-        "change_pct": 0.0,
-        "change_amount": 0.0,
-        "volume": 0,
-        "turnover": 0.0
-      },
-      "premium_rate": 0.8641,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "160717": {
@@ -459,34 +1192,102 @@
       "market": "sz",
       "notes": "",
       "price": {
-        "current": 0.722,
-        "change_pct": 0.98,
-        "change_amount": 0.007,
-        "volume": 1338,
-        "turnover": 10.0
+        "current": 0.724,
+        "change_pct": 0.28,
+        "change_amount": 0.002,
+        "volume": 4017,
+        "turnover": 29.1184
       },
-      "premium_rate": -0.17,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
-    },
-    "161838": {
-      "code": "161838",
-      "name": "银华全球核心优选LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 1.0,
-        "change_pct": 0.0,
-        "change_amount": 0.0,
-        "volume": 0,
-        "turnover": 0.0
+      "premium_rate": 0.11,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "开放申购",
+        "limit_amount": null,
+        "buy_fee_pct": "0.15%",
+        "is_fully_open": true,
+        "is_restricted": false,
+        "is_suspended": false
       },
-      "premium_rate": null,
-      "kline_5d": [],
+      "kline_5d": [
+        {
+          "date": "2026-05-26",
+          "open": 0.73,
+          "close": 0.735,
+          "high": 0.735,
+          "low": 0.726,
+          "volume": 3594,
+          "turnover": 3594.0
+        },
+        {
+          "date": "2026-05-27",
+          "open": 0.735,
+          "close": 0.722,
+          "high": 0.735,
+          "low": 0.722,
+          "volume": 677,
+          "turnover": 677.0
+        },
+        {
+          "date": "2026-05-28",
+          "open": 0.721,
+          "close": 0.715,
+          "high": 0.721,
+          "low": 0.708,
+          "volume": 3031,
+          "turnover": 3031.0
+        },
+        {
+          "date": "2026-05-29",
+          "open": 0.712,
+          "close": 0.722,
+          "high": 0.722,
+          "low": 0.712,
+          "volume": 1338,
+          "turnover": 1338.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 0.719,
+          "close": 0.724,
+          "high": 0.727,
+          "low": 0.719,
+          "volume": 4017,
+          "turnover": 4017.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     },
     "162205": {
@@ -496,28 +1297,11 @@
       "notes": "",
       "price": null,
       "premium_rate": null,
+      "subscription": null,
       "kline_5d": [],
       "money_flow": {},
       "news": [],
       "error": "价格获取失败"
-    },
-    "163208": {
-      "code": "163208",
-      "name": "诺安油气能源LOF",
-      "market": "sz",
-      "notes": "",
-      "price": {
-        "current": 1.271,
-        "change_pct": -1.4,
-        "change_amount": -0.018,
-        "volume": 46322,
-        "turnover": 590.0
-      },
-      "premium_rate": -1.55,
-      "kline_5d": [],
-      "money_flow": {},
-      "news": [],
-      "error": null
     },
     "160215": {
       "code": "160215",
@@ -525,26 +1309,113 @@
       "market": "sz",
       "notes": "",
       "price": {
-        "current": 3.637,
-        "change_pct": 0.55,
-        "change_amount": 0.02,
-        "volume": 1444,
-        "turnover": 54.0
+        "current": 3.723,
+        "change_pct": 2.36,
+        "change_amount": 0.086,
+        "volume": 1649,
+        "turnover": 60.409
       },
-      "premium_rate": -3.04,
-      "kline_5d": [],
+      "premium_rate": -0.75,
+      "subscription": {
+        "status_code": "1",
+        "status_text": "开放申购",
+        "limit_amount": null,
+        "buy_fee_pct": "0.15%",
+        "is_fully_open": true,
+        "is_restricted": false,
+        "is_suspended": false
+      },
+      "kline_5d": [
+        {
+          "date": "2026-05-26",
+          "open": 3.5,
+          "close": 3.499,
+          "high": 3.528,
+          "low": 3.43,
+          "volume": 851,
+          "turnover": 851.0
+        },
+        {
+          "date": "2026-05-27",
+          "open": 3.534,
+          "close": 3.52,
+          "high": 3.569,
+          "low": 3.503,
+          "volume": 357,
+          "turnover": 357.0
+        },
+        {
+          "date": "2026-05-28",
+          "open": 3.541,
+          "close": 3.617,
+          "high": 3.625,
+          "low": 3.519,
+          "volume": 941,
+          "turnover": 941.0
+        },
+        {
+          "date": "2026-05-29",
+          "open": 3.711,
+          "close": 3.637,
+          "high": 3.78,
+          "low": 3.637,
+          "volume": 1444,
+          "turnover": 1444.0
+        },
+        {
+          "date": "2026-06-01",
+          "open": 3.72,
+          "close": 3.72,
+          "high": 3.75,
+          "low": 3.63,
+          "volume": 1649,
+          "turnover": 1649.0
+        }
+      ],
       "money_flow": {},
-      "news": [],
+      "news": [
+        {
+          "title": "华安证券恒赢20号集合资产管理计划合同条款变更的公告",
+          "date": "2026-12-26",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "华安证券恒赢18号集合资产管理计划合同条款变更的公告",
+          "date": "2026-06-17",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于签订《湖北万润新能源电池正极材料项目资产回购补充协议》的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "万润新能:关于对参股公司增资暨关联交易的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        },
+        {
+          "title": "禾元生物:关于完成工商变更登记并换发营业执照的公告",
+          "date": "2026-06-02",
+          "source": "公告",
+          "url": ""
+        }
+      ],
       "error": null
     }
   },
   "summary": {
-    "total_funds": 31,
-    "above_threshold": 7,
-    "below_threshold": 20,
+    "total_funds": 17,
+    "suspended_filtered": 14,
+    "above_threshold": 1,
+    "below_threshold": 12,
     "max_premium": {
-      "code": "501225",
-      "rate": 41.44
+      "code": "501312",
+      "rate": 4.54
     },
     "errors": 4
   }

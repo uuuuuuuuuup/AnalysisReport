@@ -1,0 +1,40 @@
+{
+  "active_env": "prod",
+  "base_urls": {
+    "test": "https://test.gtjadev.com:38443/",
+    "prod": "https://zx.app.gtja.com:8443/"
+  },
+  "gateway_paths": {
+    "market": "mcp/marketdata",
+    "ranklist": "mcp/hq-20200002",
+    "optionalStock": "mcp/optionalStock",
+    "mqtt": "mcp/mqtt",
+    "usercode": "mcp/usercode",
+    "financial": "mcp/financialsearch/lingxi",
+    "researchReport": "mcp/researchReport/lingxi",
+    "stockselect": "mcp/lingxi/financial",
+    "backtest": "mcp/lingxi/backtest"
+  },
+  "gateways": {
+    "market": "https://zx.app.gtja.com:8443/mcp/marketdata",
+    "ranklist": "https://zx.app.gtja.com:8443/mcp/hq-20200002",
+    "optionalStock": "https://zx.app.gtja.com:8443/mcp/optionalStock",
+    "mqtt": "https://zx.app.gtja.com:8443/mcp/mqtt",
+    "usercode": "https://zx.app.gtja.com:8443/mcp/usercode",
+    "financial": "https://zx.app.gtja.com:8443/mcp/financialsearch/lingxi",
+    "researchReport": "https://zx.app.gtja.com:8443/mcp/researchReport/lingxi",
+    "stockselect": "https://zx.app.gtja.com:8443/mcp/lingxi/financial",
+    "backtest": "https://zx.app.gtja.com:8443/mcp/lingxi/backtest"
+  },
+  "known_domains": [
+    "market",
+    "ranklist",
+    "optionalStock",
+    "mqtt",
+    "usercode",
+    "financial",
+    "researchReport",
+    "stockselect",
+    "backtest"
+  ]
+}

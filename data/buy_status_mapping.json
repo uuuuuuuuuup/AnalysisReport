@@ -1,0 +1,250 @@
+[
+  {
+    "code": "501021",
+    "fund_buy_status": "1",
+    "trading_status": "开放申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/501021.html",
+    "success": true
+  },
+  {
+    "code": "501018",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限0元",
+    "limit_amount": "0元",
+    "url": "https://fund.eastmoney.com/501018.html",
+    "success": true
+  },
+  {
+    "code": "501312",
+    "fund_buy_status": "1",
+    "trading_status": "限大额 (单日累计购买上限5000.00元",
+    "limit_amount": "5000.00元",
+    "url": "https://fund.eastmoney.com/501312.html",
+    "success": true
+  },
+  {
+    "code": "501225",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限100.00元",
+    "limit_amount": "100.00元",
+    "url": "https://fund.eastmoney.com/501225.html",
+    "success": true
+  },
+  {
+    "code": "501300",
+    "fund_buy_status": "1",
+    "trading_status": "限大额 (单日累计购买上限1000.00万元",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/501300.html",
+    "success": true
+  },
+  {
+    "code": "161125",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限10.00元",
+    "limit_amount": "10.00元",
+    "url": "https://fund.eastmoney.com/161125.html",
+    "success": true
+  },
+  {
+    "code": "161130",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限10.00元",
+    "limit_amount": "10.00元",
+    "url": "https://fund.eastmoney.com/161130.html",
+    "success": true
+  },
+  {
+    "code": "501318",
+    "fund_buy_status": null,
+    "trading_status": null,
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/501318.html",
+    "success": true
+  },
+  {
+    "code": "161128",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限10.00元",
+    "limit_amount": "10.00元",
+    "url": "https://fund.eastmoney.com/161128.html",
+    "success": true
+  },
+  {
+    "code": "164705",
+    "fund_buy_status": "1",
+    "trading_status": "开放申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/164705.html",
+    "success": true
+  },
+  {
+    "code": "501322",
+    "fund_buy_status": null,
+    "trading_status": null,
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/501322.html",
+    "success": true
+  },
+  {
+    "code": "160924",
+    "fund_buy_status": "1",
+    "trading_status": "开放申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/160924.html",
+    "success": true
+  },
+  {
+    "code": "161831",
+    "fund_buy_status": "1",
+    "trading_status": "开放申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/161831.html",
+    "success": true
+  },
+  {
+    "code": "161124",
+    "fund_buy_status": "1",
+    "trading_status": "限大额 (单日累计购买上限3000.00元",
+    "limit_amount": "3000.00元",
+    "url": "https://fund.eastmoney.com/161124.html",
+    "success": true
+  },
+  {
+    "code": "161116",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限10.00元",
+    "limit_amount": "10.00元",
+    "url": "https://fund.eastmoney.com/161116.html",
+    "success": true
+  },
+  {
+    "code": "501332",
+    "fund_buy_status": null,
+    "trading_status": null,
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/501332.html",
+    "success": true
+  },
+  {
+    "code": "160719",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限5.00元",
+    "limit_amount": "5.00元",
+    "url": "https://fund.eastmoney.com/160719.html",
+    "success": true
+  },
+  {
+    "code": "160125",
+    "fund_buy_status": "1",
+    "trading_status": "开放申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/160125.html",
+    "success": true
+  },
+  {
+    "code": "160140",
+    "fund_buy_status": "1",
+    "trading_status": "开放申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/160140.html",
+    "success": true
+  },
+  {
+    "code": "161129",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限10.00元",
+    "limit_amount": "10.00元",
+    "url": "https://fund.eastmoney.com/161129.html",
+    "success": true
+  },
+  {
+    "code": "164824",
+    "fund_buy_status": "1",
+    "trading_status": "限大额 (单日累计购买上限50.00万元",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/164824.html",
+    "success": true
+  },
+  {
+    "code": "162416",
+    "fund_buy_status": "6",
+    "trading_status": "基金终止",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/162416.html",
+    "success": true
+  },
+  {
+    "code": "160723",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限5.00元",
+    "limit_amount": "5.00元",
+    "url": "https://fund.eastmoney.com/160723.html",
+    "success": true
+  },
+  {
+    "code": "160717",
+    "fund_buy_status": "1",
+    "trading_status": "开放申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/160717.html",
+    "success": true
+  },
+  {
+    "code": "161838",
+    "fund_buy_status": "6",
+    "trading_status": "暂停申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/161838.html",
+    "success": true
+  },
+  {
+    "code": "160644",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限1.00万元",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/160644.html",
+    "success": true
+  },
+  {
+    "code": "163208",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限500.00元",
+    "limit_amount": "500.00元",
+    "url": "https://fund.eastmoney.com/163208.html",
+    "success": true
+  },
+  {
+    "code": "165513",
+    "fund_buy_status": "1",
+    "trading_status": "开放申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/165513.html",
+    "success": true
+  },
+  {
+    "code": "162205",
+    "fund_buy_status": "1",
+    "trading_status": "开放申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/162205.html",
+    "success": true
+  },
+  {
+    "code": "162719",
+    "fund_buy_status": "4",
+    "trading_status": "暂停申购 (单日累计购买上限10.00元",
+    "limit_amount": "10.00元",
+    "url": "https://fund.eastmoney.com/162719.html",
+    "success": true
+  },
+  {
+    "code": "160215",
+    "fund_buy_status": "1",
+    "trading_status": "开放申购",
+    "limit_amount": null,
+    "url": "https://fund.eastmoney.com/160215.html",
+    "success": true
+  }
+]

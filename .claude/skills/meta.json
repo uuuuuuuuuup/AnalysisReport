@@ -1,0 +1,42 @@
+{
+  "mx-assistant" : {
+    "ownerId" : "kn7b4ptpdag877t9kmq8axyja182taab",
+    "display" : "Eastmoney Financial Assistant",
+    "slug" : "mx-assistant",
+    "version" : "2.0.0",
+    "publishedAt" : 1773828110847,
+    "isLinkApplied" : true
+  },
+  "mx-report" : {
+    "ownerId" : "kn7b4ptpdag877t9kmq8axyja182taab",
+    "display" : "Eastmoney Research Report Generator",
+    "slug" : "mx-report",
+    "version" : "2.0.0",
+    "publishedAt" : 1773828110847,
+    "isLinkApplied" : true
+  },
+  "mx-diagnosis" : {
+    "ownerId" : "kn7b4ptpdag877t9kmq8axyja182taab",
+    "display" : "Eastmoney Stock/Fund/Hotspot Diagnosis",
+    "slug" : "mx-diagnosis",
+    "version" : "2.0.0",
+    "publishedAt" : 1773828110847,
+    "isLinkApplied" : true
+  },
+  "mx-data" : {
+    "ownerId" : "kn7b4ptpdag877t9kmq8axyja182taab",
+    "display" : "Eastmoney Structured Data Query",
+    "slug" : "mx-data",
+    "version" : "2.0.0",
+    "publishedAt" : 1773828110847,
+    "isLinkApplied" : true
+  },
+  "mx-search" : {
+    "ownerId" : "kn7b4ptpdag877t9kmq8axyja182taab",
+    "display" : "Eastmoney Financial News Search",
+    "slug" : "mx-search",
+    "version" : "2.0.0",
+    "publishedAt" : 1773828110847,
+    "isLinkApplied" : true
+  }
+}
