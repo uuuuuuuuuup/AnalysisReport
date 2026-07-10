@@ -4,6 +4,7 @@ import os
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 
 # China stock convention: up=red, down=green
 COLOR_UP = "#C00000"
@@ -11,6 +12,36 @@ COLOR_DOWN = "#007000"
 COLOR_COMPANY = "#C00000"
 COLOR_INDUSTRY = "#007000"
 COLOR_TREND = "#1F3A5F"
+
+CHINESE_FONT_CANDIDATES = [
+    "PingFang SC",
+    "Microsoft YaHei",
+    "SimHei",
+    "Heiti SC",
+    "Hiragino Sans GB",
+    "Arial Unicode MS",
+    "Noto Sans CJK SC",
+    "WenQuanYi Micro Hei",
+    "Songti SC",
+    "STHeiti",
+]
+
+
+def setup_chinese_font():
+    """Configure matplotlib to use a system Chinese font for CJK text."""
+    available = {f.name for f in fm.fontManager.ttflist}
+    for name in CHINESE_FONT_CANDIDATES:
+        if name in available:
+            plt.rcParams["font.family"] = "sans-serif"
+            plt.rcParams["font.sans-serif"] = [name] + [
+                f for f in plt.rcParams["font.sans-serif"] if f != name
+            ]
+            plt.rcParams["axes.unicode_minus"] = False
+            return name
+    return None
+
+
+_CHINESE_FONT = setup_chinese_font()
 
 
 def save_dcf_sensitivity_chart(ratios: list, market_caps: list, current_cap: float,
