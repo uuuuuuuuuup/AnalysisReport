@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Bricolage Grotesque", "DM Sans", sans-serif;
+  --font-body: "Bricolage Grotesque", "DM Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", monospace;
+
+  /* Nordlys-inspired: printed-timetable modernism */
+  --color-paper: #eef3f1;
+  --color-paper-raised: #f7faf9;
+  --color-ink: #14333a;
+  --color-ink-soft: #3d5a60;
+  --color-ink-muted: #5d767b;
+  --color-rule: #14333a;
+  --color-glacier: #c6dadb;
+  --color-glacier-soft: #dde9e9;
+  --color-signal: #e8490f;
+  --color-panel: #0b2127;
+  --color-panel-line: #1d3d45;
+
+  --color-success: #2d7a4f;
+  --color-success-soft: rgba(45, 122, 79, 0.08);
+  --color-warn: #b5781b;
+  --color-warn-soft: rgba(181, 120, 27, 0.08);
+  --color-danger: #c73d3d;
+  --color-danger-soft: rgba(199, 61, 61, 0.08);
+}
+
+body {
+  @apply bg-paper text-ink antialiased;
+  font-family: var(--font-body);
+  font-weight: 420;
+  line-height: 1.55;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+}
