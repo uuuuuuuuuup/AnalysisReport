@@ -37,3 +37,26 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 800;
 }
+
+/* ── 日间/夜间模式 ── */
+html {
+  transition: background-color .25s ease;
+}
+body {
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+
+.dark {
+  --color-paper: #0f1a1d;
+  --color-paper-raised: #16262a;
+  --color-ink: #d6e3e0;
+  --color-ink-soft: #9db3b2;
+  --color-ink-muted: #6f8787;
+  --color-rule: #2a4045;
+  --color-glacier: #2a4045;
+  --color-glacier-soft: #1a2f34;
+  --color-signal: #ff6420;
+  --color-success-soft: rgba(45, 122, 79, 0.18);
+  --color-warn-soft: rgba(181, 120, 27, 0.18);
+  --color-danger-soft: rgba(199, 61, 61, 0.18);
+}
