@@ -1,0 +1,19 @@
+{
+  "symbol": "000858",
+  "company": "五粮液",
+  "created_at": "2026-07-11T12:17:59",
+  "versions": [
+    {
+      "date": "2026-07-11",
+      "target_year": 2025,
+      "version_dir": "2026-07-11",
+      "report": "五粮液_000858_稳健投资策略分析报告.md",
+      "rating": "good",
+      "model": "turtle-investment-strategy v2.2",
+      "data_packs": [
+        "data_pack_market.md",
+        "data_pack_report.md"
+      ]
+    }
+  ]
+}
