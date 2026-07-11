@@ -1,0 +1,16 @@
+{
+  "symbol": "601825",
+  "company": "沪农商行",
+  "latest": "2026-04-24",
+  "versions": [
+    {
+      "date": "2026-04-24",
+      "dir": "2026-04-24",
+      "report": [
+        "沪农商行_601825_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

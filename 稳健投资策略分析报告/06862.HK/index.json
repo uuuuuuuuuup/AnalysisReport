@@ -1,0 +1,25 @@
+{
+  "symbol": "06862.HK",
+  "company": "海底捞国际控股有限公司",
+  "latest": "2026-07-08",
+  "versions": [
+    {
+      "date": "2026-04-21",
+      "dir": "2026-04-21",
+      "report": [
+        "海底捞_06862.HK_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    },
+    {
+      "date": "2026-07-08",
+      "dir": "2026-07-08",
+      "report": [
+        "海底捞国际控股有限公司_06862.HK_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

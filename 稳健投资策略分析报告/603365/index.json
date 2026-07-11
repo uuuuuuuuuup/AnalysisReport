@@ -1,0 +1,16 @@
+{
+  "symbol": "603365",
+  "company": "水星家纺投资分析报告",
+  "latest": "2026-04-24",
+  "versions": [
+    {
+      "date": "2026-04-24",
+      "dir": "2026-04-24",
+      "report": [
+        "水星家纺投资分析报告_603365_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

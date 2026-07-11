@@ -1,0 +1,16 @@
+{
+  "symbol": "601717",
+  "company": "中创智领",
+  "latest": "2026-04-23",
+  "versions": [
+    {
+      "date": "2026-04-23",
+      "dir": "2026-04-23",
+      "report": [
+        "中创智领_601717_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

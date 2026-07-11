@@ -1,0 +1,25 @@
+{
+  "symbol": "002088",
+  "company": "稳健投资策略分析报告：鲁阳节能",
+  "latest": "2026-05-01",
+  "versions": [
+    {
+      "date": "2026-04-23",
+      "dir": "2026-04-23",
+      "report": [
+        "鲁阳节能_稳健投资策略分析报告_20260423_002088_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": null,
+      "data_pack_report": null
+    },
+    {
+      "date": "2026-05-01",
+      "dir": "2026-05-01",
+      "report": [
+        "稳健投资策略分析报告：鲁阳节能_002088_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

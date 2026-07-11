@@ -1,0 +1,16 @@
+{
+  "symbol": "002367",
+  "company": "康力电梯",
+  "latest": "2025-12-31",
+  "versions": [
+    {
+      "date": "2025-12-31",
+      "dir": "2025-12-31",
+      "report": [
+        "康力电梯_002367_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

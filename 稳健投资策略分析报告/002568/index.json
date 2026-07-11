@@ -1,0 +1,16 @@
+{
+  "symbol": "002568",
+  "company": "百润股份",
+  "latest": "2026-04-22",
+  "versions": [
+    {
+      "date": "2026-04-22",
+      "dir": "2026-04-22",
+      "report": [
+        "百润股份_002568_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

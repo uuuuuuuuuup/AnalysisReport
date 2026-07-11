@@ -1,0 +1,16 @@
+{
+  "symbol": "000088",
+  "company": "盐田港",
+  "latest": "2026-04-24",
+  "versions": [
+    {
+      "date": "2026-04-24",
+      "dir": "2026-04-24",
+      "report": [
+        "盐田港_000088_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

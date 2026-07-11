@@ -1,0 +1,16 @@
+{
+  "symbol": "603551",
+  "company": "奥普科技",
+  "latest": "2026-07-11",
+  "versions": [
+    {
+      "date": "2026-07-11",
+      "dir": "2026-07-11",
+      "report": [
+        "奥普科技_603551_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "symbol": "000423",
+  "company": "东阿阿胶",
+  "latest": "2026-04-24",
+  "versions": [
+    {
+      "date": "2026-04-24",
+      "dir": "2026-04-24",
+      "report": [
+        "东阿阿胶_000423_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

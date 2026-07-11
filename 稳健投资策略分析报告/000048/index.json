@@ -1,0 +1,16 @@
+{
+  "symbol": "000048",
+  "company": "京基智农",
+  "latest": "2026-04-24",
+  "versions": [
+    {
+      "date": "2026-04-24",
+      "dir": "2026-04-24",
+      "report": [
+        "京基智农_000048_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "symbol": "688271",
+  "company": null,
+  "latest": "2026-07-11",
+  "versions": [
+    {
+      "date": "2026-07-11",
+      "dir": "2026-07-11",
+      "report": [],
+      "data_pack_market": null,
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

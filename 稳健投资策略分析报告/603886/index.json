@@ -1,0 +1,25 @@
+{
+  "symbol": "603886",
+  "company": "4月27日分析报告",
+  "latest": "2026-07-11",
+  "versions": [
+    {
+      "date": "2026-04-23",
+      "dir": "2026-04-23",
+      "report": [
+        "元祖股份_603886_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": null,
+      "data_pack_report": null
+    },
+    {
+      "date": "2026-07-11",
+      "dir": "2026-07-11",
+      "report": [
+        "4月27日分析报告_603886_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

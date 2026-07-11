@@ -1,0 +1,16 @@
+{
+  "symbol": "600023",
+  "company": "浙能电力",
+  "latest": "2026-04-23",
+  "versions": [
+    {
+      "date": "2026-04-23",
+      "dir": "2026-04-23",
+      "report": [
+        "浙能电力_600023_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

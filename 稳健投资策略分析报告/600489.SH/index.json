@@ -1,0 +1,16 @@
+{
+  "symbol": "600489.SH",
+  "company": "中金黄金股份有限公司",
+  "latest": "2026-05-22",
+  "versions": [
+    {
+      "date": "2026-05-22",
+      "dir": "2026-05-22",
+      "report": [
+        "中金黄金股份有限公司_600489.SH_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "symbol": "000596",
+  "company": "安徽古井贡酒股份有限公司",
+  "latest": "2026-05-01",
+  "versions": [
+    {
+      "date": "2026-05-01",
+      "dir": "2026-05-01",
+      "report": [
+        "安徽古井贡酒股份有限公司_000596_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

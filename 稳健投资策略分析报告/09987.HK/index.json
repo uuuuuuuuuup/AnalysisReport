@@ -1,0 +1,25 @@
+{
+  "symbol": "09987.HK",
+  "company": "百胜中国控股有限公司",
+  "latest": "2026-07-09",
+  "versions": [
+    {
+      "date": "2026-05-20",
+      "dir": "2026-05-20",
+      "report": [
+        "百胜中国_09987.HK_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    },
+    {
+      "date": "2026-07-09",
+      "dir": "2026-07-09",
+      "report": [
+        "百胜中国控股有限公司_09987.HK_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "symbol": "01066.HK",
+  "company": "山东威高集团医用高分子制品股份有限公司",
+  "latest": "2026-07-08",
+  "versions": [
+    {
+      "date": "2026-05-21",
+      "dir": "2026-05-21",
+      "report": [
+        "山东威高集团医用高分子制品股份有限公司_01066.HK_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    },
+    {
+      "date": "2026-07-08",
+      "dir": "2026-07-08",
+      "report": [
+        "山东威高集团医用高分子制品股份有限公司_01066.HK_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

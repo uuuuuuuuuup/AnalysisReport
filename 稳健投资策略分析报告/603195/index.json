@@ -1,0 +1,16 @@
+{
+  "symbol": "603195",
+  "company": "公牛集团",
+  "latest": "2026-04-22",
+  "versions": [
+    {
+      "date": "2026-04-22",
+      "dir": "2026-04-22",
+      "report": [
+        "公牛集团_603195_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

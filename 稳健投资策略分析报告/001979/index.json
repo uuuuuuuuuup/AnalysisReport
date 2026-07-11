@@ -1,0 +1,16 @@
+{
+  "symbol": "001979",
+  "company": "招商局蛇口工业区控股股份有限公司",
+  "latest": "2026-05-01",
+  "versions": [
+    {
+      "date": "2026-05-01",
+      "dir": "2026-05-01",
+      "report": [
+        "招商局蛇口工业区控股股份有限公司_001979_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

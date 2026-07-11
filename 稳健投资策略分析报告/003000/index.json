@@ -1,0 +1,16 @@
+{
+  "symbol": "003000",
+  "company": "劲仔食品集团股份有限公司",
+  "latest": "2026-04-20",
+  "versions": [
+    {
+      "date": "2026-04-20",
+      "dir": "2026-04-20",
+      "report": [
+        "劲仔食品集团股份有限公司_003000_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

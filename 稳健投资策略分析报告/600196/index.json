@@ -1,0 +1,16 @@
+{
+  "symbol": "600196",
+  "company": "稳健投资策略分析报告：复星医药",
+  "latest": "2026-04-20",
+  "versions": [
+    {
+      "date": "2026-04-20",
+      "dir": "2026-04-20",
+      "report": [
+        "稳健投资策略分析报告：复星医药_600196_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

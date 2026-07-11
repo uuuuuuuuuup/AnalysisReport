@@ -1,0 +1,16 @@
+{
+  "symbol": "00883.HK",
+  "company": "中国海洋石油",
+  "latest": "2026-05-07",
+  "versions": [
+    {
+      "date": "2026-05-07",
+      "dir": "2026-05-07",
+      "report": [
+        "中国海洋石油_HK0883_稳健投资策略分析报告_2025_HK0883_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

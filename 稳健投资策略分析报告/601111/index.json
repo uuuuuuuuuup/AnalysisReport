@@ -1,0 +1,16 @@
+{
+  "symbol": "601111",
+  "company": "中国国航",
+  "latest": "2026-05-06",
+  "versions": [
+    {
+      "date": "2026-05-06",
+      "dir": "2026-05-06",
+      "report": [
+        "中国国航_601111_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

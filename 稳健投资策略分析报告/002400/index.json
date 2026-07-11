@@ -1,0 +1,16 @@
+{
+  "symbol": "002400",
+  "company": "广东省广告集团股份有限公司",
+  "latest": "2026-04-30",
+  "versions": [
+    {
+      "date": "2026-04-30",
+      "dir": "2026-04-30",
+      "report": [
+        "广东省广告集团股份有限公司_002400_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

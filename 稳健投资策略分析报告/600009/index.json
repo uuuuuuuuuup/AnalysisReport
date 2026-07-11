@@ -1,0 +1,16 @@
+{
+  "symbol": "600009",
+  "company": "上海国际机场股份有限公司",
+  "latest": "2026-05-01",
+  "versions": [
+    {
+      "date": "2026-05-01",
+      "dir": "2026-05-01",
+      "report": [
+        "上海国际机场股份有限公司_600009_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

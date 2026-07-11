@@ -1,0 +1,16 @@
+{
+  "symbol": "300433",
+  "company": "稳健投资策略分析报告：蓝思科技",
+  "latest": "2026-05-01",
+  "versions": [
+    {
+      "date": "2026-05-01",
+      "dir": "2026-05-01",
+      "report": [
+        "稳健投资策略分析报告：蓝思科技_300433_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

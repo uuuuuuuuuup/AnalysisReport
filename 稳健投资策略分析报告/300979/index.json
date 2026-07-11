@@ -1,0 +1,34 @@
+{
+  "symbol": "300979",
+  "company": "华利集团",
+  "latest": "2026-07-11",
+  "versions": [
+    {
+      "date": "2026-04-20",
+      "dir": "2026-04-20",
+      "report": [
+        "华利集团_300979_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": null,
+      "data_pack_report": null
+    },
+    {
+      "date": "2026-05-07",
+      "dir": "2026-05-07",
+      "report": [
+        "华利集团_稳健投资策略分析报告_300979_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    },
+    {
+      "date": "2026-07-11",
+      "dir": "2026-07-11",
+      "report": [
+        "华利集团_稳健投资策略分析报告_2026Q1_300979_2026Q1_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}

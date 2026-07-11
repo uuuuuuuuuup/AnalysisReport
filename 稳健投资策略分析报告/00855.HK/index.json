@@ -1,0 +1,16 @@
+{
+  "symbol": "00855.HK",
+  "company": "中国水务集团有限公司",
+  "latest": "2026-05-21",
+  "versions": [
+    {
+      "date": "2026-05-21",
+      "dir": "2026-05-21",
+      "report": [
+        "中国水务集团有限公司_00855HK_稳健投资策略分析报告.md"
+      ],
+      "data_pack_market": "data_pack_market.md",
+      "data_pack_report": "data_pack_report.md"
+    }
+  ]
+}
