@@ -11,6 +11,19 @@
       ],
       "data_pack_market": "data_pack_market.md",
       "data_pack_report": "data_pack_report.md"
+    },
+    {
+      "version": "2026-07-13_23-51",
+      "date": "2026-07-13",
+      "target_year": 2025,
+      "price": 139.68,
+      "rough_return": 3.57,
+      "precise_return": 3.08,
+      "threshold": 3.73,
+      "safety_margin": -0.65,
+      "target_price": 80.84,
+      "recommendation": "观望等待",
+      "completeness": "高"
     }
   ]
 }

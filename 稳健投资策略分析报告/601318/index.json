@@ -1,0 +1,19 @@
+{
+  "symbol": "601318",
+  "company": "中国平安",
+  "created_at": "2026-07-12T21:34:07",
+  "versions": [
+    {
+      "rough_return_pct": 5.41,
+      "precise_return_pct": 5.39,
+      "threshold_pct": 3.73,
+      "safety_margin_pct": 1.66,
+      "target_buy_price": 50.09,
+      "current_price": 49.48,
+      "data_completeness": "中高",
+      "verdict": "标配/观察",
+      "rf": 1.73,
+      "rf_date": "2026-07-10"
+    }
+  ]
+}

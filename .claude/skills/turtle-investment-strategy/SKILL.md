@@ -1,6 +1,6 @@
 ---
 name: "turtle-investment-strategy"
-description: "Executes versioned, multi-phase stock analysis with a coordinator and parallel data workers. Uses AI-Tools MCP, mx-* skills, and gtht-lingxi-unified by data type; applies deterministic local valuation calculations. Invoke for stock analysis, buy/valuation questions, or annual-report review."
+description: "Executes versioned, multi-phase stock analysis with a coordinator and parallel data workers. Uses AI-Tools MCP, westock-data, anysearch, mx-* skills, and gtht-lingxi-unified by data type; applies deterministic local valuation calculations. Invoke for stock analysis, buy/valuation questions, or annual-report review."
 ---
 
 # 稳健投资策略分析助手 v2.2
@@ -15,16 +15,16 @@ description: "Executes versioned, multi-phase stock analysis with a coordinator 
 
 ## 角色与流程
 
-| 角色 | 负责 | 不负责 |
-|---|---|---|
-| 主代理 | 解析、版本目录、调度、数据包整合、定性判断、脚本计算、报告与归档 | 直接采集外部数据 |
-| Phase 1 | 市场、三表、月线、Rf、治理、行业、税务、MD&A | 投资结论 |
-| Phase 2 | 附注、审计、负债、非经常损益、关联方、股息深度数据 | 投资结论 |
+| 角色 | 负责 | 不负责 | 建议模型 |
+|---|---|---|---|
+| 主代理 | 解析、版本目录、调度、数据包整合、定性判断、脚本计算、报告与归档 | 直接采集外部数据 | 继承父会话（默认） |
+| Phase 1 | 市场、三表、月线、Rf、治理、行业、税务、MD&A | 投资结论 | `model: "haiku"` |
+| Phase 2 | 附注、审计、负债、非经常损益、关联方、股息深度数据 | 投资结论 | `model: "haiku"` |
 
 1. 解析代码/名称、市场、持股渠道和触发原因。未指定年份时：1–3 月取 `year - 2`，其他月份取 `year - 1`。
 2. 用 `prepare` 获取 `{workspace}/稳健投资策略分析报告/{symbol}/{analysis_date}/` 和目标年份；同日冲突时使用 `YYYY-MM-DD_HH-mm`。
 3. 用 `rf-cache` 检查 Rf。A 股/港股/美股对应 `CN`/`HK`/`US` 和 `CN_10Y`/`HK_10Y`/`US_10Y`。主代理维护本地缓存不属于数据采集；缓存失效或重大货币政策事件后，由 Phase 1 重新查询并回填。
-4. 并行启动两个子代理，输出 `data_pack_market.md` 与 `data_pack_report.md`。Phase 1 必须完成；Phase 2 超时、缺失或关键字段不足时，标注缺失后降级继续。不要轮询 Agent 工具已跟踪的后台任务。
+4. 并行启动两个子代理（Phase 1 和 Phase 2），均使用 `model: "haiku"` 调用 Agent 工具，输出 `data_pack_market.md` 与 `data_pack_report.md`。Phase 1 必须完成；Phase 2 超时、缺失或关键字段不足时，标注缺失后降级继续。不要轮询 Agent 工具已跟踪的后台任务。
 5. 读取数据包的单位、币种与来源，完成因子 1A/1B 定性判断；将已核验数值传给 `calculate`，禁止手算、禁止改写脚本结果。
 6. 成功写出报告后，以 `finalize` 原子追加 `index.json`，再更新 `latest` 指向最新版本；旧版本不删除。
 
@@ -34,22 +34,38 @@ description: "Executes versioned, multi-phase stock analysis with a coordinator 
 
 | 数据类别 | 首选 | 降级顺序 |
 |---|---|---|
-| 行情、三表、财报、指标、月线 | AI-Tools：`QueryStockPriceInfo`、`GetIncomeStatement`、`GetBalanceSheet`、`GetCashFlowStatement`、`GetFinancialReport`、`GetFinancialIndicators`、`GetMonthlyKLineData` | `gtht-lingxi-unified` → `mx-data` → WebSearch |
-| Rf/宏观 | 有效 `risk_free_rate.json` | AI-Tools `GetAllEconomicData`/`GetUsTreasuryYield` → `mx-data` macro → Lingxi → WebSearch |
-| 公告、审计、研报 | `mx-search` | Lingxi research → AI-Tools 财报 → WebSearch |
-| 治理、行业、税务 | `mx-assistant` | Lingxi → `mx-search` → WebSearch |
-| MD&A/业绩补充 | AI-Tools 财报或 `mx-report` | `mx-assistant` → WebSearch |
+| 行情、三表、财报、指标、月线 | AI-Tools：`QueryStockPriceInfo`、`GetIncomeStatement`、`GetBalanceSheet`、`GetCashFlowStatement`、`GetFinancialReport`、`GetFinancialIndicators`、`GetMonthlyKLineData` | `westock-data` → `gtht-lingxi-unified` → `mx-data` → `anysearch` |
+| 资金流向、北向/南向、板块估值 | `westock-data`：`fund flow`、`fund north-holding`、`sector valuation` 等 | AI-Tools 相应接口 → `anysearch` |
+| Rf/宏观 | 有效 `risk_free_rate.json` | AI-Tools `GetAllEconomicData`/`GetUsTreasuryYield` → `westock-data` macro → `mx-data` macro → Lingxi → `anysearch` |
+| 公告、审计、研报 | `westock-data`：`notice list`、`report list` | `mx-search` → Lingxi research → AI-Tools 财报 → `anysearch` |
+| 治理、行业、税务 | `anysearch` 垂直搜索（finance 域） | `mx-assistant` → Lingxi → `mx-search` → `anysearch` 通用搜索 |
+| MD&A/业绩补充 | AI-Tools 财报或 `westock-data` finance | `mx-report` → `mx-assistant` → `anysearch` |
 
 脚本入口统一使用：
 
 ```bash
 SKILL_BASE={workspace}/.claude/skills/turtle-investment-strategy
+WESTOCK_DATA={workspace}/.claude/skills/westock-data
+ANYSEARCH={workspace}/.claude/skills/anysearch
 LINGXI={workspace}/.claude/skills/gtht-lingxi-unified/skill-entry.js
 MX_DATA={workspace}/.claude/skills/mx-data/scripts/query_data.py
 MX_SEARCH={workspace}/.claude/skills/mx-search/scripts/search.py
 MX_ASSISTANT={workspace}/.claude/skills/mx-assistant/scripts/ask.py
 MX_REPORT={workspace}/.claude/skills/mx-report/scripts/generate_report.py
 ```
+
+### 数据源说明
+
+| 数据源 | 调用方式 | 适用场景 |
+|---|---|---|
+| **AI-Tools MCP** | MCP 工具直接调用 | A股/港股/美股行情、三表、财报、指标、K线、宏观经济 |
+| **westock-data** | `npx -y westock-data-skillhub@1.0.5 <命令>` | A股/港股/美股 K线、财务、技术指标、研报、公告、板块估值、资金流向、北向/南向持仓、ETF、宏观 |
+| **anysearch** | `python3 $ANYSEARCH/scripts/anysearch_cli.py search "查询"` | 通用网页搜索、垂直领域搜索（finance/health/academic 等）、URL 内容提取、批量搜索 |
+| **gtht-lingxi-unified** | `node $LINGXI ...` | 备选数据聚合 |
+| **mx-data** | `python3 $MX_DATA ...` | 备选行情/财务数据 |
+| **mx-search** | `python3 $MX_SEARCH ...` | 备选公告/研报搜索 |
+| **mx-assistant** | `python3 $MX_ASSISTANT ...` | 备选治理/行业/税务分析 |
+| **mx-report** | `python3 $MX_REPORT ...` | 备选深度报告生成 |
 
 ### Phase 1 必采字段
 
