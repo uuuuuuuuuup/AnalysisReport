@@ -139,6 +139,7 @@ function buildStocks() {
       industry,
       hasReport: !!reportPath,
       path: encodeURIComponent(index.symbol),
+      reportPath,
     })
   }
 
@@ -189,13 +190,16 @@ function main() {
   mkdirSync(reportsDir, { recursive: true })
   let reportCount = 0
   for (const stock of stocks) {
-    const dirPath = join(REPORTS_DIR, stock.path)
-    let rp = findReportFile(dirPath)
+    let rp = stock.reportPath
     if (!rp) {
-      const subs = readdirSync(dirPath).filter(f => f.match(/^\d{4}-\d{2}-\d{2}$/))
-      for (const sub of subs) {
-        rp = findReportFile(join(dirPath, sub))
-        if (rp) break
+      const dirPath = join(REPORTS_DIR, stock.path)
+      rp = findReportFile(dirPath)
+      if (!rp) {
+        const subs = readdirSync(dirPath).filter(f => f.match(/^\d{4}-\d{2}-\d{2}$/))
+        for (const sub of subs) {
+          rp = findReportFile(join(dirPath, sub))
+          if (rp) break
+        }
       }
     }
     if (rp) {
