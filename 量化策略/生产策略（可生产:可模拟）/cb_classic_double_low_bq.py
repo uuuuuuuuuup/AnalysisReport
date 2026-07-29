@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 # ============================================================
-# 可转债经典双低轮动 (Classic Double-Low, 月频)
-# 平台: BigQuant BigTrader API
-# 数据: dai.query() → cn_cbond_bar1d_te + cn_cbond_basic_info
+# Engine 2: 可转债经典双低轮动 (Classic Double-Low, 月频)
+# 平台: BigQuant BigTrader  |  市场: Market.CN_CBOND
 # ============================================================
+# ⚠️ 三引擎合并: 本脚本独立运行在 Market.CN_CBOND,
+#   用 merge_three_engine.py 与 unified_etf_engine_bq.py 合并净值。
+#   合并公式: 合并NAV = ETF_NAV + 0.35 × CB_NAV - 35,000
+#
 # 设计依据: 训练集 2019-01 ~ 2022-12 共48个月
 #   经典双低: 年化 15.32%  夏普 1.05  最大回撤 -14.9%  月胜率 64.6%
+#   BigQuant回测(2019-01~2024-09): 年化 15.02% 夏普 0.77 回撤 -31.4%
+#   回撤恶化因2023-2024可转债首次违约(搜特/蓝盾), 实盘须按-31%做心理准备
 #
 # 逻辑:
 #   1. 每月调仓(约22个交易日)

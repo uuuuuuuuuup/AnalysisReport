@@ -320,8 +320,8 @@ K=12,M=3 前段 0.13 / 后段 0.79，剧烈不稳。
 
 | 引擎 | 策略 | 冻结 | 测试 | 生产代码 |
 |---|---|---|---|---|
-| Engine 1 | ETF 双动量 (本策略) | ✅ | ✅ 已消耗 (2023-01~2026-07) | ✅ etf_dual_momentum.py |
-| Engine 2 | 可转债经典双低 | ✅ | ⚠️ 部分消耗 (BigQuant 2023-01~2024-09) | ⚠️ BigQuant 可用 |
-| Engine 3 | 红利ETF静态持有(515180) | ✅ | N/A | ⬜ |
+| Engine 1 | ETF 双动量 (本策略) | ✅ | ✅ 已消耗 (2023-01~2026-07) | ✅ unified_etf_engine_bq.py (BigQuant) |
+| Engine 2 | 可转债经典双低 | ✅ | ⚠️ 部分消耗 (BigQuant 2023-01~2024-09) | ✅ cb_classic_double_low_bq.py (BigQuant) |
+| Engine 3 | 红利ETF静态持有(515180) | ✅ | N/A | ✅ unified_etf_engine_bq.py (与E1合并) |
 
-三引擎全部就绪后做组合优化。
+三个引擎已整合为两个 BigQuant 脚本 + merge_three_engine.py。详见 README.md。

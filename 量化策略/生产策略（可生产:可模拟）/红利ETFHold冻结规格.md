@@ -69,9 +69,9 @@ Engine 3 的赚钱逻辑与 Engine 1/2 完全不同：
 
 | 引擎 | 策略 | 仓位 | 冻结 | 测试 | 生产代码 |
 |---|---|---|---|---|---|
-| Engine 1 | ETF 双动量 | 35% | ✅ | ✅ 已消耗 | ✅ etf_dual_momentum.py |
-| Engine 2 | 可转债经典双低 | 35% | ✅ | ⚠️ 部分消耗 | ⚠️ BigQuant |
-| **Engine 3** | **红利ETF静态持有** | **30%** | **✅** | **N/A** | ⬜ |
+| Engine 1 | ETF 双动量 | 35% | ✅ | ✅ 已消耗 | ✅ unified_etf_engine_bq.py (BigQuant) |
+| Engine 2 | 可转债经典双低 | 35% | ✅ | ⚠️ 部分消耗 | ✅ cb_classic_double_low_bq.py (BigQuant) |
+| **Engine 3** | **红利ETF静态持有** | **30%** | **✅** | **N/A** | **✅ unified_etf_engine_bq.py (与E1合并)** |
 
 ### 相关性预判
 
