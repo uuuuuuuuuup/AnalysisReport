@@ -52,20 +52,26 @@ def initialize(context: bigtrader.IContext):
     context.set_slippage_value(slippage_type=2, slippage_value=0.0005)
 
     # 加载可转债全量数据
+    # ⚠️ 2023年起 cn_cbond_bar1d_te.cb_over_rate 数据异常,
+    #    改用 cn_cbond_bar1d(行情) + cn_cbond_analyze_metric(转股溢价率) 联表
     sql = """
     SELECT
         a.date, a.instrument, a.close,
-        a.cb_over_rate AS premium_rate,
-        b.stock_code, b.maturity_date, b.list_date
-    FROM cn_cbond_bar1d_te a
+        m.conversion_premium_rate AS premium_rate,
+        b.maturity_date, b.list_date,
+        b.name AS bond_name
+    FROM cn_cbond_bar1d a
     INNER JOIN cn_cbond_basic_info b
         ON a.instrument = b.instrument
+    INNER JOIN cn_cbond_analyze_metric m
+        ON a.instrument = m.instrument AND a.date = m.date
     WHERE
         a.close > 0
         AND b.maturity_date IS NOT NULL
     ORDER BY a.date, a.instrument
     """
-    df = dai.query(sql).df()
+    # cn_cbond_bar1d 为分区表, 须指定 filters 分区范围(对齐回测起止日期)
+    df = dai.query(sql, filters={"date": ["2019-01-01", "2026-07-29"]}).df()
     df['date'] = pd.to_datetime(df['date'])
     df['maturity_date'] = pd.to_datetime(df['maturity_date'])
     df['list_date'] = pd.to_datetime(df['list_date'])
