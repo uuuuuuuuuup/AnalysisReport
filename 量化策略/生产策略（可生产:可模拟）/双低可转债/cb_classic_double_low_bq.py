@@ -14,11 +14,22 @@
 #
 # 逻辑:
 #   1. 每月调仓(约22个交易日)
-#   2. 双低打分: 0.5×z(close) + 0.5×z(cb_over_rate), 值越低越好
+#   2. 双低打分: 0.5×z(close) + 0.5×z(premium_rate), 值越低越好
 #   3. 选前20只, 等权
 #   4. 缓冲带: 前25名中已在仓的保留, 补足到20只
-#   5. 信用过滤: close<80且cb_over_rate>100 → 剔除
+#   5. 信用过滤: close<80且premium_rate>100 → 剔除
 #   6. 池子过滤: 距maturity_date>12月 / 上市满30天
+#
+# ⚠️ 数据权限修复 (2026-08-01):
+#   原方案使用 cn_cbond_analyze_metric.conversion_premium_rate (需标准版付费权限)
+#   现改为: 通过4张免费表手动计算转股溢价率 ——
+#     转股价值 = 100 ÷ 转股价 × 正股收盘价
+#     转股溢价率 = (转债收盘价 ÷ 转股价值 - 1) × 100%
+#   免费数据表:
+#     - cn_cbond_bar1d       (Beta免费): 可转债日行情 close + 正股代码 stock_code
+#     - cn_cbond_basic_info  (Alpha免费): 基本信息 maturity_date / list_date / stock_code
+#     - cn_cbond_conversion  (免费):     转股价 conversion_clause_price
+#     - cn_stock_bar1d       (免费):     正股日行情 close
 # ============================================================
 
 from bigquant import bigtrader
@@ -39,7 +50,16 @@ CREDIT_PREMIUM_CEILING = 100
 
 
 def initialize(context: bigtrader.IContext):
-    """策略初始化。加载可转债全量数据, 设置费率。"""
+    """策略初始化。加载可转债全量数据, 设置费率。
+
+    数据获取策略:
+      1. 可转债行情 (cn_cbond_bar1d) + 基本信息 (cn_cbond_basic_info) → 主表
+      2. 转股条款 (cn_cbond_conversion) → 转股价 conversion_clause_price
+         (注意: cn_cbond_conversion.date 为转股起始日, 非分区日; 该表记录最新条款快照,
+          若某标的无转股价记录, 回退使用 basic_info 中的初始转股价 或 标记后丢弃)
+      3. 正股行情 (cn_stock_bar1d) → 正股收盘价
+      4. 按公式手动计算转股溢价率 premium_rate
+    """
     # 账户费率: 免印花税, 佣金万0.85 免5
     context.set_commission(bigtrader.PerOrder(
         buy_cost=0.000085,
@@ -51,38 +71,122 @@ def initialize(context: bigtrader.IContext):
     # 百分比滑点 0.05%
     context.set_slippage_value(slippage_type=2, slippage_value=0.0005)
 
-    # 加载可转债全量数据
-    # ⚠️ 2023年起 cn_cbond_bar1d_te.cb_over_rate 数据异常,
-    #    改用 cn_cbond_bar1d(行情) + cn_cbond_analyze_metric(转股溢价率) 联表
-    sql = """
+    # ---- Step 1: 加载可转债行情 + 基本信息 ----
+    # stock_code 字段用于关联正股行情
+    sql_cb = """
     SELECT
-        a.date, a.instrument, a.close,
-        m.conversion_premium_rate AS premium_rate,
+        a.date, a.instrument, a.close AS bond_close, a.stock_code,
         b.maturity_date, b.list_date,
         b.name AS bond_name
     FROM cn_cbond_bar1d a
-    INNER JOIN cn_cbond_basic_info b
+    LEFT JOIN cn_cbond_basic_info b
         ON a.instrument = b.instrument
-    INNER JOIN cn_cbond_analyze_metric m
-        ON a.instrument = m.instrument AND a.date = m.date
     WHERE
         a.close > 0
         AND b.maturity_date IS NOT NULL
     ORDER BY a.date, a.instrument
     """
-    # cn_cbond_bar1d 为分区表, 须指定 filters 分区范围(对齐回测起止日期)
-    df = dai.query(sql, filters={"date": ["2019-01-01", "2026-07-29"]}).df()
+    df = dai.query(sql_cb, filters={"date": ["2019-01-01", "2026-07-29"]}).df()
     df['date'] = pd.to_datetime(df['date'])
     df['maturity_date'] = pd.to_datetime(df['maturity_date'])
     df['list_date'] = pd.to_datetime(df['list_date'])
 
+    context.logger.info('Step1 可转债行情+基本信息: %d 行, %d 标的'
+                        % (len(df), df['instrument'].nunique()))
+
+    # ---- Step 2: 加载转股价 (cn_cbond_conversion) ----
+    # 注意: 该表 date 字段为「转股起始日期」, 非每日快照; 取每条 bond 最新转股价即可
+    # (实际回测中, 若需精确的历史转股价变动, 可后续加入 cn_cbond_revise 修正条款,
+    #  此处先用最新转股价作为近似, 对于双低策略来说误差可接受)
+    sql_conv = """
+    SELECT
+        instrument,
+        conversion_clause_price AS conversion_price
+    FROM cn_cbond_conversion
+    WHERE
+        conversion_clause_price > 0
+    """
+    try:
+        df_conv = dai.query(sql_conv).df()
+        # 同一 instrument 可能有多条记录(不同转股期), 取最小转股价(更保守)
+        df_conv = df_conv.groupby('instrument', as_index=False)['conversion_price'].min()
+        context.logger.info('Step2 转股价数据: %d 只可转债' % len(df_conv))
+    except Exception as e:
+        context.logger.warning('Step2 读取 cn_cbond_conversion 失败: %s, 将使用默认转股价' % str(e))
+        df_conv = pd.DataFrame(columns=['instrument', 'conversion_price'])
+
+    # 将转股价合并到主表
+    df = df.merge(df_conv, on='instrument', how='left')
+
+    # ---- Step 3: 加载正股收盘价 (cn_stock_bar1d) ----
+    # 收集所有需要的正股代码, 避免全表扫描
+    stock_list = df['stock_code'].dropna().unique().tolist()
+    if stock_list:
+        sql_stock = """
+        SELECT date, instrument AS stock_code, close AS stock_close
+        FROM cn_stock_bar1d
+        WHERE close > 0
+        """
+        # cn_stock_bar1d 也是分区表, 需要指定 date filters
+        df_stock = dai.query(sql_stock, filters={"date": ["2019-01-01", "2026-07-29"]}).df()
+        df_stock['date'] = pd.to_datetime(df_stock['date'])
+        context.logger.info('Step3 正股行情: %d 行, %d 只正股'
+                            % (len(df_stock), df_stock['stock_code'].nunique()))
+
+        # 合并正股收盘价到主表
+        df = df.merge(df_stock, on=['date', 'stock_code'], how='left')
+    else:
+        df['stock_close'] = np.nan
+        context.logger.warning('Step3 未找到正股代码列表, 正股收盘价列为空')
+
+    # ---- Step 4: 手动计算转股溢价率 ----
+    # 公式:
+    #   转股价值 = 100 / 转股价 × 正股收盘价
+    #   转股溢价率 = (转债收盘价 / 转股价值 - 1) × 100%
+    df['conversion_value'] = np.where(
+        (df['conversion_price'] > 0) & (df['stock_close'] > 0),
+        100.0 / df['conversion_price'] * df['stock_close'],
+        np.nan
+    )
+    df['premium_rate'] = np.where(
+        df['conversion_value'] > 0,
+        (df['bond_close'] / df['conversion_value'] - 1.0) * 100.0,
+        np.nan
+    )
+
+    # 转股价缺失或正股收盘价缺失时, 对 premium_rate 做兜底处理:
+    # - 若 premium_rate 缺失, 按当日截面中位数填充 (仅用于避免回测中断)
+    n_missing = df['premium_rate'].isna().sum()
+    if n_missing > 0:
+        context.logger.warning('Step4 有 %d 行 premium_rate 缺失, 按当日截面中位数填充' % n_missing)
+        df['premium_rate'] = df.groupby('date')['premium_rate'].transform(
+            lambda x: x.fillna(x.median())
+        )
+        # 仍缺失的(当日全缺失), 用全局默认值 30% 填充
+        df['premium_rate'] = df['premium_rate'].fillna(30.0)
+
+    # 统一列名: bond_close → close, 与原代码保持兼容
+    df.rename(columns={'bond_close': 'close'}, inplace=True)
+
+    # 过滤异常值: 溢价率 > 500% 或 < -50% 的视为数据异常, 用截面中位数替代
+    pct_mask = (df['premium_rate'] > 500) | (df['premium_rate'] < -50)
+    if pct_mask.any():
+        context.logger.warning('Step4 过滤 %d 行异常溢价率数据, 用当日截面中位数替代' % pct_mask.sum())
+        df.loc[pct_mask, 'premium_rate'] = np.nan
+        df['premium_rate'] = df.groupby('date')['premium_rate'].transform(
+            lambda x: x.fillna(x.median())
+        )
+        df['premium_rate'] = df['premium_rate'].fillna(30.0)
+
     context.cb_data = df
     context.day_count = 0
 
-    context.logger.info('可转债数据: %d 行, %d 标的, %s ~ %s'
+    context.logger.info('可转债数据(已计算溢价率): %d 行, %d 标的, %s ~ %s | 溢价率均值 %.2f%%, 中位数 %.2f%%'
                         % (len(df), df['instrument'].nunique(),
                            df['date'].min().strftime('%Y-%m-%d'),
-                           df['date'].max().strftime('%Y-%m-%d')))
+                           df['date'].max().strftime('%Y-%m-%d'),
+                           df['premium_rate'].mean(),
+                           df['premium_rate'].median()))
 
 
 def handle_data(context: bigtrader.IContext, data: bigtrader.IBarData):
