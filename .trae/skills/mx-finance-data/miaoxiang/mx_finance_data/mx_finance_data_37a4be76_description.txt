@@ -1,8 +1,0 @@
-金融数据查询结果说明
-========================================
-查询内容: 中国移动 00941.HK 近5年股息率 分红历史 回购历史
-数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_37a4be76.xlsx
-描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_37a4be76_description.txt
-数据行数: 16
-表数量: 3
-Sheet 列表: 中国移动(00941.HK)当前的股息率, 中国移动(00941.HK)的回购日期、回购数量等, 中国移动(00941.HK)分红明细(2021-05-08~2

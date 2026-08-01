@@ -1,8 +1,0 @@
-金融数据查询结果说明
-========================================
-查询内容: 爱玛科技 603529 近5年分红派息 历年股息
-数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_2a92dd73.xlsx
-描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_2a92dd73_description.txt
-数据行数: 17
-表数量: 3
-Sheet 列表: 爱玛科技(603529.SH)当前的股息率, 爱玛科技(603529.SH)的股息率(TTM), 爱玛科技(603529.SH)分红明细

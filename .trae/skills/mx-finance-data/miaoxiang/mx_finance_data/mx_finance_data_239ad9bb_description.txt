@@ -1,8 +1,0 @@
-金融数据查询结果说明
-========================================
-查询内容: 中国石化 600028 2025年资产负债表 母公司单体报表
-数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_239ad9bb.xlsx
-描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_239ad9bb_description.txt
-数据行数: 99
-表数量: 2
-Sheet 列表: 中国石化(600028.SH)等的流动资产合计、固定资产等, 中国石油化工股份(00386.HK)资产负债表_合并报表(调整

@@ -1,8 +1,0 @@
-金融数据查询结果说明
-========================================
-查询内容: 中国移动 00941.HK 2020年至2025年 营业收入 净利润 毛利润 经营现金流 总资产 总负债 股东权益
-数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_d458cf23.xlsx
-描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_d458cf23_description.txt
-数据行数: 76
-表数量: 4
-Sheet 列表: 中国移动(00941.HK)(最新年结日12-31)的净利润、, 中国移动(00941.HK)现金流量表_合并报表(调整)_(2, 中国移动(00941.HK)资产负债表_合并报表(调整)_(2, 中国移动(00941.HK)利润表_合并报表(调整)_(202

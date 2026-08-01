@@ -1,8 +1,0 @@
-金融数据查询结果说明
-========================================
-查询内容: HK0883 中国海洋石油 实时股价 市值 股息率 市盈率 市净率
-数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_36a440d1.xlsx
-描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_36a440d1_description.txt
-数据行数: 9
-表数量: 3
-Sheet 列表: 中国海洋石油(00883.HK)当前的总市值、市净率等, 中国海洋石油(00883.HK)的总市值、市净率PB等, 中国海洋石油(00883.HK)当前的股息率

@@ -1,8 +1,0 @@
-金融数据查询结果说明
-========================================
-查询内容: 保利物业 06049.HK 历年股息 分红 派息率 2020-2025
-数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_82acf904.xlsx
-描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_82acf904_description.txt
-数据行数: 12
-表数量: 1
-Sheet 列表: 保利物业(06049.HK)分红明细(2020-01-01~2

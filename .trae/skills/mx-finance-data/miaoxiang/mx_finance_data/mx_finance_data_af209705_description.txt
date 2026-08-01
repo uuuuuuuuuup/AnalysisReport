@@ -1,8 +1,0 @@
-金融数据查询结果说明
-========================================
-查询内容: HK0883 中国海洋石油 2021年至2026年 月度收盘价 历史价格
-数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_af209705.xlsx
-描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_af209705_description.txt
-数据行数: 1
-表数量: 1
-Sheet 列表: 中国海洋石油(00883.HK)的区间收盘价

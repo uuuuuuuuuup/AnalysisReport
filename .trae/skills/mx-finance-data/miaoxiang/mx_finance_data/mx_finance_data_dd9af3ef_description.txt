@@ -1,8 +1,0 @@
-金融数据查询结果说明
-========================================
-查询内容: 保利物业 06049.HK 2020-2025年 资产负债表 利润表 现金流量表 营业收入 净利润 总资产 总负债 股东权益
-数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_dd9af3ef.xlsx
-描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_dd9af3ef_description.txt
-数据行数: 208
-表数量: 5
-Sheet 列表: 保利物业(06049.HK)(最新年结日12-31)的营业收入, 保利物业(06049.HK)资产负债表_合并报表(调整)_(2, 保利物业(06049.HK)利润表_合并报表(调整)_(202, 保利物业(06049.HK)现金流量表_合并报表(调整)_(2, 保利物业(06049.HK)利润表_合并报表(调整)_(2_2

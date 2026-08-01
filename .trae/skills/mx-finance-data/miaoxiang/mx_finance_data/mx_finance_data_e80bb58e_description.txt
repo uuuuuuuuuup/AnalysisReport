@@ -1,8 +1,0 @@
-金融数据查询结果说明
-========================================
-查询内容: 保利物业 06049.HK 应收账款账龄 受限现金 关联方交易 2023-2025
-数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_e80bb58e.xlsx
-描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_e80bb58e_description.txt
-数据行数: 78
-表数量: 3
-Sheet 列表: 保利物业(06049.HK)(最新年结日12-31)的总资产、, 保利物业(06049.HK)资产负债表_合并报表(调整)_(2, 保利物业(06049.HK)同业公司

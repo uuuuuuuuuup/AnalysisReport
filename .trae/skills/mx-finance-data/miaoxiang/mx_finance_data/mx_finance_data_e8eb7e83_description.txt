@@ -1,8 +1,0 @@
-金融数据查询结果说明
-========================================
-查询内容: 中国国航 子公司 深圳航空 山东航空 澳门航空
-数据文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_e8eb7e83.xlsx
-描述文件路径: /Users/apple/Documents/分析报告/.trae/skills/mx-finance-data/miaoxiang/mx_finance_data/mx_finance_data_e8eb7e83_description.txt
-数据行数: 95
-表数量: 3
-Sheet 列表: 中国国航(601111.SH)控股参股子公司(2025-12-, 中国国航(601111.SH)控股参股子公司(2025-06-, 中国国航(00753.HK)控股参股子公司(2024-12-3
