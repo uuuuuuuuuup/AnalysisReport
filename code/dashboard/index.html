@@ -43,7 +43,14 @@
   .dashboard {
     position: relative; z-index: 1; padding: 12px;
     display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-auto-rows: 240px;
+    grid-template-rows: repeat(6, 240px);
+    grid-template-areas:
+      "acct  portf candl candl"
+      "pl    pl    candl candl"
+      "wl    wl    mf    mf"
+      "index cash  mf    mf"
+      "hold  hold  mf    mf"
+      "pos   pos   pos   pos";
     gap: 12px; max-width: 1800px; margin: 0 auto;
   }
   .card {
@@ -61,6 +68,12 @@
   .col-1 { grid-column: span 1; } .col-2 { grid-column: span 2; }
   .row-2 { grid-row: span 2; height: auto; }
   .row-3 { grid-row: span 3; height: auto; }
+  /* area 类须在 col/row 类之后声明，确保 grid-area 覆盖 span */
+  .area-acct { grid-area: acct; }   .area-portf { grid-area: portf; }
+  .area-candl { grid-area: candl; } .area-pl { grid-area: pl; }
+  .area-wl { grid-area: wl; }       .area-mf { grid-area: mf; }
+  .area-index { grid-area: index; } .area-pos { grid-area: pos; }
+  .area-hold { grid-area: hold; }   .area-cash { grid-area: cash; }
 
   /* Eye toggle */
   .eye-btn {
@@ -175,11 +188,11 @@
   .op-badge.fund { background: #448aff26; color: #448aff; }
 
   @media (max-width: 1400px) {
-    .dashboard { grid-template-columns: 1fr 1fr; }
+    .dashboard { grid-template-columns: 1fr 1fr; grid-template-areas: none; grid-template-rows: none; }
     .col-1, .col-2 { grid-column: span 2; }
     .row-2, .row-3 { grid-row: span 1; height: 240px; }
   }
-  @media (max-width: 680px) { .dashboard { grid-template-columns: 1fr; } .col-1,.col-2 { grid-column: span 1; } .row-2,.row-3 { grid-row: span 1; height: 240px; } }
+  @media (max-width: 680px) { .dashboard { grid-template-columns: 1fr; grid-template-areas: none; grid-template-rows: none; } .col-1,.col-2 { grid-column: span 1; } .row-2,.row-3 { grid-row: span 1; height: 240px; } }
 </style>
 </head>
 <body>
@@ -191,6 +204,7 @@
 
 <header class="top-bar">
   <div class="breadcrumb">看板 › <span>投资账本 · 金融终端</span></div>
+  <div class="index-tabs" id="view-tabs" style="margin:0;"></div>
   <div class="top-actions">
     <button class="eye-btn" id="eye-btn" onclick="togglePrivacy()" title="隐藏/显示金额">👁</button>
     <span><span class="live-dot"></span>LIVE</span>
@@ -203,18 +217,18 @@
 
 <main class="dashboard">
 
-  <div class="card col-1">
+  <div class="card col-1 area-acct">
     <div class="card-title">ACCOUNTS // 账户红绿灯</div>
     <div class="account-ledgers" id="account-ledgers">加载中...</div>
   </div>
 
-  <div class="card col-1">
+  <div class="card col-1 area-portf">
     <div class="card-title">PORTFOLIO // 账户概览</div>
     <div id="acct-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;flex:1;"></div>
   </div>
 
   <!-- 收盘价折线 / K线 -->
-  <div class="card col-2 row-2">
+  <div class="card col-2 row-2 area-candl">
     <div class="card-title">
       CANDLESTICK //
       <select id="kline-symbol" onchange="switchSymbol()" style="
@@ -237,7 +251,7 @@
   </div>
 
   <!-- 每日盈亏日历 -->
-  <div class="card col-2">
+  <div class="card col-2 area-pl">
     <div class="card-title">P&L CALENDAR // 每日盈亏</div>
     <div id="monthly-status" style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;"></div>
     <div class="index-tabs" id="monthly-tabs"></div>
@@ -245,7 +259,7 @@
   </div>
 
   <!-- 自选行情 -->
-  <div class="card col-2 row-2">
+  <div class="card col-2 area-wl">
     <div class="card-title">
       WATCHLIST // 自选行情
       <select id="wl-sort" onchange="renderWatchlist()" style="
@@ -266,26 +280,22 @@
   </div>
 
   <!-- 资金流向 -->
-  <div class="card col-2 row-2">
+  <div class="card col-2 row-3 area-mf">
     <div class="card-title">
       MONEY FLOW // 资金流向
-      <span id="mf-tabs" style="margin-left:auto;display:flex;gap:2px;">
-        <button class="index-tab active" onclick="switchMoneyFlow(0)">主力净流入</button>
-        <button class="index-tab" onclick="switchMoneyFlow(1)">主力净流出</button>
-      </span>
     </div>
     <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;">
       <span id="mf-status">--</span><span style="margin-left:8px;" id="mf-time"></span>
     </div>
     <div class="chart-box" id="chart-mf"></div>
     <div class="treemap-legend">
-      <span><span class="dot" style="background:var(--up)"></span>涨</span>
-      <span><span class="dot" style="background:var(--down)"></span>跌</span>
+      <span><span class="dot" style="background:var(--up)"></span>净流入</span>
+      <span><span class="dot" style="background:var(--down)"></span>净流出</span>
       <span style="margin-left:auto;">块面积 = 主力净流入额</span>
     </div>
   </div>
 
-  <div class="card col-1 row-2">
+  <div class="card col-1 area-index">
     <div class="card-title">INDEX TAPE // 资产净值走势</div>
     <div class="index-tabs" id="index-tabs">
       <button class="index-tab active" onclick="switchIndex('total')">全部合计</button>
@@ -298,7 +308,7 @@
     <div style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-top:4px;" id="index-range"></div>
   </div>
 
-  <div class="card col-2 row-2">
+  <div class="card col-2 area-pos">
     <div class="card-title">POSITIONS // 持仓明细 <span style="font-weight:400;font-size:10px;color:var(--text-3);margin-left:8px;" id="pos-count"></span></div>
     <div class="scroll-y" style="flex:1;">
       <table class="pos-mini"><thead><tr>
@@ -308,7 +318,7 @@
   </div>
 
   <!-- 持仓权重（横向柱形图） -->
-  <div class="card col-1">
+  <div class="card col-2 area-hold">
     <div class="card-title">HOLDINGS // 持仓权重</div>
     <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;">
       <span id="holdings-status">--</span><span style="margin-left:8px;" id="holdings-time"></span>
@@ -322,7 +332,7 @@
   </div>
 
   <!-- 资金流水 -->
-  <div class="card col-1">
+  <div class="card col-1 area-cash">
     <div class="card-title">CASH FLOW // 资金流水 <span style="font-size:10px;color:var(--text-3);font-weight:400;margin-left:8px;" id="cash-range"></span></div>
     <div class="index-tabs" id="cash-tabs"></div>
     <div class="scroll-y" style="flex:1;">
@@ -455,6 +465,30 @@ function allPositions() {
   return all;
 }
 
+// ========================= GLOBAL VIEW SWITCH =========================
+let viewMode = 'total';
+function activeAccounts() {
+  return viewMode === 'total' ? store.accounts : store.accounts.filter(a => a.name === viewMode);
+}
+function buildViewTabs() {
+  document.getElementById('view-tabs').innerHTML =
+    '<button class="index-tab active" onclick="switchView(\'total\')">汇总</button>' +
+    store.accounts.map(a => `<button class="index-tab" onclick="switchView('${a.name}')">${a.name}</button>`).join('');
+}
+function switchView(mode) {
+  viewMode = mode;
+  document.querySelectorAll('#view-tabs .index-tab').forEach(t =>
+    t.classList.toggle('active', mode === 'total' ? t.textContent.includes('汇总') : t.textContent.includes(mode)));
+  buildSessions();          // 账户红绿灯
+  fillAll();                // PORTFOLIO 概览 + POSITIONS 持仓
+  initHoldings();           // 持仓权重
+  initKline();              // K线（重建标的列表）
+  switchIndex(mode === 'total' ? 'total' : mode);   // 净值走势（卡内 Tab 同步）
+  switchMonthly(mode === 'total' ? 'total' : mode); // 每日盈亏日历
+  const cashTarget = mode === 'total' ? (store.accounts[0]?.name || '') : mode;
+  if (cashMode !== cashTarget) switchCash(cashTarget); // 资金流水
+}
+
 // ========================= ACCOUNTS LEDGER =========================
 function buildSessions() {
   const container = document.getElementById('account-ledgers');
@@ -464,10 +498,20 @@ function buildSessions() {
   }
   const now = new Date();
   const currentMonth = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`;
-  container.innerHTML = store.accounts.map(a => {
-    const arr = (store.trends[a.name]?.year_profit || []).filter(d => (d.date || '').slice(0,6) === currentMonth);
-    const profit = arr.reduce((s, d) => s + (parseFloat(d.profit) || 0), 0);
-    const pct = a.total_asset > 0 ? profit / a.total_asset : 0;
+  container.innerHTML = activeAccounts().map(a => {
+    const yp = store.trends[a.name]?.year_profit || [];
+    const arr = yp.filter(d => (d.date || '').slice(0,6) === currentMonth);
+    // year_profit 的 profit 是累计盈亏：当月盈亏 = 月末累计 - 月初累计（以上月最后一天为基准）
+    let profit = 0, pct = 0;
+    if (arr.length) {
+      const idx = yp.findIndex(d => (d.date || '').slice(0,6) === currentMonth);
+      const prev = idx > 0 ? yp[idx - 1] : null;
+      const startProfit = prev ? (parseFloat(prev.profit) || 0) : 0;
+      profit = (parseFloat(arr[arr.length - 1].profit) || 0) - startProfit;
+      const base = prev || arr[0];
+      const baseAsset = (parseFloat(base.asset) || 0) - startProfit;
+      if (baseAsset > 0) pct = profit / baseAsset;
+    }
     const rate = parseFloat(a.position_rate) || 0;
     const upCls = upDown(pct);
     const posPct = Math.min(rate * 100, 100);
@@ -498,14 +542,15 @@ function initHoldings() {
   }
 
   // status
-  const uploadTimes = store.accounts.map(a => a.upload_time ? new Date(parseInt(a.upload_time)) : null).filter(Boolean);
+  const uploadTimes = activeAccounts().map(a => a.upload_time ? new Date(parseInt(a.upload_time)) : null).filter(Boolean);
   const latest = uploadTimes.length ? new Date(Math.max(...uploadTimes.map(d => d.getTime()))) : null;
   document.getElementById('holdings-time').textContent = new Date().toLocaleTimeString('zh-CN',{hour12:false});
   document.getElementById('holdings-status').textContent = latest
     ? '数据: ' + latest.toLocaleTimeString('zh-CN',{hour12:false})
     : '--';
 
-  const all = allPositions().filter(p => Math.abs(p.value) > 0).sort((a,b) => a.value - b.value);
+  const acctNames = activeAccounts().map(a => a.name);
+  const all = allPositions().filter(p => Math.abs(p.value) > 0 && acctNames.includes(p.account)).sort((a,b) => a.value - b.value);
   const names = all.map(p => (p.name.length > 4 ? p.name.slice(0,4)+'~' : p.name));
   const colorFn = r => r > 0.005 ? upColor+'cc' : r > 0 ? upColor+'88' : r > -0.005 ? '#444' : r > -0.02 ? downColor+'88' : downColor+'cc';
 
@@ -520,10 +565,14 @@ function initHoldings() {
     series:[{
       type:'bar',data:all.map(p=>({value:p.value,itemStyle:{color:colorFn(p.profit_rate),borderRadius:[0,2,2,0]}})),
       barWidth:'60%',
+      // 极值保底：债券几十万 vs 转债几千（比值可达数百倍），线性刻度下小额柱子几乎不可见，用最小条长保证每根可读
+      minBarLength: 8,
       label:{show:true,position:'right',color:'#bbb',fontSize:9,fontFamily:'JetBrains Mono',
         formatter:p=>{const d=all[p.dataIndex];return `${(d.profit_rate*100).toFixed(1)}%`;}}
     }]
   });
+  // 主动 resize 确保初始帧绘制（页面加载时序下偶尔首帧不渲染）
+  holdingsChart.resize();
 }
 
 // ========================= K-LINE (dynamic from Eastmoney, 前复权) =========================
@@ -537,9 +586,9 @@ function buildSymbolSelector() {
   const seen = new Set();
   const unique = all.filter(p => { if (seen.has(p.code)) return false; seen.add(p.code); return true; });
 
-  // Group by account
+  // Group by account (跟随全局视图)
   const groups = {};
-  store.accounts.forEach(a => {
+  activeAccounts().forEach(a => {
     const items = unique.filter(p => a.positions.some(ap => ap.code === p.code));
     if (items.length) groups[a.name] = items;
   });
@@ -636,7 +685,7 @@ async function renderKline() {
       const kd = await fetchKlineOHLC(currentSymbol);
       const { dates, ohlc, volumes } = kd;
       const closes = ohlc.map(o => o[1]);
-      if (!dates.length) { dom.innerHTML = '<div style="color:#666;text-align:center;padding-top:20%;">无数据</div>'; return; }
+      if (!dates.length) { showKlineEmpty(klineChart, '暂无数据'); return; }
       klineHeader(kd);
       const volColors = ohlc.map(o => o[1] >= o[0] ? upColor : downColor);
       klineChart.setOption({
@@ -670,8 +719,8 @@ async function renderKline() {
           textStyle: { fontSize: 11, fontFamily: 'JetBrains Mono' },
           formatter: params => {
             const i = params[0].dataIndex;
-            const o = ohlc[i], chg = o[1] >= o[0], diff = (o[1] - o[0]).toFixed(2);
-            return `${dates[i]}<br/>开 ${o[0].toFixed(2)}　高 <span style="color:${upColor}">${o[3].toFixed(2)}</span><br/>低 <span style="color:${downColor}">${o[2].toFixed(2)}</span>　收 ${o[1].toFixed(2)}<br/>涨跌 <span style="color:${chg ? upColor : downColor}">${chg ? '+' : ''}${diff}</span>　量 ${fmtM(volumes[i])}`;
+            const o = ohlc[i] || { 0: 0, 1: 0, 2: 0, 3: 0 }, chg = o[1] >= o[0], diff = (o[1] - o[0]).toFixed(2);
+            return `${dates[i] || ''}<br/>开 ${o[0].toFixed(2)}　高 <span style="color:${upColor}">${o[3].toFixed(2)}</span><br/>低 <span style="color:${downColor}">${o[2].toFixed(2)}</span>　收 ${o[1].toFixed(2)}<br/>涨跌 <span style="color:${chg ? upColor : downColor}">${chg ? '+' : ''}${diff}</span>　量 ${fmtM(volumes[i])}`;
           }
         }
       });
@@ -682,7 +731,7 @@ async function renderKline() {
     const kd = await fetchKline(currentSymbol);
     const dates = kd.dates, closes = kd.closes;
 
-    if (!dates.length) { dom.innerHTML = '<div style="color:#666;text-align:center;padding-top:20%;">无数据</div>'; return; }
+    if (!dates.length) { showKlineEmpty(klineChart, '暂无数据'); return; }
     klineHeader(kd);
 
     klineChart.setOption({
@@ -696,12 +745,22 @@ async function renderKline() {
         {name:'MA10',type:'line',data:klineMA(closes,10),smooth:true,lineStyle:{width:1,color:'#e4e4e7',type:'dashed'},symbol:'none'},
         {name:'MA20',type:'line',data:klineMA(closes,20),smooth:true,lineStyle:{width:1,color:'#448aff'},symbol:'none'}
       ],
-      tooltip:{trigger:'axis',backgroundColor:'#1a1a1f',borderColor:'#333',textStyle:{fontSize:11,fontFamily:'JetBrains Mono'},formatter:params=>params[0].axisValue+'<br/>'+params.map(p=>`${p.marker} ¥${p.value.toFixed(3)}`).join('<br/>')}
+      tooltip:{trigger:'axis',backgroundColor:'#1a1a1f',borderColor:'#333',textStyle:{fontSize:11,fontFamily:'JetBrains Mono'},formatter:params=>params[0].axisValue+'<br/>'+params.map(p=>`${p.marker} ¥${p.value==null?'--':p.value.toFixed(3)}`).join('<br/>')}
     });
     klineChart.resize();
   } catch(e) {
-    dom.innerHTML = `<div style="color:#f87171;text-align:center;padding-top:20%;">K线加载失败: ${e.message}</div>`;
+    showKlineEmpty(klineChart, 'K线加载失败: ' + e.message);
   }
+}
+
+// K线空态/错误：用 ECharts title 显示，勿动 dom.innerHTML（会删除 ECharts 创建的 canvas）
+function showKlineEmpty(chart, text) {
+  if (!chart) return;
+  chart.clear();
+  chart.setOption({
+    backgroundColor:'transparent',
+    title:{text,left:'center',top:'middle',textStyle:{fontSize:12,color:'#f87171',fontFamily:'JetBrains Mono'}}
+  });
 }
 
 async function initKline() {
@@ -731,13 +790,30 @@ function initIndex() {
 function updateIndex() {
   let data = [];
   if (indexMode === 'total') {
-    const sMap={}, hMap={};
-    (store.trends['宁静致远']?.year_profit||[]).forEach(d=>{sMap[d.date]=d.asset;});
-    (store.trends['淡泊明志']?.year_profit||[]).forEach(d=>{hMap[d.date]=d.asset;});
-    data = [...new Set([...Object.keys(sMap),...Object.keys(hMap)])].sort()
-      .map(d=>({date:d,value:(sMap[d]||0)+(hMap[d]||0)}));
+    // 各账户按日期建立 asset 映射；缺失日期/资产为 0 时用该账户最近已知值填充（carry forward），避免折线出现坑
+    const maps = store.accounts.map(a => {
+      const m = {};
+      (store.trends[a.name]?.year_profit || []).forEach(d => { m[d.date] = parseFloat(d.asset) || 0; });
+      return m;
+    });
+    const allDates = [...new Set(maps.flatMap(m => Object.keys(m)))].sort();
+    data = allDates.map(date => {
+      let value = 0;
+      maps.forEach(m => {
+        if (m[date]) value += m[date];
+        else {
+          const prev = Object.keys(m).filter(d => d < date).sort().pop();
+          if (prev) value += m[prev];
+        }
+      });
+      return { date, value };
+    });
   } else {
-    data = (store.trends[indexMode]?.year_profit||[]).map(d=>({date:d.date,value:d.asset}));
+    data = (store.trends[indexMode]?.year_profit || []).map((d, i, arr) => ({
+      date: d.date,
+      // 资产为 0（异常日）用前值填充，避免折线跳水
+      value: (parseFloat(d.asset) || 0) || (i > 0 ? parseFloat(arr[i - 1].asset) || 0 : 0)
+    }));
   }
   if (!data.length) return;
 
@@ -851,7 +927,7 @@ function updateCalendar() {
     tooltip: {
       backgroundColor: '#1a1a1f', borderColor: '#333', textStyle: { fontSize: 11, fontFamily: 'JetBrains Mono' },
       formatter: p => {
-        const d = data.find(x => x.date === p.value[0]);
+        const d = data.find(x => x.date === p.value[0]) || { date: p.value[0] || '--', daily: 0, rate: 0 };
         const c = d.daily >= 0 ? upColor : downColor;
         return `${d.date}<br/><span style="color:${c}">${d.daily >= 0 ? '+' : ''}¥${d.daily.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span><br/>日收益率 ${fmtPct(d.rate)}`;
       }
@@ -944,37 +1020,43 @@ function renderWatchlist() {
 function initWatchlist() { loadWatchlist(); }
 
 // ========================= MONEY FLOW (treemap) =========================
-let mfOrder = 0, mfChart;
-const mfCache = {};
+let mfChart;
+let mfIn = [], mfOut = [];
 
-function initMoneyFlow() { loadMoneyFlow(0); }
+function initMoneyFlow() { loadMoneyFlow(); }
 
-async function loadMoneyFlow(order) {
-  if (mfCache[order]) { renderMoneyFlow(order); return; }
+async function loadMoneyFlow() {
   document.getElementById('mf-status').textContent = '加载中...';
   document.getElementById('mf-status').style.color = 'var(--text-3)';
   try {
-    const r = await fetch(`/proxy/moneyflow?order=${order === 0 ? 'desc' : 'asc'}&num=12`);
-    const data = await r.json();
-    if (data.error) throw new Error(data.error);
-    mfCache[order] = data;
-    renderMoneyFlow(order);
+    const [inResp, outResp] = await Promise.all([
+      fetch('/proxy/moneyflow?order=desc&num=12'),
+      fetch('/proxy/moneyflow?order=asc&num=12')
+    ]);
+    const inData = await inResp.json();
+    const outData = await outResp.json();
+    if (inData.error) throw new Error(inData.error);
+    if (outData.error) throw new Error(outData.error);
+    mfIn = inData || [];
+    mfOut = outData || [];
+    renderMoneyFlow();
   } catch (e) {
     document.getElementById('mf-status').textContent = '资金流向加载失败: ' + e.message;
     document.getElementById('mf-status').style.color = '#f87171';
   }
 }
 
-function renderMoneyFlow(order) {
+function renderMoneyFlow() {
   const dom = document.getElementById('chart-mf');
   if (!mfChart) {
     mfChart = echarts.init(dom, 'dark');
     new ResizeObserver(() => mfChart.resize()).observe(dom);
   }
 
-  // 过滤 ETF/货币基金 (sh51/58, sz15)
-  const rows = (mfCache[order] || []).filter(x => !/^(sh[15]|sz15)/.test(x.symbol || '')).slice(0, 10);
-  if (!rows.length) {
+  // 过滤 ETF/货币基金 (sh51/58, sz15)，流入/流出各取前 10
+  const filt = arr => (arr || []).filter(x => !/^(sh[15]|sz15)/.test(x.symbol || '')).slice(0, 10);
+  const inRows = filt(mfIn), outRows = filt(mfOut);
+  if (!inRows.length && !outRows.length) {
     // 用 ECharts title 显示占位，勿动 dom.innerHTML（会删除 ECharts 创建的 canvas）
     mfChart.clear();
     mfChart.setOption({
@@ -985,32 +1067,42 @@ function renderMoneyFlow(order) {
   }
 
   document.getElementById('mf-time').textContent = new Date().toLocaleTimeString('zh-CN',{hour12:false});
-  document.getElementById('mf-status').textContent = order === 0 ? '主力净流入榜' : '主力净流出榜';
+  document.getElementById('mf-status').textContent = `主力净流入 ${inRows.length} · 净流出 ${outRows.length}`;
   document.getElementById('mf-status').style.color = 'var(--text-3)';
 
-  const colorFn = r => r > 0.005 ? upColor+'cc' : r > 0 ? upColor+'88' : r > -0.005 ? '#444' : r > -0.02 ? downColor+'88' : downColor+'cc';
-  const data = rows.map(x => ({
+  // 净流入红 / 净流出绿，块面积 = |主力净流入额|；金额越大颜色越深（榜内相对渐变）
+  const lerpHex = (h1, h2, t) => {
+    const p = h => [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)];
+    const a = p(h1), b = p(h2);
+    return '#' + [0,1,2].map(i => Math.round(a[i] + (b[i]-a[i])*t).toString(16).padStart(2,'0')).join('');
+  };
+  const mk = x => ({
     name: x.name,
     value: Math.max(1, Math.abs(parseFloat(x.r0_net) || 0)),
     symbol: x.symbol || '', trade: parseFloat(x.trade) || 0, changeratio: (parseFloat(x.changeratio) || 0), r0_net: parseFloat(x.r0_net) || 0,
-    itemStyle: { color: colorFn(parseFloat(x.changeratio) || 0) }
-  }));
+  });
+  const shade = (rows, light, dark) => {
+    const nets = rows.map(x => Math.abs(parseFloat(x.r0_net) || 0));
+    const max = Math.max(...nets, 1), min = Math.min(...nets, 0);
+    return rows.map((x, i) => {
+      const t = max > min ? (nets[i] - min) / (max - min) : 0.5;
+      return { ...mk(x), itemStyle: { color: lerpHex(light, dark, t) } };
+    });
+  };
+  const data = [
+    ...shade(inRows, upColor, '#7f1d1d'),
+    ...shade(outRows, downColor, '#14532d')
+  ];
 
   mfChart.setOption({
     backgroundColor:'transparent',
     tooltip:{backgroundColor:'#1a1a1f',borderColor:'#333',textStyle:{fontSize:11,fontFamily:'JetBrains Mono'},
-      formatter:p=>{const d=p.data;return `<b>${d.name}</b> ${d.symbol}<br/>现价:¥${d.trade.toFixed(2)}<br/>涨跌:<span style="color:${d.changeratio>=0?upColor:downColor}">${fmtPct(d.changeratio)}</span><br/>主力净流入:${d.r0_net>=0?'+':''}¥${fmtM(d.r0_net)}`;}},
+      formatter:p=>{const d=p.data||{};const t=parseFloat(d.trade)||0,c=parseFloat(d.changeratio)||0,n=parseFloat(d.r0_net)||0;return `<b>${d.name||''}</b> ${d.symbol||''}<br/>现价:¥${t.toFixed(2)}<br/>涨跌:<span style="color:${c>=0?upColor:downColor}">${fmtPct(c)}</span><br/>主力净流入:${n>=0?'+':''}¥${fmtM(n)}`;}},
     series:[{type:'treemap',data,roam:false,nodeClick:false,breadcrumb:{show:false},
-      label:{show:true,formatter:p=>{const n=(p.name||'').length>4?p.name.slice(0,4)+'~':p.name;const r=p.data?.changeratio||0;return `{name|${n}}\n{pct|${r>=0?'+':''}${(r*100).toFixed(1)}%}`;},
+      label:{show:true,formatter:p=>{const n=(p.name||'').length>4?p.name.slice(0,4)+'~':p.name;const m=p.data?.r0_net||0;return `{name|${n}}\n{pct|${m>=0?'+':''}${fmtM(m)}}`;},
         rich:{name:{fontSize:9,color:'#ddd',lineHeight:15},pct:{fontSize:8,color:'#999',lineHeight:13,fontFamily:'JetBrains Mono'}}},
       upperLabel:{show:false},itemStyle:{borderColor:'#18181b',borderWidth:2,gapWidth:2}}]
   });
-}
-
-function switchMoneyFlow(o) {
-  mfOrder = o;
-  document.querySelectorAll('#mf-tabs .index-tab').forEach((b, i) => b.classList.toggle('active', i === o));
-  loadMoneyFlow(o);
 }
 
 // ========================= CASH FLOW =========================
@@ -1100,7 +1192,8 @@ function initCashflow() { loadCashflow(); }
 // ========================= FILL STATS =========================
 function fillAll() {
   // Account cards
-  document.getElementById('acct-cards').innerHTML = store.accounts.map(a => {
+  const accts = activeAccounts();
+  document.getElementById('acct-cards').innerHTML = accts.map(a => {
     const profit = a.positions.reduce((s,p)=>s+(p.profit||0),0);
     const cls = profit>=0?'up':'down';
     return `<div>
@@ -1115,7 +1208,7 @@ function fillAll() {
   }).join('');
 
   // Position table
-  const all = allPositions().sort((a,b)=>Math.abs(b.value)-Math.abs(a.value));
+  const all = allPositions().filter(p => accts.some(a => a.name === p.account)).sort((a,b)=>Math.abs(b.value)-Math.abs(a.value));
   document.getElementById('pos-count').textContent = `共 ${all.length} 只标的`;
   document.getElementById('pos-tbody').innerHTML = all.map(p =>
     `<tr><td>${p.name}</td><td>${p.code}</td><td>${p.count}</td><td>${p.cost?p.cost.toFixed(2):'-'}</td><td>${p.price?p.price.toFixed(2):'-'}</td><td>${fmtM(p.value)}</td><td class="${upDown(p.profit)}">${(p.profit>=0?'+':'')+fmtM(p.profit)}</td><td class="${upDown(p.profit_rate)}">${fmtPct(p.profit_rate)}</td></tr>`
@@ -1134,6 +1227,7 @@ async function refreshAll() {
 }
 
 function renderAll() {
+  buildViewTabs();
   initHoldings();
   initKline();
   initIndex();
