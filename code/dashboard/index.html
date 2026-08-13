@@ -90,13 +90,12 @@
   body.privacy .acct-led-profit,
   body.privacy .acct-led-pct { filter: blur(5px); user-select: none; }
   body.privacy #chart-monthly,
+  body.privacy #chart-mf,
+  body.privacy #chart-holdings,
   body.privacy #cash-tbody td:nth-child(5),
   body.privacy #wl-tbody td:nth-child(2),
   body.privacy #wl-tbody td:nth-child(3),
-  body.privacy .wl-avg,
-  body.privacy #mf-tbody td:nth-child(2),
-  body.privacy #mf-tbody td:nth-child(3),
-  body.privacy #mf-tbody td:nth-child(4) { filter: blur(5px); user-select: none; }
+  body.privacy .wl-avg { filter: blur(5px); user-select: none; }
 
   /* Account ledgers */
   .account-ledgers { flex: 1; display: flex; flex-direction: column; gap: 4px; }
@@ -110,17 +109,10 @@
   .acct-led-fill { height: 100%; background: #666; border-radius: 2px; }
   .acct-led-rate { font-size: 10px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; }
 
-  /* Gauge */
-  .gauge-wrap { display: flex; align-items: center; gap: 10px; flex: 1; }
-  .gauge-chart { flex: 1; min-height: 0; }
-  .gauge-num { font-family: 'JetBrains Mono', monospace; font-size: 42px; font-weight: 700; color: var(--orange); letter-spacing: 4px; min-width: 72px; text-align: center; }
-  .gauge-label { font-size: 10px; color: var(--text-2); text-align: center; margin-top: 2px; }
-  .gauge-date { font-size: 9px; color: var(--text-3); text-align: center; margin-top: 4px; }
-  .seg-bar { display: flex; gap: 2px; height: 4px; margin-top: 8px; }
-  .seg-bar span { flex: 1; background: #333; border-radius: 1px; }
-  .seg-bar span.active { background: var(--orange); }
+  .treemap-legend { display: flex; gap: 12px; font-size: 9px; color: var(--text-3); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+  .treemap-legend .dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 3px; }
 
-  /* OHLC */
+  .index-tabs { display: flex; gap: 4px; margin-bottom: 8px; }
   .ohlc-row { display: flex; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-2); margin-bottom: 6px; flex-wrap: wrap; }
   .ohlc-row .label { color: var(--text-3); }
   .ohlc-row .val { color: var(--text-1); font-weight: 600; }
@@ -217,16 +209,8 @@
   </div>
 
   <div class="card col-1">
-    <div class="card-title">A股市场温度 // 持仓情绪</div>
-    <div class="gauge-wrap">
-      <div class="gauge-chart" id="chart-gauge"></div>
-      <div>
-        <div class="gauge-num" id="gauge-num">--</div>
-        <div class="gauge-label" id="gauge-label">--</div>
-        <div class="gauge-date" id="gauge-date">--</div>
-      </div>
-    </div>
-    <div class="seg-bar" id="seg-bar"></div>
+    <div class="card-title">PORTFOLIO // 账户概览</div>
+    <div id="acct-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;flex:1;"></div>
   </div>
 
   <!-- 收盘价折线 / K线 -->
@@ -252,6 +236,14 @@
     </div>
   </div>
 
+  <!-- 每日盈亏日历 -->
+  <div class="card col-2">
+    <div class="card-title">P&L CALENDAR // 每日盈亏</div>
+    <div id="monthly-status" style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;"></div>
+    <div class="index-tabs" id="monthly-tabs"></div>
+    <div class="chart-box" id="chart-monthly"></div>
+  </div>
+
   <!-- 自选行情 -->
   <div class="card col-2 row-2">
     <div class="card-title">
@@ -273,37 +265,23 @@
     </div>
   </div>
 
+  <!-- 资金流向 -->
   <div class="card col-2 row-2">
-    <div class="card-title">HEAT WALL // 持仓权重</div>
-    <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;">
-      <span id="treemap-status">--</span>
-      <span style="margin-left:8px;" id="treemap-time"></span>
+    <div class="card-title">
+      MONEY FLOW // 资金流向
+      <span id="mf-tabs" style="margin-left:auto;display:flex;gap:2px;">
+        <button class="index-tab active" onclick="switchMoneyFlow(0)">主力净流入</button>
+        <button class="index-tab" onclick="switchMoneyFlow(1)">主力净流出</button>
+      </span>
     </div>
-    <div class="chart-box" id="chart-treemap"></div>
+    <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;">
+      <span id="mf-status">--</span><span style="margin-left:8px;" id="mf-time"></span>
+    </div>
+    <div class="chart-box" id="chart-mf"></div>
     <div class="treemap-legend">
       <span><span class="dot" style="background:var(--up)"></span>涨</span>
       <span><span class="dot" style="background:var(--down)"></span>跌</span>
-      <span><span class="dot" style="background:#444"></span>平</span>
-      <span style="margin-left:auto;">块面积 = 市值</span>
-    </div>
-  </div>
-
-  <div class="card col-1">
-    <div class="card-title">PORTFOLIO // 账户概览</div>
-    <div id="acct-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;flex:1;"></div>
-  </div>
-
-  <!-- 资金流向 -->
-  <div class="card col-1">
-    <div class="card-title">MONEY FLOW // 资金流向</div>
-    <div class="index-tabs" id="mf-tabs">
-      <button class="index-tab active" onclick="switchMoneyFlow(0)">主力净流入</button>
-      <button class="index-tab" onclick="switchMoneyFlow(1)">主力净流出</button>
-    </div>
-    <div class="scroll-y">
-      <table class="pos-mini"><thead><tr>
-        <th>名称</th><th>现价</th><th>涨跌幅</th><th>主力净流入</th>
-      </tr></thead><tbody id="mf-tbody"></tbody></table>
+      <span style="margin-left:auto;">块面积 = 主力净流入额</span>
     </div>
   </div>
 
@@ -320,20 +298,26 @@
     <div style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-top:4px;" id="index-range"></div>
   </div>
 
-  <!-- 月度收益 -->
-  <div class="card col-1">
-    <div class="card-title">MONTHLY P&L // 月度收益 <span style="font-size:9px;color:var(--text-3);margin-left:auto;font-family:'JetBrains Mono',monospace;">¥/月</span></div>
-    <div id="monthly-status" style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;"></div>
-    <div class="index-tabs" id="monthly-tabs"></div>
-    <div class="chart-box" id="chart-monthly" style="height:160px;"></div>
-  </div>
-
   <div class="card col-2 row-2">
     <div class="card-title">POSITIONS // 持仓明细 <span style="font-weight:400;font-size:10px;color:var(--text-3);margin-left:8px;" id="pos-count"></span></div>
     <div class="scroll-y" style="flex:1;">
       <table class="pos-mini"><thead><tr>
         <th>名称</th><th>代码</th><th>持仓</th><th>成本</th><th>现价</th><th>市值</th><th>盈亏</th><th>盈亏%</th>
       </tr></thead><tbody id="pos-tbody"></tbody></table>
+    </div>
+  </div>
+
+  <!-- 持仓权重（横向柱形图） -->
+  <div class="card col-1">
+    <div class="card-title">HOLDINGS // 持仓权重</div>
+    <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;">
+      <span id="holdings-status">--</span><span style="margin-left:8px;" id="holdings-time"></span>
+    </div>
+    <div class="chart-box" id="chart-holdings"></div>
+    <div class="treemap-legend">
+      <span><span class="dot" style="background:var(--up)"></span>涨</span>
+      <span><span class="dot" style="background:var(--down)"></span>跌</span>
+      <span style="margin-left:auto;">条长 = 市值</span>
     </div>
   </div>
 
@@ -479,11 +463,10 @@ function buildSessions() {
     return;
   }
   const now = new Date();
-  const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  const currentMonth = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`;
   container.innerHTML = store.accounts.map(a => {
-    const arr = monthlyData[a.name] || [];
-    const m = arr.find(d => d.month === currentMonth) || arr[arr.length - 1] || { profit: 0, month: currentMonth };
-    const profit = parseFloat(m.profit) || 0;
+    const arr = (store.trends[a.name]?.year_profit || []).filter(d => (d.date || '').slice(0,6) === currentMonth);
+    const profit = arr.reduce((s, d) => s + (parseFloat(d.profit) || 0), 0);
     const pct = a.total_asset > 0 ? profit / a.total_asset : 0;
     const rate = parseFloat(a.position_rate) || 0;
     const upCls = upDown(pct);
@@ -505,63 +488,42 @@ function buildSessions() {
   }).join('');
 }
 
-// ========================= GAUGE =========================
-function initGauge() {
-  const chart = echarts.init(document.getElementById('chart-gauge'), 'dark');
-  let totalVal = 0, totalAsset = 0;
-  store.accounts.forEach(a => { totalVal += a.total_value; totalAsset += a.total_asset; });
-  const rate = totalAsset > 0 ? totalVal / totalAsset * 100 : 0;
-  const score = Math.round(rate * 0.7 + 5);
+// ========================= HOLDINGS 横向柱形图 =========================
+let holdingsChart;
+function initHoldings() {
+  const dom = document.getElementById('chart-holdings');
+  if (!holdingsChart) {
+    holdingsChart = echarts.init(dom, 'dark');
+    new ResizeObserver(() => holdingsChart.resize()).observe(dom);
+  }
 
-  document.getElementById('gauge-num').textContent = score;
-  document.getElementById('gauge-label').textContent = rate > 90 ? '重仓' : rate > 60 ? '适中' : '轻仓';
-  document.getElementById('gauge-date').textContent = new Date().toISOString().slice(0,10);
-  document.getElementById('seg-bar').innerHTML =
-    Array.from({length:5},(_,i)=>`<span class="${i===4?'active':''}"></span>`).join('');
-
-  chart.setOption({
-    backgroundColor:'transparent',
-    series:[{type:'gauge',startAngle:210,endAngle:-30,center:['50%','58%'],radius:'80%',min:0,max:100,splitNumber:10,
-      axisLine:{lineStyle:{width:14,color:[[0.25,'#444'],[0.5,'#666'],[0.75,'#f97316'],[1,'#ef4444']]}},
-      pointer:{length:'65%',width:4,itemStyle:{color:'#e4e4e7'}},
-      axisTick:{distance:-14,length:5,lineStyle:{width:1,color:'#555'}},
-      splitLine:{distance:-18,length:12,lineStyle:{width:1.5,color:'#555'}},
-      axisLabel:{color:'#666',fontSize:9,distance:25,fontFamily:'JetBrains Mono'},
-      anchor:{show:true,size:12,itemStyle:{borderWidth:2,borderColor:'#e4e4e7'}},
-      title:{show:false},detail:{show:false},data:[{value:score}]}]
-  });
-  new ResizeObserver(() => chart.resize()).observe(document.getElementById('chart-gauge'));
-}
-
-// ========================= TREEMAP =========================
-function initTreemap() {
-  const chart = echarts.init(document.getElementById('chart-treemap'), 'dark');
-  document.getElementById('treemap-time').textContent = new Date().toLocaleTimeString('zh-CN',{hour12:false});
-
-  // Show upload time status
+  // status
   const uploadTimes = store.accounts.map(a => a.upload_time ? new Date(parseInt(a.upload_time)) : null).filter(Boolean);
   const latest = uploadTimes.length ? new Date(Math.max(...uploadTimes.map(d => d.getTime()))) : null;
-  document.getElementById('treemap-status').textContent = latest
+  document.getElementById('holdings-time').textContent = new Date().toLocaleTimeString('zh-CN',{hour12:false});
+  document.getElementById('holdings-status').textContent = latest
     ? '数据: ' + latest.toLocaleTimeString('zh-CN',{hour12:false})
     : '--';
 
-  const all = allPositions().filter(p => Math.abs(p.value) > 0);
-  const data = all.map(p => ({
-    name:p.name, value:Math.abs(p.value), profit_rate:p.profit_rate, profit:p.profit, code:p.code, account:p.account,
-    itemStyle:{color:p.profit_rate>0.005?upColor+'cc':p.profit_rate>0?upColor+'88':p.profit_rate>-0.005?'#444':p.profit_rate>-0.02?downColor+'88':downColor+'cc'}
-  }));
+  const all = allPositions().filter(p => Math.abs(p.value) > 0).sort((a,b) => a.value - b.value);
+  const names = all.map(p => (p.name.length > 4 ? p.name.slice(0,4)+'~' : p.name));
+  const colorFn = r => r > 0.005 ? upColor+'cc' : r > 0 ? upColor+'88' : r > -0.005 ? '#444' : r > -0.02 ? downColor+'88' : downColor+'cc';
 
-  chart.setOption({
+  holdingsChart.setOption({
     backgroundColor:'transparent',
+    grid:{left:'4%',right:'18%',top:'2%',bottom:'2%',containLabel:false},
+    xAxis:{type:'value',show:false,min:0},
+    yAxis:{type:'category',data:names,axisLine:{show:false},axisTick:{show:false},axisLabel:{color:'#999',fontSize:9,fontFamily:'Noto Sans SC',interval:0},splitLine:{show:false}},
+    dataZoom:[{type:'inside',yAxisIndex:0,start:Math.max(0,100-all.length/20*100),end:100}],
     tooltip:{backgroundColor:'#1a1a1f',borderColor:'#333',textStyle:{fontSize:11,fontFamily:'JetBrains Mono'},
-      formatter:p=>{const d=p.data;if(!d?.profit_rate&&d?.profit_rate!==0)return p.name;
-        return `<b>${d.name}</b> ${d.code}<br/>市值:¥${fmtM(d.value)}<br/>涨跌:<span style="color:${d.profit_rate>=0?upColor:downColor}">${fmtPct(d.profit_rate)}</span><br/>账户:${d.account}`;}},
-    series:[{type:'treemap',data,roam:false,nodeClick:false,breadcrumb:{show:false},
-      label:{show:true,formatter:p=>{const n=(p.name||'').length>4?p.name.slice(0,4)+'~':p.name;const r=p.data?.profit_rate||0;return `{name|${n}}\n{pct|${r>=0?'+':''}${(r*100).toFixed(1)}%}`;},
-        rich:{name:{fontSize:9,color:'#ddd',lineHeight:15},pct:{fontSize:8,color:'#999',lineHeight:13,fontFamily:'JetBrains Mono'}}},
-      upperLabel:{show:false},itemStyle:{borderColor:'#18181b',borderWidth:2,gapWidth:2}}]
+      formatter:p=>{const d=all[p.dataIndex];return `<b>${d.name}</b> ${d.code}<br/>市值:¥${fmtM(d.value)}<br/>涨跌:<span style="color:${d.profit_rate>=0?upColor:downColor}">${fmtPct(d.profit_rate)}</span><br/>账户:${d.account}`;}},
+    series:[{
+      type:'bar',data:all.map(p=>({value:p.value,itemStyle:{color:colorFn(p.profit_rate),borderRadius:[0,2,2,0]}})),
+      barWidth:'60%',
+      label:{show:true,position:'right',color:'#bbb',fontSize:9,fontFamily:'JetBrains Mono',
+        formatter:p=>{const d=all[p.dataIndex];return `${(d.profit_rate*100).toFixed(1)}%`;}}
+    }]
   });
-  new ResizeObserver(()=>chart.resize()).observe(document.getElementById('chart-treemap'));
 }
 
 // ========================= K-LINE (dynamic from Eastmoney, 前复权) =========================
@@ -800,29 +762,8 @@ function updateIndex() {
   });
 }
 
-// ========================= MONTHLY P&L =========================
-let monthlyChart = null, monthlyData = {}, monthlyMode = 'total';
-
-async function loadMonthly() {
-  const st = document.getElementById('monthly-status');
-  st.textContent = '加载中...';
-  st.style.color = 'var(--text-3)';
-  try {
-    const entries = await Promise.all(store.accounts.map(async a => {
-      const resp = await apiFetch(`/caishen_fund/pc/asset/v1/merge_compare?manual_id=${a.manual_id}&fund_key=${a.fund_key}&rzrq_fund_key=&fund_id=&custid=`);
-      return [a.name, resp.ex_data?.profit_compare || []];
-    }));
-    monthlyData = Object.fromEntries(entries);
-    buildMonthlyTabs();
-    updateMonthly();
-    buildSessions();
-    st.textContent = '';
-  } catch (e) {
-    st.textContent = '月度收益加载失败: ' + e.message;
-    st.style.color = '#f87171';
-    monthlyChart.clear();
-  }
-}
+// ========================= P&L CALENDAR 每日盈亏热力图 =========================
+let calendarChart = null, monthlyMode = 'total';
 
 function buildMonthlyTabs() {
   document.getElementById('monthly-tabs').innerHTML =
@@ -836,44 +777,126 @@ function switchMonthly(mode) {
   monthlyMode = mode;
   document.querySelectorAll('#monthly-tabs .index-tab').forEach(t =>
     t.classList.toggle('active', mode === 'total' ? t.textContent.includes('全部') : t.textContent.includes(mode)));
-  updateMonthly();
+  updateCalendar();
 }
 
-function updateMonthly() {
-  if (!monthlyChart) return;
-  let months = [], values = [];
+function getCalendarData() {
+  let data = [];
   if (monthlyMode === 'total') {
     const map = {};
-    Object.values(monthlyData).forEach(arr => arr.forEach(d => { map[d.month] = (map[d.month] || 0) + d.profit; }));
-    months = Object.keys(map).sort();
-    values = months.map(m => map[m]);
+    Object.values(store.trends).forEach(arr => (arr.year_profit || []).forEach(d => {
+      const k = d.date;
+      if (!map[k]) map[k] = { date: k, profit: 0, asset: 0 };
+      map[k].profit += parseFloat(d.profit) || 0;
+      map[k].asset += parseFloat(d.asset) || 0;
+    }));
+    data = Object.values(map).sort((a, b) => a.date.localeCompare(b.date));
   } else {
-    const arr = monthlyData[monthlyMode] || [];
-    months = arr.map(d => d.month);
-    values = arr.map(d => d.profit);
+    data = ((store.trends[monthlyMode]?.year_profit) || []).map(d => ({
+      date: d.date,
+      profit: parseFloat(d.profit) || 0,
+      asset: parseFloat(d.asset) || 0
+    }));
   }
-  if (!months.length) { monthlyChart.clear(); return; }
-  monthlyChart.setOption({
-    backgroundColor: 'transparent',
-    grid: { left: '8%', right: '3%', top: '8%', bottom: '4%' },
-    xAxis: { type: 'category', data: months, axisLabel: { color: '#555', fontSize: 9, formatter: v => v.slice(5) + '月' }, axisLine: { lineStyle: { color: '#333' } }, axisTick: { show: false } },
-    yAxis: { type: 'value', axisLabel: { color: '#555', fontSize: 9, formatter: v => (v / 10000).toFixed(0) + '万' }, splitLine: { lineStyle: { color: '#1a1a22' } }, axisLine: { show: false }, axisTick: { show: false } },
-    series: [{
-      type: 'bar', data: values, barWidth: '55%',
-      itemStyle: { color: p => p.value > 0 ? upColor : p.value < 0 ? downColor : '#3f3f46' }
-    }],
-    tooltip: { trigger: 'axis', backgroundColor: '#1a1a1f', borderColor: '#333', textStyle: { fontSize: 11, fontFamily: 'JetBrains Mono' },
-      formatter: ps => { const p = ps[0]; const c = p.value > 0 ? upColor : p.value < 0 ? downColor : '#999';
-        return p.axisValue + '<br/><span style="color:' + c + '">' + (p.value >= 0 ? '+' : '') + '¥' + p.value.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span>'; } }
+  data = data.filter(d => d.profit !== 0 || d.asset !== 0).map(d => ({
+    ...d,
+    // year_profit 的 date 是 'YYYYMMDD'，ECharts calendar 需要 'YYYY-MM-DD'
+    date: `${d.date.slice(0,4)}-${d.date.slice(4,6)}-${d.date.slice(6)}`,
+  })).sort((a, b) => a.date.localeCompare(b.date));
+
+  // year_profit 的 profit 是「截至当日的历史累计盈亏」，逐日差分才是当日盈亏；
+  // 日收益率 = 当日盈亏 / 前一日资产
+  return data.map((d, i) => {
+    const daily = d.profit - (i > 0 ? data[i-1].profit : 0);
+    const prevAsset = i > 0 ? data[i-1].asset : 0;
+    return { ...d, daily, rate: prevAsset > 0 ? daily / prevAsset : 0 };
   });
 }
 
-function initMonthly() {
-  if (!monthlyChart) {
-    monthlyChart = echarts.init(document.getElementById('chart-monthly'), 'dark');
-    new ResizeObserver(() => monthlyChart.resize()).observe(document.getElementById('chart-monthly'));
+function calendarColor(rate) {
+  if (rate === 0) return '#3f3f46';
+  if (rate >= 0.02) return '#ef4444';
+  if (rate >= 0.005) return '#b91c1c';
+  if (rate > 0) return '#7f1d1d';
+  if (rate <= -0.02) return '#22c55e';
+  if (rate <= -0.005) return '#15803d';
+  return '#14532d';
+}
+
+function updateCalendar() {
+  if (!calendarChart) return;
+  const data = getCalendarData();
+  const st = document.getElementById('monthly-status');
+  if (!data.length) {
+    st.textContent = '暂无每日盈亏数据';
+    st.style.color = '#f87171';
+    calendarChart.clear();
+    return;
   }
-  loadMonthly();
+  st.style.color = 'var(--text-3)';
+
+  const startDate = data[0].date;
+  const endDate = data[data.length - 1].date;
+  // 区间盈亏 = 末日累计盈亏 - 首日累计盈亏（profit 是累计值，不能逐日累加）
+  const totalProfit = data[data.length - 1].profit - data[0].profit;
+  const startAsset = data[0].asset - data[0].profit;
+  const endAsset = data[data.length - 1].asset;
+  const totalRate = startAsset > 0 ? (data[data.length - 1].profit - data[0].profit) / startAsset : 0;
+  st.textContent = `区间盈亏 ${totalProfit >= 0 ? '+' : ''}¥${fmtM(totalProfit)} · 区间收益率 ${fmtPct(totalRate)} · ${data.length} 个交易日`;
+
+  const heatmapData = data.map(d => [d.date, +d.rate.toFixed(4)]);
+
+  calendarChart.setOption({
+    backgroundColor: 'transparent',
+    tooltip: {
+      backgroundColor: '#1a1a1f', borderColor: '#333', textStyle: { fontSize: 11, fontFamily: 'JetBrains Mono' },
+      formatter: p => {
+        const d = data.find(x => x.date === p.value[0]);
+        const c = d.daily >= 0 ? upColor : downColor;
+        return `${d.date}<br/><span style="color:${c}">${d.daily >= 0 ? '+' : ''}¥${d.daily.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span><br/>日收益率 ${fmtPct(d.rate)}`;
+      }
+    },
+    visualMap: {
+      show: false,
+      min: -0.03, max: 0.03,
+      inRange: { color: ['#22c55e', '#15803d', '#14532d', '#3f3f46', '#7f1d1d', '#b91c1c', '#ef4444'] },
+      pieces: [
+        { min: 0.02, color: '#ef4444' },
+        { min: 0.005, max: 0.02, color: '#b91c1c' },
+        { min: 0, max: 0.005, color: '#7f1d1d' },
+        { value: 0, color: '#3f3f46' },
+        { min: -0.005, max: 0, color: '#14532d' },
+        { min: -0.02, max: -0.005, color: '#15803d' },
+        { max: -0.02, color: '#22c55e' }
+      ]
+    },
+    calendar: {
+      top: 20, left: 28, right: 8, bottom: 8,
+      range: [startDate, endDate],
+      cellSize: ['auto', 14],
+      splitLine: { show: false },
+      itemStyle: { borderColor: '#18181b', borderWidth: 2, color: '#18181b' },
+      dayLabel: { color: '#555', fontSize: 8, firstDay: 1, nameMap: 'cn' },
+      monthLabel: { color: '#555', fontSize: 9 },
+      yearLabel: { show: false },
+      dayGap: 2
+    },
+    series: [{
+      type: 'heatmap',
+      coordinateSystem: 'calendar',
+      data: heatmapData,
+      itemStyle: { color: p => calendarColor(p.value[1]) }
+    }]
+  });
+}
+
+function initCalendar() {
+  if (!calendarChart) {
+    calendarChart = echarts.init(document.getElementById('chart-monthly'), 'dark');
+    new ResizeObserver(() => calendarChart.resize()).observe(document.getElementById('chart-monthly'));
+  }
+  buildMonthlyTabs();
+  updateCalendar();
 }
 
 // ========================= WATCHLIST =========================
@@ -920,16 +943,16 @@ function renderWatchlist() {
 
 function initWatchlist() { loadWatchlist(); }
 
-// ========================= MONEY FLOW =========================
-let mfOrder = 0;
+// ========================= MONEY FLOW (treemap) =========================
+let mfOrder = 0, mfChart;
 const mfCache = {};
 
 function initMoneyFlow() { loadMoneyFlow(0); }
 
 async function loadMoneyFlow(order) {
-  const tbody = document.getElementById('mf-tbody');
   if (mfCache[order]) { renderMoneyFlow(order); return; }
-  tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#666;">加载中...</td></tr>';
+  document.getElementById('mf-status').textContent = '加载中...';
+  document.getElementById('mf-status').style.color = 'var(--text-3)';
   try {
     const r = await fetch(`/proxy/moneyflow?order=${order === 0 ? 'desc' : 'asc'}&num=12`);
     const data = await r.json();
@@ -937,24 +960,51 @@ async function loadMoneyFlow(order) {
     mfCache[order] = data;
     renderMoneyFlow(order);
   } catch (e) {
-    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:#f87171;">资金流向加载失败: ${e.message}</td></tr>`;
+    document.getElementById('mf-status').textContent = '资金流向加载失败: ' + e.message;
+    document.getElementById('mf-status').style.color = '#f87171';
   }
 }
 
 function renderMoneyFlow(order) {
+  const dom = document.getElementById('chart-mf');
+  if (!mfChart) {
+    mfChart = echarts.init(dom, 'dark');
+    new ResizeObserver(() => mfChart.resize()).observe(dom);
+  }
+
   // 过滤 ETF/货币基金 (sh51/58, sz15)
   const rows = (mfCache[order] || []).filter(x => !/^(sh[15]|sz15)/.test(x.symbol || '')).slice(0, 10);
-  const tbody = document.getElementById('mf-tbody');
-  tbody.innerHTML = rows.length ? rows.map(x => {
-    const main = parseFloat(x.r0_net) || 0;   // 主力净流入
-    const pct = (parseFloat(x.changeratio) || 0) * 100;
-    return `<tr title="${x.symbol}">
-      <td>${x.name}</td>
-      <td>${(parseFloat(x.trade) || 0).toFixed(2)}</td>
-      <td class="${upDown(pct)}">${fmtPct(pct / 100)}</td>
-      <td class="${main >= 0 ? 'up' : 'down'}">${main >= 0 ? '+' : ''}${fmtM(main)}</td>
-    </tr>`;
-  }).join('') : '<tr><td colspan="4" style="text-align:center;color:#666;">暂无数据</td></tr>';
+  if (!rows.length) {
+    // 用 ECharts title 显示占位，勿动 dom.innerHTML（会删除 ECharts 创建的 canvas）
+    mfChart.clear();
+    mfChart.setOption({
+      backgroundColor:'transparent',
+      title:{text:'暂无数据',left:'center',top:'middle',textStyle:{fontSize:12,color:'#666',fontFamily:'JetBrains Mono'}}
+    });
+    return;
+  }
+
+  document.getElementById('mf-time').textContent = new Date().toLocaleTimeString('zh-CN',{hour12:false});
+  document.getElementById('mf-status').textContent = order === 0 ? '主力净流入榜' : '主力净流出榜';
+  document.getElementById('mf-status').style.color = 'var(--text-3)';
+
+  const colorFn = r => r > 0.005 ? upColor+'cc' : r > 0 ? upColor+'88' : r > -0.005 ? '#444' : r > -0.02 ? downColor+'88' : downColor+'cc';
+  const data = rows.map(x => ({
+    name: x.name,
+    value: Math.max(1, Math.abs(parseFloat(x.r0_net) || 0)),
+    symbol: x.symbol || '', trade: parseFloat(x.trade) || 0, changeratio: (parseFloat(x.changeratio) || 0), r0_net: parseFloat(x.r0_net) || 0,
+    itemStyle: { color: colorFn(parseFloat(x.changeratio) || 0) }
+  }));
+
+  mfChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{backgroundColor:'#1a1a1f',borderColor:'#333',textStyle:{fontSize:11,fontFamily:'JetBrains Mono'},
+      formatter:p=>{const d=p.data;return `<b>${d.name}</b> ${d.symbol}<br/>现价:¥${d.trade.toFixed(2)}<br/>涨跌:<span style="color:${d.changeratio>=0?upColor:downColor}">${fmtPct(d.changeratio)}</span><br/>主力净流入:${d.r0_net>=0?'+':''}¥${fmtM(d.r0_net)}`;}},
+    series:[{type:'treemap',data,roam:false,nodeClick:false,breadcrumb:{show:false},
+      label:{show:true,formatter:p=>{const n=(p.name||'').length>4?p.name.slice(0,4)+'~':p.name;const r=p.data?.changeratio||0;return `{name|${n}}\n{pct|${r>=0?'+':''}${(r*100).toFixed(1)}%}`;},
+        rich:{name:{fontSize:9,color:'#ddd',lineHeight:15},pct:{fontSize:8,color:'#999',lineHeight:13,fontFamily:'JetBrains Mono'}}},
+      upperLabel:{show:false},itemStyle:{borderColor:'#18181b',borderWidth:2,gapWidth:2}}]
+  });
 }
 
 function switchMoneyFlow(o) {
@@ -1084,12 +1134,11 @@ async function refreshAll() {
 }
 
 function renderAll() {
-  initGauge();
-  initTreemap();
+  initHoldings();
   initKline();
   initIndex();
   fillAll();
-  initMonthly();
+  initCalendar();
   buildSessions();
   initWatchlist();
   initMoneyFlow();

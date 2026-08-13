@@ -43,23 +43,23 @@ dashboard/
 CSS Grid 四列布局，`grid-auto-rows: 240px`，卡片按内容高度自适应（`row-2` 跨 2 行），6 行全部填满无空隙：
 
 ```
-┌───────────┬───────────┬─────────────┬───────────┐
-│ ACCOUNTS  │ 市场温度    │ CANDLESTICK  │ CANDLESTICK│
-│ 账户红绿灯  │           │ (row-2, 2列宽) │           │
-├───────────┼───────────┼─────────────┼───────────┤
-│ WATCHLIST │ WATCHLIST │ CANDLESTICK  │ CANDLESTICK│
-│ (row-2,2列)│           │             │           │
-├───────────┼───────────┼─────────────┼───────────┤
-│ WATCHLIST │ WATCHLIST │ HEAT WALL    │ HEAT WALL │
-│           │           │ (row-2, 2列宽) │           │
-├───────────┼───────────┼─────────────┼───────────┤
-│ PORTFOLIO │ 资金流向    │ HEAT WALL    │ HEAT WALL │
-├───────────┼───────────┼─────────────┼───────────┤
-│ INDEX TAPE│ MONTHLY   │ POSITIONS    │ POSITIONS │
-│ (row-2)   │           │ (row-2, 2列宽) │           │
-├───────────┼───────────┼─────────────┼───────────┤
-│ INDEX TAPE│ CASH FLOW │ POSITIONS    │ POSITIONS │
-└───────────┴───────────┴─────────────┴───────────┘
+┌───────────┬───────────┬─────────────┬─────────────┐
+│ ACCOUNTS  │ PORTFOLIO │ CANDLESTICK │ CANDLESTICK │
+│ 账户红绿灯  │ 账户概览   │ (2×2, 2列宽) │             │
+├───────────┴───────────┼─────────────┴─────────────┤
+│ P&L CALENDAR 每日盈亏    │ CANDLESTICK               │
+│ (col-2, 日历热力图)      │                           │
+├───────────┬───────────┼─────────────┬─────────────┤
+│ WATCHLIST │ WATCHLIST │ MONEY FLOW  │ MONEY FLOW  │
+│ (2×2, 2列)│           │ (2×2  treemap)│             │
+├───────────┴───────────┼─────────────┴─────────────┤
+│ WATCHLIST             │ MONEY FLOW                │
+├───────────┬───────────┼─────────────┬─────────────┤
+│ INDEX TAPE│ POSITIONS │ POSITIONS   │ HOLDINGS    │
+│ (row-2)   │ (2×2, 2列)│             │ 横向柱形图    │
+├───────────┴───────────┼─────────────┼─────────────┤
+│ INDEX TAPE            │ POSITIONS   │ CASH FLOW   │
+└───────────────────────┴─────────────┴─────────────┘
 ```
 
 响应式：≤1400px 两列（跨行卡折为单行 240px）、≤680px 单列。
@@ -78,10 +78,10 @@ CSS Grid 四列布局，`grid-auto-rows: 240px`，卡片按内容高度自适应
 | 持仓明细（26 只标的） | `stock_position` | 随账户数据同步 |
 | 资产净值走势（Tab 切换账户） | `asset_trend` API | 打开页面自动加载 |
 | 收盘价折线图（60 交易日 + MA5/10/20） | `getQuotes` API 逐日查询 | 切换标的时按需拉取 + 缓存 |
-| 月度收益（每账户近 12 个月盈亏） | `merge_compare` API | 打开页面自动加载（3 账户并行） |
+| 每日盈亏日历（GitHub 贡献图风格，按日收益率分档红绿） | `asset_trend` `year_profit` | 打开页面自动加载 |
 | 资金流水（近 30 天交易/入账记录） | `get_money_history` API | 打开页面加载第 1 页，翻页按需追加 |
 | 自选行情（213 只自选涨跌分布 + 列表） | `sort_list` + `rise_fall` | 打开页面自动加载 |
-| 资金流向（全市场主力净流入/流出榜） | 新浪 `MoneyFlow.ssl_bkzj_ssggzj` | 打开页面自动加载，Tab 切换 |
+| 资金流向（全市场主力净流入/流出榜，treemap 热力图） | 新浪 `MoneyFlow.ssl_bkzj_ssggzj` | 打开页面自动加载，Tab 切换 |
 | K 线图（OHLC 蜡烛图，前复权 120 日） | 腾讯 `web.ifzq.gtimg.cn/appstock/app/fqkline/get` | 切换 K 线模式时按需拉取 + 缓存 |
 
 空账户过滤：`store.accounts` 统一过滤「空空如也」空账户，所有卡片自动隐藏。
@@ -89,17 +89,16 @@ CSS Grid 四列布局，`grid-auto-rows: 240px`，卡片按内容高度自适应
 ### UI 组件
 
 1. **账户红绿灯** — 每账户一行：本月盈亏额 + 盈亏率（红涨绿跌）+ 仓位进度条（>90% 红 / >60% 橙 / 其余绿）
-2. **持仓情绪温度计** — 半圆仪表盘，仓位率映射为 0-100 温度分，配分段色条
-3. **HEAT WALL 持仓权重** — 树图按市值面积 + 涨跌红绿着色，悬浮显示详情
+2. **P&L CALENDAR 每日盈亏** — GitHub 贡献图风格日历热力图：每个交易日一格，按日收益率分红（正）/绿（负）多档强度；Tab 总合计 / 各账户；统计区间盈亏与区间收益率
+3. **HOLDINGS 持仓权重** — 横向柱形图：按市值横向展开，红涨绿跌着色，右侧标注涨跌幅；dataZoom 支持滚动
 4. **WATCHLIST 自选行情** — 213 只自选 ↑↓ 计数 + 红绿分布条 + 平均涨跌幅，列表排序切换（涨跌幅↓ / 自选顺序 / 代码），卡片内滚动，只读
 5. **收盘价折线 / K 线图** — 标题栏「折线 | K线」一键切换：折线模式用同花顺 60 日收盘价（含 MA5/10/20 面积图），K 线模式用腾讯前复权 120 日蜡烛图（红涨绿跌 + 成交量 + MA + 缩放条），下拉选择器按账户分组列出全部持仓
 6. **持仓明细表** — 按市值排序，8 列：名称/代码/持仓/成本/现价/市值/盈亏/盈亏%
 7. **账户概览** — 3 账户资产/市值/仓位小卡
 8. **资产净值走势** — Tab 切换：全部合计 / 宁静致远 / 淡泊明志，大字号指数值 + 面积图
-9. **月度收益** — 每账户近 12 个月盈亏柱状图（正红负绿，profit=0 灰色小柱），Tab：总合计 / 各账户，总合计为客户端同月求和
+9. **资金流向** — 全市场主力净流入/流出 treemap 热力图：面积 = 主力净流入额，颜色 = 红涨绿跌；Tab 净流入/净流出；过滤 ETF，悬浮显示现价、涨跌幅、主力净流入
 10. **资金流水** — Tab 切换账户，表格：日期/名称/操作/数量/金额/备注，操作列彩色徽章（交易橙 / 资金蓝），「加载更多」翻页到顶自动隐藏
-11. **资金流向** — 全市场主力净流入 Top10（Tab 切换净流入/净流出榜），列：名称/现价/涨跌幅/主力净流入，红涨绿跌，过滤 ETF
-12. **隐私模式** — 👁 一键模糊全部金额，顶栏 LIVE 时钟 + ⟳ 手动刷新
+11. **隐私模式** — 👁 一键模糊全部金额，顶栏 LIVE 时钟 + ⟳ 手动刷新
 
 ### 服务端（server.js）
 
@@ -115,11 +114,10 @@ CSS Grid 四列布局，`grid-auto-rows: 240px`，卡片按内容高度自适应
 1. **无 K 线（OHLC）数据** — 同花顺投资账本是持仓管理工具，其 API 只提供收盘价（`getQuotes`），无开盘/最高/最低/成交量，因此用收盘价折线替代蜡烛图
 2. **收盘价查询较慢** — 首次查询某标的需 60 次 API 调用（约 2-3 秒），前端有缓存，二次查询秒出
 3. **市场代码映射** — `getQuotes` 的 market 参数来自持仓数据（1=沪股/深股、2=沪市基金债券），非通用规则
-4. **资产走势无资金进出修正** — `asset_trend` 返回的净值含资金流入流出影响，非纯投资收益曲线；月度收益（`merge_compare`）为收益额，不含资金进出
-5. **胜率不展示** — `merge_compare` 返回的 win_rate 实测基本全 0，无参考价值
-6. **清仓统计接口不可用** — 该账户类型不支持 `cleared_position`（所有参数组合 HTTP 400）
-7. **自选只读** — 看板不提供加删自选功能
-8. **Cookie 过期** — Cookie 失效后需重新从浏览器复制到 `~/.tzzb_cookies`
+4. **资产走势与每日盈亏均含资金进出影响** — `asset_trend` 返回的净值、每日 `profit` 均含资金流入流出影响，非纯投资收益曲线
+5. **清仓统计接口不可用** — 该账户类型不支持 `cleared_position`（所有参数组合 HTTP 400）
+6. **自选只读** — 看板不提供加删自选功能
+7. **Cookie 过期** — Cookie 失效后需重新从浏览器复制到 `~/.tzzb_cookies`
 
 ## 数据源对照
 
@@ -127,8 +125,8 @@ CSS Grid 四列布局，`grid-auto-rows: 240px`，卡片按内容高度自适应
 |------|------|
 | `POST /caishen_fund/pc/account/v1/account_list` | 账户列表 |
 | `POST /caishen_fund/pc/asset/v1/stock_position` | 实时持仓 |
-| `POST /caishen_fund/pc/asset/v1/asset_trend` | 历史资产净值（year/month/total_asset） |
-| `POST /caishen_fund/pc/asset/v1/merge_compare` | 月度盈亏对比（近 12 个月，win_rate 未用） |
+| `POST /caishen_fund/pc/asset/v1/asset_trend` | 历史资产净值（year/month/total_asset；`year_profit` 还用于每日盈亏日历） |
+| `POST /caishen_fund/pc/asset/v1/merge_compare` | [已弃用] 月度盈亏对比（原月度收益柱状图） |
 | `POST /caishen_fund/pc/account/v2/get_money_history` | 资金流水（近 30 天，分页 20 条） |
 | `POST /caishen_fund/pc/optional/v1/sort_list` | 自选列表（现价/涨跌额/涨跌幅/加入时间） |
 | `POST /caishen_fund/pc/optional/v1/rise_fall` | 自选涨跌分布（stock_rise / stock_fall / avg_rate） |
