@@ -47,8 +47,8 @@
     grid-template-areas:
       "acct  portf candl candl"
       "pl    pl    candl candl"
-      "wl    wl    mf    mf"
-      "index cash  mf    mf"
+      "index cash  wl    wl"
+      "hold  hold  wl    wl"
       "hold  hold  mf    mf"
       "pos   pos   pos   pos";
     gap: 12px; max-width: 1800px; margin: 0 auto;
@@ -280,7 +280,7 @@
   </div>
 
   <!-- 资金流向 -->
-  <div class="card col-2 row-3 area-mf">
+  <div class="card col-2 area-mf">
     <div class="card-title">
       MONEY FLOW // 资金流向
     </div>
@@ -840,6 +840,12 @@ function updateIndex() {
 
 // ========================= P&L CALENDAR 每日盈亏热力图 =========================
 let calendarChart = null, monthlyMode = 'total';
+let calendarUpdating = false;
+
+function debounce(fn, ms) {
+  let t = null;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
 
 function buildMonthlyTabs() {
   document.getElementById('monthly-tabs').innerHTML =
@@ -899,14 +905,35 @@ function calendarColor(rate) {
   return '#14532d';
 }
 
+function setCalendarSpan(rows) {
+  const dashboard = document.querySelector('.dashboard');
+  const pl = document.querySelector('.area-pl');
+  if (!dashboard || !pl) return;
+  const n = Math.max(1, Math.min(4, rows));
+  // 只在与上次不同时才改写 grid，避免重排循环
+  const current = pl.dataset.span;
+  if (current && Number(current) === n) return;
+  pl.dataset.span = String(n);
+  pl.style.gridRow = `span ${n}`;
+  const areas = {
+    1: `"acct  portf candl candl" "pl    pl    candl candl" "index cash  wl    wl" "hold  hold  wl    wl" "hold  hold  mf    mf" "pos   pos   pos   pos"`,
+    2: `"acct  portf candl candl" "pl    pl    candl candl" "pl    pl    wl    wl" "index cash  mf    mf" "hold  hold  mf    mf" "pos   pos   pos   pos"`,
+    3: `"acct  portf candl candl" "pl    pl    candl candl" "pl    pl    wl    wl" "pl    pl    mf    mf" "index cash  mf    mf" "hold  hold  pos   pos"`,
+    4: `"acct  portf candl candl" "pl    pl    candl candl" "pl    pl    wl    wl" "pl    pl    mf    mf" "pl    pl    mf    mf" "index cash  hold  pos"`
+  };
+  dashboard.style.gridTemplateAreas = areas[n];
+}
+
 function updateCalendar() {
-  if (!calendarChart) return;
+  if (!calendarChart || calendarUpdating) return;
+  calendarUpdating = true;
   const data = getCalendarData();
   const st = document.getElementById('monthly-status');
   if (!data.length) {
     st.textContent = '暂无每日盈亏数据';
     st.style.color = '#f87171';
     calendarChart.clear();
+    calendarUpdating = false;
     return;
   }
   st.style.color = 'var(--text-3)';
@@ -921,6 +948,47 @@ function updateCalendar() {
   st.textContent = `区间盈亏 ${totalProfit >= 0 ? '+' : ''}¥${fmtM(totalProfit)} · 区间收益率 ${fmtPct(totalRate)} · ${data.length} 个交易日`;
 
   const heatmapData = data.map(d => [d.date, +d.rate.toFixed(4)]);
+
+  // ECharts calendar 是单条横向带（宽=周数×格宽，高=7×格高），且同时指定
+  // left/right/top/bottom 会把 cellSize 强制归一为 'auto'，导致格子被拉伸成矩形。
+  // 这里只用一条连续横向 calendar，按容器宽度和固定单行高度反算正方形格子，
+  // 并让卡片 grid-row span 保持 1，使卡片高度刚好包住日历，不留上下白边。
+  const calBox = document.getElementById('chart-monthly');
+  const W = calBox.clientWidth;
+  const [sy, sm, sd] = startDate.split('-').map(Number);
+  const [ey, em, ed] = endDate.split('-').map(Number);
+  const days = Math.round((Date.UTC(ey, em - 1, ed) - Date.UTC(sy, sm - 1, sd)) / 86400000) + 1;
+  const firstDay = (new Date(sy, sm - 1, sd).getDay() + 6) % 7; // 周一=0，与 dayLabel.firstDay=1 一致
+  const weeks = Math.floor((days + firstDay + 6) / 7);
+  const rowLabelH = 16;
+  const rows = 1;
+  // 卡片固定只占 1 行网格（240px），日历垂直居中填充
+  const cardH = 240;
+  const availH = cardH - 34; // 减去 card 上下 padding
+  const calSize = Math.max(8, Math.min(24, Math.floor(Math.min(
+    (W - 36) / weeks,
+    (availH - rowLabelH) / 7
+  ))));
+  const calTop = Math.max(20, Math.floor((cardH - 34 - 7 * calSize - rowLabelH) / 2));
+  const calLeft = Math.max(4, Math.floor((W - weeks * calSize) / 2));
+
+  const calendars = [{
+    top: calTop, left: calLeft,
+    range: [startDate, endDate],
+    cellSize: [calSize, calSize],
+    splitLine: { show: false },
+    itemStyle: { borderColor: '#18181b', borderWidth: 2, color: '#18181b' },
+    dayLabel: { color: '#555', fontSize: 8, firstDay: 1, nameMap: 'cn' },
+    monthLabel: { color: '#555', fontSize: 9 },
+    yearLabel: { show: false },
+    dayGap: 2
+  }];
+  const series = [{
+    type: 'heatmap',
+    coordinateSystem: 'calendar',
+    data: heatmapData,
+    itemStyle: { color: p => calendarColor(p.value[1]), borderRadius: 2 }
+  }];
 
   calendarChart.setOption({
     backgroundColor: 'transparent',
@@ -946,30 +1014,18 @@ function updateCalendar() {
         { max: -0.02, color: '#22c55e' }
       ]
     },
-    calendar: {
-      top: 20, left: 28, right: 8, bottom: 8,
-      range: [startDate, endDate],
-      cellSize: ['auto', 14],
-      splitLine: { show: false },
-      itemStyle: { borderColor: '#18181b', borderWidth: 2, color: '#18181b' },
-      dayLabel: { color: '#555', fontSize: 8, firstDay: 1, nameMap: 'cn' },
-      monthLabel: { color: '#555', fontSize: 9 },
-      yearLabel: { show: false },
-      dayGap: 2
-    },
-    series: [{
-      type: 'heatmap',
-      coordinateSystem: 'calendar',
-      data: heatmapData,
-      itemStyle: { color: p => calendarColor(p.value[1]) }
-    }]
+    calendar: calendars,
+    series
   });
+  setCalendarSpan(rows);
+  calendarUpdating = false;
 }
 
 function initCalendar() {
   if (!calendarChart) {
     calendarChart = echarts.init(document.getElementById('chart-monthly'), 'dark');
-    new ResizeObserver(() => calendarChart.resize()).observe(document.getElementById('chart-monthly'));
+    const debouncedUpdate = debounce(() => { calendarChart.resize(); updateCalendar(); }, 200);
+    new ResizeObserver(() => { calendarChart.resize(); debouncedUpdate(); }).observe(document.getElementById('chart-monthly'));
   }
   buildMonthlyTabs();
   updateCalendar();
