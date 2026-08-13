@@ -74,6 +74,31 @@ function proxyAPI(reqPath, method, cookie, res) {
   req.end();
 }
 
+// 外部行情代理（腾讯K线 / 新浪资金流），带防盗链头
+function proxyExternal(urlStr, referer, res) {
+  console.log(`  ↳ GET ${urlStr.slice(0, 90)}`);
+  const req = https.get(urlStr, {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Referer': referer,
+    }
+  }, (proxyRes) => {
+    let body = '';
+    proxyRes.on('data', chunk => body += chunk);
+    proxyRes.on('end', () => {
+      res.writeHead(proxyRes.statusCode, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+      });
+      res.end(body);
+    });
+  });
+  req.on('error', (e) => {
+    res.writeHead(502);
+    res.end(JSON.stringify({error: 'Proxy error: ' + e.message}));
+  });
+}
+
 function proxyKline(code, market, res) {
   const cookie = readCookie();
   if (!cookie) { res.writeHead(401); res.end(JSON.stringify({error:'No cookie'})); return; }
@@ -204,6 +229,23 @@ const server = http.createServer((req, res) => {
     const code = pathname.split('/')[2];
     const market = url.searchParams.get('market') || '2';
     if (code) return proxyKline(code, market, res);
+  }
+
+  // 腾讯 K 线（前复权日K，含 OHLC + 成交量）: /proxy/kline?code=sh600519&count=120
+  if (pathname.startsWith('/proxy/kline')) {
+    const code = url.searchParams.get('code') || '';
+    const count = url.searchParams.get('count') || 120;
+    const period = url.searchParams.get('period') || 'day';
+    const target = `https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=${encodeURIComponent(`${code},${period},,,${count},qfq`)}`;
+    return proxyExternal(target, 'https://gu.qq.com/', res);
+  }
+
+  // 新浪个股资金流排行: /proxy/moneyflow?order=desc|asc&num=12
+  if (pathname.startsWith('/proxy/moneyflow')) {
+    const order = url.searchParams.get('order') === 'asc' ? 1 : 0;
+    const num = url.searchParams.get('num') || 12;
+    const target = `https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/MoneyFlow.ssl_bkzj_ssggzj?page=1&num=${num}&sort=netamount&asc=${order}&bankuai=&shichang=`;
+    return proxyExternal(target, 'https://finance.sina.com.cn/', res);
   }
 
   // Static files

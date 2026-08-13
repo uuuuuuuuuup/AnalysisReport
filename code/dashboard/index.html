@@ -93,7 +93,10 @@
   body.privacy #cash-tbody td:nth-child(5),
   body.privacy #wl-tbody td:nth-child(2),
   body.privacy #wl-tbody td:nth-child(3),
-  body.privacy .wl-avg { filter: blur(5px); user-select: none; }
+  body.privacy .wl-avg,
+  body.privacy #mf-tbody td:nth-child(2),
+  body.privacy #mf-tbody td:nth-child(3),
+  body.privacy #mf-tbody td:nth-child(4) { filter: blur(5px); user-select: none; }
 
   /* Account ledgers */
   .account-ledgers { flex: 1; display: flex; flex-direction: column; gap: 4px; }
@@ -139,6 +142,8 @@
   .pos-mini td { text-align: right; padding: 2px 6px; color: var(--text-2); }
   .pos-mini td:first-child { text-align: left; color: var(--text-1); }
   .up { color: var(--up) !important; } .down { color: var(--down) !important; }
+  .kline-mode-btn { background: none; border: none; color: var(--text-3); font-size: 10px; font-family: inherit; padding: 2px 8px; border-radius: 3px; cursor: pointer; }
+  .kline-mode-btn.active { background: #3a3a3f; color: var(--text-1); }
   .scroll-y { overflow-y: auto; flex: 1; scrollbar-width: thin; scrollbar-color: #333 transparent; }
   .acct-card-val { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; }
   .acct-card-sub { font-size: 10px; margin-top: 2px; }
@@ -177,8 +182,11 @@
   .op-badge.trade { background: #f9731626; color: #f97316; }
   .op-badge.fund { background: #448aff26; color: #448aff; }
 
-  @media (max-width: 1400px) { .dashboard { grid-template-columns: 1fr 1fr 1fr; } .row-3 { grid-row: span 2; height: auto; } }
-  @media (max-width: 1000px) { .dashboard { grid-template-columns: 1fr 1fr; } .col-1,.col-2 { grid-column: span 2; } .row-2,.row-3 { grid-row: span 1; height: 240px; } }
+  @media (max-width: 1400px) {
+    .dashboard { grid-template-columns: 1fr 1fr; }
+    .col-1, .col-2 { grid-column: span 2; }
+    .row-2, .row-3 { grid-row: span 1; height: 240px; }
+  }
   @media (max-width: 680px) { .dashboard { grid-template-columns: 1fr; } .col-1,.col-2 { grid-column: span 1; } .row-2,.row-3 { grid-row: span 1; height: 240px; } }
 </style>
 </head>
@@ -221,23 +229,31 @@
     <div class="seg-bar" id="seg-bar"></div>
   </div>
 
+  <!-- 收盘价折线 / K线 -->
   <div class="card col-2 row-2">
-    <div class="card-title">HEAT WALL // 持仓权重</div>
-    <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;">
-      <span id="treemap-status">--</span>
-      <span style="margin-left:8px;" id="treemap-time"></span>
+    <div class="card-title">
+      CANDLESTICK //
+      <select id="kline-symbol" onchange="switchSymbol()" style="
+        background:#222;color:var(--text-1);border:1px solid var(--border);
+        border-radius:4px;padding:2px 6px;font-size:11px;font-family:inherit;
+        cursor:pointer;max-width:280px;
+      "></select>
+      <span style="margin-left:auto;display:flex;gap:2px;background:#222;border-radius:4px;padding:2px;">
+        <button class="kline-mode-btn active" id="km-line" onclick="setKlineMode('line')">折线</button>
+        <button class="kline-mode-btn" id="km-candle" onclick="setKlineMode('candle')">K线</button>
+      </span>
+      <span style="font-size:10px;color:var(--text-3);" id="kline-mode-label">· 收盘价折线 · 60日</span>
     </div>
-    <div class="chart-box" id="chart-treemap"></div>
-    <div class="treemap-legend">
-      <span><span class="dot" style="background:var(--up)"></span>涨</span>
-      <span><span class="dot" style="background:var(--down)"></span>跌</span>
-      <span><span class="dot" style="background:#444"></span>平</span>
-      <span style="margin-left:auto;">块面积 = 市值</span>
+    <div class="ohlc-row" id="ohlc-row">加载中...</div>
+    <div class="chart-box" id="chart-kline"></div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px;">
+      <span style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;">MA5 · MA10 · MA20</span>
+      <span style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;" id="kline-range"></span>
     </div>
   </div>
 
   <!-- 自选行情 -->
-  <div class="card col-1 row-3">
+  <div class="card col-2 row-2">
     <div class="card-title">
       WATCHLIST // 自选行情
       <select id="wl-sort" onchange="renderWatchlist()" style="
@@ -257,30 +273,18 @@
     </div>
   </div>
 
-  <div class="card col-2">
-    <div class="card-title">
-      CANDLESTICK //
-      <select id="kline-symbol" onchange="switchSymbol()" style="
-        background:#222;color:var(--text-1);border:1px solid var(--border);
-        border-radius:4px;padding:2px 6px;font-size:11px;font-family:inherit;
-        cursor:pointer;max-width:280px;
-      "></select>
-      <span style="font-size:10px;color:var(--text-3);">· 收盘价折线 · 60日</span>
+  <div class="card col-2 row-2">
+    <div class="card-title">HEAT WALL // 持仓权重</div>
+    <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;">
+      <span id="treemap-status">--</span>
+      <span style="margin-left:8px;" id="treemap-time"></span>
     </div>
-    <div class="ohlc-row" id="ohlc-row">加载中...</div>
-    <div class="chart-box" id="chart-kline"></div>
-    <div style="display:flex;justify-content:space-between;margin-top:4px;">
-      <span style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;">MA5 · MA10 · MA20</span>
-      <span style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;" id="kline-range"></span>
-    </div>
-  </div>
-
-  <div class="card col-2">
-    <div class="card-title">POSITIONS // 持仓明细 <span style="font-weight:400;font-size:10px;color:var(--text-3);margin-left:8px;" id="pos-count"></span></div>
-    <div class="scroll-y" style="flex:1;">
-      <table class="pos-mini"><thead><tr>
-        <th>名称</th><th>代码</th><th>持仓</th><th>成本</th><th>现价</th><th>市值</th><th>盈亏</th><th>盈亏%</th>
-      </tr></thead><tbody id="pos-tbody"></tbody></table>
+    <div class="chart-box" id="chart-treemap"></div>
+    <div class="treemap-legend">
+      <span><span class="dot" style="background:var(--up)"></span>涨</span>
+      <span><span class="dot" style="background:var(--down)"></span>跌</span>
+      <span><span class="dot" style="background:#444"></span>平</span>
+      <span style="margin-left:auto;">块面积 = 市值</span>
     </div>
   </div>
 
@@ -289,7 +293,21 @@
     <div id="acct-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;flex:1;"></div>
   </div>
 
+  <!-- 资金流向 -->
   <div class="card col-1">
+    <div class="card-title">MONEY FLOW // 资金流向</div>
+    <div class="index-tabs" id="mf-tabs">
+      <button class="index-tab active" onclick="switchMoneyFlow(0)">主力净流入</button>
+      <button class="index-tab" onclick="switchMoneyFlow(1)">主力净流出</button>
+    </div>
+    <div class="scroll-y">
+      <table class="pos-mini"><thead><tr>
+        <th>名称</th><th>现价</th><th>涨跌幅</th><th>主力净流入</th>
+      </tr></thead><tbody id="mf-tbody"></tbody></table>
+    </div>
+  </div>
+
+  <div class="card col-1 row-2">
     <div class="card-title">INDEX TAPE // 资产净值走势</div>
     <div class="index-tabs" id="index-tabs">
       <button class="index-tab active" onclick="switchIndex('total')">全部合计</button>
@@ -308,6 +326,15 @@
     <div id="monthly-status" style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;"></div>
     <div class="index-tabs" id="monthly-tabs"></div>
     <div class="chart-box" id="chart-monthly" style="height:160px;"></div>
+  </div>
+
+  <div class="card col-2 row-2">
+    <div class="card-title">POSITIONS // 持仓明细 <span style="font-weight:400;font-size:10px;color:var(--text-3);margin-left:8px;" id="pos-count"></span></div>
+    <div class="scroll-y" style="flex:1;">
+      <table class="pos-mini"><thead><tr>
+        <th>名称</th><th>代码</th><th>持仓</th><th>成本</th><th>现价</th><th>市值</th><th>盈亏</th><th>盈亏%</th>
+      </tr></thead><tbody id="pos-tbody"></tbody></table>
+    </div>
   </div>
 
   <!-- 资金流水 -->
@@ -579,9 +606,63 @@ async function fetchKline(code) {
   return data;
 }
 
+// 代码 → 腾讯前缀: 6/5/9 → sh, 0/2/3 → sz, 4/8 → bj
+function tencentCode(code) {
+  const c = String(code);
+  return (c.startsWith('6') || c.startsWith('5') || c.startsWith('9')) ? 'sh' + c
+       : (c.startsWith('4') || c.startsWith('8')) ? 'bj' + c
+       : 'sz' + c;
+}
+
+let klineMode = 'line';
+const klineOHLCCache = {};
+
+async function fetchKlineOHLC(code) {
+  if (klineOHLCCache[code]) return klineOHLCCache[code];
+  const r = await fetch(`/proxy/kline?code=${tencentCode(code)}&count=120`);
+  const data = await r.json();
+  if (data.error) throw new Error(data.error);
+  const k = data?.data?.[tencentCode(code)];
+  const rows = k?.qfqday || k?.day || [];
+  if (!rows.length) throw new Error('无K线数据');
+  const out = { dates: [], ohlc: [], volumes: [] };
+  rows.forEach(row => {
+    out.dates.push(row[0]);
+    out.ohlc.push([+row[1], +row[2], +row[4], +row[3]]); // [open, close, low, high]
+    out.volumes.push(+row[5]);
+  });
+  klineOHLCCache[code] = out;
+  return out;
+}
+
+function setKlineMode(mode) {
+  klineMode = mode;
+  document.getElementById('km-line').classList.toggle('active', mode === 'line');
+  document.getElementById('km-candle').classList.toggle('active', mode === 'candle');
+  document.getElementById('kline-mode-label').textContent =
+    mode === 'line' ? '· 收盘价折线 · 60日' : '· 腾讯K线 · 前复权 120日';
+  renderKline();
+}
+
+const klineMA = (arr, p) => arr.map((_, i) => {
+  if (i < p - 1) return null; let s = 0;
+  for (let j = i - p + 1; j <= i; j++) s += arr[j];
+  return +(s / p).toFixed(3);
+});
+
 async function switchSymbol() {
   currentSymbol = document.getElementById('kline-symbol').value;
   await renderKline();
+}
+
+function klineHeader(kd) {
+  const dates = kd.dates, closes = kd.ohlc ? kd.ohlc.map(o => o[1]) : kd.closes;
+  const last = closes[closes.length - 1], prev = closes[closes.length - 2];
+  const change = prev ? (last - prev) / prev : 0;
+  document.getElementById('ohlc-row').innerHTML =
+    `<span><span class="label">最新</span> <span class="val">${last.toFixed(2)}</span></span>` +
+    `<span><span class="label">日涨跌</span> <span class="val" style="color:${change >= 0 ? upColor : downColor}">${(change >= 0 ? '+' : '') + (change * 100).toFixed(2)}%</span></span>`;
+  document.getElementById('kline-range').textContent = dates[0] + ' — ' + dates[dates.length - 1];
 }
 
 async function renderKline() {
@@ -589,23 +670,58 @@ async function renderKline() {
   if (!klineChart) klineChart = echarts.init(dom, 'dark');
 
   try {
+    if (klineMode === 'candle') {
+      const kd = await fetchKlineOHLC(currentSymbol);
+      const { dates, ohlc, volumes } = kd;
+      const closes = ohlc.map(o => o[1]);
+      if (!dates.length) { dom.innerHTML = '<div style="color:#666;text-align:center;padding-top:20%;">无数据</div>'; return; }
+      klineHeader(kd);
+      const volColors = ohlc.map(o => o[1] >= o[0] ? upColor : downColor);
+      klineChart.setOption({
+        backgroundColor: 'transparent',
+        animation: false,
+        grid: [
+          { left: '7%', right: '4%', top: '4%', height: '60%' },
+          { left: '7%', right: '4%', top: '74%', height: '15%' }
+        ],
+        xAxis: [
+          { type: 'category', data: dates, gridIndex: 0, axisLine: { lineStyle: { color: '#333' } }, axisLabel: { color: '#555', fontSize: 9, formatter: v => v.slice(5) }, axisTick: { show: false }, splitLine: { show: false } },
+          { type: 'category', data: dates, gridIndex: 1, axisLine: { lineStyle: { color: '#333' } }, axisLabel: { color: '#555', fontSize: 9, formatter: v => v.slice(5) }, axisTick: { show: false }, splitLine: { show: false } }
+        ],
+        yAxis: [
+          { scale: true, gridIndex: 0, splitNumber: 5, axisLabel: { color: '#555', fontSize: 9 }, splitLine: { lineStyle: { color: '#1a1a22', type: 'dashed' } }, axisLine: { show: false }, axisTick: { show: false } },
+          { gridIndex: 1, splitNumber: 2, axisLabel: { show: false }, splitLine: { show: false }, axisLine: { show: false }, axisTick: { show: false } }
+        ],
+        dataZoom: [
+          { type: 'inside', xAxisIndex: [0, 1], start: 20, end: 100 },
+          { type: 'slider', xAxisIndex: [0, 1], bottom: 0, height: 12, borderColor: '#333', backgroundColor: '#141417', fillerColor: 'rgba(249,115,22,0.15)', handleStyle: { color: '#f97316' }, textStyle: { color: '#555', fontSize: 8 } }
+        ],
+        series: [
+          { name: '日K', type: 'candlestick', data: ohlc, itemStyle: { color: upColor, color0: downColor, borderColor: upColor, borderColor0: downColor } },
+          { name: 'MA5', type: 'line', data: klineMA(closes, 5), smooth: true, lineStyle: { width: 1, color: '#e4e4e7' }, symbol: 'none' },
+          { name: 'MA10', type: 'line', data: klineMA(closes, 10), smooth: true, lineStyle: { width: 1, color: '#e4e4e7', type: 'dashed' }, symbol: 'none' },
+          { name: 'MA20', type: 'line', data: klineMA(closes, 20), smooth: true, lineStyle: { width: 1, color: '#448aff' }, symbol: 'none' },
+          { name: '成交量', type: 'bar', xAxisIndex: 1, yAxisIndex: 1, data: volumes, barWidth: '60%', itemStyle: { color: p => volColors[p.dataIndex] } }
+        ],
+        tooltip: {
+          trigger: 'axis', axisPointer: { type: 'cross' }, backgroundColor: '#1a1a1f', borderColor: '#333',
+          textStyle: { fontSize: 11, fontFamily: 'JetBrains Mono' },
+          formatter: params => {
+            const i = params[0].dataIndex;
+            const o = ohlc[i], chg = o[1] >= o[0], diff = (o[1] - o[0]).toFixed(2);
+            return `${dates[i]}<br/>开 ${o[0].toFixed(2)}　高 <span style="color:${upColor}">${o[3].toFixed(2)}</span><br/>低 <span style="color:${downColor}">${o[2].toFixed(2)}</span>　收 ${o[1].toFixed(2)}<br/>涨跌 <span style="color:${chg ? upColor : downColor}">${chg ? '+' : ''}${diff}</span>　量 ${fmtM(volumes[i])}`;
+          }
+        }
+      });
+      klineChart.resize();
+      return;
+    }
+
     const kd = await fetchKline(currentSymbol);
     const dates = kd.dates, closes = kd.closes;
 
     if (!dates.length) { dom.innerHTML = '<div style="color:#666;text-align:center;padding-top:20%;">无数据</div>'; return; }
-
-    const last = closes[closes.length-1], prev = closes[closes.length-2];
-    const change = prev ? (last-prev)/prev : 0;
-    document.getElementById('ohlc-row').innerHTML =
-      `<span><span class="label">最新</span> <span class="val">${last.toFixed(2)}</span></span>` +
-      `<span><span class="label">日涨跌</span> <span class="val" style="color:${change>=0?upColor:downColor}">${(change>=0?'+':'')+(change*100).toFixed(2)}%</span></span>`;
-    document.getElementById('kline-range').textContent = dates[0]+' — '+dates[dates.length-1];
-
-    const ma = (arr,p) => arr.map((_,i) => {
-      if (i<p-1) return null; let s=0;
-      for (let j=i-p+1;j<=i;j++) s+=arr[j];
-      return +(s/p).toFixed(3);
-    });
+    klineHeader(kd);
 
     klineChart.setOption({
       backgroundColor:'transparent',
@@ -614,9 +730,9 @@ async function renderKline() {
       yAxis:{type:'value',scale:true,splitNumber:5,axisLabel:{color:'#555',fontSize:9,formatter:v=>v.toFixed(2)},splitLine:{lineStyle:{color:'#1a1a22',type:'dashed'}},axisLine:{show:false},axisTick:{show:false}},
       series:[
         {name:'收盘价',type:'line',data:closes,smooth:true,lineStyle:{width:1.5,color:'#f97316'},itemStyle:{color:'#f97316'},symbol:'none',areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(249,115,22,0.15)'},{offset:1,color:'rgba(249,115,22,0)'}])}},
-        {name:'MA5',type:'line',data:ma(closes,5),smooth:true,lineStyle:{width:1,color:'#e4e4e7'},symbol:'none'},
-        {name:'MA10',type:'line',data:ma(closes,10),smooth:true,lineStyle:{width:1,color:'#e4e4e7',type:'dashed'},symbol:'none'},
-        {name:'MA20',type:'line',data:ma(closes,20),smooth:true,lineStyle:{width:1,color:'#448aff'},symbol:'none'}
+        {name:'MA5',type:'line',data:klineMA(closes,5),smooth:true,lineStyle:{width:1,color:'#e4e4e7'},symbol:'none'},
+        {name:'MA10',type:'line',data:klineMA(closes,10),smooth:true,lineStyle:{width:1,color:'#e4e4e7',type:'dashed'},symbol:'none'},
+        {name:'MA20',type:'line',data:klineMA(closes,20),smooth:true,lineStyle:{width:1,color:'#448aff'},symbol:'none'}
       ],
       tooltip:{trigger:'axis',backgroundColor:'#1a1a1f',borderColor:'#333',textStyle:{fontSize:11,fontFamily:'JetBrains Mono'},formatter:params=>params[0].axisValue+'<br/>'+params.map(p=>`${p.marker} ¥${p.value.toFixed(3)}`).join('<br/>')}
     });
@@ -804,6 +920,49 @@ function renderWatchlist() {
 
 function initWatchlist() { loadWatchlist(); }
 
+// ========================= MONEY FLOW =========================
+let mfOrder = 0;
+const mfCache = {};
+
+function initMoneyFlow() { loadMoneyFlow(0); }
+
+async function loadMoneyFlow(order) {
+  const tbody = document.getElementById('mf-tbody');
+  if (mfCache[order]) { renderMoneyFlow(order); return; }
+  tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#666;">加载中...</td></tr>';
+  try {
+    const r = await fetch(`/proxy/moneyflow?order=${order === 0 ? 'desc' : 'asc'}&num=12`);
+    const data = await r.json();
+    if (data.error) throw new Error(data.error);
+    mfCache[order] = data;
+    renderMoneyFlow(order);
+  } catch (e) {
+    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:#f87171;">资金流向加载失败: ${e.message}</td></tr>`;
+  }
+}
+
+function renderMoneyFlow(order) {
+  // 过滤 ETF/货币基金 (sh51/58, sz15)
+  const rows = (mfCache[order] || []).filter(x => !/^(sh[15]|sz15)/.test(x.symbol || '')).slice(0, 10);
+  const tbody = document.getElementById('mf-tbody');
+  tbody.innerHTML = rows.length ? rows.map(x => {
+    const main = parseFloat(x.r0_net) || 0;   // 主力净流入
+    const pct = (parseFloat(x.changeratio) || 0) * 100;
+    return `<tr title="${x.symbol}">
+      <td>${x.name}</td>
+      <td>${(parseFloat(x.trade) || 0).toFixed(2)}</td>
+      <td class="${upDown(pct)}">${fmtPct(pct / 100)}</td>
+      <td class="${main >= 0 ? 'up' : 'down'}">${main >= 0 ? '+' : ''}${fmtM(main)}</td>
+    </tr>`;
+  }).join('') : '<tr><td colspan="4" style="text-align:center;color:#666;">暂无数据</td></tr>';
+}
+
+function switchMoneyFlow(o) {
+  mfOrder = o;
+  document.querySelectorAll('#mf-tabs .index-tab').forEach((b, i) => b.classList.toggle('active', i === o));
+  loadMoneyFlow(o);
+}
+
 // ========================= CASH FLOW =========================
 let cashRows = {}, cashPage = {}, cashMax = {}, cashErr = {}, cashMode = '', cashLoadingMore = false;
 
@@ -933,6 +1092,7 @@ function renderAll() {
   initMonthly();
   buildSessions();
   initWatchlist();
+  initMoneyFlow();
   initCashflow();
 }
 
