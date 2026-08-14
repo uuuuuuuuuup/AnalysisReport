@@ -51,9 +51,9 @@
       "portf portf candl candl"
       "pl    pl    mf    mf"
       "cash  cash  mf    mf"
-      "hold  hold  wl    wl"
-      "hold  hold  wl    wl"
-      "pos   pos   pos   pos";
+      "hold  hold  stk   stk"
+      "hold  hold  stk   stk"
+      "hold  hold  stk   stk";
     gap: 12px; max-width: 1800px; margin: 0 auto;
   }
   .card {
@@ -80,8 +80,7 @@
   /* area 类须在 col/row 类之后声明，确保 grid-area 覆盖 span */
   .area-portf { grid-area: portf; }
   .area-candl { grid-area: candl; } .area-pl { grid-area: pl; }
-  .area-wl { grid-area: wl; }       .area-mf { grid-area: mf; }
-  .area-pos { grid-area: pos; }
+  .area-stk { grid-area: stk; }     .area-mf { grid-area: mf; }
   .area-hold { grid-area: hold; }   .area-cash { grid-area: cash; }
 
   /* Eye toggle */
@@ -275,6 +274,7 @@
     <div style="display:flex;align-items:baseline;gap:12px;">
       <span class="index-big" id="index-value">--</span>
       <span class="index-change" id="index-change">--</span>
+      <span class="index-change" id="index-today">--</span>
     </div>
     <div class="chart-box" id="chart-index" style="flex:1;min-height:120px;"></div>
     <div id="acct-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px;"></div>
@@ -312,24 +312,44 @@
     <div class="chart-box" id="chart-monthly"></div>
   </div>
 
-  <!-- 自选行情 -->
-  <div class="card col-2 area-wl">
+  <!-- 股票列表（持仓明细 + 自选行情 合并） -->
+  <div class="card col-2 area-stk">
     <div class="card-title">
-      <span class="en">WATCHLIST</span><span class="sep">·</span><span class="zh">自选行情</span>
-      <select id="wl-sort" onchange="renderWatchlist()" style="
-        background:#1a1a1c;color:var(--text-1);border:1px solid #26262a;
-        border-radius:4px;padding:3px 7px;font-size:11px;font-family:inherit;
-        cursor:pointer;margin-left:auto;outline:none;">
-        <option value="rate">涨跌幅↓</option>
-        <option value="add">自选顺序</option>
-        <option value="code">代码</option>
-      </select>
+      <span class="en">STOCKS</span><span class="sep">·</span><span class="zh">股票列表</span>
+      <span class="index-tabs" id="stk-tabs" style="margin-left:auto;margin-bottom:0;">
+        <button class="index-tab active" id="stk-tab-pos" onclick="switchStockTab('pos')">持仓明细</button>
+        <button class="index-tab" id="stk-tab-wl" onclick="switchStockTab('wl')">自选行情</button>
+      </span>
     </div>
-    <div class="wl-summary" id="wl-summary">加载中...</div>
-    <div class="scroll-y" style="flex:1;">
-      <table class="pos-mini" id="wl-table"><thead><tr>
-        <th>名称</th><th>现价</th><th>涨跌幅</th>
-      </tr></thead><tbody id="wl-tbody"></tbody></table>
+
+    <!-- 持仓明细 Tab -->
+    <div id="stk-pane-pos" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+      <div style="font-size:10px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-bottom:6px;" id="pos-count"></div>
+      <div class="scroll-y" style="flex:1;">
+        <table class="pos-mini"><thead><tr>
+          <th>名称</th><th>代码</th><th>持仓</th><th>成本</th><th>现价</th><th>市值</th><th>盈亏</th><th>盈亏%</th>
+        </tr></thead><tbody id="pos-tbody"></tbody></table>
+      </div>
+    </div>
+
+    <!-- 自选行情 Tab -->
+    <div id="stk-pane-wl" style="display:none;flex-direction:column;flex:1;min-height:0;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <div class="wl-summary" id="wl-summary" style="margin-bottom:0;">加载中...</div>
+        <select id="wl-sort" onchange="renderWatchlist()" style="
+          background:#1a1a1c;color:var(--text-1);border:1px solid #26262a;
+          border-radius:4px;padding:3px 7px;font-size:11px;font-family:inherit;
+          cursor:pointer;margin-left:auto;outline:none;">
+          <option value="rate">涨跌幅↓</option>
+          <option value="add">自选顺序</option>
+          <option value="code">代码</option>
+        </select>
+      </div>
+      <div class="scroll-y" style="flex:1;">
+        <table class="pos-mini" id="wl-table"><thead><tr>
+          <th>名称</th><th>现价</th><th>涨跌幅</th>
+        </tr></thead><tbody id="wl-tbody"></tbody></table>
+      </div>
     </div>
   </div>
 
@@ -346,15 +366,6 @@
       <span><span class="dot" style="background:var(--up)"></span>净流入</span>
       <span><span class="dot" style="background:var(--down)"></span>净流出</span>
       <span style="margin-left:auto;">块面积 = 主力净流入额</span>
-    </div>
-  </div>
-
-  <div class="card col-2 area-pos">
-    <div class="card-title"><span class="en">POSITIONS</span><span class="sep">·</span><span class="zh">持仓明细</span> <span style="font-weight:400;font-size:10px;color:var(--text-3);margin-left:8px;" id="pos-count"></span></div>
-    <div class="scroll-y" style="flex:1;">
-      <table class="pos-mini"><thead><tr>
-        <th>名称</th><th>代码</th><th>持仓</th><th>成本</th><th>现价</th><th>市值</th><th>盈亏</th><th>盈亏%</th>
-      </tr></thead><tbody id="pos-tbody"></tbody></table>
     </div>
   </div>
 
@@ -527,6 +538,7 @@ function buildViewTabs() {
 }
 function switchView(mode) {
   viewMode = mode;
+  localStorage.setItem('tzzb_view', mode);
   document.querySelectorAll('#view-tabs .index-tab').forEach(t =>
     t.classList.toggle('active', mode === 'total' ? t.textContent.includes('汇总') : t.textContent.includes(mode)));
   fillAll();                // 资产总览 + POSITIONS 持仓
@@ -817,6 +829,37 @@ function updateIndex() {
   document.getElementById('index-value').textContent = '¥'+fmtM(last);
   document.getElementById('index-change').innerHTML = prev
     ? `<span class="${change>=0?'up':'down'}">${fmtPct(change)}</span>` : '';
+
+  // 今日盈亏：profit 为累计值，今日 = 末日累计 - 前日累计；多账户按日期对齐（缺失日期用前值填充）后差分
+  let todayProfit = 0, todayAvail = false;
+  if (indexMode === 'total') {
+    const pMaps = store.accounts.map(a => {
+      const m = {};
+      (store.trends[a.name]?.year_profit || []).forEach(d => { m[d.date] = parseFloat(d.profit) || 0; });
+      return m;
+    });
+    const pDates = [...new Set(pMaps.flatMap(m => Object.keys(m)))].sort();
+    const pSeries = pDates.map(date => {
+      let v = 0;
+      pMaps.forEach(m => {
+        if (m[date] !== undefined) v += m[date];
+        else {
+          const prev = Object.keys(m).filter(d => d < date).sort().pop();
+          if (prev) v += m[prev];
+        }
+      });
+      return v;
+    });
+    if (pSeries.length >= 2) { todayAvail = true; todayProfit = pSeries[pSeries.length - 1] - pSeries[pSeries.length - 2]; }
+  } else {
+    const arr = store.trends[indexMode]?.year_profit || [];
+    if (arr.length >= 2) {
+      todayAvail = true;
+      todayProfit = (parseFloat(arr[arr.length - 1].profit) || 0) - (parseFloat(arr[arr.length - 2].profit) || 0);
+    }
+  }
+  document.getElementById('index-today').innerHTML = todayAvail
+    ? `今日 <span class="${todayProfit>=0?'up':'down'}">${todayProfit>=0?'+':''}¥${fmtM(todayProfit)}</span>` : '';
   document.getElementById('index-range').textContent =
     data[0].date.slice(0,4)+'/'+data[0].date.slice(4,6)+'/'+data[0].date.slice(6)+
     ' — '+data[data.length-1].date.slice(0,4)+'/'+data[data.length-1].date.slice(4,6)+'/'+data[data.length-1].date.slice(6);
@@ -1056,6 +1099,14 @@ function renderWatchlist() {
 }
 
 function initWatchlist() { loadWatchlist(); }
+
+// ========================= STOCK LIST TABS (持仓明细 / 自选行情) =========================
+function switchStockTab(tab) {
+  document.getElementById('stk-tab-pos').classList.toggle('active', tab === 'pos');
+  document.getElementById('stk-tab-wl').classList.toggle('active', tab === 'wl');
+  document.getElementById('stk-pane-pos').style.display = tab === 'pos' ? 'flex' : 'none';
+  document.getElementById('stk-pane-wl').style.display = tab === 'wl' ? 'flex' : 'none';
+}
 
 // ========================= MONEY FLOW (treemap) =========================
 let mfChart;
@@ -1304,6 +1355,7 @@ const EYE_OFF = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" str
 function togglePrivacy() {
   document.body.classList.toggle('privacy');
   const on = document.body.classList.contains('privacy');
+  localStorage.setItem('tzzb_privacy', on ? '1' : '0');
   const btn = document.getElementById('eye-btn');
   btn.innerHTML = on ? EYE_OPEN : EYE_OFF;
   btn.title = on ? '显示金额' : '隐藏金额';
@@ -1312,6 +1364,7 @@ function togglePrivacy() {
 async function toggleStealth() {
   document.body.classList.toggle('stealth');
   const on = document.body.classList.contains('stealth');
+  localStorage.setItem('tzzb_stealth', on ? '1' : '0');
   document.title = on ? '数据概览 · Overview' : '投资账本 · 金融终端';
   const breadcrumb = document.querySelector('.breadcrumb span');
   if (breadcrumb) breadcrumb.textContent = on ? '数据概览 · Overview' : '投资账本 · 金融终端';
@@ -1327,11 +1380,34 @@ async function rerenderCharts() {
   if (mfChart) renderMoneyFlow();
 }
 
+// 恢复顶部栏状态（账户选择 / 隐私模式 / 摸鱼模式）
+function applySavedState() {
+  if (localStorage.getItem('tzzb_stealth') === '1') {
+    document.body.classList.add('stealth');
+    syncColors();
+    document.title = '数据概览 · Overview';
+    const breadcrumb = document.querySelector('.breadcrumb span');
+    if (breadcrumb) breadcrumb.textContent = '数据概览 · Overview';
+  }
+  if (localStorage.getItem('tzzb_privacy') === '1') {
+    document.body.classList.add('privacy');
+    const btn = document.getElementById('eye-btn');
+    if (btn) { btn.innerHTML = EYE_OPEN; btn.title = '显示金额'; }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   updateClock();
   setInterval(updateClock, 10000);
+  applySavedState();
   const ok = await loadAllData();
-  if (ok) renderAll();
+  if (ok) {
+    // 恢复账户选择（无效值回退到汇总）
+    const savedView = localStorage.getItem('tzzb_view');
+    if (savedView && (savedView === 'total' || store.accounts.some(a => a.name === savedView))) viewMode = savedView;
+    renderAll();
+    switchView(viewMode);
+  }
 });
 </script>
 </body>
