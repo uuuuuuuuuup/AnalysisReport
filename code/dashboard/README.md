@@ -1,16 +1,18 @@
 # 投资账本 · 金融终端看板
 
-基于同花顺投资账本 API 的暗色模式金融数据看板，纯 JS 实现（Node.js + 原生 HTML/CSS/JS），零第三方依赖（图表库 ECharts 5.5 走 CDN）。
+基于同花顺投资账本 API 的暗色模式金融数据看板，TypeScript 实现（tsx 直接运行，前端原生 HTML/CSS/JS 无框架），后端依赖 AI SDK（ai / @ai-sdk/deepseek / zod），图表库 ECharts 5.5 走 CDN。
 
 ## 快速开始
 
 ```bash
-node server.js
+npm install          # 首次使用需安装依赖（ai / @ai-sdk/deepseek / zod / tsx / typescript）
+npm start            # 启动服务（等价于 npx tsx server.ts）
 # 自动打开浏览器 → http://localhost:8888
+npm run dev          # 开发模式：文件变更自动重启（tsx watch）
 ```
 
 **前置条件：**
-- Node.js ≥ 18（仅用内置模块，无需 npm install）
+- Node.js ≥ 20.3（服务端用到 AbortSignal.any）
 - `~/.tzzb_cookies` 文件：浏览器登录同花顺投资账本后，从开发者工具复制 Cookie 存入
 
 ## 文件结构
@@ -18,8 +20,10 @@ node server.js
 ```
 dashboard/
 ├── index.html              # 看板页面（全部 UI + 前端逻辑，约 1450 行）
-├── server.js               # Node.js 服务器（API 代理 + 静态文件，约 284 行）
+├── server.ts               # 服务器（API 代理 + 静态文件 + AI Agent 路由）
+├── tools.ts                # AI Agent 内置工具定义（7 个，同花顺/腾讯/新浪数据源）
 ├── README.md               # 本文档
+├── server.js               # [遗留] 旧版纯 JS 服务器，已由 server.ts 取代，可删除
 ├── data.json               # [遗留] 早期静态数据文件，已不再使用，可删除
 ├── kline.json              # [遗留] 早期 MCP 预取 K 线数据，已不再使用，可删除
 └── docs/
@@ -166,11 +170,29 @@ dashboard/
 | 手动刷新 | 顶栏 ⟳ 按钮，重新拉取全部数据并渲染 |
 | 状态持久化 | 视图选择、隐私模式、摸鱼模式均保存到 `localStorage`，刷新页面后恢复 |
 
-## 服务端（server.js）
+### AI 助手（灵犀 · Agent）
+
+顶栏 🤖 按钮打开 AI 助手「灵犀」面板，可提问持仓、盈亏、资金流水、K线行情、市场资金流向等问题，回答以 SSE 流式逐字输出。
+
+**配置：**
+- API Key 二选一：`export TZZB_AI_KEY="sk-xxx"` 环境变量，或写入 `~/.tzzb_ai_key` 文件（环境变量优先）
+- 模型：默认 `deepseek-chat`，可用 `TZZB_AI_MODEL` 环境变量覆盖
+- 未配置 Key 时 AI 功能不可用（面板内提示），不影响看板其他功能
+
+**数据与存储：**
+- 数据来源：AI 通过 7 个内置工具实时查询——同花顺账户/自选（资产、持仓、流水、涨跌）、腾讯 K 线、新浪资金流，与本页各卡片同数据源
+- 对话历史：保存在 `~/.tzzb_ai_sessions.json`，跨刷新/重启保留，最多 10 个会话 × 每会话 60 条
+
+## 服务端（server.ts）
+
+服务监听 `127.0.0.1:8888`（仅本机可访问），由 `tsx` 直接运行 TypeScript，无需编译。
 
 | 路由 | 用途 |
 |------|------|
 | `/` | 看板页面（index.html） |
+| `/api/agent` | AI 助手「灵犀」对话（POST，SSE 流式响应） |
+| `/api/agent/history` | AI 会话历史（GET） |
+| `/api/agent/clear` | 清空 AI 会话（POST） |
 | `/api/*` | 同花顺 API 反向代理（自动附加 Cookie，转发到 `tzzb.10jqka.com.cn`） |
 | `/api-check` | Cookie 存在性检查 + userid 提取 |
 | `/proxy/kline?code=sh600519&count=120` | 腾讯前复权日 K 线代理（OHLC + 成交量，带防盗链 Referer） |
@@ -207,14 +229,15 @@ dashboard/
   │
   ├── ECharts 5.5 (CDN) ── 全部图表渲染
   │
-  └── fetch() ──► Node.js server.js (:8888)
+  └── fetch() ──► Node.js server.ts（tsx 运行，127.0.0.1:8888）
                     │
+                    ├── /api/agent ──► AI SDK（DeepSeek）+ 7 个内置工具
                     ├── /api/*  ──► 同花顺 API (tzzb.10jqka.com.cn)
                     ├── /proxy/kline ──► 腾讯 K线 (web.ifzq.gtimg.cn)
                     └── /proxy/moneyflow ──► 新浪资金流 (vip.stock.finance.sina.com.cn)
 ```
 
 - **前端**：原生 HTML/CSS/JS 单文件，无框架，无构建工具。
-- **后端**：Node.js 内置 `http`/`https` 模块，零 `npm install`。
+- **后端**：TypeScript，`tsx` 直接运行；代理与静态文件用 Node.js 内置 `http`/`https` 模块，AI Agent 用 `ai` / `@ai-sdk/deepseek`（模型默认 deepseek-chat），工具参数校验用 `zod`。
 - **数据流**：`loadAllData()` → 并行拉取账户列表 + 持仓 + 趋势 → `renderAll()` 分发到各卡片初始化。
 - **缓存策略**：K线 OHLC 数据内存缓存（`klineOHLCCache`），资金流水分页缓存（`cashRows`），资产趋势存 `store.trends`。
