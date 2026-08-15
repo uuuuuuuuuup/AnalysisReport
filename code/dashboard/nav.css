@@ -1,0 +1,11 @@
+/* ===== 双页共享导航（看板默认色板，点金页用 CSS 变量覆盖） ===== */
+.top-nav { display: flex; align-items: center; gap: 18px; }
+.nav-item {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  color: var(--nav-text, #5b5b63); text-decoration: none;
+  padding-bottom: 4px; border-bottom: 2px solid transparent;
+  transition: color 150ms ease-out;
+}
+.nav-item:hover { color: var(--nav-hover, #a1a1a9); }
+.nav-item.active { color: var(--nav-active, #f0f0f3); border-bottom-color: var(--nav-accent, #f97316); }

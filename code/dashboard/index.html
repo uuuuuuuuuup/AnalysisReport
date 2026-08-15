@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>投资账本 · 金融终端</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<link rel="stylesheet" href="/nav.css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
 
@@ -36,8 +37,6 @@
     display: flex; align-items: center; justify-content: space-between;
     box-shadow: 0 1px 0 rgba(255,255,255,0.03) inset;
   }
-  .breadcrumb { font-size: 12px; color: var(--text-3); display: flex; align-items: center; gap: 8px; letter-spacing: 0.3px; }
-  .breadcrumb span { color: var(--text-2); font-weight: 500; }
   .top-actions { display: flex; align-items: center; gap: 14px; font-size: 11px; color: var(--text-2); font-family: 'JetBrains Mono', monospace; }
   .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--up); animation: pulse 2s infinite; display: inline-block; margin-right: 5px; box-shadow: 0 0 6px var(--up); }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
@@ -92,14 +91,6 @@
   }
   .eye-btn:hover { color: var(--text-1); border-color: #3a3a3f; background: #222225; }
   .eye-btn svg { display: block; }
-  /* AI 跳转按钮（点金） */
-  .ai-toggle-btn {
-    background: #1a1a1c; border: 1px solid #26262a; border-radius: 4px;
-    color: var(--text-3); cursor: pointer; padding: 4px 5px; line-height: 1;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-family: inherit; font-size: 13px; margin-left: 8px; transition: all 0.15s;
-  }
-  .ai-toggle-btn:hover { color: var(--text-1); border-color: #3a3a3f; background: #222225; }
   .masked { filter: blur(6px); transition: filter 0.2s; user-select: none; }
 
   /* Privacy mode: blur all monetary content */
@@ -253,7 +244,6 @@
     .row-2, .row-3 { grid-row: span 1; height: auto; }
     .card { padding: 10px 12px; min-width: 0; }
     .top-bar { padding: 0 12px; }
-    .breadcrumb span { display: none; }
     #clock { display: none; }
     .card-title { flex-wrap: wrap; row-gap: 6px; }
     .index-big { font-size: 24px; }
@@ -296,15 +286,22 @@
 </div>
 
 <header class="top-bar">
-  <div class="breadcrumb">看板 › <span>投资账本 · 金融终端</span></div>
+  <nav class="top-nav">
+    <a class="nav-item active" href="/">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      看板
+    </a>
+    <a class="nav-item" href="/ai">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a8 8 0 0 1-8 8H5l2.5-3A8 8 0 1 1 21 12z"/></svg>
+      点金
+    </a>
+  </nav>
   <div class="index-tabs" id="view-tabs" style="margin:0;"></div>
   <div class="top-actions">
     <button class="eye-btn" id="eye-btn" onclick="togglePrivacy()" title="隐藏金额"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg></button>
-    <button class="eye-btn" id="stealth-btn" onclick="toggleStealth()" title="摸鱼模式"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18.5 8c-2.5-2.5-6-3-9-1.5-3 1.5-5 4-6 7 1.5 2.5 4 4.5 7 5 3.5.5 6.5-1 8.5-3.5"/><path d="M2 12c1.5-1 3-1.5 4-1.5v3c-1 0-2.5-.5-4-1.5z"/><circle cx="16" cy="12" r="1"/></svg></button>
+    <button class="eye-btn" id="stealth-btn" onclick="toggleStealth()" title="摸鱼模式"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M17 8h1a3 3 0 0 1 0 6h-1"/><path d="M3 8h14v7a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/><path d="M7 1v2M11 1v2"/></svg></button>
     <span><span class="live-dot"></span>LIVE</span>
     <span id="clock">--</span>
-    <button class="ai-toggle-btn" id="ai-toggle" title="点金 AI"
-            onclick="location.href='/ai'">🤖</button>
     <span style="color:var(--text-3);cursor:pointer;" id="refresh-btn" onclick="refreshAll()">⟳</span>
   </div>
 </header>
@@ -1419,8 +1416,6 @@ async function toggleStealth() {
   const on = document.body.classList.contains('stealth');
   localStorage.setItem('tzzb_stealth', on ? '1' : '0');
   document.title = on ? '数据概览 · Overview' : '投资账本 · 金融终端';
-  const breadcrumb = document.querySelector('.breadcrumb span');
-  if (breadcrumb) breadcrumb.textContent = on ? '数据概览 · Overview' : '投资账本 · 金融终端';
   syncColors();
   await rerenderCharts();
 }
@@ -1439,8 +1434,6 @@ function applySavedState() {
     document.body.classList.add('stealth');
     syncColors();
     document.title = '数据概览 · Overview';
-    const breadcrumb = document.querySelector('.breadcrumb span');
-    if (breadcrumb) breadcrumb.textContent = '数据概览 · Overview';
   }
   if (localStorage.getItem('tzzb_privacy') === '1') {
     document.body.classList.add('privacy');

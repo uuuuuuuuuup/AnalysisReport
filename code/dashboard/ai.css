@@ -5,6 +5,7 @@
   --text-1: #F3F4F6; --text-2: #9CA3AF; --text-3: #6B7280; --text-4: #4B5563;
   --border: #1F2937; --divider: #374151; --border-hover: #4B5563;
   --ok: #10B981; --warn: #F59E0B; --danger: #EF4444; --data: #3B82F6;
+  --nav-text: #6B7280; --nav-hover: #9CA3AF; --nav-active: #F3F4F6; --nav-accent: #F59E0B;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
@@ -339,3 +340,11 @@ button { font-family: inherit; cursor: pointer; }
   .input-area { padding: 6px 12px 8px; }
   .disclaimer { font-size: 10px; }
 }
+
+/* ---------- 隐私 / 摸鱼（与看板同步） ---------- */
+.chat-header .top-nav { margin: 0 10px 0 2px; }
+body.privacy .msg-ai-body, body.privacy .msg-user,
+body.privacy .si-title, body.privacy .chat-title {
+  filter: blur(5px); user-select: none;
+}
+body.stealth { filter: grayscale(1); }

@@ -24,6 +24,30 @@ function fmtTime(ts) {
   const d = new Date(ts);
   return d.toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false });
 }
+
+// ---------- 隐私 / 摸鱼（与看板同步） ----------
+function applyDJMode() {
+  const privacy = localStorage.getItem('tzzb_privacy') === '1';
+  const stealth = localStorage.getItem('tzzb_stealth') === '1';
+  document.body.classList.toggle('privacy', privacy);
+  document.body.classList.toggle('stealth', stealth);
+  document.title = stealth ? '数据概览 · Overview' : '点金 · 投资 AI 助手';
+}
+function toggleDJPrivacy() {
+  const on = !document.body.classList.contains('privacy');
+  document.body.classList.toggle('privacy', on);
+  localStorage.setItem('tzzb_privacy', on ? '1' : '0');
+}
+function toggleDJStealth() {
+  const on = !document.body.classList.contains('stealth');
+  document.body.classList.toggle('stealth', on);
+  localStorage.setItem('tzzb_stealth', on ? '1' : '0');
+  document.title = on ? '数据概览 · Overview' : '点金 · 投资 AI 助手';
+}
+// 双开标签页实时同步：任一页切换，另一页立即生效
+window.addEventListener('storage', (e) => {
+  if (e.key === 'tzzb_privacy' || e.key === 'tzzb_stealth') applyDJMode();
+});
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
@@ -490,6 +514,9 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#new-chat').onclick = newChat;
   $('#sidebar-toggle').onclick = toggleSidebar;
   $('#export-btn').onclick = exportMarkdown;
+  $('#dj-privacy-btn').onclick = toggleDJPrivacy;
+  $('#dj-stealth-btn').onclick = toggleDJStealth;
+  applyDJMode();
   $('#settings-btn').onclick = () => showToast('设置页将在下期（能力扩展）提供');
   $('#session-search').oninput = renderSessionList;
   $('#chat-title').onclick = editHeaderTitle;
