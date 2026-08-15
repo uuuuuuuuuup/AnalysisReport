@@ -32,7 +32,8 @@ const AI_KEY_FILE = path.join(os.homedir(), '.tzzb_ai_key');
 const AI_API_KEY = process.env.TZZB_AI_KEY?.trim() ||
   (fs.existsSync(AI_KEY_FILE) ? fs.readFileSync(AI_KEY_FILE, 'utf-8').trim() : '');
 const AI_MODEL = process.env.TZZB_AI_MODEL || 'deepseek-chat';
-const modelProvider = createDeepSeek({ apiKey: AI_API_KEY });  // 模块级构造一次，勿在每次请求内新建
+const AI_BASE_URL = process.env.TZZB_AI_BASE_URL?.trim() || undefined;  // 可选：自定义 OpenAI 兼容端点（未设置走 DeepSeek 官方）
+const modelProvider = createDeepSeek({ apiKey: AI_API_KEY, baseURL: AI_BASE_URL });  // 模块级构造一次，勿在每次请求内新建
 
 const SYSTEM_PROMPT = `你是一个专业的投资看板 AI 助手，名为"灵犀"。
 

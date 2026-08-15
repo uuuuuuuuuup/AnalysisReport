@@ -177,6 +177,7 @@ dashboard/
 **配置：**
 - API Key 二选一：`export TZZB_AI_KEY="sk-xxx"` 环境变量，或写入 `~/.tzzb_ai_key` 文件（环境变量优先）
 - 模型：默认 `deepseek-chat`，可用 `TZZB_AI_MODEL` 环境变量覆盖
+- 模型地址：默认 DeepSeek 官方端点；可用 `TZZB_AI_BASE_URL` 环境变量指向任意 OpenAI 兼容端点（如通义千问 `https://dashscope.aliyuncs.com/compatible-mode/v1`、Ollama 本地模型），配合 `TZZB_AI_MODEL` 使用
 - 未配置 Key 时 AI 功能不可用（面板内提示），不影响看板其他功能
 
 **数据与存储：**
