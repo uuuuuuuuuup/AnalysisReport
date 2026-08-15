@@ -596,6 +596,94 @@ function showError(msg) {
   el.style.display = 'block';
 }
 
+// ===== 账户数据缓存（切换页面/标签不重复全量加载）=====
+const ACCOUNT_CACHE_KEY = 'tzzb_accounts_cache_v1';
+function readAccountCache() {
+  try {
+    const raw = localStorage.getItem(ACCOUNT_CACHE_KEY);
+    if (!raw) return null;
+    const d = JSON.parse(raw);
+    if (!d || !d.ts || Date.now() - d.ts > 10 * 60 * 1000) return null; // 10min 过期
+    return d;
+  } catch { return null; }
+}
+function writeAccountCache() {
+  try {
+    localStorage.setItem(ACCOUNT_CACHE_KEY, JSON.stringify({
+      ts: Date.now(),
+      accounts: store.accounts,
+      trends: store.trends,
+    }));
+  } catch { /* 存储满等异常忽略 */ }
+}
+
+// 拉取账户/持仓/趋势并填充 store（loadAllData 与后台刷新共用）
+async function fetchAccounts() {
+  const alResp = await apiFetch('/caishen_fund/pc/account/v1/account_list');
+  if (alResp.error_code !== '0') throw new Error('账户列表: ' + alResp.error_msg);
+  const accountList = alResp.ex_data?.common || [];
+
+  store.accounts = [];
+  store.trends = {};
+
+  for (const acc of accountList) {
+    const name = acc.manualname || '未知';
+    const mid = acc.manualid || '';
+    const fk = acc.fund_key || '';
+    const extraParams = `?manual_id=${mid}&fund_key=${fk}&rzrq_fund_key=&is_merge=1`;
+
+    // Fetch position and trend in parallel
+    const [posResp, trendResp] = await Promise.all([
+      apiFetch('/caishen_fund/pc/asset/v1/stock_position' + extraParams),
+      apiFetch('/caishen_fund/pc/asset/v1/asset_trend' + extraParams + '&fundid=&custid=')
+        .catch(() => null) // trend may fail, not critical
+    ]);
+
+    const ex = posResp.ex_data || {};
+    const acctData = {
+      name,
+      fund_key: fk,
+      manual_id: mid,
+      total_asset: parseFloat(ex.total_asset || 0),
+      total_value: parseFloat(ex.total_value || 0),
+      money_remain: parseFloat(ex.money_remain || 0),
+      position_rate: parseFloat(ex.position_rate || 0),
+      upload_time: ex.upload_time || '',
+      positions: (ex.position || []).map(p => ({
+        code: p.code || '', name: p.name || '', market: p.market || '2',
+        count: parseInt(p.count) || 0,
+        cost: parseFloat(p.cost || 0),
+        price: parseFloat(p.price || 0),
+        value: parseFloat(p.value || 0),
+        profit: parseFloat(p.hold_profit || 0),
+        profit_rate: parseFloat(p.hold_rate || 0),
+      }))
+    };
+    store.accounts.push(acctData);
+
+    if (trendResp && trendResp.ex_data) {
+      store.trends[name] = {
+        year_profit: trendResp.ex_data.year_profit || [],
+        month_profit: trendResp.ex_data.month_profit || [],
+        total_asset: trendResp.ex_data.total_asset || [],
+      };
+    }
+  }
+
+  // Hide the empty "空空如也" account across all cards
+  store.accounts = store.accounts.filter(a => a.name !== '空空如也');
+  writeAccountCache();
+}
+
+// 后台刷新账户数据（定时器用）：成功后重渲染，失败静默保留旧数据
+async function refreshAccountsAsync() {
+  try {
+    await fetchAccounts();
+    renderAll();
+    switchView(viewMode);
+  } catch (e) { /* 静默：下次刷新再试 */ }
+}
+
 async function loadAllData() {
   document.getElementById('loading').style.display = 'flex';
   document.getElementById('loading-msg').textContent = '正在连接...';
@@ -611,65 +699,18 @@ async function loadAllData() {
     // Extract UID from cookie on server side
     UID = check.userid || '520687019';
 
-    document.getElementById('loading-msg').textContent = '获取账户列表...';
-
-    // 1. Account list
-    const alResp = await apiFetch('/caishen_fund/pc/account/v1/account_list');
-    if (alResp.error_code !== '0') throw new Error('账户列表: ' + alResp.error_msg);
-    const accountList = alResp.ex_data?.common || [];
-
-    // 2. For each account: positions + trends
-    store.accounts = [];
-    store.trends = {};
-
-    for (const acc of accountList) {
-      const name = acc.manualname || '未知';
-      const mid = acc.manualid || '';
-      const fk = acc.fund_key || '';
-      document.getElementById('loading-msg').textContent = `获取 ${name} 持仓...`;
-
-      const extraParams = `?manual_id=${mid}&fund_key=${fk}&rzrq_fund_key=&is_merge=1`;
-
-      // Fetch position and trend in parallel
-      const [posResp, trendResp] = await Promise.all([
-        apiFetch('/caishen_fund/pc/asset/v1/stock_position' + extraParams),
-        apiFetch('/caishen_fund/pc/asset/v1/asset_trend' + extraParams + '&fundid=&custid=')
-          .catch(() => null) // trend may fail, not critical
-      ]);
-
-      const ex = posResp.ex_data || {};
-      const acctData = {
-        name,
-        fund_key: fk,
-        manual_id: mid,
-        total_asset: parseFloat(ex.total_asset || 0),
-        total_value: parseFloat(ex.total_value || 0),
-        money_remain: parseFloat(ex.money_remain || 0),
-        position_rate: parseFloat(ex.position_rate || 0),
-        upload_time: ex.upload_time || '',
-        positions: (ex.position || []).map(p => ({
-          code: p.code || '', name: p.name || '', market: p.market || '2',
-          count: parseInt(p.count) || 0,
-          cost: parseFloat(p.cost || 0),
-          price: parseFloat(p.price || 0),
-          value: parseFloat(p.value || 0),
-          profit: parseFloat(p.hold_profit || 0),
-          profit_rate: parseFloat(p.hold_rate || 0),
-        }))
-      };
-      store.accounts.push(acctData);
-
-      if (trendResp && trendResp.ex_data) {
-        store.trends[name] = {
-          year_profit: trendResp.ex_data.year_profit || [],
-          month_profit: trendResp.ex_data.month_profit || [],
-          total_asset: trendResp.ex_data.total_asset || [],
-        };
-      }
+    // 缓存优先：切换页面/标签回来秒开，后台再刷新
+    const cache = readAccountCache();
+    if (cache) {
+      store.accounts = cache.accounts;
+      store.trends = cache.trends;
+      document.getElementById('loading').style.display = 'none';
+      refreshAccountsAsync(); // 后台静默刷新（不阻塞首屏）
+      return true;
     }
 
-    // Hide the empty "空空如也" account across all cards
-    store.accounts = store.accounts.filter(a => a.name !== '空空如也');
+    document.getElementById('loading-msg').textContent = '获取账户列表...';
+    await fetchAccounts();
 
     document.getElementById('loading').style.display = 'none';
     return true;
@@ -1275,14 +1316,19 @@ async function loadNews() {
   }
 }
 
+let newsTimer = null;
 function initNews() {
   loadNews();
-  setInterval(loadNews, NEWS_REFRESH_MS);
-  // 点击新闻行跳转新浪原始详情（事件委托，避免内联注入）
-  document.getElementById('news-list').addEventListener('click', e => {
-    const item = e.target.closest('.news-item');
-    if (item && item.dataset.url) window.open(item.dataset.url, '_blank', 'noopener');
-  });
+  if (!newsTimer) newsTimer = setInterval(loadNews, NEWS_REFRESH_MS); // 防重复注册（renderAll 会被多次调用）
+  // 点击新闻行跳转新浪原始详情（事件委托，避免内联注入；仅绑定一次）
+  const list = document.getElementById('news-list');
+  if (!list.dataset.bound) {
+    list.dataset.bound = '1';
+    list.addEventListener('click', e => {
+      const item = e.target.closest('.news-item');
+      if (item && item.dataset.url) window.open(item.dataset.url, '_blank', 'noopener');
+    });
+  }
 }
 
 // ========================= MARKET BREADTH 市场宽度 =========================
@@ -1385,9 +1431,11 @@ let mfIn = [], mfOut = [];
 
 function initMoneyFlow() { loadMoneyFlow(); }
 
-async function loadMoneyFlow() {
-  document.getElementById('mf-status').textContent = '加载中...';
-  document.getElementById('mf-status').style.color = 'var(--text-3)';
+async function loadMoneyFlow(silent) {
+  if (!silent) {
+    document.getElementById('mf-status').textContent = '加载中...';
+    document.getElementById('mf-status').style.color = 'var(--text-3)';
+  }
   try {
     const [inResp, outResp] = await Promise.all([
       fetch('/proxy/moneyflow?order=desc&num=12'),
@@ -1817,6 +1865,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   setInterval(updateClock, 10000);
   applySavedState();
   initGlobalIndexes(); // 指数数据独立加载，不依赖同花顺 cookie
+
+  // 实时数据按更新优先级分档定时刷新（首次 init 后由定时器驱动后续刷新）
+  // P1 盘中快变：指数 ticker/卡片、资金流向、市场宽度 → 60s
+  setInterval(() => initGlobalIndexes(), 60000);
+  setInterval(() => loadMoneyFlow(true), 60000);
+  setInterval(() => loadBreadth(), 60000);
+  // P2 中等：账户资产/持仓/趋势 → 5min（静默刷新，失败保留旧数据）
+  setInterval(() => refreshAccountsAsync(), 300000);
+
   const ok = await loadAllData();
   if (ok) {
     // 恢复账户选择（无效值回退到汇总）
