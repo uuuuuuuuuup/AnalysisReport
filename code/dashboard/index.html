@@ -107,15 +107,15 @@
     display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: repeat(9, 240px);
     grid-template-areas:
-      "tabA  tabA  mf    mf"
-      "tabB  tabB  mf    mf"
-      "tabB  tabB  news  news"
-      "tabB  tabB  news  news"
-      "tabB  tabB  news  news"
-      "tabB  tabB  news  news"
-      "tabB  tabB  bdst  bdst"
-      "tabB  tabB  bdst  bdst"
-      "tabB  tabB  bdst  bdst";
+      "tabA  tabA  tabD  tabD"
+      "news  news  tabD  tabD"
+      "news  news  tabB  tabB"
+      "news  news  tabB  tabB"
+      "news  news  tabB  tabB"
+      "news  news  tabB  tabB"
+      "news  news  tabB  tabB"
+      "news  news  tabB  tabB"
+      "news  news  tabB  tabB";
     gap: 12px; max-width: 1800px; margin: 0 auto;
   }
   .card {
@@ -142,8 +142,8 @@
   /* area 类须在 col/row 类之后声明，确保 grid-area 覆盖 span */
   .area-tabA { grid-area: tabA; }
   .area-tabB { grid-area: tabB; }
-  .area-mf { grid-area: mf; }
-  .area-news { grid-area: news; }   .area-bdst { grid-area: bdst; }
+  .area-tabD { grid-area: tabD; }
+  .area-news { grid-area: news; }
 
   /* Eye toggle */
   .eye-btn {
@@ -233,6 +233,11 @@
   .chart-box { flex: 1; min-height: 0; width: 100%; }
   #chart-index { min-height: 120px; }
 
+  /* 每日盈亏 · 手绘 5 行热力图（周一~周五为行，周为列，无周末行） */
+  .month-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(5, 1fr); gap: 4px; }
+  .month-cell { border-radius: 3px; min-width: 0; min-height: 0; transition: transform 0.1s; }
+  .month-cell:hover { outline: 1px solid rgba(255,255,255,0.25); transform: scale(1.05); }
+
   .treemap-legend { display: flex; gap: 12px; font-size: 9px; color: var(--text-3); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
   .treemap-legend .dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 3px; }
 
@@ -319,14 +324,14 @@
 
   @media (max-width: 1400px) {
     .dashboard { grid-template-columns: 1fr 1fr; grid-template-areas: none; grid-template-rows: none; }
-    .area-tabA, .area-tabB, .area-mf, .area-news, .area-bdst { grid-area: auto; }
+    .area-tabA, .area-tabB, .area-tabD, .area-news { grid-area: auto; }
     .col-1, .col-2 { grid-column: span 2; }
     .row-2, .row-3 { grid-row: span 1; height: 240px; }
   }
   /* 移动端：单列 + 卡片高度自适应 + 触控优化 */
   @media (max-width: 680px) {
     .dashboard { grid-template-columns: minmax(0, 1fr); grid-template-areas: none; grid-template-rows: none; gap: 8px; padding: 8px; }
-    .area-tabA, .area-tabB, .area-mf, .area-news, .area-bdst { grid-area: auto; }
+    .area-tabA, .area-tabB, .area-tabD, .area-news { grid-area: auto; }
     .col-1, .col-2 { grid-column: span 1; }
     .row-2, .row-3 { grid-row: span 1; height: auto; }
     .card { padding: 10px 12px; min-width: 0; }
@@ -351,7 +356,7 @@
   /* 超大屏：一卡一行，自上而下堆叠（≥1920px；1080p/1440p 仍走默认 4 列马赛克） */
   @media (min-width: 1920px) {
     .dashboard { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: none; }
-    .area-tabA, .area-tabB, .area-mf, .area-news, .area-bdst { grid-area: auto; }
+    .area-tabA, .area-tabB, .area-tabD, .area-news { grid-area: auto; }
     .col-1, .col-2 { grid-column: span 1; }
     .row-2, .row-3 { grid-row: span 1; }
     .card { min-width: 0; }
@@ -435,7 +440,7 @@
     <div class="tab-pane" id="pane-monthly" style="display:none;flex-direction:column;flex:1;min-height:0;">
       <div id="monthly-status" style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;"></div>
       <div class="index-tabs" id="monthly-tabs"></div>
-      <div class="chart-box" id="chart-monthly"></div>
+      <div class="chart-box month-grid" id="chart-monthly"></div>
     </div>
     <!-- 资金流水 -->
     <div class="tab-pane" id="pane-cash" style="display:none;flex-direction:column;flex:1;min-height:0;">
@@ -531,23 +536,35 @@
     </div>
   </div>
 
-  <!-- 资金流向 -->
-  <div class="card col-2 area-mf">
+  <!-- 资金流向 / 市场宽度（合并 tab） -->
+  <div class="card col-2 area-tabD">
     <div class="card-title">
-      <span class="en">MONEY FLOW</span><span class="sep">·</span><span class="zh">资金流向</span>
+      <span class="en">MONEY</span><span class="sep">·</span><span class="zh">资金</span>
+      <span class="index-tabs pane-tabs" style="margin-left:auto;margin-bottom:0;">
+        <button class="index-tab active" data-pane="pane-mf" onclick="switchPane(this)">资金流向</button>
+        <button class="index-tab" data-pane="pane-bdst" onclick="switchPane(this)">市场宽度</button>
+      </span>
     </div>
-    <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;">
-      <span id="mf-status">--</span><span style="margin-left:8px;" id="mf-time"></span>
+    <!-- 资金流向 pane -->
+    <div class="tab-pane" id="pane-mf" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+      <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;">
+        <span id="mf-status">--</span><span style="margin-left:8px;" id="mf-time"></span>
+      </div>
+      <div class="chart-box" id="chart-mf"></div>
+      <div class="treemap-legend">
+        <span><span class="dot" style="background:var(--up)"></span>净流入</span>
+        <span><span class="dot" style="background:var(--down)"></span>净流出</span>
+        <span style="margin-left:auto;">块面积 = 主力净流入额</span>
+      </div>
     </div>
-    <div class="chart-box" id="chart-mf"></div>
-    <div class="treemap-legend">
-      <span><span class="dot" style="background:var(--up)"></span>净流入</span>
-      <span><span class="dot" style="background:var(--down)"></span>净流出</span>
-      <span style="margin-left:auto;">块面积 = 主力净流入额</span>
+    <!-- 市场宽度 pane -->
+    <div class="tab-pane" id="pane-bdst" style="display:none;flex-direction:column;flex:1;min-height:0;">
+      <div class="bdst-body" id="bdst-body">加载中...</div>
+      <div class="chart-box" id="chart-bdst" style="flex:1;min-height:200px;"></div>
     </div>
   </div>
 
-  <!-- 新闻快讯（上移） -->
+  <!-- 新闻快讯 -->
   <div class="card col-2 area-news">
     <div class="card-title"><span class="en">NEWS</span><span class="sep">·</span><span class="zh">新闻快讯</span></div>
     <div class="news-head">
@@ -555,12 +572,6 @@
       <span class="news-meta" id="news-meta">加载中...</span>
     </div>
     <div class="scroll-y" style="flex:1;"><div class="news-list" id="news-list"></div></div>
-  </div>
-
-  <!-- 市场宽度 -->
-  <div class="card col-2 area-bdst">
-    <div class="card-title"><span class="en">BREADTH</span><span class="sep">·</span><span class="zh">市场宽度</span></div>
-    <div class="bdst-body" id="bdst-body">加载中...</div>
   </div>
 
 </main>
@@ -1050,7 +1061,7 @@ function updateIndex() {
 }
 
 // ========================= P&L CALENDAR 每日盈亏热力图 =========================
-let calendarChart = null, monthlyMode = 'total';
+let monthlyMode = 'total';
 let calendarUpdating = false;
 
 function debounce(fn, ms) {
@@ -1118,14 +1129,15 @@ function calendarColor(rate) {
 }
 
 function updateCalendar() {
-  if (!calendarChart || calendarUpdating) return;
+  if (calendarUpdating) return;
   calendarUpdating = true;
   const data = getCalendarData();
   const st = document.getElementById('monthly-status');
+  const grid = document.getElementById('chart-monthly');
   if (!data.length) {
     st.textContent = '暂无每日盈亏数据';
     st.style.color = '#f87171';
-    calendarChart.clear();
+    grid.innerHTML = '';
     calendarUpdating = false;
     return;
   }
@@ -1140,94 +1152,22 @@ function updateCalendar() {
   const totalRate = startAsset > 0 ? (data[data.length - 1].profit - data[0].profit) / startAsset : 0;
   st.textContent = `区间盈亏 ${totalProfit >= 0 ? '+' : ''}¥${fmtM(totalProfit)} · 区间收益率 ${fmtPct(totalRate)} · ${data.length} 个交易日`;
 
-  const heatmapData = data.map(d => [d.date, +d.rate.toFixed(4)]);
-
-  // ECharts calendar 是单条横向带（宽=周数×格宽，高=7×格高），且同时指定
-  // left/right/top/bottom 会把 cellSize 强制归一为 'auto'，导致格子被拉伸成矩形。
-  // 这里只用一条连续横向 calendar，按容器宽度和实际高度反算正方形格子，
-  // 卡片高度自适应（移动端/大屏单列），日历垂直居中填充，不留上下白边。
-  const calBox = document.getElementById('chart-monthly');
-  const W = calBox.clientWidth;
-  const [sy, sm, sd] = startDate.split('-').map(Number);
-  const [ey, em, ed] = endDate.split('-').map(Number);
-  const days = Math.round((Date.UTC(ey, em - 1, ed) - Date.UTC(sy, sm - 1, sd)) / 86400000) + 1;
-  const firstDay = (new Date(sy, sm - 1, sd).getDay() + 6) % 7; // 周一=0，与 dayLabel.firstDay=1 一致
-  const weeks = Math.floor((days + firstDay + 6) / 7);
-  const rowLabelH = 16;
-  const boxH = calBox.clientHeight || 240; // 按容器实际高度反算（自适应断点通用）
-  const availH = boxH - 16;
-  const calSize = Math.max(8, Math.min(24, Math.floor(Math.min(
-    (W - 36) / weeks,
-    (availH - rowLabelH) / 7
-  ))));
-  const calTop = Math.max(6, Math.floor((boxH - 7 * calSize - rowLabelH) / 2));
-  const calLeft = Math.max(4, Math.floor((W - weeks * calSize) / 2));
-
-  const calendars = [{
-    top: calTop, left: calLeft,
-    range: [startDate, endDate],
-    cellSize: [calSize, calSize],
-    splitLine: { show: false },
-    itemStyle: { borderColor: '#18181b', borderWidth: 2, color: '#18181b' },
-    dayLabel: { color: '#555', fontSize: 8, firstDay: 1, nameMap: 'cn' },
-    monthLabel: { color: '#555', fontSize: 9 },
-    yearLabel: { show: false },
-    dayGap: 2
-  }];
-  const series = [{
-    type: 'heatmap',
-    coordinateSystem: 'calendar',
-    data: heatmapData,
-    itemStyle: { color: p => calendarColor(p.value[1]), borderRadius: 2 }
-  }];
-
-  calendarChart.setOption({
-    backgroundColor: 'transparent',
-    tooltip: {
-      backgroundColor: '#111113', borderColor: '#27272a', textStyle: { fontSize: 11, fontFamily: 'JetBrains Mono', color: '#f0f0f3' },
-      formatter: p => {
-        const d = data.find(x => x.date === p.value[0]) || { date: p.value[0] || '--', daily: 0, rate: 0 };
-        const c = d.daily >= 0 ? upColor : downColor;
-        return `${d.date}<br/><span style="color:${c}">${d.daily >= 0 ? '+' : ''}¥${d.daily.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span><br/>日收益率 ${fmtPct(d.rate)}`;
-      }
-    },
-    visualMap: {
-      show: false,
-      min: -0.03, max: 0.03,
-      inRange: { color: document.body.classList.contains('stealth')
-        ? ['#78716c', '#4b5563', '#374151', '#4b5563', '#374151', '#4b5563', '#6b7280']
-        : ['#22c55e', '#15803d', '#14532d', '#3f3f46', '#7f1d1d', '#b91c1c', '#ef4444'] },
-      pieces: document.body.classList.contains('stealth') ? [
-        { min: 0.02, color: '#6b7280' },
-        { min: 0.005, max: 0.02, color: '#4b5563' },
-        { min: 0, max: 0.005, color: '#374151' },
-        { value: 0, color: '#4b5563' },
-        { min: -0.005, max: 0, color: '#374151' },
-        { min: -0.02, max: -0.005, color: '#4b5563' },
-        { max: -0.02, color: '#78716c' }
-      ] : [
-        { min: 0.02, color: '#ef4444' },
-        { min: 0.005, max: 0.02, color: '#b91c1c' },
-        { min: 0, max: 0.005, color: '#7f1d1d' },
-        { value: 0, color: '#3f3f46' },
-        { min: -0.005, max: 0, color: '#14532d' },
-        { min: -0.02, max: -0.005, color: '#15803d' },
-        { max: -0.02, color: '#22c55e' }
-      ]
-    },
-    calendar: calendars,
-    series
-  });
+  // 手绘 5 行热力图（周一~周五为行、周为列）：无周末行，格高 = 可用高/5 直接放大
+  // 数据仅含交易日（周末/节假日无记录），按交易日序号定位 (col=序号/5, row=序号%5)
+  let seq = 0;
+  grid.innerHTML = data.map(d => {
+    const col = Math.floor(seq / 5), row = seq % 5;
+    seq++;
+    const c = calendarColor(d.rate);
+    const t = `${d.date} ${d.daily >= 0 ? '+' : ''}¥${d.daily.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} · 日收益率 ${fmtPct(d.rate)}`;
+    return `<div class="month-cell" style="grid-column:${col + 1};grid-row:${row + 1};background:${c};" title="${t}"></div>`;
+  }).join('');
   calendarUpdating = false;
 }
+
 function initCalendar() {
   const dom = document.getElementById('chart-monthly');
-  if (!dom || dom.clientWidth === 0) return; // pane 隐藏时跳过，切 tab 后由 switchPane 触发
-  if (!calendarChart) {
-    calendarChart = echarts.init(dom, 'dark');
-    const debouncedUpdate = debounce(() => { calendarChart.resize(); updateCalendar(); }, 200);
-    new ResizeObserver(() => { calendarChart.resize(); debouncedUpdate(); }).observe(dom);
-  }
+  if (!dom) return;
   buildMonthlyTabs();
   updateCalendar();
 }
@@ -1348,33 +1288,31 @@ function initNews() {
 // ========================= MARKET BREADTH 市场宽度 =========================
 // 基于自选样本（loadWatchlist 数据）计算；最活跃板块取新浪行业资金排行第一
 let sectorList = [];
+let marketBreadth = null;
 
 async function loadBreadth() {
-  if (!wlItems.length) return;
   try {
-    const r = await fetch('/proxy/sector-money');
-    const d = await r.json();
-    if (!d.error && Array.isArray(d)) sectorList = d;
-  } catch (e) { /* 板块数据缺失不影响核心统计 */ }
+    const [mb, sec] = await Promise.all([
+      fetch('/proxy/market-breadth').then(r => r.json()).catch(() => null),
+      fetch('/proxy/sector-money').then(r => r.json()).catch(() => null),
+    ]);
+    if (mb && !mb.error) marketBreadth = mb;
+    if (sec && !sec.error && Array.isArray(sec)) sectorList = sec;
+  } catch (e) { /* 板块/分布数据缺失不影响渲染 */ }
   renderBreadth();
 }
 
 function renderBreadth() {
   const body = document.getElementById('bdst-body');
-  if (!wlItems.length) { body.innerHTML = '<div style="color:#71717a;font-size:11px;">无自选样本</div>'; return; }
+  const b = marketBreadth;
+  if (!b) { body.innerHTML = '<div style="color:#71717a;font-size:11px;">暂无市场宽度数据</div>'; return; }
 
-  const total = wlItems.length;
-  const s = wlStats;
-  const rise = s.rise || 0, fall = s.fall || 0;
-  const flat = Math.max(0, total - rise - fall);
+  const { rise, fall, flat, total, median, date, top, bottom, bands } = b;
   const ratio = fall > 0 ? (rise / fall).toFixed(2) : (rise > 0 ? '∞' : '--');
-
-  const rates = wlItems.map(i => parseFloat(i.rate) || 0).sort((a, b) => a - b);
-  let median = '--';
-  if (rates.length) median = fmtPct(rates[Math.floor((rates.length - 1) / 2)]);
-  const sorted = [...wlItems].sort((a, b) => b.rate - a.rate);
-  const top = sorted[0] || null, bot = sorted[sorted.length - 1] || null;
   const hot = sectorList[0] || null;
+  const d = date ? `${String(date).slice(0, 4)}-${String(date).slice(4, 6)}-${String(date).slice(6)}` : '';
+  const limitUp = bands?.find(x => x.pct === 11)?.count || 0;
+  const limitDown = bands?.find(x => x.pct === -11)?.count || 0;
 
   const row = (k, v, cls) => `<div class="bdst-row"><span class="k">${k}</span><span class="v ${cls || ''}">${v}</span></div>`;
   body.innerHTML =
@@ -1384,12 +1322,32 @@ function renderBreadth() {
       <span style="display:flex;flex-direction:column;"><span class="bdst-count" style="color:var(--text-2);">${flat}</span><span class="bdst-label">平盘</span></span>
       <span class="bdst-ratio">涨跌比 <b>${ratio}</b></span>
     </div>` +
-    row('涨跌幅中位数', median) +
-    row('平均涨跌幅', fmtPct(s.avg), s.avg > 0 ? 'up' : s.avg < 0 ? 'down' : '') +
-    row('领涨', top ? `${top.name} ${escapeHtml(fmtPct(top.rate))}` : '--', 'up') +
-    row('领跌', bot ? `${bot.name} ${escapeHtml(fmtPct(bot.rate))}` : '--', 'down') +
+    row('涨停 / 跌停', `<span class="up">${limitUp}</span> / <span class="down">${limitDown}</span>` + `　中位数 <span class="${median >= 0 ? 'up' : median < 0 ? 'down' : ''}">${median >= 0 ? '+' : ''}${median}%</span>`) +
+    row('领涨', top ? `${top.name} ${escapeHtml(fmtPct(top.pct / 100))}` : '--', 'up') +
+    row('领跌', bottom ? `${bottom.name} ${escapeHtml(fmtPct(bottom.pct / 100))}` : '--', 'down') +
     row('最活跃板块', hot ? `${hot.name} · 主力净流入 ${(parseFloat(hot.netamount) / 1e8).toFixed(1)}亿` : '--', parseFloat(hot?.netamount) >= 0 ? 'up' : 'down') +
-    `<div class="bdst-note">统计仅描述当前筛选下的 ${total} 只跟踪样本，不代表全市场宽度</div>`;
+    `<div class="bdst-note">全市场 ${total} 只 · ${d} · 东方财富</div>`;
+  renderBreadthDist();
+}
+
+// 全市场涨跌分布直方图（-11% ~ +11% 分档家数）
+let bdstChart = null;
+function renderBreadthDist() {
+  const dom = document.getElementById('chart-bdst');
+  if (!dom || dom.clientWidth === 0) return; // pane 隐藏时跳过
+  const b = marketBreadth;
+  if (!b || !b.bands) { if (bdstChart) bdstChart.clear(); return; }
+  if (!bdstChart) bdstChart = echarts.init(dom, 'dark');
+  const cats = b.bands.map(x => (x.pct > 0 ? '+' : '') + x.pct + '%');
+  const colors = b.bands.map(x => x.pct > 0 ? upColor : x.pct < 0 ? downColor : '#52525b');
+  bdstChart.setOption({
+    backgroundColor: 'transparent',
+    grid: { left: '6%', right: '3%', top: '10%', bottom: '20%' },
+    xAxis: { type: 'category', data: cats, axisLabel: { color: '#52525b', fontSize: 8, interval: 1 }, axisLine: { lineStyle: { color: '#27272a' } }, axisTick: { show: false } },
+    yAxis: { type: 'value', axisLabel: { color: '#52525b', fontSize: 8 }, splitLine: { lineStyle: { color: '#141417' } }, axisLine: { show: false }, axisTick: { show: false } },
+    series: [{ type: 'bar', data: b.bands.map(x => x.count), barWidth: '55%', itemStyle: { color: p => colors[p.dataIndex], borderRadius: [2, 2, 0, 0] }, label: { show: true, position: 'top', fontSize: 8, color: '#71717a', fontFamily: 'JetBrains Mono' } }],
+    tooltip: { trigger: 'axis', backgroundColor: '#111113', borderColor: '#27272a', textStyle: { fontSize: 10, fontFamily: 'JetBrains Mono', color: '#f0f0f3' }, formatter: p => `${p[0].axisValue}<br/>${p[0].value} 家` },
+  });
 }
 
 // ========================= STOCK LIST TABS (持仓明细 / 自选行情) =========================
@@ -1411,9 +1369,12 @@ function switchPane(btn) {
     if (btn.dataset.pane === 'pane-monthly') initCalendar();
     else if (btn.dataset.pane === 'pane-holdings') initHoldings();
     else if (btn.dataset.pane === 'pane-kline' && !klineChart) initKline();
-    if (calendarChart) { calendarChart.resize(); updateCalendar(); }
+    else if (btn.dataset.pane === 'pane-mf' && !mfChart) initMoneyFlow();
+    else if (btn.dataset.pane === 'pane-bdst' && !bdstChart) renderBreadthDist();
     if (holdingsChart) holdingsChart.resize();
     if (klineChart) klineChart.resize();
+    if (mfChart) mfChart.resize();
+    if (bdstChart) bdstChart.resize();
     if (indexChart) indexChart.resize();
   }, 60);
 }
@@ -1447,6 +1408,7 @@ async function loadMoneyFlow() {
 
 function renderMoneyFlow() {
   const dom = document.getElementById('chart-mf');
+  if (!dom || dom.clientWidth === 0) return; // pane 隐藏时跳过，切 tab 后由 switchPane 触发
   if (!mfChart) {
     mfChart = echarts.init(dom, 'dark');
     new ResizeObserver(() => mfChart.resize()).observe(dom);
@@ -1802,6 +1764,7 @@ function renderAll() {
   initMoneyFlow();
   initCashflow();
   initNews();
+  loadBreadth();
   initGlobalIndexes();
 }
 
@@ -1832,6 +1795,7 @@ async function rerenderCharts() {
   updateIndex();
   updateCalendar();
   if (mfChart) renderMoneyFlow();
+  if (bdstChart) renderBreadthDist(); // 摸鱼切换后分布图柱色随 up/downColor 灰化
 }
 
 // 恢复顶部栏状态（账户选择 / 隐私模式 / 摸鱼模式）

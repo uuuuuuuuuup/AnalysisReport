@@ -399,6 +399,70 @@ function proxySectorMoney(res: ServerResponse): void {
   });
 }
 
+function httpGetJsonp(urlStr: string, headers: Record<string, string>): Promise<string> {
+  return new Promise((resolve, reject) => {
+    https.get(urlStr, { headers }, (pres) => {
+      let body = '';
+      pres.setEncoding('utf8');
+      pres.on('data', c => body += c);
+      pres.on('end', () => resolve(body));
+    }).on('error', reject);
+  });
+}
+
+// 全市场市场宽度: /proxy/market-breadth
+// 涨跌家数/平盘/中位数档 ← 东财涨跌分布(push2ex)；领涨领跌 ← 新浪 Market_Center 排行
+// （东财 push2 clist 对 node TLS 指纹风控会 socket hang up，故排行改走新浪）
+function proxyMarketBreadth(res: ServerResponse): void {
+  const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0';
+  const distUrl = 'https://push2ex.eastmoney.com/getTopicZDFenBu?ut=7eea3edcaed734bea9cbfc24409ed989&dpt=wz.ztzt';
+  const rankUrl = (asc: number) => `https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/Market_Center.getHQNodeData?page=1&num=1&sort=changepercent&asc=${asc}&node=hs_a`;
+  console.log('  ↳ GET eastmoney(分布) + sina(涨跌幅榜)');
+  Promise.all([
+    httpGetJsonp(distUrl, { 'Referer': 'https://quote.eastmoney.com/', 'User-Agent': UA }),
+    httpGetJsonp(rankUrl(0), { 'Referer': 'https://finance.sina.com.cn', 'User-Agent': UA }),
+    httpGetJsonp(rankUrl(1), { 'Referer': 'https://finance.sina.com.cn', 'User-Agent': UA }),
+  ]).then(([distRaw, topRaw, bottomRaw]) => {
+    try {
+      const dist = JSON.parse(distRaw)?.data || {};
+      const fenbu = dist.fenbu || [];
+      let rise = 0, fall = 0, flat = 0, total = 0;
+      const bands: [number, number][] = [];
+      for (const it of fenbu) {
+        const k = Object.keys(it)[0];
+        const n = parseInt(it[k]) || 0;
+        bands.push([parseInt(k), n]);
+        const v = parseInt(k);
+        if (v > 0) rise += n; else if (v < 0) fall += n; else flat += n;
+        total += n;
+      }
+      // 涨跌幅中位数（按分档累计取覆盖 50% 的档位）
+      const sorted = [...bands].sort((a, b) => a[0] - b[0]);
+      let acc = 0, median = 0;
+      for (const [v, n] of sorted) { acc += n; if (acc >= total / 2) { median = v; break; } }
+      // 原始分档（-11 ~ +11 缺失档补 0），供前端画涨跌分布直方图
+      const distBands: { pct: number; count: number }[] = [];
+      for (let v = -11; v <= 11; v++) {
+        const hit = bands.find(x => x[0] === v);
+        distBands.push({ pct: v, count: hit ? hit[1] : 0 });
+      }
+      const pick = (raw: string) => {
+        const arr = JSON.parse(raw);
+        const item = Array.isArray(arr) ? arr[0] : null;
+        return item ? { name: item.name || '', code: item.code || '', pct: parseFloat(item.changepercent) || 0 } : null;
+      };
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+      res.end(JSON.stringify({ date: dist.qdate || '', rise, fall, flat, total, median, bands: distBands, top: pick(topRaw), bottom: pick(bottomRaw) }));
+    } catch (e: any) {
+      res.writeHead(502);
+      res.end(JSON.stringify({ error: 'Breadth proxy: ' + e.message }));
+    }
+  }).catch((e) => {
+    res.writeHead(502);
+    res.end(JSON.stringify({ error: 'Proxy error: ' + e.message }));
+  });
+}
+
 function proxyKline(code: string, market: string, res: ServerResponse): void {
   const cookie = readCookie();
   if (!cookie) { res.writeHead(401); res.end(JSON.stringify({error:'No cookie'})); return; }
@@ -831,6 +895,11 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
   // 新浪行业资金排名（最活跃板块）: /proxy/sector-money
   if (pathname.startsWith('/proxy/sector-money')) {
     return proxySectorMoney(res);
+  }
+
+  // 全市场涨跌家数 + 领涨领跌: /proxy/market-breadth
+  if (pathname.startsWith('/proxy/market-breadth')) {
+    return proxyMarketBreadth(res);
   }
 
   // Static files
