@@ -1427,6 +1427,7 @@ function askAgent(query) {
 
 | 取舍 | 理由 |
 |------|------|
+| thsPost 统一注入 `terminal=1&version=0.0.0&userid=<uid>` 查询参数 | 实测：同花顺 API 缺失这些参数直接 403（即使 cookie 有效）；与前端 apiFetch 行为一致，userid 经 /api-check 获取并缓存（2026-08-15 线上排障修正） |
 | tool() 用 `parameters` 而非 `inputSchema` | ai@4.3.19 的 API 命名（`inputSchema` 是 v5 命名），Task 3 实测修正并已同步回本计划 |
 | 回环调用而非抽取共享 helper | 零重构，100% 复用代理逻辑；若实测不稳定可改为抽 `fetchTHS` |
 | month 模式用 year_profit 聚合 | `month_profit` 字段前端从未使用、结构未知，不冒险 |

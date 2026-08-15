@@ -18,7 +18,19 @@ async function loopback(path: string, init?: RequestInit): Promise<any> {
   return data;
 }
 
-const thsPost = (path: string, signal?: AbortSignal): Promise<any> => loopback(path, { method: 'POST', signal });
+// 同花顺 API 强制要求查询参数 terminal=1&version=0.0.0&userid=<uid>，缺失返回 403（与前端 apiFetch 行为一致）。
+// userid 经回环 /api-check 获取一次并缓存。
+let cachedUid = '';
+async function thsPost(path: string, signal?: AbortSignal): Promise<any> {
+  if (!cachedUid) {
+    try {
+      const check = await loopback('/api-check', { signal });
+      cachedUid = check?.userid || '';
+    } catch { cachedUid = ''; }
+  }
+  const sep = path.includes('?') ? '&' : '?';
+  return loopback(`${path}${sep}terminal=1&version=0.0.0&userid=${cachedUid}`, { method: 'POST', signal });
+}
 
 // ---------- 共享数据获取 ----------
 type Account = { name: string; mid: string; fk: string };
