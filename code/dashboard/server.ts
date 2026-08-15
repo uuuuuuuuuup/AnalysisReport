@@ -45,7 +45,31 @@ const AI_API_KEY = process.env.TZZB_AI_KEY?.trim() ||
   (fs.existsSync(AI_KEY_FILE) ? fs.readFileSync(AI_KEY_FILE, 'utf-8').trim() : '');
 const AI_MODEL = process.env.TZZB_AI_MODEL?.trim() || aiConfig.model || 'deepseek-chat';
 const AI_BASE_URL = process.env.TZZB_AI_BASE_URL?.trim() || aiConfig.baseURL || undefined;  // 可选：自定义 OpenAI 兼容端点（未设置走 DeepSeek 官方）
-const modelProvider = createDeepSeek({ apiKey: AI_API_KEY, baseURL: AI_BASE_URL });  // 模块级构造一次，勿在每次请求内新建
+
+// 网关兼容层：部分 OpenAI 兼容网关（如 New API）的 JSON Schema 校验要求 tool 的 parameters 必须含 required 数组；
+// 而 zod 转 JSON Schema 时对无必填字段的对象会省略 required，导致上游 400。
+// 发送前给缺 required 的对象型 schema 补上 required: []（合法的 JSON Schema，不影响其他端点）。
+const gatewayFetch: typeof fetch = async (url, init) => {
+  if (init?.body && typeof init.body === 'string') {
+    try {
+      const body = JSON.parse(init.body);
+      if (Array.isArray(body.tools)) {
+        let touched = false;
+        for (const t of body.tools) {
+          const p = t?.function?.parameters;
+          if (p && typeof p === 'object' && p.type === 'object' && !Array.isArray(p.required)) {
+            p.required = [];
+            touched = true;
+          }
+        }
+        if (touched) init = { ...init, body: JSON.stringify(body) };
+      }
+    } catch { /* 非 JSON 请求体，跳过 */ }
+  }
+  return fetch(url, init);
+};
+
+const modelProvider = createDeepSeek({ apiKey: AI_API_KEY, baseURL: AI_BASE_URL, fetch: gatewayFetch });  // 模块级构造一次，勿在每次请求内新建
 
 const SYSTEM_PROMPT = `你是一个专业的投资看板 AI 助手，名为"灵犀"。
 
