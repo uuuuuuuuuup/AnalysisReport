@@ -174,10 +174,14 @@ dashboard/
 
 顶栏 🤖 按钮打开 AI 助手「灵犀」面板，可提问持仓、盈亏、资金流水、K线行情、市场资金流向等问题，回答以 SSE 流式逐字输出。
 
-**配置：**
-- API Key 二选一：`export TZZB_AI_KEY="sk-xxx"` 环境变量，或写入 `~/.tzzb_ai_key` 文件（环境变量优先）
-- 模型：默认 `deepseek-chat`，可用 `TZZB_AI_MODEL` 环境变量覆盖
-- 模型地址：默认 DeepSeek 官方端点；可用 `TZZB_AI_BASE_URL` 环境变量指向任意 OpenAI 兼容端点（如通义千问 `https://dashscope.aliyuncs.com/compatible-mode/v1`、Ollama 本地模型），配合 `TZZB_AI_MODEL` 使用
+**配置（推荐：统一配置文件）：**
+- 写入 `~/.tzzb_ai_config.json`，一个文件配齐三件套：
+  ```json
+  { "apiKey": "sk-xxx", "model": "deepseek-chat", "baseURL": "https://dashscope.aliyuncs.com/compatible-mode/v1" }
+  ```
+  - `apiKey`：必填；`model`：默认 `deepseek-chat`；`baseURL`：可选，默认 DeepSeek 官方端点，可指向任意 OpenAI 兼容端点（通义千问 / Ollama 本地模型等）
+- 环境变量可临时覆盖（优先级最高）：`TZZB_AI_KEY` / `TZZB_AI_MODEL` / `TZZB_AI_BASE_URL`
+- 兼容旧方式：仅 Key 也可写入 `~/.tzzb_ai_key` 文件（优先级最低）
 - 未配置 Key 时 AI 功能不可用（面板内提示），不影响看板其他功能
 
 **数据与存储：**

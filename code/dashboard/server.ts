@@ -28,11 +28,23 @@ const STATIC_DIR = __dirname;
 const API_BASE = 'tzzb.10jqka.com.cn';
 
 // ===== AI Agent 配置 =====
+// 优先级：环境变量 > ~/.tzzb_ai_config.json（统一配置文件）> ~/.tzzb_ai_key（仅 Key 旧方式）> 默认值
 const AI_KEY_FILE = path.join(os.homedir(), '.tzzb_ai_key');
+const AI_CONFIG_FILE = path.join(os.homedir(), '.tzzb_ai_config.json');
+
+function readAIConfig(): { apiKey?: string; model?: string; baseURL?: string } {
+  try {
+    const raw = JSON.parse(fs.readFileSync(AI_CONFIG_FILE, 'utf-8'));
+    return raw && typeof raw === 'object' ? raw : {};
+  } catch { return {}; }  // 文件不存在或损坏 → 空
+}
+
+const aiConfig = readAIConfig();
 const AI_API_KEY = process.env.TZZB_AI_KEY?.trim() ||
+  (aiConfig.apiKey || '').trim() ||
   (fs.existsSync(AI_KEY_FILE) ? fs.readFileSync(AI_KEY_FILE, 'utf-8').trim() : '');
-const AI_MODEL = process.env.TZZB_AI_MODEL || 'deepseek-chat';
-const AI_BASE_URL = process.env.TZZB_AI_BASE_URL?.trim() || undefined;  // 可选：自定义 OpenAI 兼容端点（未设置走 DeepSeek 官方）
+const AI_MODEL = process.env.TZZB_AI_MODEL?.trim() || aiConfig.model || 'deepseek-chat';
+const AI_BASE_URL = process.env.TZZB_AI_BASE_URL?.trim() || aiConfig.baseURL || undefined;  // 可选：自定义 OpenAI 兼容端点（未设置走 DeepSeek 官方）
 const modelProvider = createDeepSeek({ apiKey: AI_API_KEY, baseURL: AI_BASE_URL });  // 模块级构造一次，勿在每次请求内新建
 
 const SYSTEM_PROMPT = `你是一个专业的投资看板 AI 助手，名为"灵犀"。
@@ -324,7 +336,7 @@ async function handleAgentRequest(req: IncomingMessage, res: ServerResponse): Pr
   }
   if (!AI_API_KEY) {
     res.writeHead(503, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ error: '未配置 AI API Key（TZZB_AI_KEY 环境变量或 ~/.tzzb_ai_key 文件）' }));
+    res.end(JSON.stringify({ error: '未配置 AI API Key（~/.tzzb_ai_config.json 配置文件 / TZZB_AI_KEY 环境变量 / ~/.tzzb_ai_key 文件）' }));
     return;
   }
 
@@ -511,8 +523,8 @@ server.listen(PORT, '127.0.0.1', () => {
 
   if (!AI_API_KEY) {
     console.log('  ⚠️  未配置 AI API Key');
-    console.log('     export TZZB_AI_KEY="your-key" 后重启');
-    console.log('     或写入 ~/.tzzb_ai_key 文件');
+    console.log('     推荐写入 ~/.tzzb_ai_config.json（apiKey/model/baseURL，见 README）');
+    console.log('     或用 TZZB_AI_KEY 环境变量 / ~/.tzzb_ai_key 文件');
     console.log('     AI 对话功能将不可用，但不影响其他功能');
   }
 
