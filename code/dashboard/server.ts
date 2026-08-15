@@ -320,6 +320,85 @@ function proxyGlobalIndexes(res: ServerResponse): void {
   });
 }
 
+// 新浪财经直播新闻: /proxy/news?num=20
+// 与 AI-Tools MarketNewsTool 同源接口（zhibo.sina.com.cn JSONP），服务端剥 JSONP 包装 + 去 HTML 标签
+const stripRichText = (s: string): string => s
+  .replace(/<[^>]*>/g, '')
+  .replace(/&(amp|lt|gt|quot|#39|nbsp);/gi, m => ({
+    '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&nbsp;': ' '
+  })[m] || m)
+  // 新浪 rich_text 内嵌样式控制字符（转义序列落在 0x00-0x1F / 0x7F-0x9F），一并剥离
+  .replace(/[\u0000-\u001f\u007f-\u009f]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+function proxyNews(num: string, res: ServerResponse): void {
+  const n = Math.min(Math.max(parseInt(num) || 20, 1), 100);
+  const target = `https://zhibo.sina.com.cn/api/zhibo/feed?callback=callback&page=1&page_size=${n}&zhibo_id=152&tag_id=0&dire=f&dpc=1&pagesize=${n}&id=4161089&type=0&_=${Date.now()}`;
+  console.log(`  ↳ GET zhibo.sina.com.cn (新闻 ×${n})`);
+  https.get(target, {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Referer': 'https://finance.sina.com.cn',
+    }
+  }, (pres) => {
+    let body = '';
+    pres.setEncoding('utf8');
+    pres.on('data', c => body += c);
+    pres.on('end', () => {
+      try {
+        // JSONP 包装: try{callback({...});}catch(e){};
+        const m = body.match(/try\{callback\((.*)\);\}catch\(e\)\{\};/s);
+        if (!m) throw new Error('JSONP 解析失败');
+        const data = JSON.parse(m[1]);
+        const list = data?.result?.data?.feed?.list || [];
+        const news = list.map((it: any) => ({
+          text: stripRichText(String(it.rich_text || it.title || '')).replace(/\s+/g, ' ').trim(),
+          time: it.create_time || '',
+          tags: (it.tag || []).map((t: any) => t.name).filter(Boolean),
+          url: it.docurl || '',   // 新浪 7x24 详情页原始链接
+        })).filter((x: any) => x.text);
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+        res.end(JSON.stringify({ list: news, fetched_at: new Date().toLocaleString('zh-CN', { hour12: false }) }));
+      } catch (e: any) {
+        res.writeHead(502);
+        res.end(JSON.stringify({ error: 'News proxy: ' + e.message }));
+      }
+    });
+  }).on('error', (e) => {
+    res.writeHead(502);
+    res.end(JSON.stringify({ error: 'Proxy error: ' + e.message }));
+  });
+}
+
+// 新浪行业资金排名（最活跃板块）: /proxy/sector-money
+// 与 AI-Tools MoneyFlowTool 同源：Windows Edge UA + Host/Referer 防盗链头，缺一可能返回 mock
+function proxySectorMoney(res: ServerResponse): void {
+  const target = 'https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/MoneyFlow.ssl_bkzj_bk?page=1&num=20&sort=netamount&asc=0&fenlei=0';
+  console.log('  ↳ GET vip.stock.finance.sina.com.cn (行业资金排行)');
+  https.get(target, {
+    headers: {
+      'Host': 'vip.stock.finance.sina.com.cn',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0',
+      'Referer': 'https://finance.sina.com.cn',
+    }
+  }, (pres) => {
+    let body = '';
+    pres.setEncoding('utf8');
+    pres.on('data', c => body += c);
+    pres.on('end', () => {
+      res.writeHead(pres.statusCode ?? 502, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+      });
+      res.end(body);
+    });
+  }).on('error', (e) => {
+    res.writeHead(502);
+    res.end(JSON.stringify({ error: 'Proxy error: ' + e.message }));
+  });
+}
+
 function proxyKline(code: string, market: string, res: ServerResponse): void {
   const cookie = readCookie();
   if (!cookie) { res.writeHead(401); res.end(JSON.stringify({error:'No cookie'})); return; }
@@ -742,6 +821,16 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
     res.writeHead(400);
     res.end(JSON.stringify({ error: 'Missing codes parameter' }));
     return;
+  }
+
+  // 新浪财经直播新闻: /proxy/news?num=20
+  if (pathname.startsWith('/proxy/news')) {
+    return proxyNews(url.searchParams.get('num') || '20', res);
+  }
+
+  // 新浪行业资金排名（最活跃板块）: /proxy/sector-money
+  if (pathname.startsWith('/proxy/sector-money')) {
+    return proxySectorMoney(res);
   }
 
   // Static files

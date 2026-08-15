@@ -105,15 +105,17 @@
   .dashboard {
     position: relative; z-index: 1; padding: 12px;
     display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(7, 240px);
+    grid-template-rows: repeat(9, 240px);
     grid-template-areas:
-      "portf portf candl candl"
-      "portf portf candl candl"
-      "pl    pl    mf    mf"
-      "cash  cash  mf    mf"
-      "hold  hold  stk   stk"
-      "hold  hold  stk   stk"
-      "hold  hold  stk   stk";
+      "tabA  tabA  mf    mf"
+      "tabA  tabA  mf    mf"
+      "tabB  tabB  candl candl"
+      "tabB  tabB  candl candl"
+      "tabB  tabB  news  news"
+      "tabB  tabB  news  news"
+      "tabB  tabB  bdst  bdst"
+      "tabB  tabB  bdst  bdst"
+      "tabB  tabB  bdst  bdst";
     gap: 12px; max-width: 1800px; margin: 0 auto;
   }
   .card {
@@ -138,10 +140,11 @@
   .row-2 { grid-row: span 2; height: auto; }
   .row-3 { grid-row: span 3; height: auto; }
   /* area 类须在 col/row 类之后声明，确保 grid-area 覆盖 span */
-  .area-portf { grid-area: portf; }
-  .area-candl { grid-area: candl; } .area-pl { grid-area: pl; }
-  .area-stk { grid-area: stk; }     .area-mf { grid-area: mf; }
-  .area-hold { grid-area: hold; }   .area-cash { grid-area: cash; }
+  .area-tabA { grid-area: tabA; }
+  .area-candl { grid-area: candl; }
+  .area-tabB { grid-area: tabB; }
+  .area-mf { grid-area: mf; }
+  .area-news { grid-area: news; }   .area-bdst { grid-area: bdst; }
 
   /* Eye toggle */
   .eye-btn {
@@ -207,6 +210,7 @@
   body.stealth .kline-mode-btn.active { background: #4b5563; border-color: #6b7280; color: #f3f4f6; }
   body.stealth .op-badge.trade { background: rgba(107,114,128,0.15); color: #9ca3af; }
   body.stealth .index-big { font-size: 24px; color: var(--text-2); }
+  body.stealth .news-tag { filter: grayscale(1); opacity: 0.65; }
   body.stealth .index-change { font-size: 11px; color: var(--text-3); }
   body.stealth .acct-card-val { font-size: 14px; color: var(--text-2); }
   body.stealth .acct-card-sub { color: var(--text-3); }
@@ -291,16 +295,39 @@
   .op-badge.trade { background: #f9731626; color: #f97316; }
   .op-badge.fund { background: #448aff26; color: #448aff; }
 
+  /* News 新闻快讯流 */
+  .news-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .news-meta { margin-left: auto; font-size: 9px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; flex-shrink: 0; }
+  .news-item { display: flex; align-items: baseline; gap: 7px; padding: 4px 2px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 11px; line-height: 1.5; }
+  .news-item:hover { background: rgba(255,255,255,0.02); }
+  .news-item.news-link { cursor: pointer; }
+  .news-item.news-link:hover .news-text { color: var(--text-1); text-decoration: underline; text-decoration-color: rgba(249,115,22,0.5); }
+  .news-tag { flex-shrink: 0; font-size: 9px; padding: 1px 5px; border-radius: 3px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.3px; }
+  .news-text { color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .news-time { margin-left: auto; flex-shrink: 0; font-size: 9px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; }
+
+  /* Market Breadth 市场宽度 */
+  .bdst-body { display: flex; flex-direction: column; gap: 7px; flex: 1; font-family: 'JetBrains Mono', monospace; }
+  .bdst-main { display: flex; gap: 22px; align-items: baseline; }
+  .bdst-count { display: inline-block; font-size: 26px; font-weight: 700; line-height: 1.1; letter-spacing: -0.5px; }
+  .bdst-label { font-size: 9px; color: var(--text-3); }
+  .bdst-ratio { margin-left: auto; font-size: 15px; color: var(--text-2); }
+  .bdst-ratio b { font-weight: 700; color: var(--text-1); }
+  .bdst-row { display: flex; gap: 8px; font-size: 11px; color: var(--text-1); align-items: baseline; }
+  .bdst-row .k { color: var(--text-3); font-size: 10px; flex-shrink: 0; }
+  .bdst-row .v { margin-left: auto; }
+  .bdst-note { margin-top: auto; font-size: 9px; color: var(--text-3); }
+
   @media (max-width: 1400px) {
     .dashboard { grid-template-columns: 1fr 1fr; grid-template-areas: none; grid-template-rows: none; }
-    .area-portf, .area-candl, .area-pl, .area-stk, .area-mf, .area-hold, .area-cash { grid-area: auto; }
+    .area-tabA, .area-tabB, .area-candl, .area-mf, .area-news, .area-bdst { grid-area: auto; }
     .col-1, .col-2 { grid-column: span 2; }
     .row-2, .row-3 { grid-row: span 1; height: 240px; }
   }
   /* 移动端：单列 + 卡片高度自适应 + 触控优化 */
   @media (max-width: 680px) {
     .dashboard { grid-template-columns: minmax(0, 1fr); grid-template-areas: none; grid-template-rows: none; gap: 8px; padding: 8px; }
-    .area-portf, .area-candl, .area-pl, .area-stk, .area-mf, .area-hold, .area-cash { grid-area: auto; }
+    .area-tabA, .area-tabB, .area-candl, .area-mf, .area-news, .area-bdst { grid-area: auto; }
     .col-1, .col-2 { grid-column: span 1; }
     .row-2, .row-3 { grid-row: span 1; height: auto; }
     .card { padding: 10px 12px; min-width: 0; }
@@ -316,16 +343,16 @@
     #chart-monthly { min-height: 200px; }
     #chart-mf { min-height: 220px; }
     #chart-holdings { min-height: 240px; }
-    .area-stk .scroll-y, .area-cash .scroll-y { min-height: 240px; }
+    .area-tabB .scroll-y, .area-cash .scroll-y { min-height: 240px; }
     .scroll-y { overflow-x: auto; }
     #stk-pane-pos .pos-mini { min-width: 620px; }
-    .area-cash .pos-mini { min-width: 540px; }
+    .area-tabB .pos-mini { min-width: 540px; }
   }
 
   /* 超大屏：一卡一行，自上而下堆叠（≥1920px；1080p/1440p 仍走默认 4 列马赛克） */
   @media (min-width: 1920px) {
     .dashboard { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: none; }
-    .area-portf, .area-candl, .area-pl, .area-stk, .area-mf, .area-hold, .area-cash { grid-area: auto; }
+    .area-tabA, .area-tabB, .area-candl, .area-mf, .area-news, .area-bdst { grid-area: auto; }
     .col-1, .col-2 { grid-column: span 1; }
     .row-2, .row-3 { grid-row: span 1; }
     .card { min-width: 0; }
@@ -335,7 +362,7 @@
     #chart-monthly { min-height: 220px; }
     #chart-mf { min-height: 260px; }
     #chart-holdings { min-height: 280px; }
-    .area-stk .scroll-y, .area-cash .scroll-y { min-height: 320px; }
+    .area-tabB .scroll-y, .area-cash .scroll-y { min-height: 320px; }
   }
 </style>
 </head>
@@ -380,24 +407,48 @@
 
 <main class="dashboard">
 
-  <!-- 资产总览（账户概览 + 账户红绿灯 + 净值走势 合并） -->
-  <div class="card col-2 area-portf">
+  <!-- 资产总览 / 每日盈亏 / 资金流水（合并 tab） -->
+  <div class="card col-2 area-tabA">
     <div class="card-title">
       <span class="en">PORTFOLIO</span><span class="sep">·</span><span class="zh">资产总览</span>
-      <span class="index-tabs" id="index-tabs" style="margin-left:auto;margin-bottom:0;">
+      <span class="index-tabs pane-tabs" style="margin-left:auto;margin-bottom:0;">
+        <button class="index-tab active" data-pane="pane-index" onclick="switchPane(this)">总资产</button>
+        <button class="index-tab" data-pane="pane-monthly" onclick="switchPane(this)">每日盈亏</button>
+        <button class="index-tab" data-pane="pane-cash" onclick="switchPane(this)">资金流水</button>
+      </span>
+    </div>
+    <!-- 总览 pane（无总市值图） -->
+    <div class="tab-pane" id="pane-index" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+      <span class="index-tabs" id="index-tabs" style="margin-bottom:0;">
         <button class="index-tab active" onclick="switchIndex('total')">全部合计</button>
         <button class="index-tab" onclick="switchIndex('宁静致远')">宁静致远</button>
         <button class="index-tab" onclick="switchIndex('淡泊明志')">淡泊明志</button>
       </span>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-top:4px;">
+        <span class="index-big" id="index-value">--</span>
+        <span class="index-change" id="index-change">--</span>
+        <span class="index-change" id="index-today">--</span>
+      </div>
+      <div id="acct-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px;overflow-y:auto;"></div>
+      <div style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-top:6px;" id="index-range"></div>
     </div>
-    <div style="display:flex;align-items:baseline;gap:12px;">
-      <span class="index-big" id="index-value">--</span>
-      <span class="index-change" id="index-change">--</span>
-      <span class="index-change" id="index-today">--</span>
+    <!-- 每日盈亏 -->
+    <div class="tab-pane" id="pane-monthly" style="display:none;flex-direction:column;flex:1;min-height:0;">
+      <div id="monthly-status" style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;"></div>
+      <div class="index-tabs" id="monthly-tabs"></div>
+      <div class="chart-box" id="chart-monthly"></div>
     </div>
-    <div class="chart-box" id="chart-index" style="flex:1;"></div>
-    <div id="acct-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px;"></div>
-    <div style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-top:6px;" id="index-range"></div>
+    <!-- 资金流水 -->
+    <div class="tab-pane" id="pane-cash" style="display:none;flex-direction:column;flex:1;min-height:0;">
+      <div class="index-tabs" id="cash-tabs"></div>
+      <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;" id="cash-range"></div>
+      <div class="scroll-y" style="flex:1;">
+        <table class="pos-mini"><thead><tr>
+          <th>日期</th><th>名称</th><th>操作</th><th>数量</th><th>金额</th><th>备注</th>
+        </tr></thead><tbody id="cash-tbody"></tbody></table>
+      </div>
+      <div style="text-align:center;margin-top:4px;"><button id="cash-more" class="index-tab" onclick="loadMoreCash()" style="display:none;">加载更多</button></div>
+    </div>
   </div>
 
   <!-- 收盘价折线 / K线 -->
@@ -423,51 +474,60 @@
     </div>
   </div>
 
-  <!-- 每日盈亏日历 -->
-  <div class="card col-2 area-pl">
-    <div class="card-title"><span class="en">P&amp;L CALENDAR</span><span class="sep">·</span><span class="zh">每日盈亏</span></div>
-    <div id="monthly-status" style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;"></div>
-    <div class="index-tabs" id="monthly-tabs"></div>
-    <div class="chart-box" id="chart-monthly"></div>
-  </div>
-
-  <!-- 股票列表（持仓明细 + 自选行情 合并） -->
-  <div class="card col-2 area-stk">
+  <!-- 股票列表 + 持仓权重（合并 tab） -->
+  <div class="card col-2 area-tabB">
     <div class="card-title">
-      <span class="en">STOCKS</span><span class="sep">·</span><span class="zh">股票列表</span>
-      <span class="index-tabs" id="stk-tabs" style="margin-left:auto;margin-bottom:0;">
-        <button class="index-tab active" id="stk-tab-pos" onclick="switchStockTab('pos')">持仓明细</button>
-        <button class="index-tab" id="stk-tab-wl" onclick="switchStockTab('wl')">自选行情</button>
+      <span class="en">HOLDINGS</span><span class="sep">·</span><span class="zh">持仓</span>
+      <span class="index-tabs pane-tabs" style="margin-left:auto;margin-bottom:0;">
+        <button class="index-tab active" data-pane="pane-stocks" onclick="switchPane(this)">股票列表</button>
+        <button class="index-tab" data-pane="pane-holdings" onclick="switchPane(this)">持仓权重</button>
       </span>
     </div>
 
-    <!-- 持仓明细 Tab -->
-    <div id="stk-pane-pos" style="display:flex;flex-direction:column;flex:1;min-height:0;">
-      <div style="font-size:10px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-bottom:6px;" id="pos-count"></div>
-      <div class="scroll-y" style="flex:1;">
-        <table class="pos-mini"><thead><tr>
-          <th>名称</th><th>代码</th><th>持仓</th><th>成本</th><th>现价</th><th>市值</th><th>盈亏</th><th>盈亏%</th>
-        </tr></thead><tbody id="pos-tbody"></tbody></table>
+    <!-- 股票列表 pane（持仓明细 + 自选行情 内层 tab） -->
+    <div class="tab-pane" id="pane-stocks" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+      <span class="index-tabs" id="stk-tabs" style="margin-bottom:0;">
+        <button class="index-tab active" id="stk-tab-pos" onclick="switchStockTab('pos')">持仓明细</button>
+        <button class="index-tab" id="stk-tab-wl" onclick="switchStockTab('wl')">自选行情</button>
+      </span>
+      <div id="stk-pane-pos" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+        <div style="font-size:10px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-bottom:6px;" id="pos-count"></div>
+        <div class="scroll-y" style="flex:1;">
+          <table class="pos-mini"><thead><tr>
+            <th>名称</th><th>代码</th><th>持仓</th><th>成本</th><th>现价</th><th>市值</th><th>盈亏</th><th>盈亏%</th>
+          </tr></thead><tbody id="pos-tbody"></tbody></table>
+        </div>
+      </div>
+      <div id="stk-pane-wl" style="display:none;flex-direction:column;flex:1;min-height:0;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <div class="wl-summary" id="wl-summary" style="margin-bottom:0;">加载中...</div>
+          <select id="wl-sort" onchange="renderWatchlist()" style="
+            background:#1a1a1c;color:var(--text-1);border:1px solid #26262a;
+            border-radius:4px;padding:3px 7px;font-size:11px;font-family:inherit;
+            cursor:pointer;margin-left:auto;outline:none;">
+            <option value="rate">涨跌幅↓</option>
+            <option value="add">自选顺序</option>
+            <option value="code">代码</option>
+          </select>
+        </div>
+        <div class="scroll-y" style="flex:1;">
+          <table class="pos-mini" id="wl-table"><thead><tr>
+            <th>名称</th><th>现价</th><th>涨跌幅</th>
+          </tr></thead><tbody id="wl-tbody"></tbody></table>
+        </div>
       </div>
     </div>
 
-    <!-- 自选行情 Tab -->
-    <div id="stk-pane-wl" style="display:none;flex-direction:column;flex:1;min-height:0;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-        <div class="wl-summary" id="wl-summary" style="margin-bottom:0;">加载中...</div>
-        <select id="wl-sort" onchange="renderWatchlist()" style="
-          background:#1a1a1c;color:var(--text-1);border:1px solid #26262a;
-          border-radius:4px;padding:3px 7px;font-size:11px;font-family:inherit;
-          cursor:pointer;margin-left:auto;outline:none;">
-          <option value="rate">涨跌幅↓</option>
-          <option value="add">自选顺序</option>
-          <option value="code">代码</option>
-        </select>
+    <!-- 持仓权重 pane -->
+    <div class="tab-pane" id="pane-holdings" style="display:none;flex-direction:column;flex:1;min-height:0;">
+      <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;">
+        <span id="holdings-status">--</span><span style="margin-left:8px;" id="holdings-time"></span>
       </div>
-      <div class="scroll-y" style="flex:1;">
-        <table class="pos-mini" id="wl-table"><thead><tr>
-          <th>名称</th><th>现价</th><th>涨跌幅</th>
-        </tr></thead><tbody id="wl-tbody"></tbody></table>
+      <div class="chart-box" id="chart-holdings"></div>
+      <div class="treemap-legend">
+        <span><span class="dot" style="background:var(--up)"></span>涨</span>
+        <span><span class="dot" style="background:var(--down)"></span>跌</span>
+        <span style="margin-left:auto;">条长 = 市值</span>
       </div>
     </div>
   </div>
@@ -488,30 +548,20 @@
     </div>
   </div>
 
-  <!-- 持仓权重（横向柱形图） -->
-  <div class="card col-2 area-hold">
-    <div class="card-title"><span class="en">HOLDINGS</span><span class="sep">·</span><span class="zh">持仓权重</span></div>
-    <div style="font-size:10px;color:var(--text-3);margin-bottom:4px;font-family:'JetBrains Mono',monospace;">
-      <span id="holdings-status">--</span><span style="margin-left:8px;" id="holdings-time"></span>
+  <!-- 新闻快讯（上移） -->
+  <div class="card col-2 area-news">
+    <div class="card-title"><span class="en">NEWS</span><span class="sep">·</span><span class="zh">新闻快讯</span></div>
+    <div class="news-head">
+      <div class="index-tabs" id="news-tabs" style="margin:0;"></div>
+      <span class="news-meta" id="news-meta">加载中...</span>
     </div>
-    <div class="chart-box" id="chart-holdings"></div>
-    <div class="treemap-legend">
-      <span><span class="dot" style="background:var(--up)"></span>涨</span>
-      <span><span class="dot" style="background:var(--down)"></span>跌</span>
-      <span style="margin-left:auto;">条长 = 市值</span>
-    </div>
+    <div class="scroll-y" style="flex:1;"><div class="news-list" id="news-list"></div></div>
   </div>
 
-  <!-- 资金流水 -->
-  <div class="card col-1 area-cash">
-    <div class="card-title"><span class="en">CASH FLOW</span><span class="sep">·</span><span class="zh">资金流水</span> <span style="font-size:10px;color:var(--text-3);font-weight:400;margin-left:8px;" id="cash-range"></span></div>
-    <div class="index-tabs" id="cash-tabs"></div>
-    <div class="scroll-y" style="flex:1;">
-      <table class="pos-mini"><thead><tr>
-        <th>日期</th><th>名称</th><th>操作</th><th>数量</th><th>金额</th><th>备注</th>
-      </tr></thead><tbody id="cash-tbody"></tbody></table>
-    </div>
-    <div style="text-align:center;margin-top:4px;"><button id="cash-more" class="index-tab" onclick="loadMoreCash()" style="display:none;">加载更多</button></div>
+  <!-- 市场宽度 -->
+  <div class="card col-2 area-bdst">
+    <div class="card-title"><span class="en">BREADTH</span><span class="sep">·</span><span class="zh">市场宽度</span></div>
+    <div class="bdst-body" id="bdst-body">加载中...</div>
   </div>
 
 </main>
@@ -526,14 +576,22 @@ let store = { accounts: [], trends: {} };
 async function apiFetch(path) {
   const url = API + path + (path.includes('?') ? '&' : '?') +
     `terminal=1&version=0.0.0&userid=${UID}`;
-  const r = await fetch(url, { method: 'POST' });
-  return r.json();
+  // 8s 超时兜底：同花顺接口挂起时不至于被 loading 遮罩永久挡住页面
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 8000);
+  try {
+    const r = await fetch(url, { method: 'POST', signal: ctrl.signal });
+    return await r.json();
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 function showError(msg) {
   const el = document.getElementById('error-banner');
   el.textContent = '⚠ ' + msg;
   el.style.display = 'block';
+  document.getElementById('loading').style.display = 'none'; // 兜底：错误时也隐藏加载遮罩，避免遮罩拦截后续点击
 }
 
 async function loadAllData() {
@@ -674,6 +732,7 @@ function switchView(mode) {
 let holdingsChart;
 function initHoldings() {
   const dom = document.getElementById('chart-holdings');
+  if (!dom || dom.clientWidth === 0) return; // pane 隐藏时跳过，切 tab 后由 switchPane 触发
   if (!holdingsChart) {
     holdingsChart = echarts.init(dom, 'dark');
     new ResizeObserver(() => holdingsChart.resize()).observe(dom);
@@ -907,9 +966,11 @@ function switchIndex(mode) {
 }
 
 function initIndex() {
-  indexChart = echarts.init(document.getElementById('chart-index'), 'dark');
+  const dom = document.getElementById('chart-index');
+  if (!dom) return; // 已去掉总市值图，仅保留数字渲染
+  indexChart = echarts.init(dom, 'dark');
   updateIndex();
-  new ResizeObserver(()=>indexChart.resize()).observe(document.getElementById('chart-index'));
+  new ResizeObserver(()=>indexChart.resize()).observe(dom);
 }
 
 function updateIndex() {
@@ -985,6 +1046,7 @@ function updateIndex() {
     ' — '+data[data.length-1].date.slice(0,4)+'/'+data[data.length-1].date.slice(4,6)+'/'+data[data.length-1].date.slice(6);
 
   const color = indexMode==='total'?orangeColor:indexMode==='宁静致远'?'#448aff':'#22c55e';
+  if (!indexChart) return; // 图已移除时只渲染上方数字
   indexChart.setOption({
     backgroundColor:'transparent',grid:{left:'7%',right:'3%',top:'6%',bottom:'2%'},
     xAxis:{type:'category',data:dates,axisLabel:{color:'#52525b',fontSize:9,interval:Math.floor(dates.length/6)},axisLine:{lineStyle:{color:'#27272a'}},axisTick:{show:false}},
@@ -1089,8 +1151,9 @@ function updateCalendar() {
 
   // ECharts calendar 是单条横向带（宽=周数×格宽，高=7×格高），且同时指定
   // left/right/top/bottom 会把 cellSize 强制归一为 'auto'，导致格子被拉伸成矩形。
-  // 这里只用一条连续横向 calendar，按容器宽度和实际高度反算正方形格子，
-  // 卡片高度自适应（移动端/大屏单列），日历垂直居中填充，不留上下白边。
+  // 这里只用一条连续横向 calendar，按容器宽度和实际高度反算格子，卡片高度自适应
+  // （移动端/大屏单列）。周六/周日无交易数据，按 5 个交易日行计算格高并整体上移，
+  // 把周末两行推出可视区之外，日历占满剩余高度、格子等比例放大。
   const calBox = document.getElementById('chart-monthly');
   const W = calBox.clientWidth;
   const [sy, sm, sd] = startDate.split('-').map(Number);
@@ -1101,17 +1164,17 @@ function updateCalendar() {
   const rowLabelH = 16;
   const boxH = calBox.clientHeight || 240; // 按容器实际高度反算（自适应断点通用）
   const availH = boxH - 16;
-  const calSize = Math.max(8, Math.min(24, Math.floor(Math.min(
-    (W - 36) / weeks,
-    (availH - rowLabelH) / 7
-  ))));
-  const calTop = Math.max(6, Math.floor((boxH - 7 * calSize - rowLabelH) / 2));
-  const calLeft = Math.max(4, Math.floor((W - weeks * calSize) / 2));
+  const calW = Math.max(10, Math.min(60, Math.floor((W - 52) / weeks)));
+  const calH = Math.max(10, Math.min(60, Math.floor((availH - rowLabelH) / 5)));
+  // 横向日历始终渲染 7 行（周一到周日连续日期）。周六/周日无交易数据，
+  // 网格整体上移，把周末两行推到底部可视区之外，仅中间 5 个交易日行可见。
+  const calTop = -(calH + rowLabelH);
+  const calLeft = Math.max(4, Math.floor((W - weeks * calW) / 2));
 
   const calendars = [{
     top: calTop, left: calLeft,
     range: [startDate, endDate],
-    cellSize: [calSize, calSize],
+    cellSize: [calW, calH],
     splitLine: { show: false },
     itemStyle: { borderColor: '#18181b', borderWidth: 2, color: '#18181b' },
     dayLabel: { color: '#555', fontSize: 8, firstDay: 1, nameMap: 'cn' },
@@ -1166,15 +1229,34 @@ function updateCalendar() {
   calendarUpdating = false;
 }
 
-function initCalendar() {
-  if (!calendarChart) {
-    calendarChart = echarts.init(document.getElementById('chart-monthly'), 'dark');
-    const debouncedUpdate = debounce(() => { calendarChart.resize(); updateCalendar(); }, 200);
-    new ResizeObserver(() => { calendarChart.resize(); debouncedUpdate(); }).observe(document.getElementById('chart-monthly'));
-  }
-  buildMonthlyTabs();
-  updateCalendar();
-}
+// ECharts calendar 是单条横向带（宽=周数×格宽，高=7×格高），同时指定
+  // left/right/top/bottom 会把 cellSize 强制归一为 'auto'，导致格子被拉伸成矩形。
+  // 这里只用一条连续横向 calendar，按容器宽度与实际高度反算正方形格子，
+  // 卡片高度自适应（移动端/大屏单列）。周六/周日无数据，按 5 个交易日行高放大
+  // cell，并整体上移把周末两行推出可视区，日历填满剩余高度、格子等比放大。
+  const calBox = document.getElementById('chart-monthly');
+  const W = calBox.clientWidth;
+  const [sy, sm, sd] = startDate.split('-').map(Number);
+  const [ey, em, ed] = endDate.split('-').map(Number);
+  const days = Math.round((Date.UTC(ey, em - 1, ed) - Date.UTC(sy, sm - 1, sd)) / 86400000) + 1;
+  const firstDay = (new Date(sy, sm - 1, sd).getDay() + 6) % 7; // 周一=0，与 dayLabel.firstDay=1 一致
+  const weeks = Math.floor((days + firstDay + 6) / 7);
+  const rowLabelH = 16;
+  const boxH = calBox.clientHeight || 240; // 按容器实际高度反算（自适应断点通用）
+  const availH = boxH - 16;
+  const calW = Math.max(10, Math.min(44, Math.floor((W - 52) / weeks)));
+  const calH = Math.max(10, Math.min(44, Math.floor((availH - rowLabelH) / 5)));
+  const calTop = -calH * 2 + 8; // 把周六/周日两行推出可视区顶部
+  const calLeft = Math.max(4, Math.floor((W - weeks * calW) / 2));
+
+  const calendars = [{
+    top: calTop, left: calLeft,
+    range: [startDate, endDate],
+    cellSize: [calW, calH],
+    splitLine: { show: false },
+    itemStyle: { borderColor: '#18181b', borderWidth: 2, color: '#18181b' },
+    dayLabel: { color: '#555', fontSize: 8, firstDay: 1, nameMap: 'cn' },
+    monthLabel: { color: '#555', fontSize: 9 },
 
 // ========================= WATCHLIST =========================
 let wlItems = [], wlStats = { rise: 0, fall: 0, avg: 0 };
@@ -1193,6 +1275,7 @@ async function loadWatchlist() {
     const d = rf.ex_data || {};
     wlStats = { rise: parseInt(d.stock_rise) || 0, fall: parseInt(d.stock_fall) || 0, avg: parseFloat(d.avg_rate) || 0 };
     renderWatchlist();
+    loadBreadth();
   } catch (e) {
     tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:#f87171;">自选行情加载失败: ${e.message}</td></tr>`;
   }
@@ -1220,12 +1303,135 @@ function renderWatchlist() {
 
 function initWatchlist() { loadWatchlist(); }
 
+// ========================= NEWS 新闻快讯流 =========================
+const NEWS_REFRESH_MS = 30000;
+const NEWS_TAG_COLORS = ['#448aff', '#f97316', '#22c55e', '#a855f7', '#38bdf8', '#f43f5e', '#eab308', '#14b8a6'];
+let newsItems = [], newsFilter = '全部';
+
+const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const newsTagColor = t => { let h = 0; for (const c of t) h = (h * 31 + c.charCodeAt(0)) >>> 0; return NEWS_TAG_COLORS[h % NEWS_TAG_COLORS.length]; };
+
+function renderNewsTabs() {
+  // 分类标签：全部 + 按出现频次排序去重（最多 8 个）
+  const counts = {};
+  newsItems.forEach(it => it.tags.forEach(t => counts[t] = (counts[t] || 0) + 1));
+  const tags = Object.keys(counts).sort((a, b) => counts[b] - counts[a]).slice(0, 8);
+  const tab = (t, label) => `<button class="index-tab${newsFilter === t ? ' active' : ''}" onclick="switchNewsTab('${t}')">${label}</button>`;
+  document.getElementById('news-tabs').innerHTML =
+    tab('全部', '全部' + (newsFilter === '全部' ? ` <span style="opacity:.5">${newsItems.length}</span>` : '')) +
+    tags.map(t => tab(t, `${t} <span style="opacity:.5">${counts[t]}</span>`)).join('');
+}
+
+function switchNewsTab(t) { newsFilter = t; renderNewsTabs(); renderNewsList(); }
+
+function renderNewsList() {
+  const items = newsFilter === '全部' ? newsItems : newsItems.filter(it => it.tags.includes(newsFilter));
+  document.getElementById('news-list').innerHTML = items.length ? items.slice(0, 14).map(it => {
+    const tag = it.tags[0] || '快讯';
+    const c = newsTagColor(tag);
+    return `<div class="news-item${it.url ? ' news-link' : ''}"${it.url ? ` data-url="${escapeHtml(it.url)}"` : ''}>
+      <span class="news-tag" style="color:${c};background:${c}1a;border:1px solid ${c}33;">${escapeHtml(tag)}</span>
+      <span class="news-text" title="${escapeHtml(it.text)}">${escapeHtml(it.text)}</span>
+      <span class="news-time">${it.time ? it.time.slice(11, 16) : ''}</span>
+    </div>`;
+  }).join('') : '<div style="color:#71717a;font-size:11px;padding:8px 2px;">暂无该分类新闻</div>';
+}
+
+async function loadNews() {
+  const meta = document.getElementById('news-meta');
+  try {
+    const d = await fetch('/proxy/news?num=30').then(r => r.json());
+    if (d.error) throw new Error(d.error);
+    newsItems = d.list || [];
+    renderNewsTabs();
+    renderNewsList();
+    meta.textContent = `自动 ${NEWS_REFRESH_MS / 1000}s · 抓取于 ${d.fetched_at}`;
+    meta.style.color = 'var(--text-3)';
+  } catch (e) {
+    meta.textContent = '新闻加载失败: ' + e.message;
+    meta.style.color = '#f87171';
+  }
+}
+
+function initNews() {
+  loadNews();
+  setInterval(loadNews, NEWS_REFRESH_MS);
+  // 点击新闻行跳转新浪原始详情（事件委托，避免内联注入）
+  document.getElementById('news-list').addEventListener('click', e => {
+    const item = e.target.closest('.news-item');
+    if (item && item.dataset.url) window.open(item.dataset.url, '_blank', 'noopener');
+  });
+}
+
+// ========================= MARKET BREADTH 市场宽度 =========================
+// 基于自选样本（loadWatchlist 数据）计算；最活跃板块取新浪行业资金排行第一
+let sectorList = [];
+
+async function loadBreadth() {
+  if (!wlItems.length) return;
+  try {
+    const r = await fetch('/proxy/sector-money');
+    const d = await r.json();
+    if (!d.error && Array.isArray(d)) sectorList = d;
+  } catch (e) { /* 板块数据缺失不影响核心统计 */ }
+  renderBreadth();
+}
+
+function renderBreadth() {
+  const body = document.getElementById('bdst-body');
+  if (!wlItems.length) { body.innerHTML = '<div style="color:#71717a;font-size:11px;">无自选样本</div>'; return; }
+
+  const total = wlItems.length;
+  const s = wlStats;
+  const rise = s.rise || 0, fall = s.fall || 0;
+  const flat = Math.max(0, total - rise - fall);
+  const ratio = fall > 0 ? (rise / fall).toFixed(2) : (rise > 0 ? '∞' : '--');
+
+  const rates = wlItems.map(i => parseFloat(i.rate) || 0).sort((a, b) => a - b);
+  let median = '--';
+  if (rates.length) median = fmtPct(rates[Math.floor((rates.length - 1) / 2)]);
+  const sorted = [...wlItems].sort((a, b) => b.rate - a.rate);
+  const top = sorted[0] || null, bot = sorted[sorted.length - 1] || null;
+  const hot = sectorList[0] || null;
+
+  const row = (k, v, cls) => `<div class="bdst-row"><span class="k">${k}</span><span class="v ${cls || ''}">${v}</span></div>`;
+  body.innerHTML =
+    `<div class="bdst-main">
+      <span style="display:flex;flex-direction:column;"><span class="bdst-count up">${rise}</span><span class="bdst-label">上涨</span></span>
+      <span style="display:flex;flex-direction:column;"><span class="bdst-count down">${fall}</span><span class="bdst-label">下跌</span></span>
+      <span style="display:flex;flex-direction:column;"><span class="bdst-count" style="color:var(--text-2);">${flat}</span><span class="bdst-label">平盘</span></span>
+      <span class="bdst-ratio">涨跌比 <b>${ratio}</b></span>
+    </div>` +
+    row('涨跌幅中位数', median) +
+    row('平均涨跌幅', fmtPct(s.avg), s.avg > 0 ? 'up' : s.avg < 0 ? 'down' : '') +
+    row('领涨', top ? `${top.name} ${escapeHtml(fmtPct(top.rate))}` : '--', 'up') +
+    row('领跌', bot ? `${bot.name} ${escapeHtml(fmtPct(bot.rate))}` : '--', 'down') +
+    row('最活跃板块', hot ? `${hot.name} · 主力净流入 ${(parseFloat(hot.netamount) / 1e8).toFixed(1)}亿` : '--', parseFloat(hot?.netamount) >= 0 ? 'up' : 'down') +
+    `<div class="bdst-note">统计仅描述当前筛选下的 ${total} 只跟踪样本，不代表全市场宽度</div>`;
+}
+
 // ========================= STOCK LIST TABS (持仓明细 / 自选行情) =========================
 function switchStockTab(tab) {
   document.getElementById('stk-tab-pos').classList.toggle('active', tab === 'pos');
   document.getElementById('stk-tab-wl').classList.toggle('active', tab === 'wl');
   document.getElementById('stk-pane-pos').style.display = tab === 'pos' ? 'flex' : 'none';
   document.getElementById('stk-pane-wl').style.display = tab === 'wl' ? 'flex' : 'none';
+}
+
+// 卡片内 pane 切换（tabA 资产 / tabB 持仓）。pane 由 none→flex 后懒初始化图表
+function switchPane(btn) {
+  const card = btn.closest('.card');
+  card.querySelectorAll('.pane-tabs .index-tab').forEach(t => t.classList.toggle('active', t === btn));
+  card.querySelectorAll('.tab-pane').forEach(p => {
+    p.style.display = p.id === btn.dataset.pane ? 'flex' : 'none';
+  });
+  setTimeout(() => {
+    if (btn.dataset.pane === 'pane-monthly') initCalendar();
+    else if (btn.dataset.pane === 'pane-holdings') initHoldings();
+    if (calendarChart) { calendarChart.resize(); updateCalendar(); }
+    if (holdingsChart) holdingsChart.resize();
+    if (indexChart) indexChart.resize();
+  }, 60);
 }
 
 // ========================= MONEY FLOW (treemap) =========================
@@ -1611,6 +1817,7 @@ function renderAll() {
   initWatchlist();
   initMoneyFlow();
   initCashflow();
+  initNews();
   initGlobalIndexes();
 }
 
