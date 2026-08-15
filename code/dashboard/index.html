@@ -37,6 +37,67 @@
     display: flex; align-items: center; justify-content: space-between;
     box-shadow: 0 1px 0 rgba(255,255,255,0.03) inset;
   }
+
+  /* 顶部滚动指数 Ticker */
+  .ticker-wrap {
+    position: sticky; top: 46px; z-index: 99;
+    background: rgba(9,9,11,0.92); border-bottom: 1px solid var(--border);
+    overflow: hidden; height: 32px; display: flex; align-items: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
+  }
+  .ticker-label {
+    flex-shrink: 0; padding: 0 14px; color: var(--text-3);
+    border-right: 1px solid var(--border); background: rgba(255,255,255,0.015);
+    display: flex; align-items: center; gap: 6px; height: 100%;
+  }
+  .ticker-track {
+    flex: 1; overflow: hidden; position: relative; height: 100%;
+    mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+  }
+  .ticker-content {
+    display: inline-flex; align-items: center; gap: 28px;
+    white-space: nowrap; padding-left: 18px;
+    animation: ticker-scroll 60s linear infinite;
+    will-change: transform;
+  }
+  .ticker-wrap:hover .ticker-content { animation-play-state: paused; }
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .ticker-item { display: inline-flex; align-items: baseline; gap: 6px; }
+  .ticker-name { color: var(--text-2); }
+  .ticker-price { color: var(--text-1); font-weight: 600; }
+  .ticker-change { font-size: 10px; }
+
+  /* 指数行情卡片 */
+  .index-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  }
+  .index-card {
+    background: #0f0f11; border: 1px solid #1c1c1f; border-radius: 8px;
+    padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between;
+    transition: border-color 0.15s, transform 0.1s;
+  }
+  .index-card:hover { border-color: #27272a; transform: translateY(-1px); }
+  .index-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .index-card-name { font-size: 12px; color: var(--text-2); font-weight: 500; }
+  .index-card-location { font-size: 9px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; }
+  .index-card-price { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--text-1); letter-spacing: -0.5px; }
+  .index-card-change { font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 2px; }
+  .index-card-state { font-size: 9px; color: var(--text-3); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+  @media (max-width: 1200px) {
+    .index-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 680px) {
+    .index-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .index-card { padding: 10px; }
+    .index-card-price { font-size: 18px; }
+    .ticker-wrap { height: 30px; }
+    .ticker-content { animation-duration: 45s; }
+  }
   .top-actions { display: flex; align-items: center; gap: 14px; font-size: 11px; color: var(--text-2); font-family: 'JetBrains Mono', monospace; }
   .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--up); animation: pulse 2s infinite; display: inline-block; margin-right: 5px; box-shadow: 0 0 6px var(--up); }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
@@ -306,7 +367,16 @@
   </div>
 </header>
 
+<div class="ticker-wrap" id="ticker-wrap">
+  <div class="ticker-label"><span class="live-dot"></span>全球市场</div>
+  <div class="ticker-track"><div class="ticker-content" id="ticker-content">加载中...</div></div>
+</div>
+
 <div class="error-banner" id="error-banner"></div>
+
+<section class="index-section" style="max-width:1800px;margin:0 auto;padding:12px 12px 0;">
+  <div class="index-grid" id="index-grid"></div>
+</section>
 
 <main class="dashboard">
 
@@ -1382,9 +1452,153 @@ function updateClock() {
     d.toLocaleDateString('zh-CN')+' '+d.toLocaleTimeString('zh-CN',{hour12:false})+' · CST +8';
 }
 
+// ========================= GLOBAL INDEXES TICKER & CARDS =========================
+const GLOBAL_INDEX_CONFIG = [
+  { code: 'sh000001', name: '上证指数' },
+  { code: 'sz399001', name: '深证成指' },
+  { code: 'sz399006', name: '创业板指' },
+  { code: 'sh000300', name: '沪深300' },
+  { code: 'sh000688', name: '科创50' },
+  { code: 'hkHSI', name: '恒生指数' },
+  { code: 'hkHSTECH', name: '恒生科技' },
+  { code: 'DJI', name: '道琼斯' },
+  { code: 'IXIC', name: '纳斯达克' },
+  { code: 'INX', name: '标普500' },
+];
+
+let globalIndexData = [];
+
+async function initGlobalIndexes() {
+  try {
+    const r = await fetch('/proxy/global-indexes');
+    const data = await r.json();
+    if (data.error) throw new Error(data.error);
+    globalIndexData = extractGlobalIndexes(data);
+
+    // 腾讯全球指数接口缺失部分 A 股/港股指数，用新浪行情补充
+    const missing = GLOBAL_INDEX_CONFIG.filter(cfg =>
+      !globalIndexData.some(x => x.code === cfg.code || x.qtcode === cfg.code || x.name === cfg.name)
+    );
+    const aShareMissing = missing.filter(cfg => cfg.code.startsWith('sh') || cfg.code.startsWith('sz') || cfg.code.toLowerCase().startsWith('hk'));
+    if (aShareMissing.length) {
+      const codes = aShareMissing.map(cfg => cfg.code).join(',');
+      try {
+        const sr = await fetch(`/proxy/stock-price?codes=${codes}`);
+        const sData = await sr.json();
+        for (const cfg of aShareMissing) {
+          const s = sData.find(x => x.code === cfg.code);
+          if (s) {
+            globalIndexData.push({
+              code: s.code,
+              name: s.name,
+              qtcode: s.code,
+              zxj: String(s.current),
+              zdf: String(s.changePct),
+              zde: String(s.change),
+              state: 'close',
+              displayName: cfg.name,
+              location: cfg.code.toLowerCase().startsWith('hk') ? '香港' : (cfg.code.startsWith('sh') ? '上海' : '深圳'),
+            });
+          }
+        }
+      } catch (e) {
+        console.warn('新浪行情补充失败:', e);
+      }
+    }
+
+    // 按 GLOBAL_INDEX_CONFIG 顺序重新排序
+    globalIndexData.sort((a, b) => {
+      const ai = GLOBAL_INDEX_CONFIG.findIndex(cfg =>
+        a.code === cfg.code || a.qtcode === cfg.code || a.name === cfg.name || a.displayName === cfg.name
+      );
+      const bi = GLOBAL_INDEX_CONFIG.findIndex(cfg =>
+        b.code === cfg.code || b.qtcode === cfg.code || b.name === cfg.name || b.displayName === cfg.name
+      );
+      if (ai === -1 && bi === -1) return 0;
+      if (ai === -1) return 1;
+      if (bi === -1) return -1;
+      return ai - bi;
+    });
+
+    renderTicker();
+    renderIndexCards();
+  } catch (e) {
+    document.getElementById('ticker-content').textContent = '指数数据加载失败';
+    document.getElementById('index-grid').innerHTML = '';
+  }
+}
+
+function extractGlobalIndexes(data) {
+  const all = [];
+  const groups = ['common', 'asia', 'america', 'europe', 'other'];
+  for (const g of groups) {
+    const arr = data?.data?.[g] || [];
+    for (const item of arr) all.push(item);
+  }
+  // 按配置顺序提取优先指数
+  const prioritized = [];
+  for (const cfg of GLOBAL_INDEX_CONFIG) {
+    const found = all.find(x => x.code === cfg.code || x.qtcode === cfg.code || x.name === cfg.name);
+    if (found) prioritized.push({ ...found, displayName: cfg.name });
+  }
+  // 补充其他主要指数
+  for (const item of all) {
+    if (!prioritized.some(p => p.code === item.code || p.qtcode === item.qtcode)) {
+      prioritized.push({ ...item, displayName: item.name });
+    }
+  }
+  return prioritized;
+}
+
+function renderTicker() {
+  const track = document.getElementById('ticker-content');
+  const items = globalIndexData.slice(0, 24);
+  const html = items.map(item => {
+    const price = item.zxj == null || item.zxj === '' ? '--' : Number(item.zxj).toFixed(2);
+    const change = parseFloat(item.zdf) || 0;
+    const cls = change > 0 ? 'up' : change < 0 ? 'down' : '';
+    return `<div class="ticker-item">
+      <span class="ticker-name">${item.displayName || item.name}</span>
+      <span class="ticker-price">${price}</span>
+      <span class="ticker-change ${cls}">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</span>
+    </div>`;
+  }).join('');
+  // 复制一份实现无缝滚动
+  track.innerHTML = html + html;
+}
+
+function renderIndexCards() {
+  const grid = document.getElementById('index-grid');
+  const cards = GLOBAL_INDEX_CONFIG.map(cfg => {
+    const item = globalIndexData.find(x => x.code === cfg.code || x.qtcode === cfg.code || x.name === cfg.name);
+    if (!item) {
+      return `<div class="index-card">
+        <div class="index-card-header"><span class="index-card-name">${cfg.name}</span></div>
+        <div class="index-card-price" style="color:var(--text-3);">--</div>
+        <div class="index-card-change" style="color:var(--text-3);">--</div>
+      </div>`;
+    }
+    const price = item.zxj == null || item.zxj === '' ? '--' : Number(item.zxj).toFixed(2);
+    const change = parseFloat(item.zdf) || 0;
+    const cls = change > 0 ? 'up' : change < 0 ? 'down' : '';
+    const state = item.state === 'open' ? '交易中' : item.state === 'close' ? '已收盘' : '';
+    return `<div class="index-card">
+      <div class="index-card-header">
+        <span class="index-card-name">${cfg.name}</span>
+        <span class="index-card-location">${item.location || ''}</span>
+      </div>
+      <div class="index-card-price ${cls}">${price}</div>
+      <div class="index-card-change ${cls}">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</div>
+      ${state ? `<div class="index-card-state">${state}</div>` : ''}
+    </div>`;
+  }).join('');
+  grid.innerHTML = cards || '<div style="color:var(--text-3);font-size:12px;">暂无指数数据</div>';
+}
+
 async function refreshAll() {
   const ok = await loadAllData();
   if (ok) renderAll();
+  initGlobalIndexes();
 }
 
 function renderAll() {
@@ -1397,6 +1611,7 @@ function renderAll() {
   initWatchlist();
   initMoneyFlow();
   initCashflow();
+  initGlobalIndexes();
 }
 
 const EYE_OPEN = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>`;
@@ -1446,6 +1661,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateClock();
   setInterval(updateClock, 10000);
   applySavedState();
+  initGlobalIndexes(); // 指数数据独立加载，不依赖同花顺 cookie
   const ok = await loadAllData();
   if (ok) {
     // 恢复账户选择（无效值回退到汇总）

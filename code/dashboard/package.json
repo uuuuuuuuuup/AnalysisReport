@@ -12,9 +12,11 @@
   "dependencies": {
     "@ai-sdk/deepseek": "^0.2.0",
     "ai": "^4.3.0",
+    "iconv-lite": "^0.7.3",
     "zod": "^3.24.0"
   },
   "devDependencies": {
+    "@types/iconv-lite": "^0.0.1",
     "@types/node": "^22.0.0",
     "playwright": "^1.62.1",
     "tsx": "^4.19.0",

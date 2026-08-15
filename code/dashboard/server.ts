@@ -14,6 +14,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import type { IncomingMessage, ServerResponse } from 'node:http';
+import iconv from 'iconv-lite';
 import { streamText, type CoreTool } from 'ai';
 import { createDeepSeek } from '@ai-sdk/deepseek';
 import { ALL_TOOLS, TOOL_LABELS } from './tools';
@@ -228,6 +229,94 @@ function proxyExternal(urlStr: string, referer: string, res: ServerResponse): vo
   req.on('error', (e) => {
     res.writeHead(502);
     res.end(JSON.stringify({error: 'Proxy error: ' + e.message}));
+  });
+}
+
+// 新浪实时行情代理: /proxy/stock-price?codes=sh000300,sz399006
+// 返回 [{code, name, current, prevClose, change, changePct, state}]
+function proxyStockPrice(codes: string, res: ServerResponse): void {
+  const list = codes.split(',').map(c => c.trim()).filter(Boolean).join(',');
+  const target = `http://hq.sinajs.cn/list=${list}`;
+  console.log(`  ↳ GET ${target}`);
+  const req = http.get(target, {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Referer': 'https://finance.sina.com.cn',
+    }
+  }, (proxyRes) => {
+    const chunks: Buffer[] = [];
+    proxyRes.on('data', chunk => chunks.push(chunk as Buffer));
+    proxyRes.on('end', () => {
+      const raw = Buffer.concat(chunks);
+      const body = iconv.decode(raw, 'gbk');
+      const result = parseSinaStockPrice(body, codes.split(',').map(c => c.trim()).filter(Boolean));
+      res.writeHead(proxyRes.statusCode ?? 502, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+      });
+      res.end(JSON.stringify(result));
+    });
+  });
+  req.on('error', (e) => {
+    res.writeHead(502);
+    res.end(JSON.stringify({error: 'Proxy error: ' + e.message}));
+  });
+}
+
+function parseSinaStockPrice(body: string, codes: string[]) {
+  const result: { code: string; name: string; current: number; prevClose: number; change: number; changePct: number; state: string; }[] = [];
+  for (const code of codes) {
+    const re = new RegExp(`var hq_str_${code}="([^"]*)";`);
+    const m = body.match(re);
+    if (!m || !m[1]) continue;
+    const parts = m[1].split(',');
+    if (parts.length < 3) continue;
+    let name: string, current: number, prevClose: number, change: number, changePct: number;
+    if (code.toLowerCase().startsWith('hk')) {
+      // 港股格式：英文名,中文名,当前价,昨收,今开,最高,最低,涨跌额,涨跌幅,...
+      name = parts[1] || '';
+      current = parseFloat(parts[2]) || 0;
+      prevClose = parseFloat(parts[3]) || 0;
+      change = parseFloat(parts[7]) || 0;
+      changePct = parseFloat(parts[8]) || 0;
+    } else {
+      name = parts[0];
+      current = parseFloat(parts[3]) || 0;
+      prevClose = parseFloat(parts[2]) || 0;
+      change = current - prevClose;
+      changePct = prevClose ? (change / prevClose) * 100 : 0;
+    }
+    result.push({ code, name, current, prevClose, change, changePct: parseFloat(changePct.toFixed(2)), state: 'close' });
+  }
+  return result;
+}
+
+function proxyGlobalIndexes(res: ServerResponse): void {
+  const target = 'https://proxy.finance.qq.com/ifzqgtimg/appstock/app/rank/indexRankDetail2';
+  console.log(`  ↳ GET ${target}`);
+  const req = https.get(target, {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Referer': 'https://stockapp.finance.qq.com/mstats',
+      'Host': 'proxy.finance.qq.com',
+    }
+  }, (proxyRes) => {
+    let body = '';
+    proxyRes.setEncoding('utf8');
+    proxyRes.on('data', chunk => body += chunk);
+    proxyRes.on('end', () => {
+      // 腾讯接口在字段值中夹杂换行符/控制字符，需清理后再返回 JSON
+      const cleaned = body.replace(/[\x00-\x1f]/g, '');
+      res.writeHead(proxyRes.statusCode ?? 502, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Access-Control-Allow-Origin': '*',
+      });
+      res.end(cleaned);
+    });
+  });
+  req.on('error', (e) => {
+    res.writeHead(502);
+    res.end(JSON.stringify({ error: 'Proxy error: ' + e.message }));
   });
 }
 
@@ -639,6 +728,20 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
     const num = url.searchParams.get('num') || 12;
     const target = `https://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/MoneyFlow.ssl_bkzj_ssggzj?page=1&num=${num}&sort=netamount&asc=${order}&bankuai=&shichang=`;
     return proxyExternal(target, 'https://finance.sina.com.cn/', res);
+  }
+
+  // 全球主要股指: /proxy/global-indexes
+  if (pathname.startsWith('/proxy/global-indexes')) {
+    return proxyGlobalIndexes(res);
+  }
+
+  // 新浪实时行情（A 股指数补充）: /proxy/stock-price?codes=sh000300,sz399006
+  if (pathname.startsWith('/proxy/stock-price')) {
+    const codes = url.searchParams.get('codes') || '';
+    if (codes) return proxyStockPrice(codes, res);
+    res.writeHead(400);
+    res.end(JSON.stringify({ error: 'Missing codes parameter' }));
+    return;
   }
 
   // Static files
