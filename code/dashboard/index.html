@@ -109,8 +109,8 @@
     grid-template-areas:
       "tabA  tabA  mf    mf"
       "tabB  tabB  mf    mf"
-      "tabB  tabB  candl candl"
-      "tabB  tabB  candl candl"
+      "tabB  tabB  news  news"
+      "tabB  tabB  news  news"
       "tabB  tabB  news  news"
       "tabB  tabB  news  news"
       "tabB  tabB  bdst  bdst"
@@ -141,7 +141,6 @@
   .row-3 { grid-row: span 3; height: auto; }
   /* area 类须在 col/row 类之后声明，确保 grid-area 覆盖 span */
   .area-tabA { grid-area: tabA; }
-  .area-candl { grid-area: candl; }
   .area-tabB { grid-area: tabB; }
   .area-mf { grid-area: mf; }
   .area-news { grid-area: news; }   .area-bdst { grid-area: bdst; }
@@ -320,14 +319,14 @@
 
   @media (max-width: 1400px) {
     .dashboard { grid-template-columns: 1fr 1fr; grid-template-areas: none; grid-template-rows: none; }
-    .area-tabA, .area-tabB, .area-candl, .area-mf, .area-news, .area-bdst { grid-area: auto; }
+    .area-tabA, .area-tabB, .area-mf, .area-news, .area-bdst { grid-area: auto; }
     .col-1, .col-2 { grid-column: span 2; }
     .row-2, .row-3 { grid-row: span 1; height: 240px; }
   }
   /* 移动端：单列 + 卡片高度自适应 + 触控优化 */
   @media (max-width: 680px) {
     .dashboard { grid-template-columns: minmax(0, 1fr); grid-template-areas: none; grid-template-rows: none; gap: 8px; padding: 8px; }
-    .area-tabA, .area-tabB, .area-candl, .area-mf, .area-news, .area-bdst { grid-area: auto; }
+    .area-tabA, .area-tabB, .area-mf, .area-news, .area-bdst { grid-area: auto; }
     .col-1, .col-2 { grid-column: span 1; }
     .row-2, .row-3 { grid-row: span 1; height: auto; }
     .card { padding: 10px 12px; min-width: 0; }
@@ -352,7 +351,7 @@
   /* 超大屏：一卡一行，自上而下堆叠（≥1920px；1080p/1440p 仍走默认 4 列马赛克） */
   @media (min-width: 1920px) {
     .dashboard { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: none; }
-    .area-tabA, .area-tabB, .area-candl, .area-mf, .area-news, .area-bdst { grid-area: auto; }
+    .area-tabA, .area-tabB, .area-mf, .area-news, .area-bdst { grid-area: auto; }
     .col-1, .col-2 { grid-column: span 1; }
     .row-2, .row-3 { grid-row: span 1; }
     .card { min-width: 0; }
@@ -451,35 +450,13 @@
     </div>
   </div>
 
-  <!-- 收盘价折线 / K线 -->
-  <div class="card col-2 row-2 area-candl">
-    <div class="card-title">
-      <span class="en">CANDLESTICK</span><span class="sep">·</span><span class="zh">K线行情</span>
-      <select id="kline-symbol" onchange="switchSymbol()" style="
-        background:#1a1a1c;color:var(--text-1);border:1px solid #26262a;
-        border-radius:4px;padding:3px 7px;font-size:11px;font-family:inherit;
-        cursor:pointer;max-width:280px;outline:none;
-      "></select>
-      <span style="margin-left:auto;display:flex;gap:2px;background:#161618;border-radius:4px;padding:2px;border:1px solid #26262a;">
-        <button class="kline-mode-btn" id="km-line" onclick="setKlineMode('line')">折线</button>
-        <button class="kline-mode-btn active" id="km-candle" onclick="setKlineMode('candle')">K线</button>
-      </span>
-      <span style="font-size:10px;color:var(--text-3);" id="kline-mode-label">· 腾讯K线 · 前复权 120日</span>
-    </div>
-    <div class="ohlc-row" id="ohlc-row">加载中...</div>
-    <div class="chart-box" id="chart-kline"></div>
-    <div style="display:flex;justify-content:space-between;margin-top:4px;">
-      <span style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;">MA5 · MA10 · MA20</span>
-      <span style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;" id="kline-range"></span>
-    </div>
-  </div>
-
-  <!-- 股票列表 + 持仓权重（合并 tab） -->
+  <!-- 股票列表（持仓明细 + 自选行情） -->
   <div class="card col-2 area-tabB">
     <div class="card-title">
       <span class="en">HOLDINGS</span><span class="sep">·</span><span class="zh">持仓</span>
       <span class="index-tabs pane-tabs" style="margin-left:auto;margin-bottom:0;">
         <button class="index-tab active" data-pane="pane-stocks" onclick="switchPane(this)">股票列表</button>
+        <button class="index-tab" data-pane="pane-kline" onclick="switchPane(this)">K线行情</button>
         <button class="index-tab" data-pane="pane-holdings" onclick="switchPane(this)">持仓权重</button>
       </span>
     </div>
@@ -515,6 +492,28 @@
             <th>名称</th><th>现价</th><th>涨跌幅</th>
           </tr></thead><tbody id="wl-tbody"></tbody></table>
         </div>
+      </div>
+    </div>
+
+    <!-- K线行情 pane -->
+    <div class="tab-pane" id="pane-kline" style="display:none;flex-direction:column;flex:1;min-height:0;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+        <select id="kline-symbol" onchange="switchSymbol()" style="
+          background:#1a1a1c;color:var(--text-1);border:1px solid #26262a;
+          border-radius:4px;padding:3px 7px;font-size:11px;font-family:inherit;
+          cursor:pointer;max-width:280px;outline:none;
+        "></select>
+        <span style="display:flex;gap:2px;background:#161618;border-radius:4px;padding:2px;border:1px solid #26262a;">
+          <button class="kline-mode-btn" id="km-line" onclick="setKlineMode('line')">折线</button>
+          <button class="kline-mode-btn active" id="km-candle" onclick="setKlineMode('candle')">K线</button>
+        </span>
+        <span style="font-size:10px;color:var(--text-3);margin-left:auto;" id="kline-mode-label">· 腾讯K线 · 前复权 120日</span>
+      </div>
+      <div class="ohlc-row" id="ohlc-row">加载中...</div>
+      <div class="chart-box" id="chart-kline"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:4px;">
+        <span style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;">MA5 · MA10 · MA20</span>
+        <span style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;" id="kline-range"></span>
       </div>
     </div>
 
@@ -940,9 +939,11 @@ function showKlineEmpty(chart, text) {
 }
 
 async function initKline() {
+  const dom = document.getElementById('chart-kline');
+  if (!dom || dom.clientWidth === 0) return; // pane 隐藏时跳过，切 tab 后由 switchPane 触发
   buildSymbolSelector();
   await renderKline();
-  new ResizeObserver(() => klineChart?.resize()).observe(document.getElementById('chart-kline'));
+  new ResizeObserver(() => klineChart?.resize()).observe(dom);
 }
 
 // ========================= ASSET TREND =========================
@@ -1307,7 +1308,7 @@ function switchNewsTab(t) { newsFilter = t; renderNewsTabs(); renderNewsList(); 
 
 function renderNewsList() {
   const items = newsFilter === '全部' ? newsItems : newsItems.filter(it => it.tags.includes(newsFilter));
-  document.getElementById('news-list').innerHTML = items.length ? items.slice(0, 14).map(it => {
+  document.getElementById('news-list').innerHTML = items.length ? items.slice(0, 100).map(it => {
     const tag = it.tags[0] || '快讯';
     const c = newsTagColor(tag);
     return `<div class="news-item${it.url ? ' news-link' : ''}"${it.url ? ` data-url="${escapeHtml(it.url)}"` : ''}>
@@ -1321,7 +1322,7 @@ function renderNewsList() {
 async function loadNews() {
   const meta = document.getElementById('news-meta');
   try {
-    const d = await fetch('/proxy/news?num=30').then(r => r.json());
+    const d = await fetch('/proxy/news?num=100').then(r => r.json());
     if (d.error) throw new Error(d.error);
     newsItems = d.list || [];
     renderNewsTabs();
@@ -1409,8 +1410,10 @@ function switchPane(btn) {
   setTimeout(() => {
     if (btn.dataset.pane === 'pane-monthly') initCalendar();
     else if (btn.dataset.pane === 'pane-holdings') initHoldings();
+    else if (btn.dataset.pane === 'pane-kline' && !klineChart) initKline();
     if (calendarChart) { calendarChart.resize(); updateCalendar(); }
     if (holdingsChart) holdingsChart.resize();
+    if (klineChart) klineChart.resize();
     if (indexChart) indexChart.resize();
   }, 60);
 }
