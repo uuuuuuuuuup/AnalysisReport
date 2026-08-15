@@ -340,6 +340,9 @@ async function handleAgentRequest(req: IncomingMessage, res: ServerResponse): Pr
     return;
   }
 
+  console.log(`  🤖 ${sessionId} | ${query.slice(0, 50)}${query.length > 50 ? '…' : ''}`);
+  console.log(`  → model=${AI_MODEL} baseURL=${AI_BASE_URL || 'DeepSeek官方'} key=${AI_API_KEY.slice(0, 8)}…`);
+
   // SSE 响应头
   res.writeHead(200, {
     'Content-Type': 'text/event-stream; charset=utf-8',
@@ -368,21 +371,32 @@ async function handleAgentRequest(req: IncomingMessage, res: ServerResponse): Pr
       onStepFinish: (step) => {
         // 每轮 tool call 结束推送状态事件
         const tc = step.toolCalls?.[0];
-        if (tc) sendEvent(res, 'status', { content: `正在查询${TOOL_LABELS[tc.toolName] || tc.toolName}…` });
+        if (tc) {
+          console.log(`  🔧 tool: ${tc.toolName} ${JSON.stringify(tc.args).slice(0, 100)}`);
+          sendEvent(res, 'status', { content: `正在查询${TOOL_LABELS[tc.toolName] || tc.toolName}…` });
+        }
+        if (step.text) console.log(`  💬 step文本: ${step.text.slice(0, 60).replace(/\n/g, ' ')}`);
+        console.log(`  ⏱ step结束: finishReason=${step.finishReason} toolCalls=${step.toolCalls?.length || 0}`);
       },
     });
 
     // 逐字流式推送最终回复文本
+    let textLen = 0;
     for await (const delta of result.textStream) {
+      textLen += delta.length;
       sendEvent(res, 'text', { delta });
     }
 
     // 持久化：以 SDK 回吐的完整消息为准（含 tool-call/tool-result，格式天然兼容下次请求）
-    session.messages = [...(await result.response).messages];
+    const response = await result.response;
+    session.messages = [...response.messages];
     session.updated = Date.now();
     saveSessions();
+    console.log(`  ✓ agent完成: 文本${textLen}字, 共${response.messages.length}条消息${textLen === 0 ? '（⚠️ 空回复）' : ''}`);
     sendEvent(res, 'done', { sessionId });
   } catch (e: any) {
+    console.error('  ✗ agent错误:', (e && e.message) ? e.message : e, (e && e.statusCode) ? `(HTTP ${e.statusCode})` : '');
+    if (e && e.cause) console.error('      cause:', e.cause);
     sendEvent(res, 'error', { message: (e && e.message) ? String(e.message) : 'AI 服务异常' });
   } finally {
     clearInterval(heartbeat);
@@ -526,6 +540,8 @@ server.listen(PORT, '127.0.0.1', () => {
     console.log('     推荐写入 ~/.tzzb_ai_config.json（apiKey/model/baseURL，见 README）');
     console.log('     或用 TZZB_AI_KEY 环境变量 / ~/.tzzb_ai_key 文件');
     console.log('     AI 对话功能将不可用，但不影响其他功能');
+  } else {
+    console.log(`  🤖 AI: ${AI_MODEL} @ ${AI_BASE_URL || 'DeepSeek 官方端点'} (key ${AI_API_KEY.slice(0, 8)}…)`);
   }
 
   // Auto-open browser
