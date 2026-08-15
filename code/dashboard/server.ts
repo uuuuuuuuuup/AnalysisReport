@@ -12,7 +12,6 @@ import https from 'node:https';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import { exec } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { streamText, type CoreTool } from 'ai';
@@ -71,10 +70,10 @@ const gatewayFetch: typeof fetch = async (url, init) => {
 
 const modelProvider = createDeepSeek({ apiKey: AI_API_KEY, baseURL: AI_BASE_URL, fetch: gatewayFetch });  // 模块级构造一次，勿在每次请求内新建
 
-const SYSTEM_PROMPT = `你是一个专业的投资看板 AI 助手，名为"灵犀"。
+const SYSTEM_PROMPT = `你是一个专业的投资看板 AI 助手，名为"点金"。
 
 ## 角色
-- 名字：灵犀
+- 名字：点金
 - 风格：专业但不生硬，数据驱动，简洁清晰
 - 语言：中文，金额用中文习惯（万/亿）
 - 禁忌：不提供具体买卖建议，不预测未来走势，不做投资推荐
@@ -101,7 +100,7 @@ const SESSION_FILE = path.join(os.homedir(), '.tzzb_ai_sessions.json');
 const MAX_SESSIONS = 10;
 const MAX_MESSAGES = 60;
 
-type Session = { updated: number; messages: any[] };
+type Session = { updated: number; messages: any[]; title?: string };
 let sessions = new Map<string, Session>();
 
 function loadSessions(): void {
@@ -129,6 +128,14 @@ function getSession(id: string): Session {
   let s = sessions.get(id);
   if (!s) { s = { updated: Date.now(), messages: [] }; sessions.set(id, s); }
   return s;
+}
+
+// 会话标题兜底：取首条 user 消息前 20 字
+function deriveTitle(messages: any[]): string {
+  const first = messages.find(m => m.role === 'user');
+  if (!first) return '新对话';
+  const t = typeof first.content === 'string' ? first.content : extractText(first);
+  return t.trim().slice(0, 20) || '新对话';
 }
 
 // 从 SDK 消息中提取纯文本（助手消息的 text 类 part；tool 类 part 跳过）
@@ -335,38 +342,8 @@ function sendEvent(res: ServerResponse, event: string, data: object): void {
   res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
 }
 
-async function handleAgentRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
-  // 鉴权：与现有 /api/ 行为一致
-  const cookie = readCookie();
-  if (!cookie) {
-    res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ error: 'No cookie found. Run: echo "your-cookie" > ~/.tzzb_cookies' }));
-    return;
-  }
-
-  let body: { sessionId?: string; query?: string };
-  try { body = await readJsonBody(req); }
-  catch {
-    res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ error: 'Invalid JSON body' }));
-    return;
-  }
-  const sessionId = body.sessionId || 'default';
-  const query = (body.query || '').trim();
-  if (!query) {
-    res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ error: 'query 不能为空' }));
-    return;
-  }
-  if (!AI_API_KEY) {
-    res.writeHead(503, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ error: '未配置 AI API Key（~/.tzzb_ai_config.json 配置文件 / TZZB_AI_KEY 环境变量 / ~/.tzzb_ai_key 文件）' }));
-    return;
-  }
-
-  console.log(`  🤖 ${sessionId} | ${query.slice(0, 50)}${query.length > 50 ? '…' : ''}`);
-  console.log(`  → model=${AI_MODEL} baseURL=${AI_BASE_URL || 'DeepSeek官方'} key=${AI_API_KEY.slice(0, 8)}…`);
-
+// 公共流式执行核心（发送 / 重新生成共用）
+async function runAgentStream(res: ServerResponse, session: Session, sessionId: string, toolsEnabled: boolean): Promise<void> {
   // SSE 响应头
   res.writeHead(200, {
     'Content-Type': 'text/event-stream; charset=utf-8',
@@ -380,15 +357,12 @@ async function handleAgentRequest(req: IncomingMessage, res: ServerResponse): Pr
   const heartbeat = setInterval(() => { if (!res.writableEnded) res.write(': ping\n\n'); }, 15000);
   res.on('close', () => { clearInterval(heartbeat); controller.abort(); });
 
-  const session = getSession(sessionId);
-  session.messages.push({ role: 'user', content: query });
-
   try {
     const result = streamText({
       model: modelProvider(AI_MODEL),
       system: SYSTEM_PROMPT,
       messages: session.messages,
-      tools: ALL_TOOLS as unknown as Record<string, CoreTool>,
+      tools: toolsEnabled ? (ALL_TOOLS as unknown as Record<string, CoreTool>) : {},
       maxSteps: 5,
       temperature: 0.3,
       abortSignal: controller.signal,
@@ -428,6 +402,45 @@ async function handleAgentRequest(req: IncomingMessage, res: ServerResponse): Pr
   }
 }
 
+async function handleAgentRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  // 鉴权：与现有 /api/ 行为一致
+  const cookie = readCookie();
+  if (!cookie) {
+    res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: 'No cookie found. Run: echo "your-cookie" > ~/.tzzb_cookies' }));
+    return;
+  }
+
+  let body: { sessionId?: string; query?: string; toolsEnabled?: boolean };
+  try { body = await readJsonBody(req); }
+  catch {
+    res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: 'Invalid JSON body' }));
+    return;
+  }
+  const sessionId = body.sessionId || 'default';
+  const query = (body.query || '').trim();
+  if (!query) {
+    res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: 'query 不能为空' }));
+    return;
+  }
+  if (!AI_API_KEY) {
+    res.writeHead(503, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: '未配置 AI API Key（~/.tzzb_ai_config.json 配置文件 / TZZB_AI_KEY 环境变量 / ~/.tzzb_ai_key 文件）' }));
+    return;
+  }
+
+  console.log(`  🤖 ${sessionId} | ${query.slice(0, 50)}${query.length > 50 ? '…' : ''}`);
+  console.log(`  → model=${AI_MODEL} baseURL=${AI_BASE_URL || 'DeepSeek官方'} key=${AI_API_KEY.slice(0, 8)}…`);
+
+  const session = getSession(sessionId);
+  session.messages.push({ role: 'user', content: query });
+  if (!session.title) session.title = query.slice(0, 20);  // 首次对话自动命名
+
+  await runAgentStream(res, session, sessionId, body.toolsEnabled !== false);
+}
+
 async function handleAgentHistory(req: IncomingMessage, res: ServerResponse, url: URL): Promise<void> {
   const cookie = readCookie();
   if (!cookie) {
@@ -462,6 +475,93 @@ async function handleAgentClear(req: IncomingMessage, res: ServerResponse): Prom
   res.end(JSON.stringify({ ok: true }));
 }
 
+async function handleAgentSessions(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  const cookie = readCookie();
+  if (!cookie) {
+    res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: 'No cookie found. Run: echo "your-cookie" > ~/.tzzb_cookies' }));
+    return;
+  }
+  const list = [...sessions.entries()]
+    .map(([id, s]) => ({ id, title: s.title || deriveTitle(s.messages), updated: s.updated }))
+    .sort((a, b) => b.updated - a.updated);
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({ sessions: list }));
+}
+
+async function handleAgentRename(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  const cookie = readCookie();
+  if (!cookie) {
+    res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: 'No cookie found. Run: echo "your-cookie" > ~/.tzzb_cookies' }));
+    return;
+  }
+  let body: any;
+  try { body = await readJsonBody(req); }
+  catch { body = {}; }
+  const title = String(body.title || '').trim();
+  if (!title || title.length > 50) {
+    res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: 'title 不合法（1-50 字）' }));
+    return;
+  }
+  const s = sessions.get(body.sessionId);
+  if (!s) {
+    res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: '会话不存在' }));
+    return;
+  }
+  s.title = title;
+  saveSessions();
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({ ok: true }));
+}
+
+async function handleAgentDelete(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  const cookie = readCookie();
+  if (!cookie) {
+    res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: 'No cookie found. Run: echo "your-cookie" > ~/.tzzb_cookies' }));
+    return;
+  }
+  let body: any;
+  try { body = await readJsonBody(req); }
+  catch { body = {}; }
+  sessions.delete(body.sessionId || 'default');  // 幂等
+  saveSessions();
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({ ok: true }));
+}
+
+async function handleAgentRegenerate(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  const cookie = readCookie();
+  if (!cookie) {
+    res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: 'No cookie found. Run: echo "your-cookie" > ~/.tzzb_cookies' }));
+    return;
+  }
+  let body: any;
+  try { body = await readJsonBody(req); }
+  catch { body = {}; }
+  const sessionId = body.sessionId || 'default';
+  const session = sessions.get(sessionId);
+  if (!session || !session.messages.some(m => m.role === 'user')) {
+    res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: '无可重新生成的消息' }));
+    return;
+  }
+  if (!AI_API_KEY) {
+    res.writeHead(503, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ error: '未配置 AI API Key（~/.tzzb_ai_config.json 配置文件 / TZZB_AI_KEY 环境变量 / ~/.tzzb_ai_key 文件）' }));
+    return;
+  }
+  // 弹出最后一条 assistant 消息重新生成；若最后一条是 user（上次失败），直接重跑
+  const last = session.messages[session.messages.length - 1];
+  if (last && last.role === 'assistant') session.messages.pop();
+  console.log(`  🤖 ${sessionId} | 重新生成`);
+  await runAgentStream(res, session, sessionId, body.toolsEnabled !== false);
+}
+
 const server = http.createServer((req: IncomingMessage, res: ServerResponse) => {
   const url = new URL(req.url ?? '/', 'http://localhost:' + PORT);
   const pathname = url.pathname;
@@ -476,6 +576,18 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
   }
   if (pathname === '/api/agent/clear' && method === 'POST') {
     return handleAgentClear(req, res);
+  }
+  if (pathname === '/api/agent/sessions' && method === 'GET') {
+    return handleAgentSessions(req, res);
+  }
+  if (pathname === '/api/agent/rename' && method === 'POST') {
+    return handleAgentRename(req, res);
+  }
+  if (pathname === '/api/agent/delete' && method === 'POST') {
+    return handleAgentDelete(req, res);
+  }
+  if (pathname === '/api/agent/regenerate' && method === 'POST') {
+    return handleAgentRegenerate(req, res);
   }
 
   // API proxy
@@ -530,7 +642,7 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
   }
 
   // Static files
-  let filePath = pathname === '/' ? '/index.html' : pathname;
+  let filePath = pathname === '/' ? '/index.html' : pathname === '/ai' ? '/ai.html' : pathname;
   // Security: prevent directory traversal
   filePath = path.normalize(filePath).replace(/^(\.\.[\/\\])+/, '');
   const fullPath = path.join(STATIC_DIR, filePath);
@@ -568,8 +680,5 @@ server.listen(PORT, '127.0.0.1', () => {
     console.log(`  🤖 AI: ${AI_MODEL} @ ${AI_BASE_URL || 'DeepSeek 官方端点'} (key ${AI_API_KEY.slice(0, 8)}…)`);
   }
 
-  // Auto-open browser
-  const platform = process.platform;
-  const openCmd = platform === 'darwin' ? 'open' : platform === 'win32' ? 'start' : 'xdg-open';
-  exec(`${openCmd} ${url}`);
+  console.log('  启动完成，不会自动打开浏览器，请手动访问上面的地址');
 });
