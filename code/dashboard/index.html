@@ -108,7 +108,7 @@
     grid-template-rows: repeat(9, 240px);
     grid-template-areas:
       "tabA  tabA  mf    mf"
-      "tabA  tabA  mf    mf"
+      "tabB  tabB  mf    mf"
       "tabB  tabB  candl candl"
       "tabB  tabB  candl candl"
       "tabB  tabB  news  news"
@@ -576,22 +576,14 @@ let store = { accounts: [], trends: {} };
 async function apiFetch(path) {
   const url = API + path + (path.includes('?') ? '&' : '?') +
     `terminal=1&version=0.0.0&userid=${UID}`;
-  // 8s 超时兜底：同花顺接口挂起时不至于被 loading 遮罩永久挡住页面
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 8000);
-  try {
-    const r = await fetch(url, { method: 'POST', signal: ctrl.signal });
-    return await r.json();
-  } finally {
-    clearTimeout(timer);
-  }
+  const r = await fetch(url, { method: 'POST' });
+  return r.json();
 }
 
 function showError(msg) {
   const el = document.getElementById('error-banner');
   el.textContent = '⚠ ' + msg;
   el.style.display = 'block';
-  document.getElementById('loading').style.display = 'none'; // 兜底：错误时也隐藏加载遮罩，避免遮罩拦截后续点击
 }
 
 async function loadAllData() {
@@ -1151,9 +1143,8 @@ function updateCalendar() {
 
   // ECharts calendar 是单条横向带（宽=周数×格宽，高=7×格高），且同时指定
   // left/right/top/bottom 会把 cellSize 强制归一为 'auto'，导致格子被拉伸成矩形。
-  // 这里只用一条连续横向 calendar，按容器宽度和实际高度反算格子，卡片高度自适应
-  // （移动端/大屏单列）。周六/周日无交易数据，按 5 个交易日行计算格高并整体上移，
-  // 把周末两行推出可视区之外，日历占满剩余高度、格子等比例放大。
+  // 这里只用一条连续横向 calendar，按容器宽度和实际高度反算正方形格子，
+  // 卡片高度自适应（移动端/大屏单列），日历垂直居中填充，不留上下白边。
   const calBox = document.getElementById('chart-monthly');
   const W = calBox.clientWidth;
   const [sy, sm, sd] = startDate.split('-').map(Number);
@@ -1164,17 +1155,17 @@ function updateCalendar() {
   const rowLabelH = 16;
   const boxH = calBox.clientHeight || 240; // 按容器实际高度反算（自适应断点通用）
   const availH = boxH - 16;
-  const calW = Math.max(10, Math.min(60, Math.floor((W - 52) / weeks)));
-  const calH = Math.max(10, Math.min(60, Math.floor((availH - rowLabelH) / 5)));
-  // 横向日历始终渲染 7 行（周一到周日连续日期）。周六/周日无交易数据，
-  // 网格整体上移，把周末两行推到底部可视区之外，仅中间 5 个交易日行可见。
-  const calTop = -(calH + rowLabelH);
-  const calLeft = Math.max(4, Math.floor((W - weeks * calW) / 2));
+  const calSize = Math.max(8, Math.min(24, Math.floor(Math.min(
+    (W - 36) / weeks,
+    (availH - rowLabelH) / 7
+  ))));
+  const calTop = Math.max(6, Math.floor((boxH - 7 * calSize - rowLabelH) / 2));
+  const calLeft = Math.max(4, Math.floor((W - weeks * calSize) / 2));
 
   const calendars = [{
     top: calTop, left: calLeft,
     range: [startDate, endDate],
-    cellSize: [calW, calH],
+    cellSize: [calSize, calSize],
     splitLine: { show: false },
     itemStyle: { borderColor: '#18181b', borderWidth: 2, color: '#18181b' },
     dayLabel: { color: '#555', fontSize: 8, firstDay: 1, nameMap: 'cn' },
@@ -1228,6 +1219,18 @@ function updateCalendar() {
   });
   calendarUpdating = false;
 }
+function initCalendar() {
+  const dom = document.getElementById('chart-monthly');
+  if (!dom || dom.clientWidth === 0) return; // pane 隐藏时跳过，切 tab 后由 switchPane 触发
+  if (!calendarChart) {
+    calendarChart = echarts.init(dom, 'dark');
+    const debouncedUpdate = debounce(() => { calendarChart.resize(); updateCalendar(); }, 200);
+    new ResizeObserver(() => { calendarChart.resize(); debouncedUpdate(); }).observe(dom);
+  }
+  buildMonthlyTabs();
+  updateCalendar();
+}
+
 
 // ECharts calendar 是单条横向带（宽=周数×格宽，高=7×格高），同时指定
   // left/right/top/bottom 会把 cellSize 强制归一为 'auto'，导致格子被拉伸成矩形。
@@ -1236,29 +1239,7 @@ function updateCalendar() {
   // cell，并整体上移把周末两行推出可视区，日历填满剩余高度、格子等比放大。
   const calBox = document.getElementById('chart-monthly');
   const W = calBox.clientWidth;
-  const [sy, sm, sd] = startDate.split('-').map(Number);
-  const [ey, em, ed] = endDate.split('-').map(Number);
-  const days = Math.round((Date.UTC(ey, em - 1, ed) - Date.UTC(sy, sm - 1, sd)) / 86400000) + 1;
-  const firstDay = (new Date(sy, sm - 1, sd).getDay() + 6) % 7; // 周一=0，与 dayLabel.firstDay=1 一致
-  const weeks = Math.floor((days + firstDay + 6) / 7);
-  const rowLabelH = 16;
-  const boxH = calBox.clientHeight || 240; // 按容器实际高度反算（自适应断点通用）
-  const availH = boxH - 16;
-  const calW = Math.max(10, Math.min(44, Math.floor((W - 52) / weeks)));
-  const calH = Math.max(10, Math.min(44, Math.floor((availH - rowLabelH) / 5)));
-  const calTop = -calH * 2 + 8; // 把周六/周日两行推出可视区顶部
-  const calLeft = Math.max(4, Math.floor((W - weeks * calW) / 2));
-
-  const calendars = [{
-    top: calTop, left: calLeft,
-    range: [startDate, endDate],
-    cellSize: [calW, calH],
-    splitLine: { show: false },
-    itemStyle: { borderColor: '#18181b', borderWidth: 2, color: '#18181b' },
-    dayLabel: { color: '#555', fontSize: 8, firstDay: 1, nameMap: 'cn' },
-    monthLabel: { color: '#555', fontSize: 9 },
-
-// ========================= WATCHLIST =========================
+  // ========================= WATCHLIST =========================
 let wlItems = [], wlStats = { rise: 0, fall: 0, avg: 0 };
 
 async function loadWatchlist() {
