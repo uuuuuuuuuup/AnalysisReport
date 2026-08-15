@@ -168,6 +168,7 @@
   .ohlc-row .val { color: var(--text-1); font-weight: 600; }
 
   .chart-box { flex: 1; min-height: 0; width: 100%; }
+  #chart-index { min-height: 120px; }
 
   .treemap-legend { display: flex; gap: 12px; font-size: 9px; color: var(--text-3); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
   .treemap-legend .dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 3px; }
@@ -232,10 +233,51 @@
 
   @media (max-width: 1400px) {
     .dashboard { grid-template-columns: 1fr 1fr; grid-template-areas: none; grid-template-rows: none; }
+    .area-portf, .area-candl, .area-pl, .area-stk, .area-mf, .area-hold, .area-cash { grid-area: auto; }
     .col-1, .col-2 { grid-column: span 2; }
     .row-2, .row-3 { grid-row: span 1; height: 240px; }
   }
-  @media (max-width: 680px) { .dashboard { grid-template-columns: 1fr; grid-template-areas: none; grid-template-rows: none; } .col-1,.col-2 { grid-column: span 1; } .row-2,.row-3 { grid-row: span 1; height: 240px; } }
+  /* 移动端：单列 + 卡片高度自适应 + 触控优化 */
+  @media (max-width: 680px) {
+    .dashboard { grid-template-columns: minmax(0, 1fr); grid-template-areas: none; grid-template-rows: none; gap: 8px; padding: 8px; }
+    .area-portf, .area-candl, .area-pl, .area-stk, .area-mf, .area-hold, .area-cash { grid-area: auto; }
+    .col-1, .col-2 { grid-column: span 1; }
+    .row-2, .row-3 { grid-row: span 1; height: auto; }
+    .card { padding: 10px 12px; min-width: 0; }
+    .top-bar { padding: 0 12px; }
+    .breadcrumb span { display: none; }
+    #clock { display: none; }
+    .card-title { flex-wrap: wrap; row-gap: 6px; }
+    .index-big { font-size: 24px; }
+    .index-tab { padding: 5px 10px; }
+    #kline-symbol { max-width: 150px; }
+    .chart-box { min-height: 200px; }
+    #chart-index { min-height: 220px; }
+    #chart-kline { min-height: 260px; }
+    #chart-monthly { min-height: 200px; }
+    #chart-mf { min-height: 220px; }
+    #chart-holdings { min-height: 240px; }
+    .area-stk .scroll-y, .area-cash .scroll-y { min-height: 240px; }
+    .scroll-y { overflow-x: auto; }
+    #stk-pane-pos .pos-mini { min-width: 620px; }
+    .area-cash .pos-mini { min-width: 540px; }
+  }
+
+  /* 超大屏：一卡一行，自上而下堆叠（≥1920px；1080p/1440p 仍走默认 4 列马赛克） */
+  @media (min-width: 1920px) {
+    .dashboard { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: none; }
+    .area-portf, .area-candl, .area-pl, .area-stk, .area-mf, .area-hold, .area-cash { grid-area: auto; }
+    .col-1, .col-2 { grid-column: span 1; }
+    .row-2, .row-3 { grid-row: span 1; }
+    .card { min-width: 0; }
+    .chart-box { min-height: 260px; }
+    #chart-index { min-height: 300px; }
+    #chart-kline { min-height: 340px; }
+    #chart-monthly { min-height: 220px; }
+    #chart-mf { min-height: 260px; }
+    #chart-holdings { min-height: 280px; }
+    .area-stk .scroll-y, .area-cash .scroll-y { min-height: 320px; }
+  }
 </style>
 </head>
 <body>
@@ -276,7 +318,7 @@
       <span class="index-change" id="index-change">--</span>
       <span class="index-change" id="index-today">--</span>
     </div>
-    <div class="chart-box" id="chart-index" style="flex:1;min-height:120px;"></div>
+    <div class="chart-box" id="chart-index" style="flex:1;"></div>
     <div id="acct-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px;"></div>
     <div style="font-size:9px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-top:6px;" id="index-range"></div>
   </div>
@@ -969,8 +1011,8 @@ function updateCalendar() {
 
   // ECharts calendar 是单条横向带（宽=周数×格宽，高=7×格高），且同时指定
   // left/right/top/bottom 会把 cellSize 强制归一为 'auto'，导致格子被拉伸成矩形。
-  // 这里只用一条连续横向 calendar，按容器宽度和固定单行高度反算正方形格子，
-  // 卡片固定占 1 行网格（240px），日历垂直居中填充，不留上下白边。
+  // 这里只用一条连续横向 calendar，按容器宽度和实际高度反算正方形格子，
+  // 卡片高度自适应（移动端/大屏单列），日历垂直居中填充，不留上下白边。
   const calBox = document.getElementById('chart-monthly');
   const W = calBox.clientWidth;
   const [sy, sm, sd] = startDate.split('-').map(Number);
@@ -979,13 +1021,13 @@ function updateCalendar() {
   const firstDay = (new Date(sy, sm - 1, sd).getDay() + 6) % 7; // 周一=0，与 dayLabel.firstDay=1 一致
   const weeks = Math.floor((days + firstDay + 6) / 7);
   const rowLabelH = 16;
-  const cardH = 240;
-  const availH = cardH - 34; // 减去 card 上下 padding
+  const boxH = calBox.clientHeight || 240; // 按容器实际高度反算（自适应断点通用）
+  const availH = boxH - 16;
   const calSize = Math.max(8, Math.min(24, Math.floor(Math.min(
     (W - 36) / weeks,
     (availH - rowLabelH) / 7
   ))));
-  const calTop = Math.max(20, Math.floor((cardH - 34 - 7 * calSize - rowLabelH) / 2));
+  const calTop = Math.max(6, Math.floor((boxH - 7 * calSize - rowLabelH) / 2));
   const calLeft = Math.max(4, Math.floor((W - weeks * calSize) / 2));
 
   const calendars = [{
