@@ -508,6 +508,196 @@ function toggleSidebar() {
   localStorage.setItem('dj_sidebar', sb.classList.contains('collapsed') ? '1' : '0');
 }
 
+// ---------- 设置面板：技能 / MCP ----------
+const settingsState = { editing: null };  // editing: null=新建 | skill 名=编辑
+
+function openSettings() {
+  $('#settings-overlay').classList.remove('hidden');
+  $('#settings-panel').classList.remove('hidden');
+  loadSkills();
+  loadMcp();
+}
+function closeSettings() {
+  $('#settings-overlay').classList.add('hidden');
+  $('#settings-panel').classList.add('hidden');
+  $('#skill-form').classList.add('hidden');
+  $('#skill-list').classList.remove('hidden');
+}
+
+async function apiJSON(url, options) {
+  const r = await fetch(url, options);
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.error || ('HTTP ' + r.status));
+  return data;
+}
+
+// ---------- 技能 ----------
+async function loadSkills() {
+  try {
+    const data = await apiJSON('/api/skills');
+    renderSkillList(data.skills || []);
+  } catch (e) { renderSkillList([]); showToast('技能列表加载失败：' + e.message); }
+}
+function renderSkillList(skills) {
+  const box = $('#skill-list');
+  if (!skills.length) {
+    box.innerHTML = '<p class="page-hint">暂无技能。点击「新建技能」创建，或「导入 zip」批量导入。</p>'
+      + '<button class="btn-ghost" onclick="createExampleSkill()">创建示例：估值分析</button>';
+    return;
+  }
+  box.innerHTML = skills.map(s => `
+    <div class="skill-item">
+      <div class="skill-item-main">
+        <div class="skill-item-name">${escapeHtml(s.name)}</div>
+        <div class="skill-item-desc">${escapeHtml(s.description || '(无描述)')}</div>
+        <div class="skill-item-meta">${s.scripts.length ? '脚本: ' + s.scripts.map(escapeHtml).join(', ') : '无脚本'}</div>
+      </div>
+      <label class="switch" title="启用/禁用">
+        <input type="checkbox" ${s.enabled ? 'checked' : ''} onchange="toggleSkill('${escapeHtml(s.name)}', this.checked)">
+        <span class="slider"></span>
+      </label>
+      <div class="skill-item-actions">
+        <button class="mini-btn" onclick="editSkill('${escapeHtml(s.name)}')">编辑</button>
+        <button class="mini-btn danger" onclick="removeSkill('${escapeHtml(s.name)}')">删除</button>
+      </div>
+    </div>`).join('');
+}
+async function createExampleSkill() {
+  try {
+    await apiJSON('/api/skills', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'valuation-analysis',
+        description: '个股估值分析：计算 PE/PB/股息率等指标并与行业对比，给出综合估值判断',
+        body: '# 估值分析\n\n对指定股票进行估值分析：\n1. 调用内置工具获取财务指标与行情\n2. 计算 PE/PB/股息率等估值指标\n3. 与行业水平对比，给出估值结论与风险提示',
+        scripts: [],
+      }),
+    });
+    showToast('已创建示例技能');
+    loadSkills();
+  } catch (e) { showToast('创建失败：' + e.message); }
+}
+async function toggleSkill(name, enabled) {
+  try {
+    await apiJSON('/api/skills/' + encodeURIComponent(name) + '/toggle', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ enabled }) });
+    showToast(enabled ? '已启用 ' + name : '已禁用 ' + name);
+  } catch (e) { showToast('操作失败：' + e.message); loadSkills(); }
+}
+async function removeSkill(name) {
+  if (!confirm('删除技能 ' + name + '？将同时删除其脚本，不可恢复。')) return;
+  try { await apiJSON('/api/skills/' + encodeURIComponent(name), { method: 'DELETE' }); showToast('已删除 ' + name); loadSkills(); }
+  catch (e) { showToast('删除失败：' + e.message); }
+}
+function openSkillForm() {
+  settingsState.editing = null;
+  $('#skill-form-title').textContent = '新建技能';
+  $('#skill-name').value = '';
+  $('#skill-name').disabled = false;
+  $('#skill-desc').value = '';
+  $('#skill-body').value = '';
+  $('#skill-script-list').innerHTML = '';
+  addScriptRow('', '');
+  $('#skill-list').classList.add('hidden');
+  $('#skill-form').classList.remove('hidden');
+}
+async function editSkill(name) {
+  try {
+    const data = await apiJSON('/api/skills?detail=' + encodeURIComponent(name));
+    if (!data.skill) throw new Error('技能不存在');
+    const s = data.skill;
+    settingsState.editing = name;
+    $('#skill-form-title').textContent = '编辑技能：' + name;
+    $('#skill-name').value = name;
+    $('#skill-name').disabled = true;  // 名称即目录名，编辑时不改
+    $('#skill-desc').value = s.description || '';
+    $('#skill-body').value = s.body || '';
+    $('#skill-script-list').innerHTML = '';
+    const names = s.scripts || [];
+    names.forEach(f => addScriptRow(f, (s.scriptContents || {})[f] || ''));
+    if (!names.length) addScriptRow('', '');
+    $('#skill-list').classList.add('hidden');
+    $('#skill-form').classList.remove('hidden');
+  } catch (e) { showToast('加载技能详情失败：' + e.message); }
+}
+function addScriptRow(filename, content) {
+  const row = document.createElement('div');
+  row.className = 'script-row';
+  row.innerHTML = `
+    <input class="script-filename" placeholder="如 fetch_pe.py" value="${escapeHtml(filename || '')}">
+    <textarea class="script-content" placeholder="脚本内容">${escapeHtml(content || '')}</textarea>
+    <button type="button" class="mini-btn danger" title="移除脚本">×</button>`;
+  row.querySelector('button').onclick = () => row.remove();
+  $('#skill-script-list').appendChild(row);
+}
+function collectScripts() {
+  return [...document.querySelectorAll('#skill-script-list .script-row')]
+    .map(row => ({ filename: row.querySelector('.script-filename').value.trim(), content: row.querySelector('.script-content').value }))
+    .filter(s => s.filename);
+}
+async function submitSkill(e) {
+  e.preventDefault();
+  const body = {
+    name: $('#skill-name').value.trim(),
+    description: $('#skill-desc').value.trim(),
+    body: $('#skill-body').value,
+    scripts: collectScripts(),
+  };
+  const isEdit = !!settingsState.editing;
+  try {
+    await apiJSON('/api/skills' + (isEdit ? '/' + encodeURIComponent(settingsState.editing) : ''), {
+      method: isEdit ? 'PUT' : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    showToast(isEdit ? '已保存 ' + body.name : '已创建 ' + body.name);
+    settingsState.editing = null;
+    $('#skill-form').classList.add('hidden');
+    $('#skill-list').classList.remove('hidden');
+    loadSkills();
+  } catch (e) { showToast('保存失败：' + e.message); }
+}
+async function uploadSkillZip(file) {
+  if (!file) return;
+  try {
+    await apiJSON('/api/skills/upload', { method: 'POST', body: file });  // 原始 zip 二进制
+    showToast('导入成功');
+    loadSkills();
+  } catch (e) { showToast('导入失败：' + e.message); }
+}
+
+// ---------- MCP ----------
+async function loadMcp() {
+  try {
+    const data = await apiJSON('/api/mcp');
+    if ($('#mcp-config').value.trim() === '' || document.activeElement !== $('#mcp-config'))
+      $('#mcp-config').value = JSON.stringify(data.configured || {}, null, 2);
+    renderMcpServers(data.servers || []);
+  } catch (e) { showToast('MCP 状态加载失败：' + e.message); }
+}
+function renderMcpServers(servers) {
+  const box = $('#mcp-server-list');
+  if (!servers.length) { box.innerHTML = '<p class="page-hint">未配置 MCP Server。在下方填入 mcpServers JSON 后保存。</p>'; return; }
+  box.innerHTML = servers.map(s => `
+    <div class="mcp-server-item">
+      <span class="status-dot ${escapeHtml(s.status)}"></span>
+      <div class="mcp-server-main">
+        <div class="mcp-server-name">${escapeHtml(s.name)} <span style="color:var(--text-4);font-size:11px">(${escapeHtml(s.type)})</span></div>
+        ${s.error ? `<div class="mcp-server-error">${escapeHtml(s.error)}</div>` : ''}
+        <div class="mcp-server-tools">${s.toolCount} 个工具${s.status === 'connected' ? ' · 已进入点金可用工具' : ''}</div>
+      </div>
+    </div>`).join('');
+}
+async function saveMcp() {
+  let raw;
+  try { raw = JSON.parse($('#mcp-config').value); } catch (e) { showToast('JSON 格式错误：' + e.message); return; }
+  try {
+    const data = await apiJSON('/api/mcp', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(raw) });
+    renderMcpServers(data.servers || []);
+    showToast('已保存并重连');
+  } catch (e) { showToast('保存失败：' + e.message); }
+}
+
+
 // ---------- 初始化 ----------
 document.addEventListener('DOMContentLoaded', () => {
   // 事件绑定
@@ -517,7 +707,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#dj-privacy-btn').onclick = toggleDJPrivacy;
   $('#dj-stealth-btn').onclick = toggleDJStealth;
   applyDJMode();
-  $('#settings-btn').onclick = () => showToast('设置页将在下期（能力扩展）提供');
+  $('#settings-btn').onclick = openSettings;
   $('#session-search').oninput = renderSessionList;
   $('#chat-title').onclick = editHeaderTitle;
   $('#tool-toggle').onclick = () => {
@@ -525,6 +715,30 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#tool-toggle').classList.toggle('on', toolsEnabled);
     showToast(toolsEnabled ? '数据工具已开启' : '数据工具已关闭（纯对话模式）');
   };
+
+  // 设置面板
+  $('#settings-close').onclick = closeSettings;
+  $('#settings-overlay').onclick = closeSettings;
+  document.querySelectorAll('.settings-tab').forEach(t => {
+    t.onclick = () => {
+      document.querySelectorAll('.settings-tab').forEach(x => x.classList.toggle('active', x === t));
+      $('#page-skills').classList.toggle('hidden', t.dataset.tab !== 'skills');
+      $('#page-mcp').classList.toggle('hidden', t.dataset.tab !== 'mcp');
+      if (t.dataset.tab === 'mcp') loadMcp();
+    };
+  });
+  $('#skill-new').onclick = () => openSkillForm();
+  $('#skill-form').onsubmit = submitSkill;
+  $('#skill-form-cancel').onclick = () => { $('#skill-form').classList.add('hidden'); $('#skill-list').classList.remove('hidden'); };
+  $('#skill-add-script').onclick = () => addScriptRow('', '');
+  $('#skill-upload').onclick = () => $('#skill-zip-input').click();
+  $('#skill-zip-input').onchange = (e) => { uploadSkillZip(e.target.files[0]); e.target.value = ''; };
+  $('#mcp-save').onclick = saveMcp;
+  $('#mcp-reload').onclick = async () => {
+    try { const data = await apiJSON('/api/mcp/reload', { method: 'POST' }); renderMcpServers(data.servers || []); showToast('已重连'); }
+    catch (e) { showToast('重连失败：' + e.message); }
+  };
+
   $('#send-btn').onclick = sendMessage;
 
   const input = $('#input');
