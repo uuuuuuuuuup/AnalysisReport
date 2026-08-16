@@ -1,0 +1,12 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' });
+const p = await b.newPage({ viewport: { width: 1500, height: 900 } });
+const errs = [];
+p.on('pageerror', e => errs.push('PAGEERR: ' + e.message));
+await p.goto('http://127.0.0.1:8899/', { waitUntil: 'load', timeout: 60000 });
+await p.waitForTimeout(3000);
+console.log('日历canvas:', await p.locator('#chart-monthly canvas').count());
+console.log('加载遮罩:', await p.evaluate(() => getComputedStyle(document.getElementById('loading')).display));
+console.log('JS错误数:', errs.length);
+errs.forEach(e => console.log('  ✗', e.slice(0, 150)));
+await b.close();

@@ -1,0 +1,16 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' });
+const p = await b.newPage({ viewport: { width: 1700, height: 2300 } });
+const errs = [];
+p.on('pageerror', e => errs.push('PAGE: ' + e.message));
+await p.goto('http://127.0.0.1:8899/', { waitUntil: 'networkidle', timeout: 60000 });
+await p.waitForTimeout(4000);
+await p.click('.area-tabA .pane-tabs button:nth-child(2)');
+await p.waitForTimeout(1500);
+const box = await p.locator('#chart-monthly canvas').boundingBox();
+const calBx = await p.locator('#chart-monthly').boundingBox();
+console.log('卡片:', Math.round(calBx.width), 'x', Math.round(calBx.height), '| canvas:', box && `${Math.round(box.width)}x${Math.round(box.height)}`);
+console.log('errors:', errs.length);
+errs.slice(0,3).forEach(e => console.log('  X', e));
+await p.screenshot({ path: '/tmp/cal-big.png', fullPage: true });
+await b.close();

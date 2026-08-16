@@ -1,0 +1,15 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' });
+const p = await b.newPage({ viewport: { width: 1700, height: 2300 } });
+const errs = [];
+p.on('pageerror', e => errs.push('PAGE: ' + e.message));
+await p.goto('http://127.0.0.1:8899/', { waitUntil: 'networkidle', timeout: 60000 });
+await p.waitForSelector('#news-list .news-item', { timeout: 15000 });
+const news = await p.locator('.area-news').boundingBox();
+const bdst = await p.locator('.area-bdst').boundingBox();
+const stk = await p.locator('.area-stk').boundingBox();
+console.log('news.y =', news && Math.round(news.y), '| bdst.y =', bdst && Math.round(bdst.y), '| stk.y =', stk && Math.round(stk.y));
+console.log('新闻条数:', await p.locator('#news-list .news-item').count(), '| 宽度行情数:', await p.locator('.bdst-main .bdst-row').count());
+console.log('JS错误:', errs.length, errs.slice(0, 3));
+await p.screenshot({ path: '/tmp/layout-final.png', fullPage: true });
+await b.close();

@@ -14,5 +14,6 @@
 - 📄 [investment-principles](domains/buffett-perspective/investment-principles.md) — 14条
 
 ## personal
-- 📄 [_profile](domains/personal/_profile.md) — 2条摘要
+- 📄 [_profile](domains/personal/_profile.md) — 4条摘要
 - 📄 [basic-facts](domains/personal/basic-facts.md) — 4条
+- 📄 [relationship](domains/personal/relationship.md) — 4条
