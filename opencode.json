@@ -1,0 +1,26 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "siyuan-sisyphus": {
+      "type": "local",
+      "command": [
+        "node",
+        "/Users/apple/SiYuan/工作笔记/data/plugins/siyuan-plugins-mcp-sisyphus/mcp-server.cjs"
+      ],
+      "environment": {
+        "SIYUAN_API_URL": "http://127.0.0.1:6806",
+        "SIYUAN_TOKEN": "o361rxz61jng6jv5"
+      }
+    },
+    "AI Tools": {
+      "type": "local",
+      "command": [
+        "node",
+        "/Users/apple/Documents/code/AI-Tools/mcp-server/index.js"
+      ],
+      "environment": {
+        "AI_TOOLS_BASE_URL": "http://localhost:8080"
+      }
+    }
+  }
+}
