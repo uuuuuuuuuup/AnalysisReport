@@ -7,7 +7,7 @@
 
 点金（`code/dashboard/` 投资看板 AI 助手）目前支持 7 个内置数据工具（`tools.ts`）和 SSE 流式对话（`server.ts`）。本次扩展两个能力：
 
-1. **Skill**：开放 skill 配置页面，支持用户创建、上传 skill（SKILL.md + 可执行脚本），对话中 agent 按需加载使用。
+1. **Skill**：开放 skill 配置页面，支持用户创建、上传 skill（SKILL.md + 可执行脚本 python3/node/bash），对话中 agent 按需加载使用。
 2. **MCP**：MCP Client 集成，连接外部 MCP Server（stdio / SSE），其工具自动进入点金对话可用工具集。
 
 目标产物：设置面板（技能 tab + MCP tab）、Skill 系统（工具触发式加载 + python 脚本执行）、MCP 连接管理。
@@ -17,7 +17,7 @@
 | 决策点 | 结论 |
 |---|---|
 | Skill 触发机制 | 工具触发式：system prompt 注入列表，模型调用 `use_skill` 加载全文 |
-| Skill 形态 | SKILL.md 提示词 + 可选 python 脚本（`run_skill_script` 执行） |
+| Skill 形态 | SKILL.md 提示词 + 可选脚本（python3 / node / bash 按扩展名自动选择解释器） |
 | MCP 传输 | stdio（必须，用户现有配置均为 stdio）+ SSE（顺带支持） |
 | 架构 | 方案 A 单进程集成：`skills.ts` + `mcp.ts` 两个新模块 |
 | 前端 | ai.html 设置按钮 → 右侧抽屉管理面板（两个 tab） |
@@ -41,14 +41,14 @@
 
 1. system prompt 末尾注入启用 skill 列表（一行一个：`name — description`）+ 指引「任务匹配某技能时先调用 `use_skill` 加载其指引」。
 2. `use_skill(name)`：execute 返回 SKILL.md 全文 + scripts 列表，经 tool-result 注入上下文。无需改造 streamText。
-3. `run_skill_script(skill, script, args)`：`spawn('python3', [script, ...args], { cwd: skillDir, timeout: 30000 })`，返回 stdout（截断 50KB）+ exit code + stderr 摘要。
+3. `run_skill_script(skill, script, args)`：按脚本扩展名选择解释器（`.py`→`python3`，`.js/.mjs/.cjs`→`node`，`.sh`→`bash`），`spawn(解释器, [script, ...args], { cwd: skillDir, timeout: 30000 })`，返回 stdout（截断 50KB）+ exit code + stderr 摘要。
 
 ### 脚本安全约束
 
 - 脚本名必须解析后落在该 skill 的 `scripts/` 目录内（防目录穿越）。
 - `spawn` 数组参数、不用 shell（防参数注入）。
 - 30s 超时强制终止；输出截断 50KB。
-- 解释器：v1 仅支持 `python3`（`bash` 留作后续扩展位，不在 v1 暴露）。
+- 解释器按脚本扩展名自动选择：`.py`→`python3`、`.js/.mjs/.cjs`→`node`、`.sh`→`bash`（其余扩展名拒绝执行）。
 
 ## 2. MCP 集成
 
@@ -98,7 +98,7 @@ ai.html 内新增右侧滑出抽屉（约 420px 宽），点设置按钮（现�
 
 **技能 tab**
 - 技能列表：名称、描述摘要、启用开关、编辑/删除按钮。
-- 「新建技能」→ 表单：名称、描述、正文 textarea、脚本区（文件名+内容，可添加多个）。
+- 「新建技能」→ 表单：名称、描述、正文 textarea、脚本区（文件名+内容，可添加多个；解释器按扩展名自动识别 .py/.js/.sh）。
 - 「导入 zip」：上传 zip 批量导入。
 - 内置示例 skill（如「估值分析」）一键创建模板。
 
