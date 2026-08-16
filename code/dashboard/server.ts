@@ -118,9 +118,9 @@ function buildTools(): Record<string, CoreTool> {
 
 // status 事件文案：原有工具保持不变，skill/MCP 按 spec 措辞
 function toolStatusText(tc: any): string {
-  const input = tc.input as any;
-  if (tc.toolName === 'use_skill') return `正在加载技能 ${input?.name || ''}…`;
-  if (tc.toolName === 'run_skill_script') return `正在执行技能脚本 ${input?.script || ''}…`;
+  const args = tc.args as any;
+  if (tc.toolName === 'use_skill') return `正在加载技能 ${args?.name || ''}…`;
+  if (tc.toolName === 'run_skill_script') return `正在执行技能脚本 ${args?.script || ''}…`;
   if (tc.toolName.startsWith('mcp__')) return `正在调用 MCP 工具 ${tc.toolName.split('__')[2] || ''}…`;
   return `正在查询${TOOL_LABELS[tc.toolName] || tc.toolName}…`;
 }
