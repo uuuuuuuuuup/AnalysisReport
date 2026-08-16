@@ -108,6 +108,7 @@ export function updateSkill(input: SkillInput): { error?: string } {
 }
 
 export function deleteSkill(name: string): void {
+  if (!NAME_RE.test(name)) return;
   fs.rmSync(path.join(SKILLS_DIR, name), { recursive: true, force: true });
   const cfg = loadConfig();
   delete cfg[name];
@@ -115,6 +116,7 @@ export function deleteSkill(name: string): void {
 }
 
 export function setEnabled(name: string, enabled: boolean): void {
+  if (!NAME_RE.test(name)) return;
   const cfg = loadConfig();
   cfg[name] = enabled;
   saveConfig(cfg);
@@ -127,6 +129,7 @@ const STDOUT_CAP = 50_000, STDERR_CAP = 5_000, SCRIPT_TIMEOUT = 30_000;
 // 执行技能脚本：仅允许 skill 自己的 scripts/ 目录内文件，解释器按扩展名选择
 export function runSkillScript(skill: string, script: string, args: string[]): Promise<any> {
   return new Promise((resolve) => {
+    if (!NAME_RE.test(skill)) return resolve({ error: '非法技能名称' });
     const scriptsDir = path.resolve(SKILLS_DIR, skill, 'scripts');
     const resolved = path.resolve(scriptsDir, script);
     if (!resolved.startsWith(scriptsDir + path.sep)) return resolve({ error: '非法脚本路径' });
@@ -150,6 +153,7 @@ export function runSkillScript(skill: string, script: string, args: string[]): P
 
 // 读取 skill 全部脚本内容（编辑表单回填用）
 export function getSkillScriptContents(name: string): Record<string, string> {
+  if (!NAME_RE.test(name)) return {};
   const dir = path.join(SKILLS_DIR, name, 'scripts');
   const out: Record<string, string> = {};
   if (!fs.existsSync(dir)) return out;
