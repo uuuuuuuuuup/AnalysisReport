@@ -18,6 +18,8 @@ import iconv from 'iconv-lite';
 import { streamText, type CoreTool } from 'ai';
 import { createDeepSeek } from '@ai-sdk/deepseek';
 import { ALL_TOOLS, TOOL_LABELS } from './tools';
+import { use_skill, run_skill_script, listSkills, getSkill, getSkillScriptContents, createSkill, updateSkill, deleteSkill, setEnabled, validateSkillInput, importSkillZip, type SkillInput } from './skills';
+import { ensureMcpConnected, getMcpTools, getMcpStatus, saveMcpConfig, reloadMcp } from './mcp';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -95,6 +97,33 @@ const SYSTEM_PROMPT = `你是一个专业的投资看板 AI 助手，名为"点�
 3. A股惯例：涨=红色，跌=绿色
 4. 如果数据不足以回答，诚实说明
 5. 回答控制在 200 字以内，除非用户要求详细分析`;
+
+// system prompt 动态注入启用 skill 列表
+function buildSystemPrompt(): string {
+  const skills = listSkills().filter(s => s.enabled);
+  if (!skills.length) return SYSTEM_PROMPT;
+  const lines = skills.map(s => `- ${s.name}: ${s.description || '(无描述)'}`).join('\n');
+  return SYSTEM_PROMPT + `\n\n## 可用技能\n以下技能已启用。当任务匹配技能用途时，先调用 use_skill 加载其完整指引，再按指引执行：\n${lines}`;
+}
+
+// 动态工具集：内置 7 + skill 2 + MCP 工具
+function buildTools(): Record<string, CoreTool> {
+  return {
+    ...(ALL_TOOLS as unknown as Record<string, CoreTool>),
+    use_skill,
+    run_skill_script,
+    ...getMcpTools(),
+  };
+}
+
+// status 事件文案：原有工具保持不变，skill/MCP 按 spec 措辞
+function toolStatusText(tc: any): string {
+  const input = tc.input as any;
+  if (tc.toolName === 'use_skill') return `正在加载技能 ${input?.name || ''}…`;
+  if (tc.toolName === 'run_skill_script') return `正在执行技能脚本 ${input?.script || ''}…`;
+  if (tc.toolName.startsWith('mcp__')) return `正在调用 MCP 工具 ${tc.toolName.split('__')[2] || ''}…`;
+  return `正在查询${TOOL_LABELS[tc.toolName] || tc.toolName}…`;
+}
 
 // ===== 会话持久化 =====
 const SESSION_FILE = path.join(os.homedir(), '.tzzb_ai_sessions.json');
@@ -589,12 +618,15 @@ async function runAgentStream(res: ServerResponse, session: Session, sessionId: 
   const heartbeat = setInterval(() => { if (!res.writableEnded) res.write(': ping\n\n'); }, 15000);
   res.on('close', () => { clearInterval(heartbeat); controller.abort(); });
 
+  // MCP 懒连接（失败不阻塞对话，状态经 /api/mcp 查询）
+  await ensureMcpConnected();
+
   try {
     const result = streamText({
       model: modelProvider(AI_MODEL),
-      system: SYSTEM_PROMPT,
+      system: buildSystemPrompt(),
       messages: session.messages,
-      tools: toolsEnabled ? (ALL_TOOLS as unknown as Record<string, CoreTool>) : {},
+      tools: toolsEnabled ? buildTools() : {},
       maxSteps: 5,
       temperature: 0.3,
       abortSignal: controller.signal,
@@ -603,7 +635,7 @@ async function runAgentStream(res: ServerResponse, session: Session, sessionId: 
         const tc = step.toolCalls?.[0];
         if (tc) {
           console.log(`  🔧 tool: ${tc.toolName} ${JSON.stringify(tc.args).slice(0, 100)}`);
-          sendEvent(res, 'status', { content: `正在查询${TOOL_LABELS[tc.toolName] || tc.toolName}…` });
+          sendEvent(res, 'status', { content: toolStatusText(tc) });
         }
         if (step.text) console.log(`  💬 step文本: ${step.text.slice(0, 60).replace(/\n/g, ' ')}`);
         console.log(`  ⏱ step结束: finishReason=${step.finishReason} toolCalls=${step.toolCalls?.length || 0}`);
@@ -794,6 +826,99 @@ async function handleAgentRegenerate(req: IncomingMessage, res: ServerResponse):
   await runAgentStream(res, session, sessionId, body.toolsEnabled !== false);
 }
 
+// ===== Skill / MCP 管理 API =====
+async function handleSkillsList(req: IncomingMessage, res: ServerResponse, url: URL): Promise<void> {
+  if (!readCookie()) { res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: 'No cookie' })); return; }
+  const detail = url.searchParams.get('detail');
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  if (detail) {
+    const s = getSkill(detail);
+    if (!s) { res.end(JSON.stringify({ skill: null })); return; }
+    res.end(JSON.stringify({ skill: { name: s.name, description: s.description, body: s.body, enabled: s.enabled, scripts: s.scripts, scriptContents: getSkillScriptContents(detail) } }));
+    return;
+  }
+  res.end(JSON.stringify({ skills: listSkills() }));
+}
+
+async function handleSkillCreate(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  if (!readCookie()) { res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: 'No cookie' })); return; }
+  let body: any;
+  try { body = await readJsonBody(req); } catch { body = {}; }
+  const err = validateSkillInput(body);
+  if (err) { res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: err })); return; }
+  const input: SkillInput = { name: String(body.name).trim(), description: String(body.description).trim(), body: String(body.body || ''), scripts: body.scripts || [] };
+  const r = createSkill(input);
+  if (r.error) { res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: r.error })); return; }
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({ ok: true }));
+}
+
+async function handleSkillUpdate(req: IncomingMessage, res: ServerResponse, name: string): Promise<void> {
+  if (!readCookie()) { res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: 'No cookie' })); return; }
+  let body: any;
+  try { body = await readJsonBody(req); } catch { body = {}; }
+  const err = validateSkillInput({ ...body, name });
+  if (err) { res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: err })); return; }
+  const input: SkillInput = { name, description: String(body.description).trim(), body: String(body.body || ''), scripts: body.scripts || [] };
+  const r = updateSkill(input);
+  if (r.error) { res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: r.error })); return; }
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({ ok: true }));
+}
+
+async function handleSkillDelete(req: IncomingMessage, res: ServerResponse, name: string): Promise<void> {
+  if (!readCookie()) { res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: 'No cookie' })); return; }
+  deleteSkill(name);
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({ ok: true }));
+}
+
+async function handleSkillToggle(req: IncomingMessage, res: ServerResponse, name: string): Promise<void> {
+  if (!readCookie()) { res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: 'No cookie' })); return; }
+  let body: any;
+  try { body = await readJsonBody(req); } catch { body = {}; }
+  setEnabled(name, !!body.enabled);
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({ ok: true }));
+}
+
+// zip 上传：body 为原始 zip 二进制
+async function handleSkillUpload(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  if (!readCookie()) { res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: 'No cookie' })); return; }
+  const chunks: Buffer[] = [];
+  req.on('data', c => chunks.push(c as Buffer));
+  req.on('end', async () => {
+    const r = await importSkillZip(Buffer.concat(chunks));
+    if (r.error) { res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: r.error })); return; }
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ ok: true, name: r.name }));
+  });
+}
+
+async function handleMcpGet(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  if (!readCookie()) { res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: 'No cookie' })); return; }
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify(getMcpStatus()));
+}
+
+async function handleMcpPut(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  if (!readCookie()) { res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: 'No cookie' })); return; }
+  let body: any;
+  try { body = await readJsonBody(req); } catch { body = {}; }
+  const r = saveMcpConfig(body);
+  if (r.error) { res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: r.error })); return; }
+  await reloadMcp();
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({ ok: true, ...getMcpStatus() }));
+}
+
+async function handleMcpReload(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  if (!readCookie()) { res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify({ error: 'No cookie' })); return; }
+  await reloadMcp();
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify(getMcpStatus()));
+}
+
 const server = http.createServer((req: IncomingMessage, res: ServerResponse) => {
   const url = new URL(req.url ?? '/', 'http://localhost:' + PORT);
   const pathname = url.pathname;
@@ -821,6 +946,18 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
   if (pathname === '/api/agent/regenerate' && method === 'POST') {
     return handleAgentRegenerate(req, res);
   }
+
+  // ===== Skill / MCP 管理路由（必须在 /api/ 通用代理之前） =====
+  if (pathname === '/api/skills' && method === 'GET') return handleSkillsList(req, res, url);
+  if (pathname === '/api/skills/upload' && method === 'POST') return handleSkillUpload(req, res);
+  if (pathname === '/api/skills' && method === 'POST') return handleSkillCreate(req, res);
+  if (pathname.startsWith('/api/skills/') && method === 'PUT') return handleSkillUpdate(req, res, decodeURIComponent(pathname.split('/')[3] || ''));
+  if (pathname.startsWith('/api/skills/') && method === 'DELETE') return handleSkillDelete(req, res, decodeURIComponent(pathname.split('/')[3] || ''));
+  if (pathname.endsWith('/toggle') && method === 'PATCH') return handleSkillToggle(req, res, decodeURIComponent(pathname.split('/')[3] || ''));
+  if (pathname === '/api/mcp' && method === 'GET') return handleMcpGet(req, res);
+  if (pathname === '/api/mcp' && method === 'PUT') return handleMcpPut(req, res);
+  if (pathname === '/api/mcp/reload' && method === 'POST') return handleMcpReload(req, res);
+
 
   // API proxy
   if (pathname.startsWith('/api/')) {
