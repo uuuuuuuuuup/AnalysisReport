@@ -348,3 +348,129 @@ body.privacy .si-title, body.privacy .chat-title {
   filter: blur(5px); user-select: none;
 }
 body.stealth { filter: grayscale(1); }
+
+/* ---------- 设置面板 ---------- */
+.settings-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 90;
+}
+.settings-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: 420px; max-width: 92vw;
+  background: var(--bg-surface); border-left: 1px solid var(--border);
+  z-index: 91; display: flex; flex-direction: column;
+  transform: translateX(0); transition: transform 250ms ease;
+}
+.settings-panel.hidden { transform: translateX(100%); }
+.settings-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.settings-tabs { display: flex; gap: 4px; }
+.settings-tab {
+  background: transparent; border: none; color: var(--text-3);
+  font-size: 14px; padding: 6px 14px; border-radius: 8px;
+}
+.settings-tab:hover { color: var(--text-1); background: var(--bg-strong); }
+.settings-tab.active { color: var(--nav-accent); background: var(--bg-strong); }
+.settings-body { flex: 1; overflow-y: auto; padding: 16px; }
+.page-actions { display: flex; gap: 8px; margin-bottom: 12px; }
+.btn-primary {
+  background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4);
+  color: var(--warn); padding: 6px 14px; border-radius: 8px; font-size: 13px;
+}
+.btn-primary:hover { background: rgba(245,158,11,0.25); }
+.btn-ghost {
+  background: var(--bg-input); border: 1px solid var(--border);
+  color: var(--text-2); padding: 6px 14px; border-radius: 8px; font-size: 13px;
+}
+.btn-ghost:hover { border-color: var(--border-hover); color: var(--text-1); }
+.page-hint { color: var(--text-3); font-size: 12.5px; margin-bottom: 10px; }
+
+/* 技能列表 */
+.skill-item {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-input); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px; margin-bottom: 8px;
+}
+.skill-item-main { flex: 1; min-width: 0; }
+.skill-item-name { font-weight: 600; font-size: 13.5px; }
+.skill-item-desc {
+  color: var(--text-3); font-size: 12px; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; margin-top: 2px;
+}
+.skill-item-meta { color: var(--text-4); font-size: 11px; margin-top: 2px; }
+.skill-item-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.mini-btn {
+  background: transparent; border: 1px solid var(--border); color: var(--text-3);
+  border-radius: 6px; padding: 3px 8px; font-size: 12px;
+}
+.mini-btn:hover { border-color: var(--border-hover); color: var(--text-1); }
+.mini-btn.danger:hover { border-color: var(--danger); color: var(--danger); }
+
+/* 开关 */
+.switch { position: relative; width: 34px; height: 20px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch .slider {
+  position: absolute; inset: 0; background: var(--bg-strong);
+  border: 1px solid var(--border-hover); border-radius: 10px; cursor: pointer;
+  transition: background 150ms;
+}
+.switch .slider::before {
+  content: ''; position: absolute; width: 12px; height: 12px;
+  left: 3px; top: 3px; background: var(--text-3); border-radius: 50%; transition: 150ms;
+}
+.switch input:checked + .slider { background: rgba(245,158,11,0.35); border-color: rgba(245,158,11,0.5); }
+.switch input:checked + .slider::before { transform: translateX(14px); background: var(--warn); }
+
+/* 表单 */
+.skill-form {
+  background: var(--bg-input); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; margin-top: 8px;
+}
+.skill-form h3 { font-size: 14px; margin-bottom: 10px; }
+.skill-form label {
+  display: block; font-size: 12px; color: var(--text-3); margin-bottom: 10px;
+}
+.skill-form input, .skill-form textarea, #mcp-config {
+  width: 100%; background: var(--bg-page); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-1); font-size: 13px;
+  padding: 8px 10px; margin-top: 4px; font-family: inherit; resize: vertical;
+}
+.skill-form input:focus, .skill-form textarea:focus, #mcp-config:focus {
+  outline: none; border-color: var(--border-hover);
+}
+.skill-scripts { margin-bottom: 10px; }
+.skill-scripts-head {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--text-3); margin-bottom: 6px; gap: 8px;
+}
+.script-row {
+  display: flex; gap: 8px; align-items: flex-start; margin-bottom: 8px;
+}
+.script-row .script-filename { flex: 0 0 40%; }
+.script-row .script-content { flex: 1; }
+.script-row textarea { min-height: 70px; }
+.form-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+/* MCP 状态列表 */
+#mcp-config {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+}
+.mcp-server-list { margin-top: 14px; }
+.mcp-server-item {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-input); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px; margin-bottom: 8px;
+}
+.mcp-server-main { flex: 1; min-width: 0; }
+.mcp-server-name { font-weight: 600; font-size: 13.5px; }
+.mcp-server-error {
+  color: var(--danger); font-size: 12px; margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.status-dot.connected { background: var(--ok); }
+.status-dot.error { background: var(--danger); }
+.status-dot.idle { background: var(--text-4); }
+.status-dot.connecting { background: var(--warn); }
+.mcp-server-tools { color: var(--text-4); font-size: 11px; margin-top: 2px; }
+
