@@ -127,6 +127,7 @@ description: 公司新闻脉搏：股价异动时快速归因。用 4 个并行 
 {任务description的内容}
 
 **侦察方法**：
+- 结构化快讯优先用 ai-tools MCP：GetMarketNews（source=cls 财联社 / sina 新浪 / wscn 华尔街见闻 / hot 热点；个股相关加 stockCode）、GetStockNotice（公告原文）
 - 优先使用 WebSearch 搜索时效性查询（关键词加日期或"最近"、"latest"、"2026"）
 - 关键事件用 WebFetch 精读原始来源（公告原文、财报、监管文件）
 - 对每个事件做"独立信源验证"——传言至少要 2 个独立来源

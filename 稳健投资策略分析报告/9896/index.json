@@ -1,0 +1,23 @@
+{
+  "symbol": "9896",
+  "company": "名创优品",
+  "created_at": "2026-08-31T21:22:27",
+  "versions": [
+    {
+      "version_dir": "2026-08-31",
+      "as_of": "2026-08-31",
+      "target_year": 2025,
+      "verdict": "观望（暂不建仓）",
+      "current_price_hkd": 18.57,
+      "target_buy_price_hkd": 10.14,
+      "rough_return_pct": 9.75,
+      "precise_return_pct": 5.15,
+      "threshold_pct": 6.6,
+      "safety_margin_pct": -1.45,
+      "cash_protection": "无保护",
+      "risk_free_rate_pct": 3.6,
+      "data_completeness": "高",
+      "report": "名创优品_9896_稳健投资策略分析报告.md"
+    }
+  ]
+}

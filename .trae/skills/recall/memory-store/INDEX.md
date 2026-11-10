@@ -1,0 +1,20 @@
+# 记忆索引
+
+> 最后更新: 2026-08-20
+> 来源: DeepSeek 对话 2026-05-04 ~ 2026-08-10（255轮）+ Claude/OpenCode 对话 2026-08
+
+## investment
+- 📄 [_profile](domains/investment/_profile.md) — 3条摘要
+- 📄 [portfolio](domains/investment/portfolio.md) — 6条
+- 📄 [risk-appetite](domains/investment/risk-appetite.md) — 6条
+- 📄 [investment-logic](domains/investment/investment-logic.md) — 4条
+- 📄 [watchlist](domains/investment/watchlist.md) — 8条
+
+## buffett-perspective
+- 📄 [_profile](domains/buffett-perspective/_profile.md) — 2条摘要
+- 📄 [investment-principles](domains/buffett-perspective/investment-principles.md) — 14条
+
+## personal
+- 📄 [_profile](domains/personal/_profile.md) — 4条摘要
+- 📄 [basic-facts](domains/personal/basic-facts.md) — 4条
+- 📄 [relationship](domains/personal/relationship.md) — 4条

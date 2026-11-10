@@ -42,7 +42,19 @@ description: 投资研究：巴菲特-芒格-段永平-李录四大师七模块�
 > **数据源规范**：参见 `skills/financial-data.md`。所有财务数据必须来自两个独立来源，误差>1%须标记。
 > - 美股：macrotrends（主）+ stockanalysis（副）
 > - 港股：aastocks（主）+ macrotrends ADR（副）
-> - A股：东方财富（主）+ 巨潮资讯（副）
+> - A股：ai-tools MCP / 东方财富（主）+ 巨潮资讯 / Tushare / 公告原文（副）
+
+**ai-tools MCP 的用武之地**（A股取数主力，网页抓取是兜底）：
+
+| 研究环节 | 工具 |
+|---|---|
+| 取数主力（第一步） | GetFinancialReport（三大报表+指标）、QueryStockPriceInfo / GetKLineData（行情与K线）、GetStockNotice（公告原文）、GetStockResearch（研报与券商目标价）、GetMarketNews（新闻事件） |
+| 第四步"聪明人为什么不买" | GetStockConnect（北向）、GetMoneyFlow（资金流）、GetMarginTrading（两融）、GetDragonTiger（龙虎榜） |
+| 第六步行业与宏观 | GetIndustryRank（行业估值）、GetEconomicData（GDP/CPI——g 的锚定） |
+
+**独立性规则**：交叉验证的两个来源必须后端不同。ai-tools 的后端是东方财富——
+"ai-tools 查一次 + 东方财富网页查一次"仍是同一个源，不构成交叉验证；
+副源须用 Tushare、公告原文（上交所/巨潮）、新浪/腾讯行情等不同后端。
 
 使用 Task 工具启动后台 Agent，从网络收集以下数据：
 
@@ -95,12 +107,27 @@ python3 tools/financial_rigor.py verify-valuation \
 3. **所有涉及计算的数据必须通过工具验算，禁止LLM心算**
 4. 工具输出结果直接嵌入报告附录"关键数据交叉验证记录"
 5. 如果工具报告 ❌ 偏差过大，必须排查原因后才能继续分析
+6. **数字只有两种合法来源，机械可判，无裁量空间**：①原始值——直接取自数据源，走上述多源交叉验证；②派生值——由运算得来（PE/PB/市值/同比/占比/倍数/隐含参数/终值/IRR……），**写入前用工具算出并留痕算式**。任何心算、估算后落笔的数字都违规，无论出现在表格还是行文里（见下方专节）
 
 **常见错误防范**：
 - 市值单位：港币亿 vs 人民币亿 vs 美元亿，容易漏写/多写一个零
 - FCF口径：不同来源对资本支出的定义可能不同（是否含租赁、收购等）
 - 债务口径：是否包含经营租赁负债
 - 持股比例：AB股公司的经济权益 ≠ 投票权
+
+#### 一切计算走脚本，禁止自行计算（写前验算）
+
+**落笔任何派生数字之前，先跑工具，用工具输出替换心算值。不存在"简单到可以心算"的例外**——心算漏掉的不只是算术错误，更常见的是公式本身选错（如"ROE/PB=隐含资本成本"只在零增长假设下成立）：手算时不会停下来审视公式，工具跑一遍时才会。
+
+```bash
+python3 tools/financial_rigor.py calc --expr "0.065/0.365"          # 任意算式
+python3 tools/financial_rigor.py verify-valuation ...               # PE/PB/股息率/FCF yield
+python3 tools/terminal_value.py pe --roic 0.06 --g 0.015 --r 0.08   # 终值/IRR类推导
+```
+
+1. **算式留痕**：关键派生数字在正文或附录标注算式，如`隐含增量ROIC = g/(1−PE×(r−g)) = 0.015/(1−5.70×0.065) = 2.38%（工具验算）`——读者可以复算，抽检可以复核。
+2. **适用范围是全文**：表格单元格、叙述句、引用块、脚注，无一例外。
+3. 拿不准算式是否合法时，宁可删掉数字，只保留定性判断。
 
 ### 第二步：生意本质分析 — 段永平"对的生意"
 
@@ -270,7 +297,7 @@ python3 tools/terminal_value.py irr \
 1. 所有分析必须有数据支撑，附数据来源
 2. 使用 Markdown 表格呈现关键数据
 3. 每个模块末尾必须有对应大师的"追问"
-4. 最终将完整报告写入 `~/[公司名]投资研究报告.md`
+4. 最终将完整报告写入 `./巴芒策略分析报告/investment-research/[公司名]投资研究报告.md`
 5. 结论要明确，不回避给出买入/观望/回避的建议
 6. 估值部分必须给出具体的价格区间
 7. **报告开头**必须包含"信息丰富度评级"（A/B/C）和"AI研究局限性声明"
@@ -281,6 +308,11 @@ python3 tools/terminal_value.py irr \
 
 报告写入文件后，**必须**执行数据抽检，通过后方可发布：
 
+> **两类数字两种核验**：report_audit.py 抽取的数据点用**外部信源比对**核验，这只适用于
+> 原始值；派生值（比率、倍数、占比、隐含参数等计算结果，表格和行文里都有）信源里查不到，
+> 核验方式是**复算**——抽检时扫一遍全文派生数字，凡没有算式留痕的，用
+> `financial_rigor.py calc` 重算比对，复算不符或算式不合法的，按打回修正后重新抽检。
+
 **Step 1 — 提取抽检清单（15%随机抽样）：**
 ```bash
 python3 tools/report_audit.py extract \
@@ -290,7 +322,7 @@ python3 tools/report_audit.py extract \
 
 **Step 2 — 取数核验：**
 对清单中每个数据点，按 `skills/financial-data.md` 规范从可靠信源取数
-（美股：macrotrends+stockanalysis；港股：aastocks+macrotrends；A股：东方财富+巨潮资讯），
+（美股：macrotrends+stockanalysis；港股：aastocks+macrotrends；A股：ai-tools/东方财富+巨潮/Tushare），
 填入 `fetched_value` / `fetched_source` / `fetched_value2` / `fetched_source2`。
 
 **Step 3 — 输出判决：**
